@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>UDOT-MoPEED</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- Moris Charts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <!-- Datatable CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <!-- Custom styles for this template -->
+    <link href="css/canned.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+  </head>
+  <body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary1 fixed-top" id="sideNav">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <span class="d-block d-lg-none">Transportation Solutions</span>
+        <span class="d-none d-lg-block">
+          <i class="fas fa-car-side fa-5x"></i>
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#tifhome">Trans Sol Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#unfunded"><i class="fa fa-funnel-dollar"></i> Unfunded</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#funded"><i class="fa fa-hand-holding-usd "></i> Funded</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#proposed"><i class="fa fa-handshake "></i> Proposed</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#design"><i class="fa fa-pencil-ruler"></i> Design</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#construction"><i class="fa fa-hammer"></i> Construction</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#Docs"><i class="fa fa-question-circle"></i> Documentation</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid p-0">
+      <!--Transportation Solutions home section -->
+      <section class="mopeed-section p-3 p-lg-5 d-flex d-column" id="tifhome">
+        <div class="my-auto w-100">
+          <h1 class="mb-0">Transportation
+            <span class="text-primary">Solutions</span>
+          </h1>
+          <div class="subheading mb-5">Utah Department of Transportation</div>
+          <div class="row">
+            <div class="col-sm-6 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Distribution of Funds by Region</h5>
+                  <div id="byRegion" style="height: 250px"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Distribution of Funds by Year</h5>
+                  <div id="byYear" style="height: 250px"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr class="m-0">
+      <!-- Transportation Solutions Unfunded Section -->
+      <section class="mopeed-section p-3 p-lg-5 d-flex d-column" id="unfunded">
+        <div class="my-auto w-100">
+          <h1 class="mb-0">
+            <span class="text-primary">Unfunded</span> Projects
+          </h1>
+          <div class="row">
+            <div class="col-sm-12 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Unfunded Projects Table</h5>
+                  <div id="unfundedtbl" class="text-center"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Distribution of Funds by Region</h5>
+                  <div id="byRegiontbl1"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Distribution of Funds by Region</h5>
+                  <div id="byYeartbl1"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr class="m-0">
+      <!-- Transportation Solutions Funded Section -->
+      <section class="mopeed-section p-3 p-lg-5 d-flex d-column" id="funded">
+        <div class="my-auto w-100">
+          <h1 class="mb-0">
+            <span class="text-primary">Funded</span> Projects
+          </h1>
+          <div class="row">
+            <div class="col-sm-12 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Funded Table</h5>
+                  <div id="fundedtbl" class="text-center"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Distribution of Funds by Region</h5>
+                  <div id="byRegiontbl2"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Distribution of Funds by Region</h5>
+                  <div id="byYeartbl2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr class="m-0">
+      <!-- Transportation Solutions Proposed Section -->
+      <section class="mopeed-section p-3 p-lg-5 d-flex d-column" id="proposed">
+        <div class="my-auto w-100">
+          <h1 class="mb-0">
+            <span class="text-primary">Proposed</span> Projects
+          </h1>
+          <div class="row">
+            <div class="col-sm-12 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Proposed Table</h5>
+                  <div id="proposedtbl" class="text-center"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Distribution of Funds by Region</h5>
+                  <div id="byRegiontbl3"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Distribution of Funds by Region</h5>
+                  <div id="byYeartbl3"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr class="m-0">
+      <!-- Transportation Solutions Design Section -->
+      <section class="mopeed-section p-3 p-lg-5 d-flex d-column" id="design">
+        <div class="my-auto w-100">
+          <h1 class="mb-0">
+            <span class="text-primary">Design</span> Projects
+          </h1>
+          <div class="row">
+            <div class="col-sm-12 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Design Table</h5>
+                  <div id="designtbl" class="text-center"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Distribution of Funds by Region</h5>
+                  <div id="byRegiontbl4"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Distribution of Funds by Region</h5>
+                  <div id="byYeartbl4"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr class="m-0">
+      <!-- Transportation Solutions Construction Section -->
+      <section class="mopeed-section p-3 p-lg-5 d-flex d-column" id="construction">
+        <div class="my-auto w-100">
+          <h1 class="mb-0">
+            <span class="text-primary">Construction</span> Projects
+          </h1>
+          <div class="row">
+            <div class="col-sm-12 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Construction Table</h5>
+                  <div id="constructiontbl" class="text-center"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Distribution of Funds by Region</h5>
+                  <div id="byRegiontbl5"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Distribution of Funds by Region</h5>
+                  <div id="byYeartbl5"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr class="m-0">
+      <!-- Transportation Solutions Documentation Secition -->
+      <section class="mopeed-section p-3 p-lg-5 d-flex flex-column" id="Docs">
+        <div class="my-auto">
+          <h1 class="mb-0">
+            <span class="text-primary">Documentation &amp;</span> Data Queried
+          </h1>
+          <div class="row">
+            <div class="col-sm-12 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">UDOT MoPEED Documentation</h5>
+                  <p class="lead">More on Projets to Expand Economic Development is a web pages to give details on UDOT projects to the State Transportation Investment Planning Workshop. MoPEED queries dataset a6xh-u32h hosted in UDOT's Open Data Catalog. The data is queried with an API and pulled as JSON, filtered and displayed with HTML, Javascript and JQuery. The primary filters are Workshop Category (workshop_cat) and PIN Status (pin_st_nm). Also for unfunded projects the commission approved projects column is used. Lastly, projects in design are projects with PIN Status scoping, Projects funded are projects with PIN Status Advertised.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-sm-2 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <a href="tif.html">
+                    <h5 class="card-title">Transportation Investment Fund</h5>
+                    <i class="fa fa-road fa-3x fa-fw"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <a href="transol.html">
+                    <h5 class="card-title">Transportation Solutions</h5>
+                    <i class="fa fa-car-side fa-3x fa-fw"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">TAP</h5>
+                  <i class="fa fa-bicycle fa-3x fa-fw"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Pavements</h5>
+                  <i class="fa fa-layer-group fa-3x fa-fw"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Structures</h5>
+                  <i class="fa fa-archway fa-3x fa-fw"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Traffic and Safety</h5>
+                  <i class="fa fa-car-crash fa-3x fa-fw"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-sm-2 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Local Governament</h5>
+                  <i class="fa fa-thumbtack fa-3x fa-fw"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <a href="envira.html">
+                    <h5 class="card-title">Environmental Studies</h5>
+                    <i class="fa fa-leaf fa-3x fa-fw"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Freight</h5>
+                  <i class="fa fa-truck-moving fa-3x fa-fw"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">ATMS Asset Management</h5>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Federal Land Access Program</h5>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 my-auto">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Other</h5>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog" style="z-index: 1050">
+          <div class="modal-dialog">
+              <!-- Modal content-->
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="pinNum">Null</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                      <p id="PinDetails">Some text in the modal.</p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <!-- Datatable JS -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <!-- Moris Charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <!--Chart JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <!--Plotly JS -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="js/canned.min.js"></script>
+    <!-- Main Dashboard Javascript -->
+    <script src="js/maindb.js"></script>
+    <script>
+      //Page Summary Charts
+      var workshopCat = "Transportation Solutions";
+      var dataset = "https://dashboard.udot.utah.gov/resource/a6xh-u32h.json";
+      var constQuery = "?$where=workshop_cat='"+workshopCat+"'&$order=region_cd asc";
+      var unfundedQuery = "?$where=workshop_cat='"+workshopCat+"' and comm_aprv_ind='N'&$order=region_cd asc";
+      buildTable(dataset+constQuery,'#constructiontbl','Under Construction');
+      buildTable(dataset+unfundedQuery,'#unfundedtbl','Unfunded');
+      buildTable(dataset+constQuery,'#fundedtbl','Advertised');
+      buildTable(dataset+constQuery,'#proposedtbl','Proposed');
+      buildTable(dataset+constQuery,'#designtbl','Scoping');
+      var vizQuery = "?$select=region_cd,sum(fed_dollars),sum(state_dollars),sum(project_value)&$where=workshop_cat=%27Transportation Investment Funds%27";
+      vizQuery += "&$group=region_cd&$order=region_cd";
+      drawChart(dataset+vizQuery,'byRegion','region_cd');
+      vizQuery = "?$select=stip_workshop_yr,sum(fed_dollars),sum(state_dollars),sum(project_value)&$where=workshop_cat=%27Transportation Investment Funds%27";
+      vizQuery += "&$group=stip_workshop_yr&$order=stip_workshop_yr";
+      drawChart(dataset+vizQuery,'byYear','stip_workshop_yr');
+      drillChart("byRegiontbl1","region_cd","'"+workshopCat+"'","Unfunded");
+      drillChart("byYeartbl1","stip_workshop_yr","'"+workshopCat+"'","Unfunded");
+      drillChart("byRegiontbl2","region_cd","'"+workshopCat+"'","Advertised");
+      drillChart("byYeartbl2","stip_workshop_yr","'"+workshopCat+"'","Advertised");
+      drillChart("byRegiontbl3","region_cd","'"+workshopCat+"'","Proposed");
+      drillChart("byYeartbl3","stip_workshop_yr","'"+workshopCat+"'","Proposed");
+      drillChart("byRegiontbl4","region_cd","'"+workshopCat+"'","Scoping");
+      drillChart("byYeartbl4","stip_workshop_yr","'"+workshopCat+"'","Scoping");
+      drillChart("byRegiontbl5","region_cd","'"+workshopCat+"'","Under Construction");
+      drillChart("byYeartbl5","stip_workshop_yr","'"+workshopCat+"'","Under Construction");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : Oct 29, 2018, 6:30:37 AM
+    Author     : Leonel Nieto
+*/
+
+/*Css Style for table forked from https://codepen.io/barney-parker/pen/QjXOmv */
+#content {
+  text-align: center;
+}
+
+.timeline {
+  border-left: 0.25em solid #4298c3;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 2em auto;
+  line-height: 1.4em;
+  padding: 1em;
+  padding-left: 3em;
+  list-style: none;
+  text-align: left;
+  margin-left: 10em;
+  margin-right: 3em;
+  border-radius: 0.5em;
+}
+
+.event {
+  min-width: 20em;
+  width: 100%;
+  vertical-align: middle;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.timeline .event:before,
+.timeline .event:after {
+  position: absolute;
+  display: block;
+  top: 1em;
+}
+
+.timeline .event:before {
+  left: -15em;
+  color: black;
+  content: attr(data-date);
+  text-align: right;
+  font-weight: 100;
+  font-size: 0.8em;
+  min-width: 9em;
+}
+
+.timeline .event:after {
+  box-shadow: 0 0 0 0.2em #4298c3;
+  left: -3.5em;
+  background: #313534;
+  border-radius: 50%;
+  height: 0.75em;
+  width: 0.75em;
+  content: "";
+}
+
+.timeline .event .member-location,
+.timeline .event .member-parameters {
+  display: none;
+}
+
+.timeline .event:last-of-type .member-location,
+.timeline .event:last-of-type .member-parameters {
+  display: block;
+}
+
+.member-infos {
+  padding: 10px;
+  text-align: left;
+  position: relative;
+}
+
+.member-infos > h1 {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.member-location a:before {
+  margin-right: 5px;
+}
+
+.member-location {
+  text-indent: 2px;
+}
+/*Color Codding for tables*/
+.bg2019 {
+  background-color: #B7F599;
+}
+.bg2020 {
+  background-color: #00a9e6;
+}
+.bg2021 {
+  background-color: #99BDF5;
+}
+.bg2022 {
+  background-color: #ffdd99;
+}
+.bg2023 {
+  background-color: #1a1a1a;
+}
+.bg2024 {
+  background-color: #a3a3a3;
+}
+.bg2025 {
+  background-color: #f5b799;
+}
+.bg2026 {
+  background-color: #f59999;
+}
