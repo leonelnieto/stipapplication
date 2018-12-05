@@ -188,7 +188,11 @@
       var dataset = "https://dashboard.udot.utah.gov/resource/a6xh-u32h.json";
       var constQuery = "?$where=workshop_cat='Transportation Investment Funds'&$order=region_cd asc";
       var unfundedQuery = "?$where=workshop_cat='Transportation Investment Funds' and comm_aprv_ind='N'&$order=region_cd asc";
-      buildTable(dataset+constQuery,'#pills-unfunded','Under Construction');
+      var select = "?$select=pin,workshop_cat,region_cd,comm_aprv_ind,pin_desc,primary_concept,project_value,planned_construction_year,program,public_desc,forecast_st_yr,fed_dollars,state_dollars"
+      var where = "&$where=workshop_cat='Transportation Investment Funds' and comm_aprv_ind='N'";
+      var tail = '&$limit=50000';
+      dataTableBuilder(dataset+select+where,'#pills-unfunded');
+      dataTableBuilder(dataset+select+where,'#pills-proposed');
     </script>
   </body>
 </html>
