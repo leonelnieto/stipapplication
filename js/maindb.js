@@ -67,6 +67,45 @@ function buildTable(query,dop,status) {
             console.log("Error :(");
     });
 }
+function dataTableBuilder(query,dom){
+  fetch(query)
+      .then(function(response){
+          return response.json();
+      }).then(function(data){
+        //Where the magic occurs
+        var html = '';
+        var thead = '<table style="width:100%" id="dataTable'+dop+'" class="table table-striped table-hover">';
+        thead += '<thead><tr><th>Region</th>';
+        thead +='<th>PIN</th><th>PIN Description</th><th>Primary Concept</th><th>Project Value</th><th>Planned Year</th></tr></thead><tbody>';
+        html += thead;
+        for(var i=0; i < data.length;i++){
+          //Populate funded rows
+          html += '<tr><td class="sorting">'+data[i]['region_cd']+'</td>';
+          html += '<td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" onClick="pingPin('+data[i]['pin']+')">';
+          html += data[i]['pin']+'</button></td>';
+          html += '<td>'+data[i]['pin_desc']+'</td>';
+          html += '<td>'+data[i]['primary_concept']+'</td>';
+          html += '<td>'+formatter.format(data[i]['project_value'])+'</td>';
+          html += '<td class="'+bgColorClass(data[i]['stip_workshop_yr'])+'">'+data[i]['planned_construction_year']+'</td></tr>';
+        }
+        var tfoot = "</tbody></table>";
+        html += tfoot;
+        $(dop).append(html);
+        $('#dataTable'+dop).DataTable( {
+            "pagingType": "full_numbers",
+            "columns": [
+                { "orderable": true },
+                { "orderable": false },
+                { "orderable": false },
+                { "orderable": true },
+                { "orderable": false },
+                { "orderable": true }
+              ]
+        });
+      }).catch(function(err){
+          console.log("{*_*} Shit, I should not be here!!!!");
+  });
+}
 //Function gets year and returns bg color class
 function bgColorClass(year){
   var bg = '';
