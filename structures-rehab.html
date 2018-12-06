@@ -21,7 +21,6 @@
     <link href="css/custom.css" rel="stylesheet">
   </head>
   <body id="page-top">
-    <!--Begin Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary2 fixed-top" id="sideNav">
       <a class="navbar-brand js-scroll-trigger" href="index.html">
         <span class="d-block d-lg-none">STIP App</span>
@@ -61,13 +60,13 @@
               <li><a class="nav-link" href="pav-rehab-lv.html">Rehab Low Volume</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#strucsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+          <li class="nav-item active">
+            <a href="#strucsubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle nav-link">
               <i class="fa fa-archway"></i> Structures
             </a>
             <ul class="collapse list-unstyled" id="strucsubmenu">
               <li><a class="nav-link" href="structures-preservation.html">Preservation</a></li>
-              <li><a class="nav-link" href="structures-rehab.html">Rehab or Replace</a></li>
+              <li><a class="nav-link active" href="structures-rehab.html">Rehab or Replace</a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -111,11 +110,11 @@
       </div>
     </nav>
     <div class="container-fluid p-0">
-      <!-- TIF Documentation Secition -->
+      <!-- Structures -->
       <section class="mopeed-section p-3 p-lg-5 d-flex flex-column">
         <div class="my-auto">
           <h1 class="mb-0">
-            <span class="text-primary">STIP</span> Workshop Application
+            <span class="text-primary">Structures</span> Rehabilitation
           </h1>
             <ul class="nav nav-pills mb-3 nav-justified md-tabs bg-primary2" id="pills-tab" role="tablist">
               <li class="nav-item">
@@ -313,29 +312,30 @@
     <script src="js/maindb.js"></script>
     <script>
       var dataset = "https://dashboard.udot.utah.gov/resource/a6xh-u32h.json";
+      var workshop = "'Bridge Replacement and Rehabilitation'";
       var select = "?$select=pin,workshop_cat,region_cd,comm_aprv_ind,pin_desc,primary_concept,project_value,planned_construction_year,program,public_desc,forecast_st_yr,fed_dollars,state_dollars"
-      var where = "&$where=comm_aprv_ind='N' and pin_stat_nm='Proposed'";
+      var where = "&$where=comm_aprv_ind='N' and pin_stat_nm='Proposed' and workshop_cat="+workshop;
       var tail = '&$limit=50000';
       dataTableBuilder(dataset+select+where+tail,'#pills-unfundedtbl');
-      where = "&$where=pin_stat_nm='Funding' or pin_stat_nm='Advertised'";
+      where = "&$where=workshop_cat="+workshop+" and (pin_stat_nm='Funding' or pin_stat_nm='Advertised')";
       dataTableBuilder(dataset+select+where,'#pills-fundedtbl');
-      where = "&$where=pin_stat_nm='Proposed'";
+      where = "&$where=workshop_cat="+workshop+" and pin_stat_nm='Proposed'";
       dataTableBuilder(dataset+select+where,'#pills-proposedtbl');
-      where = "&$where=pin_stat_nm='Scoping'";
+      where = "&$where=workshop_cat="+workshop+" and pin_stat_nm='Scoping'";
       dataTableBuilder(dataset+select+where,'#pills-designtbl');
-      where = "&$where=pin_stat_nm='Under Construction'";
+      where = "&$where=workshop_cat="+workshop+" and pin_stat_nm='Under Construction'";
       dataTableBuilder(dataset+select+where,'#pills-constructiontbl');
       //Drill Charts
-      drillPlotlyChart("unfundedbyRegion","region_cd","all","Unfunded");
-      drillPlotlyChart("unfunedbyYear","planned_construction_year","all","Unfunded");
-      drillPlotlyChart("fundedbyRegion","region_cd","all","Advertised");
-      drillPlotlyChart("funedbyYear","planned_construction_year","all","Advertised");
-      drillPlotlyChart("proposedbyRegion","region_cd","all","Proposed");
-      drillPlotlyChart("proposedbyYear","planned_construction_year","all","Proposed");
-      drillPlotlyChart("designbyRegion","region_cd","all","Scoping");
-      drillPlotlyChart("designbyYear","planned_construction_year","all","Scoping");
-      drillPlotlyChart("constructionbyRegion","region_cd","all","Under Construction");
-      drillPlotlyChart("constructionbyYear","planned_construction_year","all","Under Construction");
+      drillPlotlyChart("unfundedbyRegion","region_cd",workshop,"Unfunded");
+      drillPlotlyChart("unfunedbyYear","planned_construction_year",workshop,"Unfunded");
+      drillPlotlyChart("fundedbyRegion","region_cd",workshop,"Advertised");
+      drillPlotlyChart("funedbyYear","planned_construction_year",workshop,"Advertised");
+      drillPlotlyChart("proposedbyRegion","region_cd",workshop,"Proposed");
+      drillPlotlyChart("proposedbyYear","planned_construction_year",workshop,"Proposed");
+      drillPlotlyChart("designbyRegion","region_cd",workshop,"Scoping");
+      drillPlotlyChart("designbyYear","planned_construction_year",workshop,"Scoping");
+      drillPlotlyChart("constructionbyRegion","region_cd",workshop,"Under Construction");
+      drillPlotlyChart("constructionbyYear","planned_construction_year",workshop,"Under Construction");
     </script>
   </body>
 </html>

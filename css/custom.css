@@ -115,3 +115,7 @@ and open the template in the editor.
 .bg2026 {
   background-color: #f59999;
 }
+.map{
+  overflow: scroll;
+  height: 75vh;
+}

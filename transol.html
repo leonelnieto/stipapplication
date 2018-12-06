@@ -21,399 +21,278 @@
     <link href="css/custom.css" rel="stylesheet">
   </head>
   <body id="page-top">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary1 fixed-top" id="sideNav">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">
-        <span class="d-block d-lg-none">Transportation Solutions</span>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary4 fixed-top" id="sideNav">
+      <a class="navbar-brand js-scroll-trigger" href="index.html">
+        <span class="d-block d-lg-none">STIP App</span>
         <span class="d-none d-lg-block">
-          <i class="fas fa-car-side fa-5x"></i>
+          <i class="fas fa-sliders-h fa-5x"></i>
         </span>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse text-left" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#tifhome">Trans Sol Home</a>
+            <a class="nav-link js-scroll-trigger" href="tif.html"><i class="fa fa-road"></i> TIF</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link js-scroll-trigger" href="transol.html"><i class="fa fa-car"></i> Transportation Solutions</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#unfunded"><i class="fa fa-funnel-dollar"></i> Unfunded</a>
+            <a href="#transolsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+              <i class="fa fa-bicycle"></i> Transportation Atlternatives
+            </a>
+            <ul class="collapse list-unstyled" id="transolsubmenu">
+              <li><a class="nav-link" href="ta.html">Transportation Solutions</a></li>
+              <li><a class="nav-link" href="ta-contingecyfund.html">Contingency Fund</a></li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#funded"><i class="fa fa-hand-holding-usd "></i> Funded</a>
+            <a href="#pavsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+              <i class="fa fa-layer-group"></i> Pavements
+            </a>
+            <ul class="collapse list-unstyled" id="pavsubmenu">
+              <li><a class="nav-link" href="pav-presev-hv.html">Preserv High Volume</a></li>
+              <li><a class="nav-link" href="pav-rehav-hv.html">Rehab High Volume</a></li>
+              <li><a class="nav-link" href="pav-recon-hv.html">Recons High Volume</a></li>
+              <li><a class="nav-link" href="pav-presev-lv.html">Preser Low Volume</a></li>
+              <li><a class="nav-link" href="pav-rehab-lv.html">Rehab Low Volume</a></li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#proposed"><i class="fa fa-handshake "></i> Proposed</a>
+            <a href="#strucsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+              <i class="fa fa-archway"></i> Structures
+            </a>
+            <ul class="collapse list-unstyled" id="strucsubmenu">
+              <li><a class="nav-link" href="structures-preservation.html">Preservation</a></li>
+              <li><a class="nav-link" href="structures-rehab.html">Rehab or Replace</a></li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#design"><i class="fa fa-pencil-ruler"></i> Design</a>
+            <a href="#tssubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+              <i class="fa fa-car-crash"></i> Traffic &amp; Safety
+            </a>
+            <ul class="collapse list-unstyled" id="tssubmenu">
+              <li><a class="nav-link" href="ts-hisp.html">HSIP</a></li>
+              <li><a class="nav-link" href="ts-trafficSignals.html">New Traffic Signals</a></li>
+              <li><a class="nav-link" href="ts-railHighwayGC.html">Rail-Highway Grade Crossing</a></li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#construction"><i class="fa fa-hammer"></i> Construction</a>
+            <a href="#locgovsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+              <i class="fa fa-thumbtack"></i> Local Gov
+            </a>
+            <ul class="collapse list-unstyled" id="locgovsubmenu">
+              <li><a class="nav-link" href="localgov-bridge.html">Off-System Bridge</a></li>
+              <li><a class="nav-link" href="localgov-nonUrban.html">Non Urban</a></li>
+              <li><a class="nav-link" href="localgov-smallUrban.html">Small Urban</a></li>
+              <li><a class="nav-link" href="localgov-statePark.html">State Park</a></li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#Docs"><i class="fa fa-question-circle"></i> Documentation</a>
+            <a class="nav-link js-scroll-trigger" href="enviro.html"><i class="fa fa-leaf"></i> Environmental Studies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="freight.html"><i class="fa fa-truck-moving"></i> Freight Program</a>
+          </li>
+          <li class="nav-item">
+            <a href="#othersubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+              <i class="fa fa-question"></i> Other
+            </a>
+            <ul class="collapse list-unstyled" id="othersubmenu">
+              <li><a class="nav-link" href="atms-assetmgmt.html">ATMS Asset</a></li>
+              <li><a class="nav-link" href="flap.html">FLAP</a></li>
+              <li><a class="nav-link" href="other.html">Other</a></li>
+            </ul>
           </li>
         </ul>
       </div>
     </nav>
-    <div class="container-fluid p-0">
-      <!--Transportation Solutions home section -->
-      <section class="mopeed-section p-3 p-lg-5 d-flex d-column" id="tifhome">
-        <div class="my-auto w-100">
+    <div class="container-fluid p-0 text-center">
+      <!-- Transportation Solutions -->
+      <section class="mopeed-section p-3 p-lg-5 d-flex flex-column">
+        <div class="my-auto">
           <h1 class="mb-0">Transportation
             <span class="text-primary">Solutions</span>
           </h1>
-          <div class="subheading mb-5">Utah Department of Transportation</div>
-          <div class="row">
-            <div class="col-sm-6 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Distribution of Funds by Region</h5>
-                  <div id="byRegion" style="height: 250px"></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Distribution of Funds by Year</h5>
-                  <div id="byYear" style="height: 250px"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <hr class="m-0">
-      <!-- Transportation Solutions Unfunded Section -->
-      <section class="mopeed-section p-3 p-lg-5 d-flex d-column" id="unfunded">
-        <div class="my-auto w-100">
-          <h1 class="mb-0">
-            <span class="text-primary">Unfunded</span> Projects
-          </h1>
-          <div class="row">
-            <div class="col-sm-12 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Unfunded Projects Table</h5>
-                  <div id="unfundedtbl" class="text-center"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Distribution of Funds by Region</h5>
-                  <div id="byRegiontbl1"></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Distribution of Funds by Region</h5>
-                  <div id="byYeartbl1"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <hr class="m-0">
-      <!-- Transportation Solutions Funded Section -->
-      <section class="mopeed-section p-3 p-lg-5 d-flex d-column" id="funded">
-        <div class="my-auto w-100">
-          <h1 class="mb-0">
-            <span class="text-primary">Funded</span> Projects
-          </h1>
-          <div class="row">
-            <div class="col-sm-12 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Funded Table</h5>
-                  <div id="fundedtbl" class="text-center"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Distribution of Funds by Region</h5>
-                  <div id="byRegiontbl2"></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Distribution of Funds by Region</h5>
-                  <div id="byYeartbl2"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <hr class="m-0">
-      <!-- Transportation Solutions Proposed Section -->
-      <section class="mopeed-section p-3 p-lg-5 d-flex d-column" id="proposed">
-        <div class="my-auto w-100">
-          <h1 class="mb-0">
-            <span class="text-primary">Proposed</span> Projects
-          </h1>
-          <div class="row">
-            <div class="col-sm-12 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Proposed Table</h5>
-                  <div id="proposedtbl" class="text-center"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Distribution of Funds by Region</h5>
-                  <div id="byRegiontbl3"></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Distribution of Funds by Region</h5>
-                  <div id="byYeartbl3"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <hr class="m-0">
-      <!-- Transportation Solutions Design Section -->
-      <section class="mopeed-section p-3 p-lg-5 d-flex d-column" id="design">
-        <div class="my-auto w-100">
-          <h1 class="mb-0">
-            <span class="text-primary">Design</span> Projects
-          </h1>
-          <div class="row">
-            <div class="col-sm-12 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Design Table</h5>
-                  <div id="designtbl" class="text-center"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Distribution of Funds by Region</h5>
-                  <div id="byRegiontbl4"></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Distribution of Funds by Region</h5>
-                  <div id="byYeartbl4"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <hr class="m-0">
-      <!-- Transportation Solutions Construction Section -->
-      <section class="mopeed-section p-3 p-lg-5 d-flex d-column" id="construction">
-        <div class="my-auto w-100">
-          <h1 class="mb-0">
-            <span class="text-primary">Construction</span> Projects
-          </h1>
-          <div class="row">
-            <div class="col-sm-12 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Construction Table</h5>
-                  <div id="constructiontbl" class="text-center"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Distribution of Funds by Region</h5>
-                  <div id="byRegiontbl5"></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Distribution of Funds by Region</h5>
-                  <div id="byYeartbl5"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <hr class="m-0">
-      <!-- Transportation Solutions Documentation Secition -->
-      <section class="mopeed-section p-3 p-lg-5 d-flex flex-column" id="Docs">
-        <div class="my-auto">
-          <h1 class="mb-0">
-            <span class="text-primary">Documentation &amp;</span> Data Queried
-          </h1>
-          <div class="row">
-            <div class="col-sm-12 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">UDOT MoPEED Documentation</h5>
-                  <p class="lead">More on Projets to Expand Economic Development is a web pages to give details on UDOT projects to the State Transportation Investment Planning Workshop. MoPEED queries dataset a6xh-u32h hosted in UDOT's Open Data Catalog. The data is queried with an API and pulled as JSON, filtered and displayed with HTML, Javascript and JQuery. The primary filters are Workshop Category (workshop_cat) and PIN Status (pin_st_nm). Also for unfunded projects the commission approved projects column is used. Lastly, projects in design are projects with PIN Status scoping, Projects funded are projects with PIN Status Advertised.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row text-center">
-            <div class="col-sm-2 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <a href="tif.html">
-                    <h5 class="card-title">Transportation Investment Fund</h5>
-                    <i class="fa fa-road fa-3x fa-fw"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <a href="transol.html">
-                    <h5 class="card-title">Transportation Solutions</h5>
-                    <i class="fa fa-car-side fa-3x fa-fw"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">TAP</h5>
-                  <i class="fa fa-bicycle fa-3x fa-fw"></i>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Pavements</h5>
-                  <i class="fa fa-layer-group fa-3x fa-fw"></i>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Structures</h5>
-                  <i class="fa fa-archway fa-3x fa-fw"></i>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Traffic and Safety</h5>
-                  <i class="fa fa-car-crash fa-3x fa-fw"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row text-center">
-            <div class="col-sm-2 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Local Governament</h5>
-                  <i class="fa fa-thumbtack fa-3x fa-fw"></i>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <a href="envira.html">
-                    <h5 class="card-title">Environmental Studies</h5>
-                    <i class="fa fa-leaf fa-3x fa-fw"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Freight</h5>
-                  <i class="fa fa-truck-moving fa-3x fa-fw"></i>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">ATMS Asset Management</h5>
-
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Federal Land Access Program</h5>
-
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-2 my-auto">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Other</h5>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Modal -->
-      <div class="modal fade" id="myModal" role="dialog" style="z-index: 1050">
-          <div class="modal-dialog">
-              <!-- Modal content-->
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="pinNum">Null</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <ul class="nav nav-pills mb-3 nav-justified md-tabs bg-primary2" id="pills-tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="true">Map</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-unfunded-tab" data-toggle="pill" href="#pills-unfunded" role="tab" aria-controls="pills-unfunded" aria-selected="false"
+                onclick="">Unfunded</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-funded-tab" data-toggle="pill" href="#pills-funded" role="tab" aria-controls="pills-funded" aria-selected="false">Funded</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false">Proposed</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-design-tab" data-toggle="pill" href="#pills-design" role="tab" aria-controls="pills-design" aria-selected="false">Design</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-construction-tab" data-toggle="pill" href="#pills-construction" role="tab" aria-controls="pills-construction" aria-selected="false">Construction</a>
+              </li>
+            </ul>
+            <div class="tab-content card" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
+                <div class="row h-75">
+                  <div class="col-12 map">
+                    <style>.embed-container {position: relative; padding-bottom: 80%; height: 0; max-width: 100%;} .embed-container iframe, .embed-container object, .embed-container iframe{position: absolute; top: 0; left: 0; width: 100%; height: 100%;} small{position: absolute; z-index: 40; bottom: 0; margin-bottom: -15px;}</style><div class="embed-container"><iframe width="500" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="TAP" src="https://uplan.maps.arcgis.com/apps/Embed/index.html?webmap=9365e71bd8eb46aaa085c145d60355d2&extent=-112.7711,39.9062,-110.7428,40.8976&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light"></iframe></div>
                   </div>
-                  <div class="modal-body">
-                      <p id="PinDetails">Some text in the modal.</p>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
+                </div>
               </div>
-          </div>
-      </div>
+              <div class="tab-pane fade p-1" id="pills-unfunded" role="tabpanel" aria-labelledby="pills-unfunded-tab">
+                <div class="row">
+                  <div class="col-12">
+                    <div id="pills-unfundedtbl"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 my-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Distribution of Funds by Region</h5>
+                        <div id="unfundedbyRegion" style="height: 250px"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 my-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Distribution of Funds by Year</h5>
+                        <div id="unfunedbyYear" style="height: 250px"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-funded" role="tabpanel" aria-labelledby="pills-funded-tab">
+                <div class="row">
+                  <div class="col-12">
+                    <div id="pills-fundedtbl"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 my-auto">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Distribution of Funds by Region</h5>
+                        <div id="fundedbyRegion" style="height: 250px"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 my-auto">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Distribution of Funds by Year</h5>
+                        <div id="funedbyYear" style="height: 250px"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-proposed" role="tabpanel" aria-labelledby="pills-proposed-tab">
+                <div class="row">
+                  <div class="col-12">
+                    <div id="pills-proposedtbl"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 my-auto">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Distribution of Funds by Region</h5>
+                        <div id="proposedbyRegion" style="height: 250px"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 my-auto">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Distribution of Funds by Year</h5>
+                        <div id="proposedbyYear" style="height: 250px"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-design" role="tabpanel" aria-labelledby="pills-design-tab">
+                <div class="row">
+                  <div class="col-12">
+                    <div id="pills-designtbl"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 my-auto">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Distribution of Funds by Region</h5>
+                        <div id="designbyRegion" style="height: 250px"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 my-auto">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Distribution of Funds by Year</h5>
+                        <div id="designbyYear" style="height: 250px"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-construction" role="tabpanel" aria-labelledby="pills-construction-tab">
+                <div class="row">
+                  <div class="col-12">
+                    <div id="pills-constructiontbl"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 my-auto">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Distribution of Funds by Region</h5>
+                        <div id="constructionbyRegion" style="height: 250px"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 my-auto">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Distribution of Funds by Year</h5>
+                        <div id="constructionbyYear" style="height: 250px"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </section>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog" style="z-index: 1050">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pinNum">Null</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <p id="PinDetails">{*_*} if you see me, something is wrong...</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
     <!-- Bootstrap core JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
@@ -433,32 +312,31 @@
     <!-- Main Dashboard Javascript -->
     <script src="js/maindb.js"></script>
     <script>
-      //Page Summary Charts
-      var workshopCat = "Transportation Solutions";
       var dataset = "https://dashboard.udot.utah.gov/resource/a6xh-u32h.json";
-      var constQuery = "?$where=workshop_cat='"+workshopCat+"'&$order=region_cd asc";
-      var unfundedQuery = "?$where=workshop_cat='"+workshopCat+"' and comm_aprv_ind='N'&$order=region_cd asc";
-      buildTable(dataset+constQuery,'#constructiontbl','Under Construction');
-      buildTable(dataset+unfundedQuery,'#unfundedtbl','Unfunded');
-      buildTable(dataset+constQuery,'#fundedtbl','Advertised');
-      buildTable(dataset+constQuery,'#proposedtbl','Proposed');
-      buildTable(dataset+constQuery,'#designtbl','Scoping');
-      var vizQuery = "?$select=region_cd,sum(fed_dollars),sum(state_dollars),sum(project_value)&$where=workshop_cat=%27Transportation Investment Funds%27";
-      vizQuery += "&$group=region_cd&$order=region_cd";
-      drawChart(dataset+vizQuery,'byRegion','region_cd');
-      vizQuery = "?$select=stip_workshop_yr,sum(fed_dollars),sum(state_dollars),sum(project_value)&$where=workshop_cat=%27Transportation Investment Funds%27";
-      vizQuery += "&$group=stip_workshop_yr&$order=stip_workshop_yr";
-      drawChart(dataset+vizQuery,'byYear','stip_workshop_yr');
-      drillChart("byRegiontbl1","region_cd","'"+workshopCat+"'","Unfunded");
-      drillChart("byYeartbl1","stip_workshop_yr","'"+workshopCat+"'","Unfunded");
-      drillChart("byRegiontbl2","region_cd","'"+workshopCat+"'","Advertised");
-      drillChart("byYeartbl2","stip_workshop_yr","'"+workshopCat+"'","Advertised");
-      drillChart("byRegiontbl3","region_cd","'"+workshopCat+"'","Proposed");
-      drillChart("byYeartbl3","stip_workshop_yr","'"+workshopCat+"'","Proposed");
-      drillChart("byRegiontbl4","region_cd","'"+workshopCat+"'","Scoping");
-      drillChart("byYeartbl4","stip_workshop_yr","'"+workshopCat+"'","Scoping");
-      drillChart("byRegiontbl5","region_cd","'"+workshopCat+"'","Under Construction");
-      drillChart("byYeartbl5","stip_workshop_yr","'"+workshopCat+"'","Under Construction");
+      var workshop = "'Transportation Solutions'";
+      var select = "?$select=pin,workshop_cat,region_cd,comm_aprv_ind,pin_desc,primary_concept,project_value,planned_construction_year,program,public_desc,forecast_st_yr,fed_dollars,state_dollars"
+      var where = "&$where=comm_aprv_ind='N' and pin_stat_nm='Proposed' and workshop_cat="+workshop;
+      var tail = '&$limit=50000';
+      dataTableBuilder(dataset+select+where+tail,'#pills-unfundedtbl');
+      where = "&$where=workshop_cat="+workshop+" and (pin_stat_nm='Funding' or pin_stat_nm='Advertised')";
+      dataTableBuilder(dataset+select+where,'#pills-fundedtbl');
+      where = "&$where=workshop_cat="+workshop+" and pin_stat_nm='Proposed'";
+      dataTableBuilder(dataset+select+where,'#pills-proposedtbl');
+      where = "&$where=workshop_cat="+workshop+" and pin_stat_nm='Scoping'";
+      dataTableBuilder(dataset+select+where,'#pills-designtbl');
+      where = "&$where=workshop_cat="+workshop+" and pin_stat_nm='Under Construction'";
+      dataTableBuilder(dataset+select+where,'#pills-constructiontbl');
+      //Drill Charts
+      drillPlotlyChart("unfundedbyRegion","region_cd",workshop,"Unfunded");
+      drillPlotlyChart("unfunedbyYear","planned_construction_year",workshop,"Unfunded");
+      drillPlotlyChart("fundedbyRegion","region_cd",workshop,"Advertised");
+      drillPlotlyChart("funedbyYear","planned_construction_year",workshop,"Advertised");
+      drillPlotlyChart("proposedbyRegion","region_cd",workshop,"Proposed");
+      drillPlotlyChart("proposedbyYear","planned_construction_year",workshop,"Proposed");
+      drillPlotlyChart("designbyRegion","region_cd",workshop,"Scoping");
+      drillPlotlyChart("designbyYear","planned_construction_year",workshop,"Scoping");
+      drillPlotlyChart("constructionbyRegion","region_cd",workshop,"Under Construction");
+      drillPlotlyChart("constructionbyYear","planned_construction_year",workshop,"Under Construction");
     </script>
   </body>
 </html>

@@ -73,7 +73,7 @@ function dataTableBuilder(query,dom){
           return response.json();
       }).then(function(data){
         //Where the magic occurs
-          console.log(data);
+          //console.log(data);
           var html = '';
           var thead = '<table style="width:100%" id="dataTable'+dom.substring(1)+'" class="table table-striped table-hover">';
           thead += '<thead><tr><th>Region</th>';
@@ -263,10 +263,22 @@ function drawChart(url,dop,xkey) {
 }
 function drillChart(dop,groupOrder,workshop,status){
     var vizQueryFilter;
-    if(status === "Unfunded"){
+    if(workshop === 'all'){
+      if(status === "Unfunded"){
+        vizQueryFilter = "&$where=pin_stat_nm='Proposed' and comm_aprv_ind = 'N'";
+      } else if(status === "Advertised") {
+        vizQueryFilter = "&$where=pin_stat_nm='"+status+"'or pin_stat_nm='Funding'";
+      } else {
+        vizQueryFilter = "&$where=pin_stat_nm='"+status+"'";
+      }
+    } else{
+      if(status === "Unfunded"){
         vizQueryFilter = "&$where=workshop_cat="+workshop+" and pin_stat_nm='Proposed' and comm_aprv_ind = 'N'";
-    } else {
+      } else if(status === "Advertised") {
+        vizQueryFilter = "&$where=workshop_cat="+workshop+" and pin_stat_nm='"+status+"'or pin_stat_nm='Funding'";
+      } else {
         vizQueryFilter = "&$where=workshop_cat="+workshop+" and pin_stat_nm='"+status+"'";
+      }
     }
     var vizDataset = "https://dashboard.udot.utah.gov/resource/a6xh-u32h.json";
     var vizQueryAgg = "?$select="+groupOrder+",sum(fed_dollars),sum(state_dollars),sum(project_value)";
@@ -297,13 +309,25 @@ function drillChart(dop,groupOrder,workshop,status){
 //Drill Chart using plotly
 function drillPlotlyChart(dop,groupOrder,workshop,status){
     var vizQueryFilter;
-    if(status === "Unfunded"){
+    if(workshop === 'all'){
+      if(status === "Unfunded"){
+        vizQueryFilter = "&$where=pin_stat_nm='Proposed' and comm_aprv_ind = 'N'";
+      } else if(status === "Advertised") {
+        vizQueryFilter = "&$where=pin_stat_nm='"+status+"'or pin_stat_nm='Funding'";
+      } else {
+        vizQueryFilter = "&$where=pin_stat_nm='"+status+"'";
+      }
+    } else{
+      if(status === "Unfunded"){
         vizQueryFilter = "&$where=workshop_cat="+workshop+" and pin_stat_nm='Proposed' and comm_aprv_ind = 'N'";
-    } else {
+      } else if(status === "Advertised") {
+        vizQueryFilter = "&$where=workshop_cat="+workshop+" and (pin_stat_nm='"+status+"'or pin_stat_nm='Funding')";
+      } else {
         vizQueryFilter = "&$where=workshop_cat="+workshop+" and pin_stat_nm='"+status+"'";
+      }
     }
     var vizDataset = "https://dashboard.udot.utah.gov/resource/a6xh-u32h.json";
-    var vizQueryAgg = "?$select="+groupOrder+",sum(fed_dollars),sum(state_dollars),sum(project_value)";
+    var vizQueryAgg = "?$select="+groupOrder+",sum(project_value)";
     var vizQueryGroup = "&$group="+groupOrder;
     var vizQueryOrder = "&$order="+groupOrder;
     var url = vizDataset+vizQueryAgg+vizQueryFilter+vizQueryGroup+vizQueryOrder;
@@ -312,13 +336,9 @@ function drillPlotlyChart(dop,groupOrder,workshop,status){
     }).then(function(j){
       var x = [];
       var y = [];
-      var y1 = [];
-      var y2 = [];
       for(var i = 0; i < j.length; i++){
         x.push(j[i][groupOrder]);
-        y.push(j[i]["sum_project_value"]);
-        y1.push(j[i]["sum_state_dollars"]);
-        y2.push(j[i]["sum_fed_dollars"]);
+        y.push(formatter.format(j[i]["sum_project_value"]));
       }
       var trace1 = {
         x: x,
@@ -326,31 +346,10 @@ function drillPlotlyChart(dop,groupOrder,workshop,status){
         name: 'Project Value',
         type: 'bar'
       };
-      var trace2 = {
-        x: x,
-        y: y1,
-        name: 'State Dollars',
-        yaxis: 'y2',
-        type: 'scatter'
-      };
-      var trace3 = {
-        x: x,
-        y: y2,
-        name: 'State Dollars',
-        yaxis: 'y2',
-        type: 'scatter'
-      };
-      var data = [trace1, trace2,trace3];
+      var data = [trace1];
       console.log(url + " : "+ data)
       var layout = {
-        yaxis: {title: 'Project values'},
-        yaxis2: {
-          title: 'Dollars Source',
-          titlefont: {color: 'rgb(148, 103, 189)'},
-          tickfont: {color: 'rgb(148, 103, 189)'},
-          overlaying: 'y',
-          side: 'right'
-        }
+        yaxis: {title: 'Project values'},xaxis: {type: 'category'}
       };
       Plotly.newPlot(dop, data, layout);
   });
