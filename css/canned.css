@@ -55,7 +55,7 @@ p.lead {
 }
 
 #sideNav .navbar-nav .nav-item .nav-link {
-  font-weight: 800;
+  color: #fff;
 }
 .collapse li a {
   color: #fff;
@@ -146,7 +146,7 @@ a, a:hover, a:focus {
 }
 
 #sideNav ul li a:hover {
-    color: #7386D5;
+    color: #ee7623 !important;
     background: #fff;
 }
 
