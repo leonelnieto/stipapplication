@@ -161,10 +161,6 @@ ul ul a {
     background: #6d7fcc;
 }
 
-section.mopeed-section {
-  padding-top: 5rem !important;
-  padding-bottom: 5rem !important;
-}
 
 section.mopeed-section .mopeed-item .mopeed-date {
   min-width: none;
@@ -179,12 +175,6 @@ section.mopeed-section .mopeed-item .mopeed-date {
   }
 }
 
-@media (min-width: 992px) {
-  section.mopeed-section {
-    padding-top: 3rem !important;
-    padding-bottom: 3rem !important;
-  }
-}
 
 .bg-primary {
   background-color: #5b87c6 !important;
