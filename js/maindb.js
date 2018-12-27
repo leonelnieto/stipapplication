@@ -347,11 +347,10 @@ function drillPlotlyChart(dop,groupOrder,workshop,status){
         type: 'bar'
       };
       var data = [trace1];
-      console.log(url + " : "+ data)
       var layout = {
         yaxis: {title: 'Project values'},xaxis: {type: 'category'}
       };
-      Plotly.newPlot(dop, data, layout);
+      Plotly.newPlot(dop, data, layout,{responsive: true});
   });
 }
 //Summary Table Function

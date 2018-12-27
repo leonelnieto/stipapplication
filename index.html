@@ -112,7 +112,7 @@
     </nav>
     <div class="container-fluid p-0">
       <!-- TIF Documentation Secition -->
-      <section class="mopeed-section p-2 d-flex flex-column">
+      <section class="mopeed-section p-3 d-flex flex-column">
         <div class="my-auto">
           <h2 class="mb-0">
             <span class="text-primary">STIP</span> Workshop Application
@@ -126,10 +126,10 @@
                 onclick="">Unfunded</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="pills-comapp-tab" data-toggle="pill" href="#pills-comapp" role="tab" aria-controls="pills-comapp" aria-selected="false">Commission Approved</a>
+                <a class="nav-link" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false">Proposed</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="pills-funded-tab" data-toggle="pill" href="#pills-funded" role="tab" aria-controls="pills-funded" aria-selected="false">Funded</a>
+                <a class="nav-link" id="pills-comapp-tab" data-toggle="pill" href="#pills-comapp" role="tab" aria-controls="pills-comapp" aria-selected="false">Commission Approved</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" id="pills-design-tab" data-toggle="pill" href="#pills-design" role="tab" aria-controls="pills-design" aria-selected="false">Design</a>
@@ -138,14 +138,14 @@
                 <a class="nav-link" id="pills-construction-tab" data-toggle="pill" href="#pills-construction" role="tab" aria-controls="pills-construction" aria-selected="false">Construction</a>
               </li>
             </ul>
-            <div class="tab-content card" id="pills-tabContent">
+            <div class="tab-content card border-0" id="pills-tabContent">
               <div class="tab-pane fade show active map" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
                 <div class="map">
                   <iframe width="100%" height="100%" src="https://uplan.maps.arcgis.com/home/webmap/viewer.html?webmap=158978f53e5a402e984688b68d2104c7">
                   </iframe>
                 </div>
               </div>
-              <div class="tab-pane fade p-1" id="pills-unfunded" role="tabpanel" aria-labelledby="pills-unfunded-tab">
+              <div class="tab-pane fade" id="pills-unfunded" role="tabpanel" aria-labelledby="pills-unfunded-tab">
                 <div class="row">
                   <div class="col-12">
                     <div id="pills-unfundedtbl"></div>
@@ -153,7 +153,7 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-6 my-auto">
-                    <div class="card">
+                    <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title">Distribution of Funds by Region</h5>
                         <div id="unfundedbyRegion" style="height: 250px"></div>
@@ -161,10 +161,35 @@
                     </div>
                   </div>
                   <div class="col-lg-6 my-auto">
-                    <div class="card">
+                    <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title">Distribution of Funds by Year</h5>
                         <div id="unfunedbyYear" style="height: 250px"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="pills-proposed" role="tabpanel" aria-labelledby="pills-proposed-tab">
+                <div class="row">
+                  <div class="col-12">
+                    <div id="pills-fundedtbl"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 my-auto">
+                    <div class="card border-0">
+                      <div class="card-body">
+                        <h5 class="card-title">Distribution of Funds by Region</h5>
+                        <div id="fundedbyRegion" style="height: 250px"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 my-auto">
+                    <div class="card border-0">
+                      <div class="card-body">
+                        <h5 class="card-title">Distribution of Funds by Year</h5>
+                        <div id="funedbyYear" style="height: 250px"></div>
                       </div>
                     </div>
                   </div>
@@ -178,7 +203,7 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-6 my-auto">
-                    <div class="card">
+                    <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title">Distribution of Funds by Region</h5>
                         <div id="proposedbyRegion" style="height: 250px"></div>
@@ -186,35 +211,10 @@
                     </div>
                   </div>
                   <div class="col-lg-6 my-auto">
-                    <div class="card">
+                    <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title">Distribution of Funds by Year</h5>
                         <div id="proposedbyYear" style="height: 250px"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane fade" id="pills-funded" role="tabpanel" aria-labelledby="pills-funded-tab">
-                <div class="row">
-                  <div class="col-12">
-                    <div id="pills-fundedtbl"></div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-6 my-auto">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">Distribution of Funds by Region</h5>
-                        <div id="fundedbyRegion" style="height: 250px"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 my-auto">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">Distribution of Funds by Year</h5>
-                        <div id="funedbyYear" style="height: 250px"></div>
                       </div>
                     </div>
                   </div>
@@ -228,7 +228,7 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-6 my-auto">
-                    <div class="card">
+                    <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title">Distribution of Funds by Region</h5>
                         <div id="designbyRegion" style="height: 250px"></div>
@@ -236,7 +236,7 @@
                     </div>
                   </div>
                   <div class="col-lg-6 my-auto">
-                    <div class="card">
+                    <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title">Distribution of Funds by Year</h5>
                         <div id="designbyYear" style="height: 250px"></div>
@@ -253,7 +253,7 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-6 my-auto">
-                    <div class="card">
+                    <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title">Distribution of Funds by Region</h5>
                         <div id="constructionbyRegion" style="height: 250px"></div>
@@ -261,7 +261,7 @@
                     </div>
                   </div>
                   <div class="col-lg-6 my-auto">
-                    <div class="card">
+                    <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title">Distribution of Funds by Year</h5>
                         <div id="constructionbyYear" style="height: 250px"></div>
