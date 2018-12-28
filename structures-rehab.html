@@ -121,16 +121,17 @@
                 <a class="nav-link active" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="true">Map</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false">Proposed</a>
+                <a class="nav-link" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false" onclick="setTimeout(drawProposed,500)">Proposed</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="pills-comapp-tab" data-toggle="pill" href="#pills-comapp" role="tab" aria-controls="pills-comapp" aria-selected="false">Commission Approved</a>
+                <a class="nav-link" id="pills-comapp-tab" data-toggle="pill" href="#pills-comapp" role="tab" aria-controls="pills-comapp" aria-selected="false"
+                onclick="setTimeout(drawFunded,500)">Commission Approved</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="pills-design-tab" data-toggle="pill" href="#pills-design" role="tab" aria-controls="pills-design" aria-selected="false">Design</a>
+                <a class="nav-link" id="pills-design-tab" data-toggle="pill" href="#pills-design" role="tab" aria-controls="pills-design" aria-selected="false" onclick="setTimeout(drawDesign,500)">Design</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="pills-construction-tab" data-toggle="pill" href="#pills-construction" role="tab" aria-controls="pills-construction" aria-selected="false">Construction</a>
+                <a class="nav-link" id="pills-construction-tab" data-toggle="pill" href="#pills-construction" role="tab" aria-controls="pills-construction" aria-selected="false" onclick="setTimeout(drawConstruction,500)">Construction</a>
               </li>
             </ul>
             <div class="tab-content card border-0" id="pills-tabContent">
@@ -295,14 +296,22 @@
       where = "&$where=workshop_cat="+workshop+" and pin_stat_nm='Under Construction'";
       dataTableBuilder(dataset+select+where,'#pills-constructiontbl');
       //Drill Charts
-      drillPlotlyChart("fundedbyRegion","region_cd",workshop,"Advertised");
-      drillPlotlyChart("funedbyYear","planned_construction_year",workshop,"Advertised");
-      drillPlotlyChart("proposedbyRegion","region_cd",workshop,"Proposed");
-      drillPlotlyChart("proposedbyYear","planned_construction_year",workshop,"Proposed");
-      drillPlotlyChart("designbyRegion","region_cd",workshop,"Scoping");
-      drillPlotlyChart("designbyYear","planned_construction_year",workshop,"Scoping");
-      drillPlotlyChart("constructionbyRegion","region_cd",workshop,"Under Construction");
-      drillPlotlyChart("constructionbyYear","planned_construction_year",workshop,"Under Construction");
+      function drawFunded() {
+        drillPlotlyChart("fundedbyRegion","region_cd",workshop,"Advertised");
+        drillPlotlyChart("funedbyYear","planned_construction_year",workshop,"Advertised");
+      }
+      function drawProposed() {
+        drillPlotlyChart("proposedbyRegion","region_cd",workshop,"Proposed");
+        drillPlotlyChart("proposedbyYear","planned_construction_year",workshop,"Proposed");
+      }
+      function drawDesign() {
+        drillPlotlyChart("designbyRegion","region_cd",workshop,"Scoping");
+        drillPlotlyChart("designbyYear","planned_construction_year",workshop,"Scoping");
+      }
+      function drawConstruction() {
+        drillPlotlyChart("constructionbyRegion","region_cd",workshop,"Under Construction");
+        drillPlotlyChart("constructionbyYear","planned_construction_year",workshop,"Under Construction");
+      }
     </script>
   </body>
 </html>
