@@ -24,5 +24,31 @@
   $('body').scrollspy({
     target: '#sideNav'
   });
+  
+  //Initilaize custom scroll bar
+  $("#sidebarNav").mCustomScrollbar({
+    theme: "minimal"
+  });
+
+
+  //SidebarNav Toggle
+  $('#dismiss, .overlay').on('click', function () {
+    // hide sidebar
+    $('#sidebarNav').removeClass('active');
+    // hide overlay
+    $('.overlay').removeClass('active');
+  });
+
+  $('#sidebarNavCollapse').on('click', function () {
+    //Open or close nav bar
+    $('#sidebarNav').toggleClass('active');
+    $('#content').toggleClass('active');
+    $('.overlay').addClass('active');
+    // close dropdowns
+    $('.collapse.in').toggleClass('in');
+    // and also adjust aria-expanded attributes we use for the open/closed arrows
+    // in our CSS
+    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+  });
 
 })(jQuery); // End of use strict
