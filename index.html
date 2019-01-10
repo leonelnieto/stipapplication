@@ -169,7 +169,7 @@
               <div class="tab-content card border-0" id="pills-tabContent">
                 <div class="tab-pane fade show active map" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
                   <div class="map">
-                    <iframe width="100%" height="100%" src="https://uplan.maps.arcgis.com/home/webmap/viewer.html?webmap=158978f53e5a402e984688b68d2104c7">
+                    <iframe width="100%" height="100%" src="http://uplan.maps.arcgis.com/home/webmap/viewer.html?webmap=05ae639b8be946aa9878d7115dc4035b">
                     </iframe>
                   </div>
                 </div>
@@ -302,17 +302,17 @@
           </div>
         </section>
       </div>
-      <!-- Modal -->
+      <!-- Modal for Pin details -->
       <div class="modal fade" id="myModal" role="dialog" style="z-index: 1050">
           <div class="modal-dialog">
-              <!-- Modal content-->
+              <!-- Pin Modal content-->
               <div class="modal-content">
                   <div class="modal-header">
                       <h5 class="modal-title" id="pinNum">Null</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   </div>
                   <div class="modal-body">
-                      <p id="PinDetails">{*_*} if you see me, something is wrong...</p>
+                      <p id="PinDetails" class="text-left">{*_*} if you see me, something is wrong...</p>
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -320,6 +320,26 @@
               </div>
           </div>
       </div>
+      <!-- END Modal for Pin details -->
+      <!-- Modal for Project Map -->
+      <div class="modal fade" id="mapModal" role="dialog"  style="z-index: 1050">
+          <div class="modal-dialog modal-full">
+          <!-- Pin Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="MapModalTitle">Project Map</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body" id="mapIframeMody">
+                  <p>If you seem run!!! Jk the map failed to load. </p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+      </div>
+      <!-- END Modal for Project Map -->
       <!--Overlay darkdayze-->
       <div class="overlay"></div>
   </div>

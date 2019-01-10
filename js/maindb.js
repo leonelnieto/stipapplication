@@ -86,7 +86,8 @@ function dataTableBuilder(query,dom){
             html += '<td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" tooltip="Click for PIN Details" tooltip-position="top"';
             html += ' data-target="#myModal" onClick="pingPin('+data[i]['pin']+')">';
             html += data[i]['pin']+'</button></td>';
-            html += '<td><a href="#" tooltip="Click for Project Map" tooltip-position="top">'+data[i]['pin_desc']+'</a></td>';
+            html += '<td><a data-toggle="modal" class="alt-link" data-target="#mapModal" onClick="showMapModal('+data[i]['pin']+')" ';
+            html += 'tooltip="Click for Project Map" tooltip-position="top">'+data[i]['pin_desc']+'</a></td>';
             html += '<td>'+data[i]['primary_concept']+'</td>';
             html += '<td>'+formatter.format(data[i]['project_value'])+'</td>';
             html += '<td class="'+bgColorClass(data[i]['planned_construction_year'])+'">'+data[i]['planned_construction_year']+'</td></tr>';
@@ -224,6 +225,12 @@ function pingPin(pinNum){
     }).catch (function(err) {
         console.log("Error on PingPin:"+err);
     });
+}
+//Function to show map when pin description is clicked
+function showMapModal(pin) {
+    var html = '<iframe class="mapIframe" src="https://uplan.maps.arcgis.com/apps/Minimalist/index.html?appid=ef5471033b7644d3a375745b7e436451&searchPIN='+pin+'">Iframes not supported</iframe>';
+    document.getElementById('mapIframeMody').innerHTML = html;
+    document.getElementById('MapModalTitle').innerHTML = 'Project ID '+pin+' Map';
 }
 //Function to parse date string
 function dateTransform(str){
