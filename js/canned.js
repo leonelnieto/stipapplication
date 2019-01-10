@@ -51,4 +51,5 @@
     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
   });
 
+
 })(jQuery); // End of use strict

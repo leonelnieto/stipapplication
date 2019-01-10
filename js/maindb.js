@@ -39,7 +39,8 @@ function buildTable(query,dop,status) {
                 if(data[i]["pin_stat_nm"] === status){
                     //Populate funded rows
                     html += '<tr><td class="sorting">'+data[i]['region_cd']+'</td>';
-                    html += '<td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" onClick="pingPin('+data[i]['pin']+')">';
+                    html += '<td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" tooltip="Click for PIN Details" ';
+                    html += ' tooltip-position="buttom" onClick="pingPin('+data[i]['pin']+')">';
                     html += data[i]['pin']+'</button></td>';
                     html += '<td>'+data[i]['pin_desc']+'</td>';
                     html += '<td>'+data[i]['primary_concept']+'</td>';
@@ -82,9 +83,10 @@ function dataTableBuilder(query,dom){
           for(var i=0; i < data.length;i++){
             //Populate funded rows
             html += '<tr><td class="sorting">'+data[i]['region_cd']+'</td>';
-            html += '<td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" onClick="pingPin('+data[i]['pin']+')">';
+            html += '<td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" tooltip="Click for PIN Details" tooltip-position="top"';
+            html += ' data-target="#myModal" onClick="pingPin('+data[i]['pin']+')">';
             html += data[i]['pin']+'</button></td>';
-            html += '<td>'+data[i]['pin_desc']+'</td>';
+            html += '<td><a href="#" tooltip="Click for Project Map" tooltip-position="top">'+data[i]['pin_desc']+'</a></td>';
             html += '<td>'+data[i]['primary_concept']+'</td>';
             html += '<td>'+formatter.format(data[i]['project_value'])+'</td>';
             html += '<td class="'+bgColorClass(data[i]['planned_construction_year'])+'">'+data[i]['planned_construction_year']+'</td></tr>';
@@ -231,7 +233,7 @@ function dateTransform(str){
 }
 //Function to build mini timeline
 function timeline(projectDates){
-    var timeline = "<div id='content'><p class='center-text'>Timeline</p><ul class='timeline'>";
+    var timeline = "<div id='timelineContent'><p class='center-text'>Timeline</p><ul class='timeline'>";
     for(var i = 0;i < projectDates.length; i++){
         timeline += "<li class='event' data-date='"+projectDates[i][1]+"'>";
         timeline += "<div class='member-infos'><span class='member-title'>"+projectDates[i][0]+"</span></div></li>";
