@@ -95,28 +95,31 @@ and open the template in the editor.
 }
 /*Color Codding for tables*/
 .bg2019 {
-  background-color: #B7F599;
+  background-color: #4ce600;
 }
 .bg2020 {
   background-color: #00a9e6;
 }
 .bg2021 {
-  background-color: #99BDF5;
+  background-color: #005ce6;
 }
 .bg2022 {
-  background-color: #ffdd99;
+  background-color: #ffaa00;
 }
 .bg2023 {
   background-color: #1a1a1a;
 }
 .bg2024 {
-  background-color: #a3a3a3;
+  background-color: #fc30cd;
 }
 .bg2025 {
-  background-color: #f5b799;
+  background-color: #e64c00;
 }
 .bg2026 {
-  background-color: #f59999;
+  background-color: #e60000;
+}
+.bg2027 {
+  background-color: #a87000;
 }
 .map{
   height: 110vh;

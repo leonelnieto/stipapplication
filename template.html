@@ -24,8 +24,8 @@
     <link href="css/custom.css" rel="stylesheet">
   </head>
   <body id="page-top">
-      <!--Wrapper-->
-      <div class="wrapper">
+    <!--Wrapper-->
+    <div class="wrapper">
         <!--Begin Navigation sidebarNav = sidebar-->
         <nav id="sidebarNav">
             <div id="dismiss">
@@ -87,13 +87,9 @@
                     <i class="fa fa-thumbtack"></i> Local Gov
                     </a>
                     <ul class="collapse list-unstyled" id="locgovsubmenu">
-                        <li><a href="wfrc.html">WFRC</a></li>
-                        <li><a href="mag.html">MAG</a></li>
-                        <li><a href="dixie.html">Dixie</a></li>
-                        <li><a href="cache.html">Cache</a></li>
+                        <li><a href="wfrc.html">MPO</a></li>
                         <li><a href="localgov-bridge.html">Off-System Bridge</a></li>
                         <li><a href="localgov-nonUrban.html">Non Urban</a></li>
-                        <li><a href="localgov-smallUrban.html">Small Urban</a></li>
                         <li><a href="localgov-statePark.html">State Park</a></li>
                     </ul>
                 </li>
@@ -149,160 +145,163 @@
         <!-- TIF Documentation Secition -->
         <section class="mopeed-section p-3 mt-70px d-flex flex-column">
             <div class="my-auto">
+                <!--Tab Selectors-->
                 <ul class="nav nav-pills mb-3 nav-justified md-tabs bg-secondary text-white" id="pills-tab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="true">Map</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-unfunded-tab" data-toggle="pill" href="#pills-unfunded" role="tab" aria-controls="pills-unfunded" aria-selected="false"
-                    onclick="" tooltip="Example " tooltip-position="buttom">Unfunded</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false">Proposed</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-comapp-tab" data-toggle="pill" href="#pills-comapp" role="tab" aria-controls="pills-comapp" aria-selected="false">Commission Approved</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-design-tab" data-toggle="pill" href="#pills-design" role="tab" aria-controls="pills-design" aria-selected="false">Design</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-construction-tab" data-toggle="pill" href="#pills-construction" role="tab" aria-controls="pills-construction" aria-selected="false">Construction</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="true">Map</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-unfunded-tab" data-toggle="pill" href="#pills-unfunded" role="tab" aria-controls="pills-unfunded" aria-selected="false" tooltip="Example " tooltip-position="buttom">Unfunded</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false">Proposed</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-comapp-tab" data-toggle="pill" href="#pills-comapp" role="tab" aria-controls="pills-comapp" aria-selected="false">Commission Approved</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-design-tab" data-toggle="pill" href="#pills-design" role="tab" aria-controls="pills-design" aria-selected="false">Design</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-construction-tab" data-toggle="pill" href="#pills-construction" role="tab" aria-controls="pills-construction" aria-selected="false">Construction</a>
+                    </li>
                 </ul>
+                <!--END Tab Selectors-->
+                <!--Begin Tabs-->
                 <div class="tab-content card border-0" id="pills-tabContent">
-                <div class="tab-pane fade show active map" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
-                    <div class="map">
-                    <iframe width="100%" height="100%" src="https://uplan.maps.arcgis.com/home/webmap/viewer.html?webmap=158978f53e5a402e984688b68d2104c7">
-                    </iframe>
+                    <div class="tab-pane fade show active map" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
+                        <div class="map">
+                            <iframe width="100%" height="75%" src="https://uplan.maps.arcgis.com/apps/Embed/index.html?webmap=05ae639b8be946aa9878d7115dc4035b&extent=-119.0136,35.989,-104.4787,42.7651&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light">
+                            </iframe>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-unfunded" role="tabpanel" aria-labelledby="pills-unfunded-tab">
+                        <div class="row">
+                        <div class="col-12">
+                            <div id="pills-unfundedtbl"></div>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-lg-6 my-auto">
+                            <div class="card border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">Distribution of Funds by Region</h5>
+                                <div id="unfundedbyRegion" style="height: 250px"></div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 my-auto">
+                            <div class="card border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">Distribution of Funds by Year</h5>
+                                <div id="unfunedbyYear" style="height: 250px"></div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-proposed" role="tabpanel" aria-labelledby="pills-proposed-tab">
+                        <div class="row">
+                        <div class="col-12">
+                            <div id="pills-proposedtbl"></div>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-lg-6 my-auto">
+                            <div class="card border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">Distribution of Funds by Region</h5>
+                                <div id="proposedbyRegion" style="height: 250px"></div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 my-auto">
+                            <div class="card border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">Distribution of Funds by Year</h5>
+                                <div id="proposedbyYear" style="height: 250px"></div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-comapp" role="tabpanel" aria-labelledby="pills-comapp-tab">
+                        <div class="row">
+                        <div class="col-12">
+                            <div id="pills-comapptbl"></div>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-lg-6 my-auto">
+                            <div class="card border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">Distribution of Funds by Region</h5>
+                                <div id="comappbyRegion" style="height: 250px"></div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 my-auto">
+                            <div class="card border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">Distribution of Funds by Year</h5>
+                                <div id="comappbyYear" style="height: 250px"></div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-design" role="tabpanel" aria-labelledby="pills-design-tab">
+                        <div class="row">
+                        <div class="col-12">
+                            <div id="pills-designtbl"></div>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-lg-6 my-auto">
+                            <div class="card border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">Distribution of Funds by Region</h5>
+                                <div id="designbyRegion" style="height: 250px"></div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 my-auto">
+                            <div class="card border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">Distribution of Funds by Year</h5>
+                                <div id="designbyYear" style="height: 250px"></div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-construction" role="tabpanel" aria-labelledby="pills-construction-tab">
+                        <div class="row">
+                        <div class="col-12">
+                            <div id="pills-constructiontbl"></div>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-lg-6 my-auto">
+                            <div class="card border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">Distribution of Funds by Region</h5>
+                                <div id="constructionbyRegion" style="height: 250px"></div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 my-auto">
+                            <div class="card border-0">
+                            <div class="card-body">
+                                <h5 class="card-title">Distribution of Funds by Year</h5>
+                                <div id="constructionbyYear" style="height: 250px"></div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pills-unfunded" role="tabpanel" aria-labelledby="pills-unfunded-tab">
-                    <div class="row">
-                    <div class="col-12">
-                        <div id="pills-unfundedtbl"></div>
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="col-lg-6 my-auto">
-                        <div class="card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">Distribution of Funds by Region</h5>
-                            <div id="unfundedbyRegion" style="height: 250px"></div>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 my-auto">
-                        <div class="card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">Distribution of Funds by Year</h5>
-                            <div id="unfunedbyYear" style="height: 250px"></div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="pills-proposed" role="tabpanel" aria-labelledby="pills-proposed-tab">
-                    <div class="row">
-                    <div class="col-12">
-                        <div id="pills-fundedtbl"></div>
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="col-lg-6 my-auto">
-                        <div class="card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">Distribution of Funds by Region</h5>
-                            <div id="fundedbyRegion" style="height: 250px"></div>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 my-auto">
-                        <div class="card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">Distribution of Funds by Year</h5>
-                            <div id="funedbyYear" style="height: 250px"></div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="pills-comapp" role="tabpanel" aria-labelledby="pills-comapp-tab">
-                    <div class="row">
-                    <div class="col-12">
-                        <div id="pills-proposedtbl"></div>
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="col-lg-6 my-auto">
-                        <div class="card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">Distribution of Funds by Region</h5>
-                            <div id="proposedbyRegion" style="height: 250px"></div>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 my-auto">
-                        <div class="card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">Distribution of Funds by Year</h5>
-                            <div id="proposedbyYear" style="height: 250px"></div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="pills-design" role="tabpanel" aria-labelledby="pills-design-tab">
-                    <div class="row">
-                    <div class="col-12">
-                        <div id="pills-designtbl"></div>
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="col-lg-6 my-auto">
-                        <div class="card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">Distribution of Funds by Region</h5>
-                            <div id="designbyRegion" style="height: 250px"></div>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 my-auto">
-                        <div class="card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">Distribution of Funds by Year</h5>
-                            <div id="designbyYear" style="height: 250px"></div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="pills-construction" role="tabpanel" aria-labelledby="pills-construction-tab">
-                    <div class="row">
-                    <div class="col-12">
-                        <div id="pills-constructiontbl"></div>
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="col-lg-6 my-auto">
-                        <div class="card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">Distribution of Funds by Region</h5>
-                            <div id="constructionbyRegion" style="height: 250px"></div>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 my-auto">
-                        <div class="card border-0">
-                        <div class="card-body">
-                            <h5 class="card-title">Distribution of Funds by Year</h5>
-                            <div id="constructionbyYear" style="height: 250px"></div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
+                <!--END Begin Tabs-->
             </div>
         </section>
         <!-- Modal for Pin details -->
@@ -345,9 +344,9 @@
         <!-- END Modal for Project Map -->
         <!--Overlay darkdayze-->
         <div class="overlay"></div>
+        
         </div>
-  </div>
-  <!--End Wrapper-->
+    <!--END Wrapper-->
     </div>
     <!-- Bootstrap core JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -368,32 +367,35 @@
     <!-- Custom scripts for this template -->
     <script src="js/canned.js"></script>
     <!-- Main Dashboard Javascript -->
-    <script src="js/maindb.js"></script>
+    <script src="js/maindb-2.0.js"></script>
     <script>
-      var dataset = "https://dashboard.udot.utah.gov/resource/jxb9-2t9j.json";
-      var select = "?$select=pin,workshop_category,region_cd,comm_aprv_ind,pin_description,primary_concept,project_value,planned_construction_year,public_desc,forecast_st_yr,fed_dollars,state_dollars"
-      var where = "&$where=comm_aprv_ind='N' and pin_status='Proposed'";
-      var tail = '&$limit=50000';
-      dataTableBuilderEPM(dataset+select+where+tail,'#pills-unfundedtbl');
-      where = "&$where=pin_status='Funding' or pin_status='Advertised'";
-      dataTableBuilderEPM(dataset+select+where,'#pills-fundedtbl');
-      where = "&$where=pin_status='Proposed'";
-      dataTableBuilderEPM(dataset+select+where,'#pills-proposedtbl');
-      where = "&$where=pin_status='Scoping'";
-      dataTableBuilderEPM(dataset+select+where,'#pills-designtbl');
-      where = "&$where=pin_status='Under Construction'";
-      dataTableBuilderEPM(dataset+select+where,'#pills-constructiontbl');
+      var workshop = "all";
+      dataTableBuilder('unfunded',workshop,'#pills-unfundedtbl');
+      dataTableBuilder('proposed',workshop,'#pills-proposedtbl');
+      dataTableBuilder('comapp',workshop,'#pills-comapptbl');
+      dataTableBuilder('design',workshop,'#pills-designtbl');
+      dataTableBuilder('construction',workshop,'#pills-constructiontbl');
       //Drill Charts
-      drillPlotlyChart("unfundedbyRegion","region_cd","all","Unfunded");
-      drillPlotlyChart("unfunedbyYear","planned_construction_year","all","Unfunded");
-      drillPlotlyChart("fundedbyRegion","region_cd","all","Advertised");
-      drillPlotlyChart("funedbyYear","planned_construction_year","all","Advertised");
-      drillPlotlyChart("proposedbyRegion","region_cd","all","Proposed");
-      drillPlotlyChart("proposedbyYear","planned_construction_year","all","Proposed");
-      drillPlotlyChart("designbyRegion","region_cd","all","Scoping");
-      drillPlotlyChart("designbyYear","planned_construction_year","all","Scoping");
-      drillPlotlyChart("constructionbyRegion","region_cd","all","Under Construction");
-      drillPlotlyChart("constructionbyYear","planned_construction_year","all","Under Construction");
+      function drawUnfunded(){
+        drillPlotlyChart("unfundedbyRegion","region_cd",workshop,"Unfunded");
+        drillPlotlyChart("unfunedbyYear","planned_construction_year",workshop,"Unfunded");
+      }
+      function drawFunded(){
+        drillPlotlyChart("fundedbyRegion","region_cd",workshop,"Advertised");
+        drillPlotlyChart("funedbyYear","planned_construction_year",workshop,"Advertised");
+      }
+      function drawComApp() {
+        drillPlotlyChart("proposedbyRegion","region_cd",workshop,"Proposed");
+        drillPlotlyChart("proposedbyYear","planned_construction_year",workshop,"Proposed");
+      }
+      function drawDesign(){
+        drillPlotlyChart("designbyRegion","region_cd",workshop,"Scoping");
+        drillPlotlyChart("designbyYear","planned_construction_year",workshop,"Scoping");
+      }
+      function drawConstruction(){
+        drillPlotlyChart("constructionbyRegion","region_cd",workshop,"Under Construction");
+        drillPlotlyChart("constructionbyYear","planned_construction_year",workshop,"Under Construction");
+      }
     </script>
   </body>
 </html>
