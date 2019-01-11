@@ -370,19 +370,19 @@
     <!-- Main Dashboard Javascript -->
     <script src="js/maindb.js"></script>
     <script>
-      var dataset = "https://dashboard.udot.utah.gov/resource/a6xh-u32h.json";
-      var select = "?$select=pin,workshop_cat,region_cd,comm_aprv_ind,pin_desc,primary_concept,project_value,planned_construction_year,program,public_desc,forecast_st_yr,fed_dollars,state_dollars"
-      var where = "&$where=comm_aprv_ind='N' and pin_stat_nm='Proposed'";
+      var dataset = "https://dashboard.udot.utah.gov/resource/jxb9-2t9j.json";
+      var select = "?$select=pin,workshop_category,region_cd,comm_aprv_ind,pin_description,primary_concept,project_value,planned_construction_year,public_desc,forecast_st_yr,fed_dollars,state_dollars"
+      var where = "&$where=comm_aprv_ind='N' and pin_status='Proposed'";
       var tail = '&$limit=50000';
-      dataTableBuilder(dataset+select+where+tail,'#pills-unfundedtbl');
-      where = "&$where=pin_stat_nm='Funding' or pin_stat_nm='Advertised'";
-      dataTableBuilder(dataset+select+where,'#pills-fundedtbl');
-      where = "&$where=pin_stat_nm='Proposed'";
-      dataTableBuilder(dataset+select+where,'#pills-proposedtbl');
-      where = "&$where=pin_stat_nm='Scoping'";
-      dataTableBuilder(dataset+select+where,'#pills-designtbl');
-      where = "&$where=pin_stat_nm='Under Construction'";
-      dataTableBuilder(dataset+select+where,'#pills-constructiontbl');
+      dataTableBuilderEPM(dataset+select+where+tail,'#pills-unfundedtbl');
+      where = "&$where=pin_status='Funding' or pin_status='Advertised'";
+      dataTableBuilderEPM(dataset+select+where,'#pills-fundedtbl');
+      where = "&$where=pin_status='Proposed'";
+      dataTableBuilderEPM(dataset+select+where,'#pills-proposedtbl');
+      where = "&$where=pin_status='Scoping'";
+      dataTableBuilderEPM(dataset+select+where,'#pills-designtbl');
+      where = "&$where=pin_status='Under Construction'";
+      dataTableBuilderEPM(dataset+select+where,'#pills-constructiontbl');
       //Drill Charts
       drillPlotlyChart("unfundedbyRegion","region_cd","all","Unfunded");
       drillPlotlyChart("unfunedbyYear","planned_construction_year","all","Unfunded");
