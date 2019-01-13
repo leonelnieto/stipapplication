@@ -14,7 +14,7 @@ const formatter = new Intl.NumberFormat('en-US', {
     currency: 'USD',
     minimumFractionDigits: 2
   });
- //Query Dataset
+ //Query Dataset then build table
 function dataTableBuilder(pn_status,workshop,dom){
     //Build where clause by filter
     var whereClause = whereClauseBuilder(pn_status,workshop);
@@ -34,7 +34,7 @@ function dataTableBuilder(pn_status,workshop,dom){
             for(var i=0; i < data.length;i++){
                 //Populate funded rows
                 html += '<tr><td class="sorting">'+data[i]['region_cd']+'</td>';
-                html += '<td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" tooltip="Click for PIN Details" tooltip-position="top"';
+                html += '<td><button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" tooltip="Click for PIN Details" tooltip-position="top"';
                 html += ' data-target="#myModal" onClick="pingPin('+data[i]['pin']+')">';
                 html += data[i]['pin']+'</button></td>';
                 html += '<td><a data-toggle="modal" class="alt-link" data-target="#mapModal" onClick="showMapModal('+data[i]['pin']+')" ';
@@ -50,7 +50,7 @@ function dataTableBuilder(pn_status,workshop,dom){
                 "pagingType": "full_numbers",
                 "columns": [
                     { "orderable": true },
-                    { "orderable": false },
+                    { "orderable": true },
                     { "orderable": false },
                     { "orderable": true },
                     { "orderable": false },
@@ -61,6 +61,77 @@ function dataTableBuilder(pn_status,workshop,dom){
             console.log("{*_*} Shit, I should not be here!!!!");
             console.log(query);
     });
+}
+//Drill Chart using plotly
+function drillPlotlyChart(pn_status,workshop,dom,groupOrder){
+    var whereClause = whereClauseBuilder(pn_status,workshop);
+    var vizQueryAgg = "?$select="+groupOrder+",sum(project_value)";
+    var vizQueryGroup = "&$group="+groupOrder;
+    var vizQueryOrder = "&$order="+groupOrder;
+    var url = sourceDataset+vizQueryAgg+whereClause+vizQueryGroup+vizQueryOrder;
+    fetch(url).then(function(response){
+        return response.json();
+    }).then(function(j){
+      var x = [];
+      var y = [];
+      for(var i = 0; i < j.length; i++){
+        x.push(j[i][groupOrder]);
+        y.push(formatter.format(j[i]["sum_project_value"]));
+      }
+      var trace1 = {
+        x: x,
+        y: y,
+        name: 'Project Value',
+        type: 'bar'
+      };
+      var data = [trace1];
+      var layout = {
+        yaxis: {title: 'Project values',hoverformat: '$0f'},xaxis: {type: 'category'},
+      };
+      Plotly.newPlot(dom, data, layout,{responsive: true});
+  });
+}
+//Drill Chart takes type parameter for table or graph
+function drillVisual(pn_status,workshop,dom,groupOrder,aggregate,type){
+    var whereClause = whereClauseBuilder(pn_status,workshop);
+    var vizQueryAgg = "?$select="+groupOrder+",sum("+aggregate+") as aggregate";
+    var vizQueryGroup = "&$group="+groupOrder;
+    var vizQueryOrder = "&$order="+groupOrder;
+    var url = sourceDataset+vizQueryAgg+whereClause+vizQueryGroup+vizQueryOrder;
+    fetch(url).then(function(response){
+        return response.json();
+    }).then(function(j){
+        //Check type and draw whats requested
+        if(type === 'chart'){
+            var x = [];
+            var y = [];
+            for(var i = 0; i < j.length; i++){
+                x.push(j[i][groupOrder]);
+                y.push(formatter.format(j[i]["aggregate"]));
+            }
+            var trace1 = {
+                x: x,
+                y: y,
+                name: 'Project Value',
+                type: 'bar'
+            };
+            var data = [trace1];
+            var layout = {
+                yaxis: {title: 'Project values',hoverformat: '$0f'},xaxis: {type: 'category'},
+            };
+            Plotly.newPlot(dom, data, layout,{responsive: true});
+        } else if(type === 'table'){
+            var col = (groupOrder === "region_cd")?"Region":"Year";
+            var html = '<table class="table"><thead><tr><th>'+col+'</th><th>Dollars</th></thead><tbody>';
+            for(var i=0; i < j.length;i++){
+                html += '<tr><td>'+j[i][groupOrder]+'</td>';
+                html += '<td>'+formatter.format(j[i]['aggregate'])+'</td></tr>';
+            }
+            html += '</tbody></table>';
+            document.getElementById(dom).innerHTML = html;
+            
+        }
+  });
 }
 //Helper function to build where clause
 function whereClauseBuilder(pn_status,workshop) {
@@ -199,6 +270,8 @@ function pingPin(pinNum){
         if(projectDates.length  !== 0){
             pinDetails += timeline(projectDates);
         }
+        //One pager link
+        pinDetails += '<br ><br ><a href="http://maps.udot.utah.gov/wadocuments/apps/ProgramBriefing/'+data[0]['region_cd']+'/'+data[0]['pin']+'.pdf"'+' class="btn btn-primary" target="new">Project Briefing</a>';
         $('#PinDetails').html(pinDetails);
     }).catch (function(err) {
         console.log("Error on PingPin:"+err);
@@ -226,51 +299,14 @@ function timeline(projectDates){
     timeline += "</ul></div>";
     return timeline;
 }
-//Drill Chart using plotly
-function drillPlotlyChart(dop,groupOrder,workshop,status){
-    var vizQueryFilter;
-    if(workshop === 'all'){
-      if(status === "Unfunded"){
-        vizQueryFilter = "&$where=pin_stat_nm='Proposed' and comm_aprv_ind = 'N'";
-      } else if(status === "Advertised") {
-        vizQueryFilter = "&$where=pin_stat_nm='"+status+"'or pin_stat_nm='Funding'";
-      } else {
-        vizQueryFilter = "&$where=pin_stat_nm='"+status+"'";
-      }
-    } else{
-      if(status === "Unfunded"){
-        vizQueryFilter = "&$where=workshop_cat="+workshop+" and pin_stat_nm='Proposed' and comm_aprv_ind = 'N'";
-      } else if(status === "Advertised") {
-        vizQueryFilter = "&$where=workshop_cat="+workshop+" and (pin_stat_nm='"+status+"'or pin_stat_nm='Funding')";
-      } else {
-        vizQueryFilter = "&$where=workshop_cat="+workshop+" and pin_stat_nm='"+status+"'";
-      }
-    }
-    //This is test data, must update with correct source
-    var vizDataset = "https://dashboard.udot.utah.gov/resource/a6xh-u32h.json";
-    var vizQueryAgg = "?$select="+groupOrder+",sum(project_value)";
-    var vizQueryGroup = "&$group="+groupOrder;
-    var vizQueryOrder = "&$order="+groupOrder;
-    var url = vizDataset+vizQueryAgg+vizQueryFilter+vizQueryGroup+vizQueryOrder;
-    fetch(url).then(function(response){
-        return response.json();
-    }).then(function(j){
-      var x = [];
-      var y = [];
-      for(var i = 0; i < j.length; i++){
-        x.push(j[i][groupOrder]);
-        y.push(formatter.format(j[i]["sum_project_value"]));
-      }
-      var trace1 = {
-        x: x,
-        y: y,
-        name: 'Project Value',
-        type: 'bar'
-      };
-      var data = [trace1];
-      var layout = {
-        yaxis: {title: 'Project values'},xaxis: {type: 'category'}
-      };
-      Plotly.newPlot(dop, data, layout,{responsive: true});
-  });
+//Function to build one pager link 
+function onePagerLink(pin,region) {
+    var onePagerButton = "";
+    var onePagerURL = "http://maps.udot.utah.gov/wadocuments/apps/ProgramBriefing/"+region+"/"+pin+".pdf";
+    $.get(onePagerURL).done(function () {
+        onePagerButton = '<a href="'+onePagerURL+'" class="btn btn-primary">Project Briefing</a>';
+    }).fail(function () {
+        onePagerButton = '<a href="#" class="btn btn-primary">Project Briefing</a>';
+    });
+    return onePagerButton;
 }

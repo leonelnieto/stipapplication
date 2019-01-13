@@ -151,19 +151,19 @@
                         <a class="nav-link active" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="true">Map</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-unfunded-tab" data-toggle="pill" href="#pills-unfunded" role="tab" aria-controls="pills-unfunded" aria-selected="false" tooltip="Example " tooltip-position="buttom">Unfunded</a>
+                        <a class="nav-link" id="pills-unfunded-tab" data-toggle="pill" href="#pills-unfunded" role="tab" aria-controls="pills-unfunded" aria-selected="false" tooltip="Example " tooltip-position="buttom" onclick="setTimeout(drawUnfunded,500)">Unfunded</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false">Proposed</a>
+                        <a class="nav-link" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false" onclick="setTimeout(drawProposed,500)">Proposed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-comapp-tab" data-toggle="pill" href="#pills-comapp" role="tab" aria-controls="pills-comapp" aria-selected="false">Commission Approved</a>
+                        <a class="nav-link" id="pills-comapp-tab" data-toggle="pill" href="#pills-comapp" role="tab" aria-controls="pills-comapp" aria-selected="false" onclick="setTimeout(drawComApp,500)">Commission Approved</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-design-tab" data-toggle="pill" href="#pills-design" role="tab" aria-controls="pills-design" aria-selected="false">Design</a>
+                        <a class="nav-link" id="pills-design-tab" data-toggle="pill" href="#pills-design" role="tab" aria-controls="pills-design" aria-selected="false" onclick="setTimeout(drawDesign,500)">Design</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-construction-tab" data-toggle="pill" href="#pills-construction" role="tab" aria-controls="pills-construction" aria-selected="false">Construction</a>
+                        <a class="nav-link" id="pills-construction-tab" data-toggle="pill" href="#pills-construction" role="tab" aria-controls="pills-construction" aria-selected="false" onclick="setTimeout(drawConstruction,500)">Construction</a>
                     </li>
                 </ul>
                 <!--END Tab Selectors-->
@@ -177,27 +177,30 @@
                     </div>
                     <div class="tab-pane fade" id="pills-unfunded" role="tabpanel" aria-labelledby="pills-unfunded-tab">
                         <div class="row">
-                        <div class="col-12">
-                            <div id="pills-unfundedtbl"></div>
-                        </div>
+                            <div class="col-12">
+                                <div id="pills-unfundedtbl"></div>
+                            </div>
                         </div>
                         <div class="row">
-                        <div class="col-lg-6 my-auto">
-                            <div class="card border-0">
-                            <div class="card-body">
-                                <h5 class="card-title">Distribution of Funds by Region</h5>
-                                <div id="unfundedbyRegion" style="height: 250px"></div>
+                            <div class="col-lg-6 my-auto">
+                                <div class="card border-0">
+                                    <div class="card-header">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm">Table</button>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="byRegionTitle"> by Region</h5>
+                                        <div id="unfundedbyRegion" style="height: 250px"></div>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="col-lg-6 my-auto">
+                                <div class="card border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title" id="byYearTitle">Distribution of Funds by Year</h5>
+                                    <div id="unfunedbyYear" style="height: 250px"></div>
+                                </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 my-auto">
-                            <div class="card border-0">
-                            <div class="card-body">
-                                <h5 class="card-title">Distribution of Funds by Year</h5>
-                                <div id="unfunedbyYear" style="height: 250px"></div>
-                            </div>
-                            </div>
-                        </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-proposed" role="tabpanel" aria-labelledby="pills-proposed-tab">
@@ -377,24 +380,24 @@
       dataTableBuilder('construction',workshop,'#pills-constructiontbl');
       //Drill Charts
       function drawUnfunded(){
-        drillPlotlyChart("unfundedbyRegion","region_cd",workshop,"Unfunded");
-        drillPlotlyChart("unfunedbyYear","planned_construction_year",workshop,"Unfunded");
+        drillVisual('unfunded',workshop,'unfunedbyYear','planned_construction_year','project_value','chart');
+        drillVisual('unfunded',workshop,'unfundedbyRegion','region_cd','project_value','chart');
       }
-      function drawFunded(){
-        drillPlotlyChart("fundedbyRegion","region_cd",workshop,"Advertised");
-        drillPlotlyChart("funedbyYear","planned_construction_year",workshop,"Advertised");
+      function drawProposed(){
+        drillVisual('proposed',workshop,'proposedbyYear','planned_construction_year','project_value','chart');
+        drillVisual('proposed',workshop,'proposedbyRegion','region_cd','project_value','chart');
       }
       function drawComApp() {
-        drillPlotlyChart("proposedbyRegion","region_cd",workshop,"Proposed");
-        drillPlotlyChart("proposedbyYear","planned_construction_year",workshop,"Proposed");
+        drillVisual('comapp',workshop,'comappbyYear','planned_construction_year','project_value','chart');
+        drillVisual('comapp',workshop,'comappbyRegion','region_cd','project_value','chart');
       }
       function drawDesign(){
-        drillPlotlyChart("designbyRegion","region_cd",workshop,"Scoping");
-        drillPlotlyChart("designbyYear","planned_construction_year",workshop,"Scoping");
+        drillVisual('design',workshop,'designbyYear','planned_construction_year','project_value','chart');
+        drillVisual('design',workshop,'designbyRegion','region_cd','project_value','chart');
       }
       function drawConstruction(){
-        drillPlotlyChart("constructionbyRegion","region_cd",workshop,"Under Construction");
-        drillPlotlyChart("constructionbyYear","planned_construction_year",workshop,"Under Construction");
+        drillVisual('construction',workshop,'constructionbyYear','planned_construction_year','project_value','chart');
+        drillVisual('construction',workshop,'constructionbyRegion','region_cd','project_value','chart');
       }
     </script>
   </body>
