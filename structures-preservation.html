@@ -87,7 +87,7 @@
                     <i class="fa fa-thumbtack"></i> Local Gov
                     </a>
                     <ul class="collapse list-unstyled" id="locgovsubmenu">
-                        <li><a href="wfrc.html">MPO</a></li>
+                        <li><a href="localgov-mpo.html">MPO</a></li>
                         <li><a href="localgov-bridge.html">Off-System Bridge</a></li>
                         <li><a href="localgov-nonUrban.html">Non Urban</a></li>
                         <li><a href="localgov-statePark.html">State Park</a></li>
@@ -150,9 +150,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="true">Map</a>
                     </li>
+                    <!-- On non TIF and TS Workshop Categories - Proposed, Commission Approved, Design, Construction
                     <li class="nav-item">
                         <a class="nav-link" id="pills-unfunded-tab" data-toggle="pill" href="#pills-unfunded" role="tab" aria-controls="pills-unfunded" aria-selected="false" onclick="setTimeout(function(){drawUnfunded('project_value')},500)">Unfunded</a>
                     </li>
+                    -->
                     <li class="nav-item">
                         <a class="nav-link" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false" onclick="setTimeout(function(){drawProposed('project_value')},500)">Proposed</a>
                     </li>
@@ -175,6 +177,7 @@
                             </iframe>
                         </div>
                     </div>
+                    <!-- On non TIF and TS Workshop Categories - Proposed, Commission Approved, Design, Construction
                     <div class="tab-pane fade" id="pills-unfunded" role="tabpanel" aria-labelledby="pills-unfunded-tab">
                         <div class="row">
                             <div class="col-12">
@@ -209,6 +212,7 @@
                             </div>
                         </div>
                     </div>
+                    -->
                     <div class="tab-pane fade" id="pills-proposed" role="tabpanel" aria-labelledby="pills-proposed-tab">
                         <div class="row">
                             <div class="col-12">
@@ -415,18 +419,18 @@
     <script src="js/maindb-2.0.js"></script>
     <script>
       var workshop = "Bridge Preservation";
-      dataTableBuilder('unfunded',workshop,'#pills-unfundedtbl');
+      //dataTableBuilder('unfunded',workshop,'#pills-unfundedtbl');
       dataTableBuilder('proposed',workshop,'#pills-proposedtbl');
       dataTableBuilder('comapp',workshop,'#pills-comapptbl');
       dataTableBuilder('design',workshop,'#pills-designtbl');
       dataTableBuilder('construction',workshop,'#pills-constructiontbl');
       //Drill Charts
-      function drawUnfunded(agg){
-        drillVisual('unfunded',workshop,'unfundedbyRegionChart','region_cd',agg,'chart');
-        drillVisual('unfunded',workshop,'unfundedbyRegionTable','region_cd',agg,'table');
-        drillVisual('unfunded',workshop,'unfunedbyYearChart','planned_construction_year',agg,'chart');
-        drillVisual('unfunded',workshop,'unfunedbyYearTable','planned_construction_year',agg,'table');
-      }
+        //   function drawUnfunded(agg){
+        //     drillVisual('unfunded',workshop,'unfundedbyRegionChart','region_cd',agg,'chart');
+        //     drillVisual('unfunded',workshop,'unfundedbyRegionTable','region_cd',agg,'table');
+        //     drillVisual('unfunded',workshop,'unfunedbyYearChart','planned_construction_year',agg,'chart');
+        //     drillVisual('unfunded',workshop,'unfunedbyYearTable','planned_construction_year',agg,'table');
+        //   }
       function drawProposed(agg){
         drillVisual('proposed',workshop,'proposedbyYearChart','planned_construction_year',agg,'chart');
         drillVisual('proposed',workshop,'proposedbyYearTable','planned_construction_year',agg,'table');
