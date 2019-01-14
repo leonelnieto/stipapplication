@@ -130,13 +130,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">App Home</a>
+                                <a class="nav-link" href="index.html">App Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">UDOT</a>
+                                <a class="nav-link" href="udot.utah.gov">UDOT</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">UDOT Strategic Direction</a>
+                                <a class="nav-link" href="udot.utah.gov/strategic-direction">UDOT Strategic Direction</a>
                             </li>
                         </ul>
                     </div>
@@ -151,19 +151,19 @@
                         <a class="nav-link active" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="true">Map</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-unfunded-tab" data-toggle="pill" href="#pills-unfunded" role="tab" aria-controls="pills-unfunded" aria-selected="false" tooltip="Example " tooltip-position="buttom" onclick="setTimeout(drawUnfunded,500)">Unfunded</a>
+                        <a class="nav-link" id="pills-unfunded-tab" data-toggle="pill" href="#pills-unfunded" role="tab" aria-controls="pills-unfunded" aria-selected="false" onclick="setTimeout(function(){drawUnfunded('project_value')},500)">Unfunded</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false" onclick="setTimeout(drawProposed,500)">Proposed</a>
+                        <a class="nav-link" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false" onclick="setTimeout(function(){drawProposed('project_value')},500)">Proposed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-comapp-tab" data-toggle="pill" href="#pills-comapp" role="tab" aria-controls="pills-comapp" aria-selected="false" onclick="setTimeout(drawComApp,500)">Commission Approved</a>
+                        <a class="nav-link" id="pills-comapp-tab" data-toggle="pill" href="#pills-comapp" role="tab" aria-controls="pills-comapp" aria-selected="false" onclick="setTimeout(function(){drawComApp('project_value')},500)">Commission Approved</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-design-tab" data-toggle="pill" href="#pills-design" role="tab" aria-controls="pills-design" aria-selected="false" onclick="setTimeout(drawDesign,500)">Design</a>
+                        <a class="nav-link" id="pills-design-tab" data-toggle="pill" href="#pills-design" role="tab" aria-controls="pills-design" aria-selected="false" onclick="setTimeout(function(){drawDesign('project_value')},500)">Design</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-construction-tab" data-toggle="pill" href="#pills-construction" role="tab" aria-controls="pills-construction" aria-selected="false" onclick="setTimeout(drawConstruction,500)">Construction</a>
+                        <a class="nav-link" id="pills-construction-tab" data-toggle="pill" href="#pills-construction" role="tab" aria-controls="pills-construction" aria-selected="false" onclick="setTimeout(function(){drawConstruction('project_value')},500)">Construction</a>
                     </li>
                 </ul>
                 <!--END Tab Selectors-->
@@ -181,126 +181,168 @@
                                 <div id="pills-unfundedtbl"></div>
                             </div>
                         </div>
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <button type="button" id="projVal" onclick="setTimeout(function(){drawUnfunded('project_value')},500)" class="btn btn-outline-secondary btn-sm">Project Value</button>
+                                <button type="button" id="statDol" onclick="setTimeout(function(){drawUnfunded('state_dollars')},500)" class="btn btn-outline-secondary btn-sm">State Dollars</button>
+                                <button type="button" onclick="setTimeout(function(){drawUnfunded('fed_dollars')},500)" id="fedDol" class="btn btn-outline-secondary btn-sm">Federal Dollars</button>
+                            </div>
+                        </div>
                         <div class="row">
-                            <div class="col-lg-6 my-auto">
+                            <div class="col-lg-6">
                                 <div class="card border-0">
-                                    <div class="card-header">
-                                        <button type="button" class="btn btn-outline-secondary btn-sm">Table</button>
-                                    </div>
                                     <div class="card-body">
-                                        <h5 class="card-title" id="byRegionTitle"> by Region</h5>
-                                        <div id="unfundedbyRegion" style="height: 250px"></div>
+                                        <h5 class="card-title" id="byRegionTitle">Region</h5>
+                                        <div id="unfundedbyRegionChart" style="height: 250px"></div>
+                                        <div id="unfundedbyRegionTable"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 my-auto">
+                            <div class="col-lg-6">
                                 <div class="card border-0">
-                                <div class="card-body">
-                                    <h5 class="card-title" id="byYearTitle">Distribution of Funds by Year</h5>
-                                    <div id="unfunedbyYear" style="height: 250px"></div>
-                                </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="byYearTitle">Planned Construction Year</h5>
+                                        <div id="unfunedbyYearChart" style="height: 250px"></div>
+                                        <div id="unfunedbyYearTable"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-proposed" role="tabpanel" aria-labelledby="pills-proposed-tab">
                         <div class="row">
-                        <div class="col-12">
-                            <div id="pills-proposedtbl"></div>
+                            <div class="col-12">
+                                <div id="pills-proposedtbl"></div>
+                            </div>
                         </div>
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <button type="button" id="projVal" onclick="setTimeout(function(){drawProposed('project_value')},500)" class="btn btn-outline-secondary btn-sm">Project Value</button>
+                                <button type="button" id="statDol" onclick="setTimeout(function(){drawProposed('state_dollars')},500)" class="btn btn-outline-secondary btn-sm">State Dollars</button>
+                                <button type="button" onclick="setTimeout(function(){drawProposed('fed_dollars')},500)" id="fedDol" class="btn btn-outline-secondary btn-sm">Federal Dollars</button>
+                            </div>
                         </div>
                         <div class="row">
-                        <div class="col-lg-6 my-auto">
-                            <div class="card border-0">
-                            <div class="card-body">
-                                <h5 class="card-title">Distribution of Funds by Region</h5>
-                                <div id="proposedbyRegion" style="height: 250px"></div>
+                            <div class="col-lg-6">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Region</h5>
+                                        <div id="proposedbyRegionChart" style="height: 250px"></div>
+                                        <div id="proposedbyRegionTable"></div>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Planned Construction Year</h5>
+                                        <div id="proposedbyYearChart" style="height: 250px"></div>
+                                        <div id="proposedbyYearTable"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 my-auto">
-                            <div class="card border-0">
-                            <div class="card-body">
-                                <h5 class="card-title">Distribution of Funds by Year</h5>
-                                <div id="proposedbyYear" style="height: 250px"></div>
-                            </div>
-                            </div>
-                        </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-comapp" role="tabpanel" aria-labelledby="pills-comapp-tab">
                         <div class="row">
-                        <div class="col-12">
-                            <div id="pills-comapptbl"></div>
-                        </div>
+                            <div class="col-12">
+                                <div id="pills-comapptbl"></div>
+                            </div>
                         </div>
                         <div class="row">
-                        <div class="col-lg-6 my-auto">
-                            <div class="card border-0">
-                            <div class="card-body">
-                                <h5 class="card-title">Distribution of Funds by Region</h5>
-                                <div id="comappbyRegion" style="height: 250px"></div>
-                            </div>
+                            <div class="col-12">
+                                <button type="button" id="projVal" onclick="setTimeout(function(){drawComApp('project_value')},500)" class="btn btn-outline-secondary btn-sm">Project Value</button>
+                                <button type="button" id="statDol" onclick="setTimeout(function(){drawComApp('state_dollars')},500)" class="btn btn-outline-secondary btn-sm">State Dollars</button>
+                                <button type="button" onclick="setTimeout(function(){drawComApp('fed_dollars')},500)" id="fedDol" class="btn btn-outline-secondary btn-sm">Federal Dollars</button>
                             </div>
                         </div>
-                        <div class="col-lg-6 my-auto">
-                            <div class="card border-0">
-                            <div class="card-body">
-                                <h5 class="card-title">Distribution of Funds by Year</h5>
-                                <div id="comappbyYear" style="height: 250px"></div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Region</h5>
+                                        <div id="comappbyRegionChart" style="height: 250px"></div>
+                                        <div id="comappbyRegionTable"></div>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Planned Construction Year</h5>
+                                        <div id="comappbyYearChart" style="height: 250px"></div>
+                                        <div id="comappbyYearTable"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-design" role="tabpanel" aria-labelledby="pills-design-tab">
                         <div class="row">
-                        <div class="col-12">
-                            <div id="pills-designtbl"></div>
-                        </div>
+                            <div class="col-12">
+                                <div id="pills-designtbl"></div>
+                            </div>
                         </div>
                         <div class="row">
-                        <div class="col-lg-6 my-auto">
-                            <div class="card border-0">
-                            <div class="card-body">
-                                <h5 class="card-title">Distribution of Funds by Region</h5>
-                                <div id="designbyRegion" style="height: 250px"></div>
-                            </div>
+                            <div class="col-12">
+                                <button type="button" id="projVal" onclick="setTimeout(function(){drawDesign('project_value')},500)" class="btn btn-outline-secondary btn-sm">Project Value</button>
+                                <button type="button" id="statDol" onclick="setTimeout(function(){drawDesign('state_dollars')},500)" class="btn btn-outline-secondary btn-sm">State Dollars</button>
+                                <button type="button" onclick="setTimeout(function(){drawDesign('fed_dollars')},500)" id="fedDol" class="btn btn-outline-secondary btn-sm">Federal Dollars</button>
                             </div>
                         </div>
-                        <div class="col-lg-6 my-auto">
-                            <div class="card border-0">
-                            <div class="card-body">
-                                <h5 class="card-title">Distribution of Funds by Year</h5>
-                                <div id="designbyYear" style="height: 250px"></div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Region</h5>
+                                        <div id="designbyRegionChart" style="height: 250px"></div>
+                                        <div id="designbyRegionTable"></div>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Planned Construction Year</h5>
+                                        <div id="designbyYearChart" style="height: 250px"></div>
+                                        <div id="designbyYearTable"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-construction" role="tabpanel" aria-labelledby="pills-construction-tab">
                         <div class="row">
-                        <div class="col-12">
-                            <div id="pills-constructiontbl"></div>
-                        </div>
+                            <div class="col-12">
+                                <div id="pills-constructiontbl"></div>
+                            </div>
                         </div>
                         <div class="row">
-                        <div class="col-lg-6 my-auto">
-                            <div class="card border-0">
-                            <div class="card-body">
-                                <h5 class="card-title">Distribution of Funds by Region</h5>
-                                <div id="constructionbyRegion" style="height: 250px"></div>
-                            </div>
+                            <div class="col-12">
+                                <button type="button" id="projVal" onclick="setTimeout(function(){drawConstruction('project_value')},500)" class="btn btn-outline-secondary btn-sm">Project Value</button>
+                                <button type="button" id="statDol" onclick="setTimeout(function(){drawConstruction('state_dollars')},500)" class="btn btn-outline-secondary btn-sm">State Dollars</button>
+                                <button type="button" onclick="setTimeout(function(){drawConstruction('fed_dollars')},500)" id="fedDol" class="btn btn-outline-secondary btn-sm">Federal Dollars</button>
                             </div>
                         </div>
-                        <div class="col-lg-6 my-auto">
-                            <div class="card border-0">
-                            <div class="card-body">
-                                <h5 class="card-title">Distribution of Funds by Year</h5>
-                                <div id="constructionbyYear" style="height: 250px"></div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Region</h5>
+                                        <div id="constructionbyRegionChart" style="height: 250px"></div>
+                                        <div id="constructionbyRegionTable"></div>
+                                    </div>
+                                </div>
                             </div>
+                            <div class="col-lg-6">
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">DPlanned Construction Year</h5>
+                                        <div id="constructionbyYearChart" style="height: 250px"></div>
+                                        <div id="constructionbyYearTable"></div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -379,25 +421,35 @@
       dataTableBuilder('design',workshop,'#pills-designtbl');
       dataTableBuilder('construction',workshop,'#pills-constructiontbl');
       //Drill Charts
-      function drawUnfunded(){
-        drillVisual('unfunded',workshop,'unfunedbyYear','planned_construction_year','project_value','chart');
-        drillVisual('unfunded',workshop,'unfundedbyRegion','region_cd','project_value','chart');
+      function drawUnfunded(agg){
+        drillVisual('unfunded',workshop,'unfundedbyRegionChart','region_cd',agg,'chart');
+        drillVisual('unfunded',workshop,'unfundedbyRegionTable','region_cd',agg,'table');
+        drillVisual('unfunded',workshop,'unfunedbyYearChart','planned_construction_year',agg,'chart');
+        drillVisual('unfunded',workshop,'unfunedbyYearTable','planned_construction_year',agg,'table');
       }
-      function drawProposed(){
-        drillVisual('proposed',workshop,'proposedbyYear','planned_construction_year','project_value','chart');
-        drillVisual('proposed',workshop,'proposedbyRegion','region_cd','project_value','chart');
+      function drawProposed(agg){
+        drillVisual('proposed',workshop,'proposedbyYearChart','planned_construction_year',agg,'chart');
+        drillVisual('proposed',workshop,'proposedbyYearTable','planned_construction_year',agg,'table');
+        drillVisual('proposed',workshop,'proposedbyRegionChart','region_cd',agg,'chart');
+        drillVisual('proposed',workshop,'proposedbyRegionTable','region_cd',agg,'table');
       }
-      function drawComApp() {
-        drillVisual('comapp',workshop,'comappbyYear','planned_construction_year','project_value','chart');
-        drillVisual('comapp',workshop,'comappbyRegion','region_cd','project_value','chart');
+      function drawComApp(agg) {
+        drillVisual('comapp',workshop,'comappbyYearChart','planned_construction_year',agg,'chart');
+        drillVisual('comapp',workshop,'comappbyYearTable','planned_construction_year',agg,'table');
+        drillVisual('comapp',workshop,'comappbyRegionChart','region_cd',agg,'chart');
+        drillVisual('comapp',workshop,'comappbyRegionTable','region_cd',agg,'table');
       }
-      function drawDesign(){
-        drillVisual('design',workshop,'designbyYear','planned_construction_year','project_value','chart');
-        drillVisual('design',workshop,'designbyRegion','region_cd','project_value','chart');
+      function drawDesign(agg){
+        drillVisual('design',workshop,'designbyYearChart','planned_construction_year',agg,'chart');
+        drillVisual('design',workshop,'designbyYearTable','planned_construction_year',agg,'table');
+        drillVisual('design',workshop,'designbyRegionChart','region_cd',agg,'chart');
+        drillVisual('design',workshop,'designbyRegionTable','region_cd',agg,'table');
       }
-      function drawConstruction(){
-        drillVisual('construction',workshop,'constructionbyYear','planned_construction_year','project_value','chart');
-        drillVisual('construction',workshop,'constructionbyRegion','region_cd','project_value','chart');
+      function drawConstruction(agg){
+        drillVisual('construction',workshop,'constructionbyYearChart','planned_construction_year',agg,'chart');
+        drillVisual('construction',workshop,'constructionbyYearTable','planned_construction_year',agg,'table');
+        drillVisual('construction',workshop,'constructionbyRegionChart','region_cd',agg,'chart');
+        drillVisual('construction',workshop,'constructionbyRegionTable','region_cd',agg,'table');
       }
     </script>
   </body>

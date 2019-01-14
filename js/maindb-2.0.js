@@ -117,19 +117,23 @@ function drillVisual(pn_status,workshop,dom,groupOrder,aggregate,type){
             };
             var data = [trace1];
             var layout = {
-                yaxis: {title: 'Project values',hoverformat: '$0f'},xaxis: {type: 'category'},
+                yaxis: {title: '$',hoverformat: '$0f'},xaxis: {type: 'category'},
             };
             Plotly.newPlot(dom, data, layout,{responsive: true});
         } else if(type === 'table'){
             var col = (groupOrder === "region_cd")?"Region":"Year";
             var html = '<table class="table"><thead><tr><th>'+col+'</th><th>Dollars</th></thead><tbody>';
             for(var i=0; i < j.length;i++){
-                html += '<tr><td>'+j[i][groupOrder]+'</td>';
-                html += '<td>'+formatter.format(j[i]['aggregate'])+'</td></tr>';
+                if(groupOrder === "planned_construction_year") {
+                    html += '<tr><td>'+j[i][groupOrder]+'</td>';
+                    html += '<td class="'+bgColorClass(j[i][groupOrder])+'">'+formatter.format(j[i]['aggregate'])+'</td></tr>';
+                } else {
+                    html += '<tr><td>'+j[i][groupOrder]+'</td>';
+                    html += '<td>'+formatter.format(j[i]['aggregate'])+'</td></tr>';
+                }
             }
             html += '</tbody></table>';
             document.getElementById(dom).innerHTML = html;
-            
         }
   });
 }
