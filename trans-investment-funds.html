@@ -37,17 +37,17 @@
             <ul class="list-unstyled components">
                 <p>STIP Workshop Categories</p>
                 <li>
-                    <a href="tif.html"><i class="fa fa-road"></i> TIF</a>
+                    <a href="trans-investment-funds.html"><i class="fa fa-road"></i> TIF</a>
                 </li>
                 <li>
-                    <a href="transol.html"><i class="fa fa-car"></i> Transportation Solutions</a>
+                    <a href="trans-solutions.html"><i class="fa fa-car"></i> Transportation Solutions</a>
                 </li>
                 <li>
                     <a href="#transolsubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fa fa-bicycle"></i> Transportation Atlternatives
                     </a>
                     <ul class="collapse list-unstyled" id="transolsubmenu">
-                        <li><a href="ta.html">Transportation Solutions</a></li>
+                        <li><a href="trans-alternatives.html">Transportation Atlternatives</a></li>
                         <li><a href="ta-contingecyfund.html">Contingency Fund</a></li>
                     </ul>
                 </li>
@@ -56,11 +56,9 @@
                     <i class="fa fa-layer-group"></i> Pavements
                     </a>
                     <ul class="collapse list-unstyled" id="pavsubmenu">
-                        <li><a href="pav-presev-hv.html">Preserv High Volume</a></li>
-                        <li><a href="pav-rehav-hv.html">Rehab High Volume</a></li>
-                        <li><a href="pav-recon-hv.html">Recons High Volume</a></li>
-                        <li><a href="pav-presev-lv.html">Preser Low Volume</a></li>
-                        <li><a href="pav-rehab-lv.html">Rehab Low Volume</a></li>
+                        <li><a href="pavements-hv.html">High Volume</a></li>
+                        <li><a href="pavements-lv.html">Low Volume</a></li>
+                        <li><a href="pavements-reconstruction.html">Reconstruction</a></li>
                     </ul>
                 </li>
                 <li>
@@ -77,9 +75,11 @@
                     <i class="fa fa-car-crash"></i> Traffic &amp; Safety
                     </a>
                     <ul class="collapse list-unstyled" id="tssubmenu">
-                        <li><a href="ts-hisp.html">HSIP</a></li>
-                        <li><a href="ts-trafficSignals.html">New Traffic Signals</a></li>
-                        <li><a href="ts-railHighwayGC.html">Rail-Highway Grade Crossing</a></li>
+                        <li><a href="traffic-safety.html">Traffic and Safety</a></li>
+                        <li><a href="traffic-safety-hisp.html">HSIP</a></li>
+                        <li><a href="traffic-safety-signals.html">New Traffic Signals</a></li>
+                        <li><a href="traffic-safety-rail.html">Rail-Highway Grade Crossing</a></li>
+                        <li><a href="traffic-safety-schools.html">Safe Routes to School</a></li>
                     </ul>
                 </li>
                 <li>
@@ -89,8 +89,9 @@
                     <ul class="collapse list-unstyled" id="locgovsubmenu">
                         <li><a href="localgov-mpo.html">MPO</a></li>
                         <li><a href="localgov-bridge.html">Off-System Bridge</a></li>
-                        <li><a href="localgov-nonUrban.html">Non Urban</a></li>
-                        <li><a href="localgov-statePark.html">State Park</a></li>
+                        <li><a href="localgov-non-urban.html">Non Urban</a></li>
+                        <li><a href="localgov-small-urban.html">Non Urban</a></li>
+                        <li><a href="localgov-state-park.html">State Park</a></li>
                     </ul>
                 </li>
                 <li>
@@ -104,9 +105,9 @@
                     <i class="fa fa-question"></i> Other
                     </a>
                     <ul class="collapse list-unstyled" id="othersubmenu">
-                        <li><a href="atms-assetmgmt.html">ATMS Asset</a></li>
-                        <li><a href="flap.html">FLAP</a></li>
+                        <li><a href="atms-asset-mgmt.html">ATMS Asset</a></li>
                         <li><a href="other.html">Other</a></li>
+                        <li><a href="one-pager-inventory.html">One Pager Inventory</a></li>
                     </ul>
                 </li>
             </ul>
@@ -121,7 +122,7 @@
                     </button>
                     <div class="appname col-lg-6 mx-auto">
                         <h2 class="mb-0">
-                            Transportation <span class="text-primary">Solutions</span>
+                            Transportation <span class="text-primary">Investments</span> Funds
                         </h2>
                     </div>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -171,7 +172,7 @@
                 <div class="tab-content card border-0" id="pills-tabContent">
                     <div class="tab-pane fade show active map" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
                         <div class="map">
-                            <iframe width="100%" height="75%" src="https://uplan.maps.arcgis.com/apps/Embed/index.html?webmap=50165206a001454c8f55f67bee9ed5ff&extent=-119.0136,35.989,-104.4787,42.7651&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light">
+                            <iframe width="100%" height="75%" src="https://uplan.maps.arcgis.com/apps/Embed/index.html?webmap=b206e67eb56849c0a4a8a682a2c3135e&extent=-119.0136,35.989,-104.4787,42.7651&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light">
                             </iframe>
                         </div>
                     </div>
@@ -414,7 +415,7 @@
     <!-- Main Dashboard Javascript -->
     <script src="js/maindb-2.0.js"></script>
     <script>
-      var workshop = "Transportation Solutions";
+      var workshop = "Transportation Investment Funds";
       dataTableBuilder('unfunded',workshop,'#pills-unfundedtbl');
       dataTableBuilder('proposed',workshop,'#pills-proposedtbl');
       dataTableBuilder('comapp',workshop,'#pills-comapptbl');
