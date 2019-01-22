@@ -314,3 +314,40 @@ function onePagerLink(pin,region) {
     });
     return onePagerButton;
 }
+//Documentation Functions
+//Summarize Categories in dataset
+function workshopCategories(dom){
+    var s = '?$select=workshop_cat,count(pin) as pins&$group=workshop_cat';
+    fetch(sourceDataset+s).then(function(response) { 
+        // Convert to JSON
+        return response.json();
+    }).then(function(j) {
+        var html = '';
+        var thead = '<table style="width:100%" id="workshopsDataTable" class="table table-striped table-hover">';
+        thead += '<thead><tr><th>Workshop</th>';
+        thead +='<th>PINs</th></tr></thead><tbody>';
+        html += thead;
+        for(var i=0; i < j.length;i++){
+            //Populate rows
+            if(j[i]['workshop_cat'] == null){
+                html += '<tr><td class="sorting">No Category</td>';    
+            } else {
+                html += '<tr><td class="sorting">'+j[i]['workshop_cat']+'</td>';
+            }
+            html += '<td class="sorting">'+j[i]['pins']+'</td></tr>';
+        }
+        var tfoot = "</tbody></table>";
+        html += tfoot;
+        $(dom).append(html);
+        $('#workshopsDataTable').DataTable( {
+            "pagingType": "full_numbers",
+            "columns": [
+                { "orderable": true },
+                { "orderable": true }
+                ]
+        });
+    }).catch(function(err){
+        console.log("{*_*} Shit, I should not be here!!!!");
+        console.log(sourceDataset+s);
+    });
+}
