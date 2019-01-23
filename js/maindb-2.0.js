@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 //Global Variables
-var sourceDataset = "https://dashboard.udot.utah.gov/resource/a6xh-u32h.json";
+//Actual Dataset
+var sourceDataset = "https://dashboard.udot.utah.gov/resource/d3ck-j69f.json";
+//Testing Dataset
+//var sourceDataset = "https://dashboard.udot.utah.gov/resource/a6xh-u32h.json";
 var selectColumns = "?$select=pin,workshop_cat,stip_workshop,region_cd,comm_aprv_ind,pin_desc,primary_concept,project_value,planned_construction_year,program,public_desc,forecast_st_yr,fed_dollars,state_dollars";
 //Use Limit to gurantee more than 1000 rows in dataset
 var tail = '&$limit=50000';
