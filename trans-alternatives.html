@@ -122,7 +122,7 @@
                     </button>
                     <div class="appname col-lg-6 mx-auto">
                         <h2 class="mb-0">
-                            Pavement <span class="text-primary">High Volume</span>
+                            <span class="text-primary">Trasnportation</span> Atlternatives
                         </h2>
                     </div>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -152,9 +152,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="true">Map</a>
                     </li>
-                    <!--On non TIF ans TS Workshop Categories - Proposed, Commission Approved, Design, Construction <li class="nav-item">
+                    <!--
+                    <li class="nav-item">
                         <a class="nav-link" id="pills-unfunded-tab" data-toggle="pill" href="#pills-unfunded" role="tab" aria-controls="pills-unfunded" aria-selected="false" onclick="setTimeout(function(){drawUnfunded('project_value')},500)">Unfunded</a>
-                    </li>-->
+                    </li>
+                    -->
                     <li class="nav-item">
                         <a class="nav-link" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false" onclick="setTimeout(function(){drawProposed('project_value')},500)">Proposed</a>
                     </li>
@@ -173,11 +175,11 @@
                 <div class="tab-content card border-0" id="pills-tabContent">
                     <div class="tab-pane fade show active map" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
                         <div class="map">
-                            <iframe width="100%" height="75%" src="https://uplan.maps.arcgis.com/apps/Embed/index.html?webmap=2819c7b37d4e479882585dff1e1170ec&extent=-119.0136,35.989,-104.4787,42.7651&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light">
+                            <iframe width="100%" height="75%" src="https://uplan.maps.arcgis.com/apps/Embed/index.html?webmap=8a25a820e4484d06a7b5c9a8e8061993&extent=-119.0136,35.989,-104.4787,42.7651&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light">
                             </iframe>
                         </div>
                     </div>
-                    <!-- On non TIF ans TS Workshop Categories - Proposed, Commission Approved, Design, Construction
+                    <!--
                     <div class="tab-pane fade" id="pills-unfunded" role="tabpanel" aria-labelledby="pills-unfunded-tab">
                         <div class="row">
                             <div class="col-12">
@@ -418,19 +420,19 @@
     <!-- Main Dashboard Javascript -->
     <script src="js/maindb-2.0.js"></script>
     <script>
-      var workshop = "Pavement High Volume";
+      var workshop = "Transportation Alternatives";
       //dataTableBuilder('unfunded',workshop,'#pills-unfundedtbl');
       dataTableBuilder('proposed',workshop,'#pills-proposedtbl');
       dataTableBuilder('comapp',workshop,'#pills-comapptbl');
       dataTableBuilder('design',workshop,'#pills-designtbl');
       dataTableBuilder('construction',workshop,'#pills-constructiontbl');
       //Drill Charts
-        //   function drawUnfunded(agg){
-        //     drillVisual('unfunded',workshop,'unfundedbyRegionChart','region_cd',agg,'chart');
-        //     drillVisual('unfunded',workshop,'unfundedbyRegionTable','region_cd',agg,'table');
-        //     drillVisual('unfunded',workshop,'unfunedbyYearChart','planned_construction_year',agg,'chart');
-        //     drillVisual('unfunded',workshop,'unfunedbyYearTable','planned_construction_year',agg,'table');
-        //   }
+    //   function drawUnfunded(agg){
+    //     drillVisual('unfunded',workshop,'unfundedbyRegionChart','region_cd',agg,'chart');
+    //     drillVisual('unfunded',workshop,'unfundedbyRegionTable','region_cd',agg,'table');
+    //     drillVisual('unfunded',workshop,'unfunedbyYearChart','planned_construction_year',agg,'chart');
+    //     drillVisual('unfunded',workshop,'unfunedbyYearTable','planned_construction_year',agg,'table');
+    //   }
       function drawProposed(agg){
         drillVisual('proposed',workshop,'proposedbyYearChart','planned_construction_year',agg,'chart');
         drillVisual('proposed',workshop,'proposedbyYearTable','planned_construction_year',agg,'table');
