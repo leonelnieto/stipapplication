@@ -307,15 +307,13 @@ function timeline(projectDates){
     return timeline;
 }
 //Function to build one pager link 
-function onePagerLink(pin,region) {
+function onePagerLink() {
     var onePagerButton = "";
-    var onePagerURL = "http://maps.udot.utah.gov/wadocuments/apps/ProgramBriefing/"+region+"/"+pin+".pdf";
-    $.get(onePagerURL).done(function () {
-        onePagerButton = '<a href="'+onePagerURL+'" class="btn btn-primary">Project Briefing</a>';
-    }).fail(function () {
-        onePagerButton = '<a href="#" class="btn btn-primary">Project Briefing</a>';
-    });
-    return onePagerButton;
+    $.getJSON('data/onepagers.json',function(data){
+        console.log(data);
+    })
+    onePagerButton = '<a href="#" class="btn btn-primary">Project Briefing</a>';
+    //return onePagerButton;
 }
 //Documentation Functions
 //Summarize Categories in dataset
@@ -333,9 +331,11 @@ function workshopCategories(dom){
         for(var i=0; i < j.length;i++){
             //Populate rows
             if(j[i]['workshop_cat'] == null){
-                html += '<tr><td class="sorting">No Category</td>';    
+                html += '<tr><td class="text-left"><button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#workshopPinsModal" ';
+                html += 'onclick="pingWorkshop('+"'No Category'"+','+"'#WorkshopPinDetails'"+')">No Category</button></td>';    
             } else {
-                html += '<tr><td class="sorting">'+j[i]['workshop_cat']+'</td>';
+                html += '<tr><td class="text-left"><button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#workshopPinsModal" '
+                html += 'onclick="pingWorkshop('+"'"+j[i]['workshop_cat']+"'"+','+"'#WorkshopPinDetails'"+')">'+j[i]['workshop_cat']+'</button></td>';
             }
             html += '<td class="sorting">'+j[i]['pins']+'</td></tr>';
         }
@@ -352,5 +352,47 @@ function workshopCategories(dom){
     }).catch(function(err){
         console.log("{*_*} Shit, I should not be here!!!!");
         console.log(sourceDataset+s);
+    });
+}
+//Function to ping workship and get list of pin details 
+function pingWorkshop(workshop,dom){
+    var s = "?$select=pin,pin_desc,region_cd,pin_stat_nm&$where=workshop_cat='"+workshop+"'";
+    fetch(sourceDataset+s).then(function(response){
+        return response.json();
+    }).then(function(j){
+        var html = '';
+        var thead = '<table style="width:100%" id="workshopPingTable" class="table table-striped table-hover">';
+        thead += '<thead><tr><th class="text-left">PINs</th>';
+        thead +='<th>Pin Description</th><th>Pin Status</th><th>Region</th></tr></thead><tbody>';
+        html += thead;
+        for(var i=0; i < j.length;i++){
+            //Populate rows
+            html += '<tr><td>'+j[i]['pin']+'</td>';
+            html += '<td class="text-left">'+j[i]['pin_desc']+'</td>';
+            html += '<td>'+j[i]['pin_stat_nm']+'</td>';
+            html += '<td>'+j[i]['region_cd']+'</td></tr>';
+        }
+        var tfoot = "</tbody></table>";
+        html += tfoot;
+        $('#workshopName').empty();
+        $(dom).empty();
+        $(dom).append(html);
+        if ( $.fn.dataTable.isDataTable( '#workshopPingTable' ) ) {
+            table = $('#workshopPingTable').DataTable();
+        }
+        else {
+            table = $('#workshopPingTable').DataTable( {
+                "pagingType": "full_numbers",
+                "columns": [
+                    { "orderable": true },
+                    { "orderable": true },
+                    { "orderable": true },
+                    { "orderable": true }
+                    ]
+            });
+        }
+        $('#workshopName').append(workshop);
+    }).catch(function(err){
+        console.log("{*_*} Bummer, who ever put this together should get fired!!!!"+err);
     });
 }

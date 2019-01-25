@@ -143,17 +143,41 @@
                     </div>
                 </div>
             </nav>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Launch demo modal
+              </button>
             <!-- TIF Documentation Secition -->
             <section class="mopeed-section p-3 mt-70px d-flex flex-column">
                 <div class="my-auto">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-sm-6">
                             <div id="WorkshopTracker"></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div id="OnePagerTracker"></div>
                         </div>
                     </div>
                 </div>
             </section>
-            
+            <!--Modal for Workshop Ping-->
+            <div class="modal fade" id="workshopPinsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel"><span id="workshopName"></span> PINs</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div id="WorkshopPinDetails"></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
             <!--Overlay darkdayze-->
             <div class="overlay"></div>
         
@@ -182,6 +206,7 @@
     <script src="js/maindb-2.0.js"></script>
     <script>
       workshopCategories('#WorkshopTracker');
+      onePagerLink();
     </script>
   </body>
 </html>
