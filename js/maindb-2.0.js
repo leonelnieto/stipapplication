@@ -278,8 +278,10 @@ function pingPin(pinNum){
             pinDetails += timeline(projectDates);
         }
         //One pager link
-        pinDetails += '<br ><br ><a href="http://maps.udot.utah.gov/wadocuments/apps/ProgramBriefing/'+data[0]['region_cd']+'/'+data[0]['pin']+'.pdf"'+' class="btn btn-primary" target="new">Project Briefing</a>';
+        
+        //pinDetails += '<br ><br ><a href="http://maps.udot.utah.gov/wadocuments/apps/ProgramBriefing/'+data[0]['region_cd']+'/'+data[0]['pin']+'.pdf"'+' class="btn btn-primary" target="new">Project Briefing</a>';
         $('#PinDetails').html(pinDetails);
+        onePagerLink(data[0]['pin'],data[0]['region_cd'],'#programBriefingButton');
     }).catch (function(err) {
         console.log("Error on PingPin:"+err);
     });
@@ -307,13 +309,24 @@ function timeline(projectDates){
     return timeline;
 }
 //Function to build one pager link 
-function onePagerLink() {
-    var onePagerButton = "";
-    $.getJSON('data/onepagers.json',function(data){
-        console.log(data);
-    })
-    onePagerButton = '<a href="#" class="btn btn-primary">Project Briefing</a>';
-    //return onePagerButton;
+function onePagerLink(pin,region,dom) {
+    var onePagerButton = '<a href="#" class="btn btn-primary" disabled>No Program Briefing</a>';
+    $(dom).empty();
+    fetch('data/onepagers.json').then(function(response){
+        return response.json();
+    }).then(function(j){
+        //console.log(j);
+        for(var i=0;i<j.length;i++){
+            if(j[i]['Region']=== region && j[i]['PIN']=== pin){
+                onePagerButton = '<a href="http://maps.udot.utah.gov/wadocuments/Apps/ProgramBriefing/'+region+"/"+pin+'.pdf" class="btn btn-primary">Project Briefing</a>';
+                break;
+            }
+        }
+        //console.log(onePagerButton);
+        $(dom).append(onePagerButton);
+    }).catch(function(err){
+        console.log(err+" {*_*} Shit, I should not be here!!!!");
+    });
 }
 //Documentation Functions
 //Summarize Categories in dataset
