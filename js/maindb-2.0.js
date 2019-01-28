@@ -409,3 +409,55 @@ function pingWorkshop(workshop,dom){
         console.log("{*_*} Bummer, who ever put this together should get fired!!!!"+err);
     });
 }
+//One pager summary table
+function onepagerSummaryTable (dom){
+    fetch('data/onepagers.json').then(function(response){
+        return response.json();
+    }).then(function(j){
+        //console.log(j);
+        var OnePagers = j;
+        //console.log(OnePagers[3]['PIN']);
+        var s = '?$select=pin,region_cd,workshop_cat';
+        fetch(sourceDataset+s).then(function(response){
+            return response.json();
+        }).then(function(d){
+            //console.log(OnePagers[3]['PIN']);
+            //console.log(d);
+            var html = '';
+            var thead = '<table style="width:100%" id="onePagerSummaryTable" class="table table-striped table-hover">';
+            thead += '<thead><tr><th class="text-left">Workshop</th>';
+            thead +='<th>Region</th><th>PIN</th><th>One Pager</th></tr></thead><tbody>';
+            html += thead;
+            for(var i = 0;i < d.length;i++){
+                html += '<tr><td class="text-left">'+d[i]['workshop_cat']+'</td>';
+                html += '<td>'+d[i]['region_cd']+'</td>';
+                html += '<td>'+d[i]['pin']+'</td>';
+                if((OnePagers[i] != undefined) && OnePagers[i]['PIN']=== d[i]["pin"]){
+                    html += '<td><a href="http://maps.udot.utah.gov/wadocuments/Apps/ProgramBriefing/'+d[i]['region_cd']+"/"+d[i]['pin']+'.pdf">Yes</a></td>';
+                } else{
+                    html += '<td>No</td></tr>';
+                }
+                
+            }
+            var tfoot = "</tbody></table>";
+            html += tfoot;
+            $(dom).append(html);
+            $('#onePagerSummaryTable').DataTable( {
+                "pagingType": "full_numbers",
+                "columns": [
+                    { "orderable": true },
+                    { "orderable": true },
+                    { "orderable": true },
+                    { "orderable": true }
+                    ]
+            });
+
+        }).catch(function(err){
+            alert("{*_*} Bummer, could not load dataset!!!!"+err);
+            console.log("{*_*} Bummer, could not load dataset!!!!"+err);
+        });
+    }).catch(function(err){
+        alert("{*_*} Bummer, could not load onepager data!!!!"+err);
+        console.log("{*_*} Bummer, could not load onepager data!!!!"+err);
+    });
+}
