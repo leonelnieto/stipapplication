@@ -146,7 +146,7 @@ function whereClauseBuilder(pn_status,workshop) {
     if(workshop === "all"){
         workshop = "";
     } else {
-        workshop = "and workshop_cat='"+workshop+"'";
+        workshop = "and workshop_cat in ("+workshop+")";
     }
     switch(pn_status){
         case "unfunded":
@@ -203,10 +203,12 @@ function bgColorClass(year){
 }
 //Function queries PIN and returns data
 function pingPin(pinNum){
-    fetch('https://dashboard.udot.utah.gov/resource/a6xh-u32h.json?$where=pin="'+pinNum+'"').then(function(response){
+    fetch(sourceDataset+'?$where=pin="'+pinNum+'"').then(function(response){
         return response.json();
     }).then(function(data){
         //console.log(data);
+        $('#pinNum').empty();
+        $('#PinDetails').empty();
         $('#pinNum').html("PIN: "+data[0]['pin']+" - "+data[0]['pin_desc']);
         var pinDetails = "Planned Year: <strong>"+data[0]['planned_construction_year']+"</strong>";
         pinDetails += "<br />Funding Program: <strong>"+data[0]['program']+"</strong>";
@@ -278,8 +280,6 @@ function pingPin(pinNum){
             pinDetails += timeline(projectDates);
         }
         //One pager link
-        
-        //pinDetails += '<br ><br ><a href="http://maps.udot.utah.gov/wadocuments/apps/ProgramBriefing/'+data[0]['region_cd']+'/'+data[0]['pin']+'.pdf"'+' class="btn btn-primary" target="new">Project Briefing</a>';
         $('#PinDetails').html(pinDetails);
         onePagerLink(data[0]['pin'],data[0]['region_cd'],'#programBriefingButton');
     }).catch (function(err) {
