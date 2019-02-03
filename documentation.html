@@ -18,7 +18,7 @@
     <!-- Moris Charts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <!-- Datatable CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-flash-1.5.4/b-html5-1.5.4/datatables.css">
     <!-- Custom styles for this template -->
     <link href="css/sidebarNav.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
@@ -145,24 +145,32 @@
             </nav>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Launch demo modal
-              </button>
+            </button>
             <!-- TIF Documentation Secition -->
             <section class="mopeed-section p-3 mt-70px d-flex flex-column">
                 <div class="my-auto">
                     <div class="row">
                         <div class="col-sm-6">
+                            <h5 class="text-center">Populated Workshops in Source Data</h5>
                             <div id="WorkshopTracker"></div>
                         </div>
                         <div class="col-sm-6">
-                            <div id="OnePagerTracker">Link Here</div>
-                            <div id="test"></div>
+                            <h5 class="text-center">Projects With Project Briefing Document</h5>
+                            <div id="OnePagerTracker"></div>
+                        </div>
+                    </div>
+                    <div class="row pt-3">
+                        <div class="col-lg-12">
+                            <h5 class="text-center">Source Data</h5>
+                            <p class="text-center">Below is the source data use for this application. </p>
+                            <div id="sourceData"></div>
                         </div>
                     </div>
                 </div>
             </section>
             <!--Modal for Workshop Ping-->
             <div class="modal fade" id="workshopPinsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel"><span id="workshopName"></span> PINs</h5>
@@ -181,7 +189,6 @@
             </div>
             <!--Overlay darkdayze-->
             <div class="overlay"></div>
-        
         </div>
     <!--END Wrapper-->
     </div>
@@ -192,8 +199,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <!-- jQuery Custom Scroller CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-    <!-- Datatable JS -->
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <!-- Datatable JS and Dependancies -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-flash-1.5.4/b-html5-1.5.4/datatables.js"></script>
     <!-- Moris Charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
@@ -208,6 +217,7 @@
     <script>
       workshopCategories('#WorkshopTracker');
       onepagerSummaryTable('#OnePagerTracker');
+      printSourceData('#sourceData')
     </script>
   </body>
 </html>

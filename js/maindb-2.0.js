@@ -360,7 +360,14 @@ function workshopCategories(dom){
             "columns": [
                 { "orderable": true },
                 { "orderable": true }
-                ]
+                ],
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ]
         });
     }).catch(function(err){
         console.log("{*_*} Shit, I should not be here!!!!");
@@ -433,7 +440,7 @@ function onepagerSummaryTable (dom){
                 html += '<td>'+d[i]['region_cd']+'</td>';
                 html += '<td>'+d[i]['pin']+'</td>';
                 if((OnePagers[i] != undefined) && OnePagers[i]['PIN']=== d[i]["pin"]){
-                    html += '<td><a href="http://maps.udot.utah.gov/wadocuments/Apps/ProgramBriefing/'+d[i]['region_cd']+"/"+d[i]['pin']+'.pdf">Yes</a></td>';
+                    html += '<td><a href="http://maps.udot.utah.gov/wadocuments/Apps/ProgramBriefing/'+d[i]['region_cd']+"/"+d[i]['pin']+'.pdf">Yes</a></td></tr>';
                 } else{
                     html += '<td>No</td></tr>';
                 }
@@ -460,4 +467,54 @@ function onepagerSummaryTable (dom){
         alert("{*_*} Bummer, could not load onepager data!!!!"+err);
         console.log("{*_*} Bummer, could not load onepager data!!!!"+err);
     });
+}
+//Show entire dataset in app documentation
+function printSourceData(dom){
+    var s = "?$select=pin,pin_desc,pin_stat_nm,proj_loc,project_value,region_cd,planned_construction_year,workshop_cat"
+    fetch(sourceDataset+s).then(function(response){
+        return response.json();
+    }).then(function(d){
+        //console.log(d);
+        var html = '';
+        var thead = '<table style="width:100%" id="sourceDataTable" class="table table-striped table-hover">';
+        thead += '<thead><tr><th>PIN</th><th>PIN Description</th><th>PIN Status</th><th>Project Location</th><th>Project Value</th>';
+        thead +='<th>Region</th><th>Planned Construction Year</th><th>Workshop Category</th></tr></thead><tbody>';
+        html += thead;
+        for(var i = 0;i < d.length;i++){
+            html += '<tr><td>'+d[i]['pin']+'</td>';
+            html += '<td class="text-left">'+d[i]['pin_desc']+'</td>';
+            html += '<td>'+d[i]['pin_stat_nm']+'</td>';
+            html += '<td>'+d[i]['proj_loc']+'</td>';
+            html += '<td>'+formatter.format(d[i]['project_value'])+'</td>';
+            html += '<td>'+d[i]['region_cd']+'</td>';
+            html += '<td>'+d[i]['planned_construction_year']+'</td>';
+            html += '<td>'+d[i]['workshop_cat']+'</td></tr>';
+        }
+        var tfoot = "</tbody></table>";
+        html += tfoot;
+        $(dom).append(html);
+        $('#sourceDataTable').DataTable( {
+            "pagingType": "full_numbers",
+            "columns": [
+                { "orderable": true },
+                { "orderable": true },
+                { "orderable": true },
+                { "orderable": true },
+                { "orderable": true },
+                { "orderable": true },
+                { "orderable": true },
+                { "orderable": true }
+                ],
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ]
+        });
+    }).catch(function(err){
+        alert("{*_*} Bummer, could not load onepager data!!!!"+err);
+        console.log("{*_*} Bummer, could not load onepager data!!!!"+err);
+    })
 }
