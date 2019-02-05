@@ -581,15 +581,18 @@ function getAllUrlParams(url) {
 function pathClearandReload(region){
     var load = '';
     //var id = '';
-    if(region === undefined){
-        load += window.location.hostname+window.location.pathname;
-       //id = 0;
+    if(region === 0 || region === null || region === undefined){
+        load += window.location.href;
+      //id = 0;
     } else {
-        load += window.location.hostname+window.location.pathname+"?region="+region;
+        load += window.location.pathname+"?region="+region;
         //id = region;
     }
+    console.log(load);
     window.location.href = load;
+     //return load;
     //var button = document.getElementById("filterregion"+id);
     //button.classList.add("active");
+    //button.href=load;
 }
   

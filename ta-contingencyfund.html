@@ -146,6 +146,25 @@
         <!-- TIF Documentation Secition -->
         <hr class="spacer py-4">
         <section class="mopeed-section p-3 d-flex flex-column">
+            <!--Region Buttons-->
+            <div class="row my-3">
+                <div class="col-sm-2 mx-auto">
+                    <button type="button" id="filterregion0" onclick="window.location = window.location.pathname" class="btn btn-info btn-sm btn-block">Statewide</button>
+                </div>
+                <div class="col-sm-2 mx-auto">
+                    <button type="button" id="filterregion2" onclick="pathClearandReload(1);" class="btn btn-info btn-sm btn-block">Region 1</button>
+                </div>
+                <div class="col-sm-2 mx-auto">
+                    <button type="button" id="filterregion2" onclick="pathClearandReload(2);" class="btn btn-info btn-sm btn-block">Region 2</button>
+                </div>
+                <div class="col-sm-2 mx-auto">
+                    <button type="button" id="filterregion3" onclick="pathClearandReload(3);" class="btn btn-info btn-sm btn-block">Region 3</button>
+                </div>
+                <div class="col-sm-2 mx-auto">
+                    <button type="button" id="filterregion4" onclick="pathClearandReload(4);" class="btn btn-info btn-sm btn-block">Region 4</button>
+                </div>
+            </div>
+            <!--/END Region Buttons-->
             <div class="my-auto">
                 <!--Tab Selectors-->
                 <ul class="nav nav-pills mb-3 nav-justified md-tabs bg-secondary text-white" id="pills-tab" role="tablist">
@@ -421,43 +440,47 @@
     <!-- Main Dashboard Javascript -->
     <script src="js/maindb-2.0.js"></script>
     <script>
-      var workshop = "'Contingency Fund'";
-      //dataTableBuilder('unfunded',workshop,'#pills-unfundedtbl');
-      dataTableBuilder('proposed',workshop,'#pills-proposedtbl');
-      dataTableBuilder('comapp',workshop,'#pills-comapptbl');
-      dataTableBuilder('design',workshop,'#pills-designtbl');
-      dataTableBuilder('construction',workshop,'#pills-constructiontbl');
-      //Drill Charts
-    //   function drawUnfunded(agg){
-    //     drillVisual('unfunded',workshop,'unfundedbyRegionChart','region_cd',agg,'chart');
-    //     drillVisual('unfunded',workshop,'unfundedbyRegionTable','region_cd',agg,'table');
-    //     drillVisual('unfunded',workshop,'unfunedbyYearChart','planned_construction_year',agg,'chart');
-    //     drillVisual('unfunded',workshop,'unfunedbyYearTable','planned_construction_year',agg,'table');
-    //   }
-      function drawProposed(agg){
-        drillVisual('proposed',workshop,'proposedbyYearChart','planned_construction_year',agg,'chart');
-        drillVisual('proposed',workshop,'proposedbyYearTable','planned_construction_year',agg,'table');
-        drillVisual('proposed',workshop,'proposedbyRegionChart','region_cd',agg,'chart');
-        drillVisual('proposed',workshop,'proposedbyRegionTable','region_cd',agg,'table');
-      }
-      function drawComApp(agg) {
-        drillVisual('comapp',workshop,'comappbyYearChart','planned_construction_year',agg,'chart');
-        drillVisual('comapp',workshop,'comappbyYearTable','planned_construction_year',agg,'table');
-        drillVisual('comapp',workshop,'comappbyRegionChart','region_cd',agg,'chart');
-        drillVisual('comapp',workshop,'comappbyRegionTable','region_cd',agg,'table');
-      }
-      function drawDesign(agg){
-        drillVisual('design',workshop,'designbyYearChart','planned_construction_year',agg,'chart');
-        drillVisual('design',workshop,'designbyYearTable','planned_construction_year',agg,'table');
-        drillVisual('design',workshop,'designbyRegionChart','region_cd',agg,'chart');
-        drillVisual('design',workshop,'designbyRegionTable','region_cd',agg,'table');
-      }
-      function drawConstruction(agg){
-        drillVisual('construction',workshop,'constructionbyYearChart','planned_construction_year',agg,'chart');
-        drillVisual('construction',workshop,'constructionbyYearTable','planned_construction_year',agg,'table');
-        drillVisual('construction',workshop,'constructionbyRegionChart','region_cd',agg,'chart');
-        drillVisual('construction',workshop,'constructionbyRegionTable','region_cd',agg,'table');
-      }
+        var region = getAllUrlParams(window.location.href)["region"];
+        if(region === undefined){
+            region = 0;
+        }
+        var workshop = "'Contingency Fund'";
+        //dataTableBuilder('unfunded',workshop,'#pills-unfundedtbl',region);
+        dataTableBuilder('proposed',workshop,'#pills-proposedtbl',region);
+        dataTableBuilder('comapp',workshop,'#pills-comapptbl',region);
+        dataTableBuilder('design',workshop,'#pills-designtbl',region);
+        dataTableBuilder('construction',workshop,'#pills-constructiontbl',region);
+        //Drill Charts
+        //   function drawUnfunded(agg){
+        //     drillVisual('unfunded',workshop,'unfundedbyRegionChart','region_cd',agg,'chart',region);
+        //     drillVisual('unfunded',workshop,'unfundedbyRegionTable','region_cd',agg,'table',region);
+        //     drillVisual('unfunded',workshop,'unfunedbyYearChart','planned_construction_year',agg,'chart',region);
+        //     drillVisual('unfunded',workshop,'unfunedbyYearTable','planned_construction_year',agg,'table',region);
+        //   }
+        function drawProposed(agg){
+            drillVisual('proposed',workshop,'proposedbyYearChart','planned_construction_year',agg,'chart',region);
+            drillVisual('proposed',workshop,'proposedbyYearTable','planned_construction_year',agg,'table',region);
+            drillVisual('proposed',workshop,'proposedbyRegionChart','region_cd',agg,'chart',region);
+            drillVisual('proposed',workshop,'proposedbyRegionTable','region_cd',agg,'table',region);
+        }
+        function drawComApp(agg) {
+            drillVisual('comapp',workshop,'comappbyYearChart','planned_construction_year',agg,'chart',region);
+            drillVisual('comapp',workshop,'comappbyYearTable','planned_construction_year',agg,'table',region);
+            drillVisual('comapp',workshop,'comappbyRegionChart','region_cd',agg,'chart',region);
+            drillVisual('comapp',workshop,'comappbyRegionTable','region_cd',agg,'table',region);
+        }
+        function drawDesign(agg){
+            drillVisual('design',workshop,'designbyYearChart','planned_construction_year',agg,'chart',region);
+            drillVisual('design',workshop,'designbyYearTable','planned_construction_year',agg,'table',region);
+            drillVisual('design',workshop,'designbyRegionChart','region_cd',agg,'chart',region);
+            drillVisual('design',workshop,'designbyRegionTable','region_cd',agg,'table',region);
+        }
+        function drawConstruction(agg){
+            drillVisual('construction',workshop,'constructionbyYearChart','planned_construction_year',agg,'chart',region);
+            drillVisual('construction',workshop,'constructionbyYearTable','planned_construction_year',agg,'table',region);
+            drillVisual('construction',workshop,'constructionbyRegionChart','region_cd',agg,'chart',region);
+            drillVisual('construction',workshop,'constructionbyRegionTable','region_cd',agg,'table',region);
+        }
     </script>
   </body>
 </html>
