@@ -1,0 +1,94 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
+  
+</head>
+<body>
+	  <div id="head" class="navbar navbar-fixed-top">
+	    <div class="navbar-inner">
+	      <div class="container">
+	        <div class="brand">UDOT Strava Download Tool</div>
+	      </div>
+	    </div>
+	  </div>
+		<div id="map"></div>
+		</div>
+    </body>
+    
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://js.arcgis.com/4.10/"></script>
+  <script>
+    var projectID = 11510; //variable to change the pin
+	
+	var 
+	
+	    require([
+        "esri/Map",
+        "esri/views/MapView",
+		"esri/tasks/support/Query",
+        "esri/tasks/QueryTask",
+        "esri/Graphic",
+		"dojo/domReady!"
+      ],
+      function(Map, MapView, Query, QueryTask, Graphic) {
+		//initialize map
+		var map = new Map({
+			basemap: "streets-vector" //https://developers.arcgis.com/javascript/latest/api-reference/esri-Basemap.html
+		});
+        var view = new MapView({
+			container: "map", // adds to <div id="map"></div>
+			map: map
+        });
+		 // Define query SQL expression
+		var query = new Query();
+		query.where = 'PIN = ' + projectID;
+		query.outFields = ["*"];
+		query.returnGeometry = true;
+		
+		// Define the query task
+		var queryTask = new QueryTask({
+			url: "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects/MapServer/0"
+		});
+
+		// Execute the query
+		queryTask.execute(query)
+			.then(function(result){
+			 console.log(result.features.length); //validate if query worked, can use to alert if no geometry
+			 result.features.forEach(function(item){
+				 console.log(item.attributes);
+			var g = new Graphic({
+            geometry: item.geometry,
+            attributes: item.attributes,
+            symbol: {
+				type: "simple-line",
+				color: "#4ce600",
+				width: 2
+           },
+           popupTemplate: {
+             title: "{PIN}", //does the individual PIN page need geometry?
+             content: "{*}"  // All of the fields
+           }
+         });
+         view.graphics.add(g);
+      });
+
+      // Zoom to the features
+			view.goTo({
+				target: view.graphics
+			});
+		})
+		.otherwise(function(e){
+			console.log(e);
+        });
+    });
+  </script>
+</body>
+
+</html>
