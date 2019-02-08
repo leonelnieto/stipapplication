@@ -475,7 +475,7 @@ function onepagerSummaryTable (dom){
 }
 //Show entire dataset in app documentation
 function printSourceData(dom){
-    var s = "?$select=pin,pin_desc,pin_stat_nm,proj_loc,project_value,region_cd,planned_construction_year,workshop_cat"
+    var s = "?$select=pin,pin_desc,pin_stat_nm,proj_loc,project_value,region_cd,planned_construction_year,workshop_cat&$limit=1000000"
     fetch(sourceDataset+s).then(function(response){
         return response.json();
     }).then(function(d){
