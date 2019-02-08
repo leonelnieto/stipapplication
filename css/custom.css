@@ -108,6 +108,7 @@ and open the template in the editor.
 }
 .bg2023 {
   background-color: #1a1a1a;
+  color: #fff;
 }
 .bg2024 {
   background-color: #fc30cd;
@@ -122,7 +123,7 @@ and open the template in the editor.
   background-color: #a87000;
 }
 .map{
-  height: 110vh;
+  height: 80vh;
 }
 /*Tooltip Forked from https://www.w3schools.com/css/css_tooltip.asp*/
 [tooltip]{
