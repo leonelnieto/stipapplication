@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <!-- Datatable CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <!--Map Loader Required Css-->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
     <!-- Custom styles for this template -->
     <link href="css/sidebarNav.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
@@ -193,9 +195,9 @@
                 <!--Begin Tabs-->
                 <div class="tab-content card border-0" id="pills-tabContent">
                     <div class="tab-pane fade show active map" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
-                        <div class="map">
-                            <iframe width="100%" height="75%" src="https://uplan.maps.arcgis.com/apps/Embed/index.html?webmap=c537c3d70ebb4e21a9f040ee4259030d&extent=-119.0136,35.989,-104.4787,42.7651&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light">
-                            </iframe>
+                        <div class="map" id="map">
+                            <!--<iframe width="100%" height="75%" src="https://uplan.maps.arcgis.com/apps/Embed/index.html?webmap=c537c3d70ebb4e21a9f040ee4259030d&extent=-119.0136,35.989,-104.4787,42.7651&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light">
+                            </iframe>-->
                         </div>
                     </div>
                     <!-- On non TIF and TS Workshop Categories - Proposed, Commission Approved, Design, Construction
@@ -435,6 +437,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     <!--Plotly JS -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!--Map Loader Required Scripts-->
+    <script src="https://js.arcgis.com/4.10/"></script>
     <!-- Custom scripts for this template -->
     <script src="js/canned.js"></script>
     <!-- Main Dashboard Javascript -->
@@ -481,6 +485,7 @@
             drillVisual('construction',workshop,'constructionbyRegionChart','region_cd',agg,'chart',region);
             drillVisual('construction',workshop,'constructionbyRegionTable','region_cd',agg,'table',region);
         }
+        mapLoader("map",parseInt(region),"c537c3d70ebb4e21a9f040ee4259030d");
     </script>
   </body>
 </html>
