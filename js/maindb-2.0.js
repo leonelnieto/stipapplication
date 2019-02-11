@@ -479,7 +479,7 @@ function printSourceData(dom){
     fetch(sourceDataset+s).then(function(response){
         return response.json();
     }).then(function(d){
-        //console.log(d);
+        //console.log(sourceDataset+s);
         var html = '';
         var thead = '<table style="width:100%" id="sourceDataTable" class="table table-striped table-hover">';
         thead += '<thead><tr><th>PIN</th><th>PIN Description</th><th>PIN Status</th><th>Project Location</th><th>Project Value</th>';
