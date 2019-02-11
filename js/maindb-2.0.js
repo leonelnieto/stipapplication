@@ -475,7 +475,7 @@ function onepagerSummaryTable (dom){
 }
 //Show entire dataset in app documentation
 function printSourceData(dom){
-    var s = "?$select=pin,pin_desc,pin_stat_nm,proj_loc,project_value,region_cd,planned_construction_year,workshop_cat&$limit=1000000"
+    var s = "?$select=pin,pin_desc,pin_stat_nm,proj_loc,project_value,region_cd,planned_construction_year,forecast_st_yr,workshop_cat&$limit=1000000"
     fetch(sourceDataset+s).then(function(response){
         return response.json();
     }).then(function(d){
@@ -483,7 +483,7 @@ function printSourceData(dom){
         var html = '';
         var thead = '<table style="width:100%" id="sourceDataTable" class="table table-striped table-hover">';
         thead += '<thead><tr><th>PIN</th><th>PIN Description</th><th>PIN Status</th><th>Project Location</th><th>Project Value</th>';
-        thead +='<th>Region</th><th>Planned Construction Year</th><th>Workshop Category</th></tr></thead><tbody>';
+        thead +='<th>Region</th><th>Planned Construction Year</th><th>Forecast Start Year</th><th>Workshop Category</th></tr></thead><tbody>';
         html += thead;
         for(var i = 0;i < d.length;i++){
             html += '<tr><td>'+d[i]['pin']+'</td>';
@@ -493,6 +493,7 @@ function printSourceData(dom){
             html += '<td>'+formatter.format(d[i]['project_value'])+'</td>';
             html += '<td>'+d[i]['region_cd']+'</td>';
             html += '<td>'+d[i]['planned_construction_year']+'</td>';
+            html += '<td>'+d[i]['forecast_st_yr']+'</td>';
             html += '<td>'+d[i]['workshop_cat']+'</td></tr>';
         }
         var tfoot = "</tbody></table>";
@@ -501,6 +502,7 @@ function printSourceData(dom){
         $('#sourceDataTable').DataTable( {
             "pagingType": "full_numbers",
             "columns": [
+                { "orderable": true },
                 { "orderable": true },
                 { "orderable": true },
                 { "orderable": true },
