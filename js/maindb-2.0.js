@@ -433,8 +433,9 @@ function onepagerSummaryTable (dom){
         fetch(sourceDataset+s).then(function(response){
             return response.json();
         }).then(function(d){
-            //console.log(OnePagers[3]['PIN']);
-            //console.log(d);
+            // console.log(OnePagers[7]['PIN']);
+            // console.log(d[3]['pin']);
+            var flag = 0;
             var html = '';
             var thead = '<table style="width:100%" id="onePagerSummaryTable" class="table table-striped table-hover">';
             thead += '<thead><tr><th class="text-left">Workshop</th>';
@@ -444,8 +445,17 @@ function onepagerSummaryTable (dom){
                 html += '<tr><td class="text-left">'+d[i]['workshop_cat']+'</td>';
                 html += '<td>'+d[i]['region_cd']+'</td>';
                 html += '<td>'+d[i]['pin']+'</td>';
-                if((OnePagers[i] != undefined) && OnePagers[i]['PIN']=== d[i]["pin"]){
-                    html += '<td><a href="http://maps.udot.utah.gov/wadocuments/Apps/ProgramBriefing/'+d[i]['region_cd']+"/"+d[i]['pin']+'.pdf">Yes</a></td></tr>';
+                //Reset the flag
+                flag = 0;
+                for(var l = 0; l < OnePagers.length; l++){
+                    //Search for pin in onepager json file, if found flip the flag..
+                    if(OnePagers[l]['PIN'] === d[i]['pin']){
+                        flag =1;
+                        break;
+                    }
+                }
+                if(flag === 1){
+                    html += '<td><a class="text-info" target="new" href="http://maps.udot.utah.gov/wadocuments/Apps/ProgramBriefing/'+d[i]['region_cd']+"/"+d[i]['pin']+'.pdf">Yes</a></td></tr>';
                 } else{
                     html += '<td>No</td></tr>';
                 }
