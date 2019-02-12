@@ -255,7 +255,7 @@
                             <div class="col-lg-6">
                                 <div class="card border-0">
                                     <div class="card-body">
-                                        <h5 class="card-title">Planned Construction Year</h5>
+                                        <h5 class="card-title">Forecast Start Year</h5>
                                         <div id="proposedbyYearChart" style="height: 250px"></div>
                                         <div id="proposedbyYearTable"></div>
                                     </div>
@@ -289,7 +289,7 @@
                             <div class="col-lg-6">
                                 <div class="card border-0">
                                     <div class="card-body">
-                                        <h5 class="card-title">Planned Construction Year</h5>
+                                        <h5 class="card-title">Forecast Start Year</h5>
                                         <div id="comappbyYearChart" style="height: 250px"></div>
                                         <div id="comappbyYearTable"></div>
                                     </div>
@@ -323,7 +323,7 @@
                             <div class="col-lg-6">
                                 <div class="card border-0">
                                     <div class="card-body">
-                                        <h5 class="card-title">Planned Construction Year</h5>
+                                        <h5 class="card-title">Forecast Start Year</h5>
                                         <div id="designbyYearChart" style="height: 250px"></div>
                                         <div id="designbyYearTable"></div>
                                     </div>
@@ -357,7 +357,7 @@
                             <div class="col-lg-6">
                                 <div class="card border-0">
                                     <div class="card-body">
-                                        <h5 class="card-title">DPlanned Construction Year</h5>
+                                        <h5 class="card-title">Forecast Start Year</h5>
                                         <div id="constructionbyYearChart" style="height: 250px"></div>
                                         <div id="constructionbyYearTable"></div>
                                     </div>
@@ -451,30 +451,30 @@
             //   function drawUnfunded(agg){
             //     drillVisual('unfunded',workshop,'unfundedbyRegionChart','region_cd',agg,'chart',region);
             //     drillVisual('unfunded',workshop,'unfundedbyRegionTable','region_cd',agg,'table',region);
-            //     drillVisual('unfunded',workshop,'unfunedbyYearChart','planned_construction_year',agg,'chart',region);
-            //     drillVisual('unfunded',workshop,'unfunedbyYearTable','planned_construction_year',agg,'table',region);
+            //     drillVisual('unfunded',workshop,'unfunedbyYearChart','forecast_st_yr',agg,'chart',region);
+            //     drillVisual('unfunded',workshop,'unfunedbyYearTable','forecast_st_yr',agg,'table',region);
             //   }
         function drawProposed(agg){
-            drillVisual('proposed',workshop,'proposedbyYearChart','planned_construction_year',agg,'chart',region);
-            drillVisual('proposed',workshop,'proposedbyYearTable','planned_construction_year',agg,'table',region);
+            drillVisual('proposed',workshop,'proposedbyYearChart','forecast_st_yr',agg,'chart',region);
+            drillVisual('proposed',workshop,'proposedbyYearTable','forecast_st_yr',agg,'table',region);
             drillVisual('proposed',workshop,'proposedbyRegionChart','region_cd',agg,'chart',region);
             drillVisual('proposed',workshop,'proposedbyRegionTable','region_cd',agg,'table',region);
         }
         function drawComApp(agg) {
-            drillVisual('comapp',workshop,'comappbyYearChart','planned_construction_year',agg,'chart',region);
-            drillVisual('comapp',workshop,'comappbyYearTable','planned_construction_year',agg,'table',region);
+            drillVisual('comapp',workshop,'comappbyYearChart','forecast_st_yr',agg,'chart',region);
+            drillVisual('comapp',workshop,'comappbyYearTable','forecast_st_yr',agg,'table',region);
             drillVisual('comapp',workshop,'comappbyRegionChart','region_cd',agg,'chart',region);
             drillVisual('comapp',workshop,'comappbyRegionTable','region_cd',agg,'table',region);
         }
         function drawDesign(agg){
-            drillVisual('design',workshop,'designbyYearChart','planned_construction_year',agg,'chart',region);
-            drillVisual('design',workshop,'designbyYearTable','planned_construction_year',agg,'table',region);
+            drillVisual('design',workshop,'designbyYearChart','forecast_st_yr',agg,'chart',region);
+            drillVisual('design',workshop,'designbyYearTable','forecast_st_yr',agg,'table',region);
             drillVisual('design',workshop,'designbyRegionChart','region_cd',agg,'chart',region);
             drillVisual('design',workshop,'designbyRegionTable','region_cd',agg,'table',region);
         }
         function drawConstruction(agg){
-            drillVisual('construction',workshop,'constructionbyYearChart','planned_construction_year',agg,'chart',region);
-            drillVisual('construction',workshop,'constructionbyYearTable','planned_construction_year',agg,'table',region);
+            drillVisual('construction',workshop,'constructionbyYearChart','forecast_st_yr',agg,'chart',region);
+            drillVisual('construction',workshop,'constructionbyYearTable','forecast_st_yr',agg,'table',region);
             drillVisual('construction',workshop,'constructionbyRegionChart','region_cd',agg,'chart',region);
             drillVisual('construction',workshop,'constructionbyRegionTable','region_cd',agg,'table',region);
         }

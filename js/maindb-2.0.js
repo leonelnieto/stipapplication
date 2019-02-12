@@ -32,7 +32,7 @@ function dataTableBuilder(pn_status,workshop,dom,region){
             var html = '';
             var thead = '<table style="width:100%" id="dataTable'+dom.substring(1)+'" class="table table-striped table-hover">';
             thead += '<thead><tr><th>Region</th>';
-            thead +='<th>PIN</th><th>PIN Description</th><th>Primary Concept</th><th>Project Value</th><th>Planned Year</th></tr></thead><tbody>';
+            thead +='<th>PIN</th><th>PIN Description</th><th>Primary Concept</th><th>Project Value</th><th>Forecast Start Year</th></tr></thead><tbody>';
             html += thead;
             for(var i=0; i < data.length;i++){
                 //Populate funded rows
@@ -44,7 +44,7 @@ function dataTableBuilder(pn_status,workshop,dom,region){
                 html += 'tooltip="Click for Project Map" tooltip-position="top">'+data[i]['pin_desc']+'</a></td>';
                 html += '<td>'+data[i]['primary_concept']+'</td>';
                 html += '<td>'+formatter.format(data[i]['project_value'])+'</td>';
-                html += '<td class="'+bgColorClass(data[i]['planned_construction_year'])+'">'+data[i]['planned_construction_year']+'</td></tr>';
+                html += '<td class="'+bgColorClass(data[i]['forecast_st_yr'])+'">'+data[i]['forecast_st_yr']+'</td></tr>';
             }
             var tfoot = "</tbody></table>";
             html += tfoot;
@@ -127,7 +127,7 @@ function drillVisual(pn_status,workshop,dom,groupOrder,aggregate,type,region){
             var col = (groupOrder === "region_cd")?"Region":"Year";
             var html = '<table class="table"><thead><tr><th>'+col+'</th><th>Dollars</th></thead><tbody>';
             for(var i=0; i < j.length;i++){
-                if(groupOrder === "planned_construction_year") {
+                if(groupOrder === "forecast_st_yr") {
                     html += '<tr><td>'+j[i][groupOrder]+'</td>';
                     html += '<td class="'+bgColorClass(j[i][groupOrder])+'">'+formatter.format(j[i]['aggregate'])+'</td></tr>';
                 } else {
