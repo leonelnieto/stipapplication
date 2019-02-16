@@ -673,3 +673,139 @@ function mapLoader(dom,region,mapid){
             view.ui.add(legend, "bottom-left");
         });
   }
+  //A second verstio of map loader 
+  function mapLoaderDynamic(dom,region,program){
+    var centerLong = -111.693657;
+    var centerLat = 39.631301;
+    var zoom = 2500000;
+    switch(region) {
+      case 1:
+        centerLong = -112.455054;
+        centerLat = 41.343983;
+        zoom = 700000;
+        break;
+      case 2:
+        centerLong = -111.667910;
+        centerLat = 40.680967;
+        zoom = 1200000;
+        break;
+      case 3:
+        centerLong = -111.534103;
+        centerLat = 40.134867;
+        zoom = 1200000;
+        break;
+      case 4:
+        centerLong = -111.662749;
+        centerLat = 38.377228;
+        zoom = 1400000;
+        break;
+    }
+    require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/widgets/Legend",
+            "esri/layers/FeatureLayer",
+            "esri/widgets/BasemapToggle"
+        ],
+        function (Map, MapView, Legend, FeatureLayer, BasemapToggle) {
+        //symbols for year lines
+        const yearnull = {type: "simple-line", color: "#000000", width: 12, style: "solid"};
+        const year2018 = {type: "simple-line", color: "#A87000", width: 12, style: "solid"};
+        const year2019 = {type: "simple-line", color: "#4ce600", width: 12, style: "solid"};
+        const year2020 = {type: "simple-line", color: "#00a9e6", width: 12, style: "solid"};
+        const year2021 = {type: "simple-line", color: "#005ce6", width: 12, style: "solid"};
+        const year2022 = {type: "simple-line", color: "#ffaa00", width: 12, style: "solid"};
+        const year2023 = {type: "simple-line", color: "#1a1a1a", width: 12, style: "solid"};
+        const year2024 = {type: "simple-line", color: "#fc30cd", width: 12, style: "solid"};
+        const year2025 = {type: "simple-line", color: "#e64c00", width: 12, style: "solid"};
+        const year2026 = {type: "simple-line", color: "#e60000", width: 12, style: "solid"};
+        const year2027 = {type: "simple-line", color: "#a87000", width: 12, style: "solid"};
+        //values for feature rendering lines
+        const STIPRender = {
+            type: "unique-value", 
+            field: "FORECAST_ST_YR",
+            uniqueValueInfos: [ // used for specifying unique values
+            {value: "2018", symbol: year2018, label: "2018" }, 
+            {value: "2019", symbol: year2019, label: "2019" },
+            {value: "2020", symbol: year2020, label: "2020" },
+            {value: "2021", symbol: year2021, label: "2021" },
+            {value: "2022", symbol: year2022, label: "2022" },
+            {value: "2023", symbol: year2023, label: "2023" },
+            {value: "2024", symbol: year2024, label: "2024" },
+            {value: "2025", symbol: year2025, label: "2025" },
+            {value: "2026", symbol: year2026, label: "2026" },
+            {value: "2027", symbol: year2027, label: "2027" }
+            ]
+        };
+        //Map Query Statements
+        const filter = ["WORKSHOP_CAT = 'Transportation Investment Funds' AND STIP_WORKSHOP_YR = '2019'", //0 TransportationInvestmentFunds - no records
+                        "WORKSHOP_CAT = 'Transportation Solutions' AND STIP_WORKSHOP_YR = '2019'",//1 TransportationSolutions
+                        "WORKSHOP_CAT = 'Contingency Fund' AND STIP_WORKSHOP_YR = '2019'", //2 ContingencyFund - no records
+                        "STIP_WORKSHOP_YR = '2019' AND (WORKSHOP_CAT = 'Preservation High Volume' OR WORKSHOP_CAT = 'Rehabilitation High Volume')", //3 PavementHighVolume 
+                        "STIP_WORKSHOP_YR = '2019' AND (WORKSHOP_CAT = 'Preservation Low Volume' OR WORKSHOP_CAT = 'Rehabilitation Low Volume')", //4 PavementLowVolume
+                        "WORKSHOP_CAT = 'Bridge Preservation' AND STIP_WORKSHOP_YR = '2019'", //5 BridgePreservation
+                        "WORKSHOP_CAT = 'Bridge Replacement and Rehabilitation' AND STIP_WORKSHOP_YR = '2019'", //6 BridgeReplacementandRehabilitation
+                        "WORKSHOP_CAT = 'HSIP - Highway Safety Improvement' AND STIP_WORKSHOP_YR = '2019'", //7 HighwaySafetyImprovement
+                        "WORKSHOP_CAT = 'SSIP - Safety Spot Improvement' AND STIP_WORKSHOP_YR = '2019'", //8 SafetySpotImprovement - I think this one is being retired
+                        "WORKSHOP_CAT = 'Barrier Treatments' AND STIP_WORKSHOP_YR = '2019'", //9 BarrierTreatments - no records
+                        "WORKSHOP_CAT = 'Small Area Lighting' AND STIP_WORKSHOP_YR = '2019'", //10 SmallAreaLighting - no records
+                        "WORKSHOP_CAT = 'Safe Routes to Schools' AND STIP_WORKSHOP_YR = '2019'", //11 SafeRoutestoSchools - no records
+                        "WORKSHOP_CAT = 'Sign Modification & Replacement' AND STIP_WORKSHOP_YR = '2019'",//12 SignModificationReplacement - no records
+                        "WORKSHOP_CAT = 'Railway-Highway Grade Crossing' AND STIP_WORKSHOP_YR = '2019'", //13 RailwayHighwayGradeCrossing
+                        "WORKSHOP_CAT = 'New Traffic Signals' AND STIP_WORKSHOP_YR = '2019'", //14 NewTrafficSignals
+                        "WORKSHOP_CAT = 'Freight' AND STIP_WORKSHOP_YR = '2019'",//15 Freight - no records
+                        "WORKSHOP_CAT = 'Off-System Bridge' AND STIP_WORKSHOP_YR = '2019'", //16 OffSystemBridge - no records
+                        "WORKSHOP_CAT = 'Non-Urban' AND STIP_WORKSHOP_YR = '2019'", //17 NonUrban - no records
+                        "WORKSHOP_CAT = 'Small Urban' AND STIP_WORKSHOP_YR = '2019'", //18 SmallUrban - no records
+                        "WORKSHOP_CAT = 'State Park Access' AND STIP_WORKSHOP_YR = '2019'", //19 StateParkAccess - no records
+                        "WORKSHOP_CAT = 'Transportation Alternatives' AND STIP_WORKSHOP_YR = '2019'", //20 TransportationAlternatives
+                        "WORKSHOP_CAT = 'Environmental Studies' AND STIP_WORKSHOP_YR = '2019'", //21 EnvironmentalStudies - no records
+                        "WORKSHOP_CAT = 'ATMS Asset Management' AND STIP_WORKSHOP_YR = '2019'", //22 ATMSAssetManagement - no records
+                        "WORKSHOP_CAT = 'Federal Lands Access Program' AND STIP_WORKSHOP_YR = '2019'", //23 FederalLandsAccessProgram - no records
+                        "WORKSHOP_CAT = 'Other' AND STIP_WORKSHOP_YR = '2019'", //24 Other - no records
+                        "STIP_WORKSHOP_YR = '2019' AND (WORKSHOP_CAT = 'HSIP - Highway Safety Improvement' OR WORKSHOP_CAT = 'Safe Routes to Schools' OR WORKSHOP_CAT = 'New Traffic Signals' OR WORKSHOP_CAT = 'Railway-Highway Grade Crossing')", //25 TrafficSafety - is this one redundant?
+                        "WORKSHOP_CAT = 'MPO' AND STIP_WORKSHOP_YR = '2019'", //26 LocalGovernmentMPOs no records
+                        "WORKSHOP_CAT = 'Reconstruction High Volume' AND STIP_WORKSHOP_YR = '2019'", //27 PavementLowVolume
+                    ]  
+        
+        let layer = new FeatureLayer({
+            url: "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects/MapServer/0", // EPM STIP Service
+            renderer: STIPRender, //this gives the line styles
+            definitionExpression: filter[program], //change filter to change dataset query
+            popupTemplate: {title: "{CONCEPT_DESC}", content: "{*}"} //the popup change be changed if we want
+        });
+        //initialize map
+        let map = new Map({
+                basemap: "streets-vector" //https://developers.arcgis.com/javascript/latest/api-reference/esri-Basemap.html 
+                
+            });
+        //create map view
+        let view = new MapView({
+                container: dom,
+                map: map,
+                center: [centerLong, centerLat], //edit to center base on lat and lon state center 39.631301,-111.693657
+                scale: zoom //larger number zooms out, smaller zooms in 
+            });
+        map.add(layer);	    
+        var legend = new Legend({
+            view: view,
+            layerInfos: [{
+            layer: layer,
+            title: "Legend"
+            }]
+        });
+        var basemapToggle = new BasemapToggle({
+            view: view,
+            nextBasemap: "satellite"
+        });
+        view.ui.add(legend, "bottom-right");
+        view.ui.add(basemapToggle, "top-right");
+        //view.when(function(){	
+        //	layer.when(function(){
+        //		return layer.queryExtent();
+        //	}).then(function(response){
+        //		view.goTo(response.extent);
+        //	});
+        //});	
+    });
+  }

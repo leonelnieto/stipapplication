@@ -478,7 +478,8 @@
             drillVisual('construction',workshop,'constructionbyRegionChart','region_cd',agg,'chart',region);
             drillVisual('construction',workshop,'constructionbyRegionTable','region_cd',agg,'table',region);
         }
-        mapLoader("map",parseInt(region),"db8902f5684b4182843b9036bdab6e8f");
+        //mapLoader("map",parseInt(region),"db8902f5684b4182843b9036bdab6e8f");
+        mapLoaderDynamic("map",parseInt(region),5);
     </script>
   </body>
 </html>
