@@ -323,7 +323,7 @@ function onePagerLink(pin,region,dom) {
         //console.log(j);
         for(var i=0;i<j.length;i++){
             if(j[i]['Region']=== region && j[i]['PIN']=== pin){
-                onePagerButton = '<a href="http://maps.udot.utah.gov/wadocuments/Apps/ProgramBriefing/'+region+"/"+pin+'.pdf" class="btn btn-primary">Project Briefing</a>';
+                onePagerButton = '<a href="http://maps.udot.utah.gov/wadocuments/Apps/ProgramBriefing/'+region+"/"+pin+'.pdf" class="btn btn-primary" target="new">Project Briefing</a>';
                 break;
             }
         }
