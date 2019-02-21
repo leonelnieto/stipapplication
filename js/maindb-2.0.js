@@ -429,7 +429,7 @@ function onepagerSummaryTable (dom){
         //console.log(j);
         var OnePagers = j;
         //console.log(OnePagers[3]['PIN']);
-        var s = '?$select=pin,region_cd,workshop_cat';
+        var s = '?$select=pin,region_cd,workshop_cat&$limit=1000000';
         fetch(sourceDataset+s).then(function(response){
             return response.json();
         }).then(function(d){
