@@ -700,6 +700,9 @@ function mapLoader(dom,region,mapid){
         zoom = 1400000;
         break;
     }
+
+    var mapFilter = region ? "AND REGION_CD ='"+ region +"'": "";
+
     require([
             "esri/Map",
             "esri/views/MapView",
@@ -766,12 +769,13 @@ function mapLoader(dom,region,mapid){
                         "STIP_WORKSHOP_YR = '2019' AND (WORKSHOP_CAT = 'HSIP - Highway Safety Improvement' OR WORKSHOP_CAT = 'Safe Routes to Schools' OR WORKSHOP_CAT = 'New Traffic Signals' OR WORKSHOP_CAT = 'Railway-Highway Grade Crossing')", //25 TrafficSafety - is this one redundant?
                         "WORKSHOP_CAT = 'MPO' AND STIP_WORKSHOP_YR = '2019'", //26 LocalGovernmentMPOs no records
                         "WORKSHOP_CAT = 'Reconstruction High Volume' AND STIP_WORKSHOP_YR = '2019'", //27 PavementLowVolume
+                        "STIP_WORKSHOP_YR = '2019'" //noquery
                     ]  
         
         let layer = new FeatureLayer({
             url: "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects/MapServer/0", // EPM STIP Service
             renderer: STIPRender, //this gives the line styles
-            definitionExpression: filter[program], //change filter to change dataset query
+            definitionExpression: filter[program]+mapFilter, //change filter to change dataset query
             popupTemplate: {title: "{CONCEPT_DESC}", content: "{*}"} //the popup change be changed if we want
         });
         //initialize map
