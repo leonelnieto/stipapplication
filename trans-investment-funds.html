@@ -186,10 +186,7 @@
                 <!--Begin Tabs-->
                 <div class="tab-content card border-0" id="pills-tabContent">
                     <div class="tab-pane fade show active map" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
-                        <div class="map" id="map">
-                            <!--<iframe width="100%" height="75%" src="https://uplan.maps.arcgis.com/apps/Embed/index.html?webmap=b206e67eb56849c0a4a8a682a2c3135e&extent=-119.0136,35.989,-104.4787,42.7651&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light">
-                            </iframe>-->
-                        </div>
+                        <div class="map" id="map"></div>
                     </div>
                     <div class="tab-pane fade" id="pills-unfunded" role="tabpanel" aria-labelledby="pills-unfunded-tab">
                         <div class="row">
@@ -228,17 +225,20 @@
                     <div class="tab-pane fade" id="pills-proposed" role="tabpanel" aria-labelledby="pills-proposed-tab">
                         <div class="row">
                             <div class="col-12">
-                                <div id="pills-proposedtbl"></div>
+                                <!--<div id="pills-proposedtbl"></div>-->
+                                <embed src="TIF Proposed 4-4-2019.pdf" width="100%" height="900px" />
                             </div>
                         </div>
+                        <!--
                         <div class="row mt-5">
                             <div class="col-12">
                                 <button type="button" id="projVal" onclick="setTimeout(function(){drawProposed('project_value')},500)" class="btn btn-outline-secondary btn-sm">Project Value</button>
                                 <button type="button" id="statDol" onclick="setTimeout(function(){drawProposed('state_dollars')},500)" class="btn btn-outline-secondary btn-sm">State Dollars</button>
                                 <button type="button" onclick="setTimeout(function(){drawProposed('fed_dollars')},500)" id="fedDol" class="btn btn-outline-secondary btn-sm">Federal Dollars</button>
                             </div>
-                        </div>
-                        <div class="row">
+                        </div>-->
+                        
+                        <div class="row" style="display:none">
                             <div class="col-lg-6">
                                 <div class="card border-0">
                                     <div class="card-body">
@@ -439,7 +439,7 @@
         }
         var workshop = "'Transportation Investment Funds'";
         dataTableBuilder('unfunded',workshop,'#pills-unfundedtbl',region);
-        dataTableBuilder('proposed',workshop,'#pills-proposedtbl',region);
+        //dataTableBuilder('proposed',workshop,'#pills-proposedtbl',region);
         dataTableBuilder('comapp',workshop,'#pills-comapptbl',region);
         dataTableBuilder('design',workshop,'#pills-designtbl',region);
         dataTableBuilder('construction',workshop,'#pills-constructiontbl',region);
