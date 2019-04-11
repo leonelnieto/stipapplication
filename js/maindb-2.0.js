@@ -58,6 +58,13 @@ function dataTableBuilder(pn_status,workshop,dom,region){
                     { "orderable": true },
                     { "orderable": false },
                     { "orderable": true }
+                    ],
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copyHtml5',
+                        'excelHtml5',
+                        'csvHtml5',
+                        'pdfHtml5'
                     ]
             });
         }).catch(function(err){
