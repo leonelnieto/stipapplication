@@ -168,7 +168,7 @@ function whereClauseBuilder(pn_status,workshop,region) {
             whereClause = "&$where=stip_workshop='Y' "+workshop+region;
         break;
         case "comapp":
-            whereClause = "&$where=comm_aprv_ind='Y'and pin_stat_nm in('STIP','Scoping','Active','Advertised','Under Construction','Substantially Compl','Physically Complete') "+workshop+region;
+            whereClause = "&$where=comm_aprv_ind='Y'and pin_stat_nm in('STIP','Scoping','Awarded ','Active','Advertised','Under Construction','Substantially Compl','Physically Complete') "+workshop+region;
         break;
         case "design":
             whereClause = "&$where=pin_stat_nm in('STIP','Scoping','Active') "+workshop+region;
