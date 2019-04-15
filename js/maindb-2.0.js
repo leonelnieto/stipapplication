@@ -162,19 +162,19 @@ function whereClauseBuilder(pn_status,workshop,region) {
     }
     switch(pn_status){
         case "unfunded":
-            whereClause = "&$where=stip_workshop='N' "+workshop+region;
+            whereClause = "&$where=stip_workshop='N' and pin_stat_nm='Proposed' "+workshop+region;
         break;
         case "proposed":
-            whereClause = "&$where=stip_workshop='Y' "+workshop+region;
+            whereClause = "&$where=stip_workshop='Y'  and pin_stat_nm='Proposed' "+workshop+region;
         break;
         case "comapp":
-            whereClause = "&$where=comm_aprv_ind='Y'and pin_stat_nm in('STIP','Scoping','Awarded ','Active','Advertised','Under Construction','Substantially Compl','Physically Complete') "+workshop+region;
+            whereClause = "&$where=comm_aprv_ind='Y'and pin_stat_nm in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete') "+workshop+region;
         break;
         case "design":
-            whereClause = "&$where=pin_stat_nm in('STIP','Scoping','Active') "+workshop+region;
+            whereClause = "&$where=pin_stat_nm in('STIP','Scoping','Active','Advertised') "+workshop+region;
         break;
         case "construction":
-            whereClause = "&$where=pin_stat_nm in('Advertised','Under Construction','Substantially Compl','Physically Complete','Awarded') "+workshop+region;
+            whereClause = "&$where=pin_stat_nm in('Under Construction','Substantially Compl','Physically Complete') "+workshop+region;
         break;
     }
     return whereClause;
