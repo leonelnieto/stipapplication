@@ -118,7 +118,7 @@
                     </button>
                     <div class="appname col-lg-6 mx-auto">
                         <h2 class="mb-0">
-                            ATMS <span class="text-primary">Assets</span> and Management
+                            All <span class="text-primary">Structures</span>
                         </h2>
                     </div>
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -148,16 +148,16 @@
                     <button type="button" id="filterregion0" onclick="window.location = window.location.pathname" class="btn btn-info btn-sm btn-block">All</button>
                 </div>
                 <div class="col-sm-2 mx-auto">
-                        <button type="button" id="filterregion1" onclick="pathClearandReload(1);" class="btn btn-info btn-sm btn-block">Region 1</button>
+                    <button type="button" id="filterregion2" onclick="pathClearandReload(1);" class="btn btn-info btn-sm btn-block">Region 1</button>
                 </div>
                 <div class="col-sm-2 mx-auto">
-                        <button type="button" id="filterregion2" onclick="pathClearandReload(2);" class="btn btn-info btn-sm btn-block">Region 2</button>
+                    <button type="button" id="filterregion2" onclick="pathClearandReload(2);" class="btn btn-info btn-sm btn-block">Region 2</button>
                 </div>
                 <div class="col-sm-2 mx-auto">
-                        <button type="button" id="filterregion3" onclick="pathClearandReload(3);" class="btn btn-info btn-sm btn-block">Region 3</button>
+                    <button type="button" id="filterregion3" onclick="pathClearandReload(3);" class="btn btn-info btn-sm btn-block">Region 3</button>
                 </div>
                 <div class="col-sm-2 mx-auto">
-                        <button type="button" id="filterregion4" onclick="pathClearandReload(4);" class="btn btn-info btn-sm btn-block">Region 4</button>
+                    <button type="button" id="filterregion4" onclick="pathClearandReload(4);" class="btn btn-info btn-sm btn-block">Region 4</button>
                 </div>
             </div>
             <!--/END Region Buttons-->
@@ -167,9 +167,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab" aria-controls="pills-map" aria-selected="true">Map</a>
                     </li>
-                    <!--<li class="nav-item">
+                    <!-- On non TIF and TS Workshop Categories - Proposed, Commission Approved, Design, Construction
+                    <li class="nav-item">
                         <a class="nav-link" id="pills-unfunded-tab" data-toggle="pill" href="#pills-unfunded" role="tab" aria-controls="pills-unfunded" aria-selected="false" onclick="setTimeout(function(){drawUnfunded('project_value')},500)">Unfunded</a>
-                    </li>-->
+                    </li>
+                    -->
                     <li class="nav-item">
                         <a class="nav-link" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false" onclick="setTimeout(function(){drawProposed('project_value')},500)">Proposed</a>
                     </li>
@@ -188,11 +190,11 @@
                 <div class="tab-content card border-0" id="pills-tabContent">
                     <div class="tab-pane fade show active map" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
                         <div class="map" id="map">
-                            <!--<iframe width="100%" height="75%" src="https://uplan.maps.arcgis.com/apps/Embed/index.html?webmap=5140bcbbff7e4fc0966075b1e2d9bb9f&extent=-119.0136,35.989,-104.4787,42.7651&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light">
+                            <!--<iframe width="100%" height="75%" src="https://uplan.maps.arcgis.com/apps/Embed/index.html?webmap=c537c3d70ebb4e21a9f040ee4259030d&extent=-119.0136,35.989,-104.4787,42.7651&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light">
                             </iframe>-->
                         </div>
                     </div>
-                    <!--
+                    <!-- On non TIF and TS Workshop Categories - Proposed, Commission Approved, Design, Construction
                     <div class="tab-pane fade" id="pills-unfunded" role="tabpanel" aria-labelledby="pills-unfunded-tab">
                         <div class="row">
                             <div class="col-12">
@@ -442,19 +444,19 @@
         if(region === undefined){
             region = 0;
         }
-        var workshop = "'ATMS Asset Management'";
+        var workshop = "'Bridge Replacement and Rehabilitation','Bridge Preservation'";
         //dataTableBuilder('unfunded',workshop,'#pills-unfundedtbl',region);
         dataTableBuilder('proposed',workshop,'#pills-proposedtbl',region);
         dataTableBuilder('comapp',workshop,'#pills-comapptbl',region);
         dataTableBuilder('design',workshop,'#pills-designtbl',region);
         dataTableBuilder('construction',workshop,'#pills-constructiontbl',region);
         //Drill Charts
-        //   function drawUnfunded(agg){
-        //     drillVisual('unfunded',workshop,'unfundedbyRegionChart','region_cd',agg,'chart',region);
-        //     drillVisual('unfunded',workshop,'unfundedbyRegionTable','region_cd',agg,'table',region);
-        //     drillVisual('unfunded',workshop,'unfunedbyYearChart','forecast_st_yr',agg,'chart',region);
-        //     drillVisual('unfunded',workshop,'unfunedbyYearTable','forecast_st_yr',agg,'table',region);
-        //   }
+            //   function drawUnfunded(agg){
+            //     drillVisual('unfunded',workshop,'unfundedbyRegionChart','region_cd',agg,'chart',region);
+            //     drillVisual('unfunded',workshop,'unfundedbyRegionTable','region_cd',agg,'table',region);
+            //     drillVisual('unfunded',workshop,'unfunedbyYearChart','forecast_st_yr',agg,'chart',region);
+            //     drillVisual('unfunded',workshop,'unfunedbyYearTable','forecast_st_yr',agg,'table',region);
+            //   }
         function drawProposed(agg){
             drillVisual('proposed',workshop,'proposedbyYearChart','forecast_st_yr',agg,'chart',region);
             drillVisual('proposed',workshop,'proposedbyYearTable','forecast_st_yr',agg,'table',region);
@@ -479,8 +481,8 @@
             drillVisual('construction',workshop,'constructionbyRegionChart','region_cd',agg,'chart',region);
             drillVisual('construction',workshop,'constructionbyRegionTable','region_cd',agg,'table',region);
         }
-        //mapLoader("map",parseInt(region),"5140bcbbff7e4fc0966075b1e2d9bb9f");
-        mapLoaderDynamic("map",parseInt(region),22);
+        //mapLoader("map",parseInt(region),"c537c3d70ebb4e21a9f040ee4259030d");
+        mapLoaderDynamic("map",parseInt(region),29);
     </script>
   </body>
 </html>
