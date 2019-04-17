@@ -192,17 +192,19 @@
                     <div class="tab-pane fade" id="pills-unfunded" role="tabpanel" aria-labelledby="pills-unfunded-tab">
                         <div class="row">
                             <div class="col-12">
-                                <div id="pills-unfundedtbl"></div>
+                                <!--<div id="pills-unfundedtbl"></div>-->
+                                <embed src="pdfs/TIF Unfunded Projects.pdf" width="100%" height="900px" />
                             </div>
                         </div>
-                        <div class="row mt-5">
+                        <!--<div class="row mt-5">
                             <div class="col-12">
                                 <button type="button" id="projVal" onclick="setTimeout(function(){drawUnfunded('project_value')},500)" class="btn btn-outline-secondary btn-sm">Project Value</button>
                                 <button type="button" id="statDol" onclick="setTimeout(function(){drawUnfunded('state_dollars')},500)" class="btn btn-outline-secondary btn-sm">State Dollars</button>
                                 <button type="button" onclick="setTimeout(function(){drawUnfunded('fed_dollars')},500)" id="fedDol" class="btn btn-outline-secondary btn-sm">Federal Dollars</button>
                             </div>
+                            -->
                         </div>
-                        <div class="row">
+                        <div class="row" style="display:none">
                             <div class="col-lg-6">
                                 <div class="card border-0">
                                     <div class="card-body">
@@ -441,7 +443,7 @@
             region = 0;
         }
         var workshop = "'Transportation Investment Funds'";
-        dataTableBuilder('unfunded',workshop,'#pills-unfundedtbl',region);
+        //dataTableBuilder('unfunded',workshop,'#pills-unfundedtbl',region);
         //dataTableBuilder('proposed',workshop,'#pills-proposedtbl',region);
         dataTableBuilder('comapp',workshop,'#pills-comapptbl',region);
         dataTableBuilder('design',workshop,'#pills-designtbl',region);
