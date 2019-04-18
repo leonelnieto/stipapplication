@@ -6,8 +6,208 @@
 	},
 	{
 		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "NoOnePager"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "10783"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "11438"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "11458"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "11467"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "11470"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "11608"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "11978"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "11979"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "12602"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "12780"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "13664"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "14165"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "14560"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "S",
+		"PIN" : "14569"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "14722"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "15226"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "15228"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "15329"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "15355"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "15420"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "15425"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "15735"
+	},
+	{
+		"json_featuretype" : "onepagers",
 		"Region" : "S",
 		"PIN" : "15880"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "16097"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "16098"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "16306"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "16315"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "16316"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "16317"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "16911"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "16912"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "17195"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "17228"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "17259"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "17260"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "17261"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "17333"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "17334"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "17383"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "17621"
 	},
 	{
 		"json_featuretype" : "onepagers",
@@ -517,6 +717,11 @@
 	{
 		"json_featuretype" : "onepagers",
 		"Region" : "2",
+		"PIN" : "14569"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "2",
 		"PIN" : "14785"
 	},
 	{
@@ -716,6 +921,66 @@
 	},
 	{
 		"json_featuretype" : "onepagers",
+		"Region" : "2",
+		"PIN" : "17626"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "3",
+		"PIN" : "PIN 16357"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "3",
+		"PIN" : "PIN 16497"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "3",
+		"PIN" : "PIN 12304"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "3",
+		"PIN" : "PIN 16500"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "3",
+		"PIN" : "PIN 16506"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "3",
+		"PIN" : "PIN 16580"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "3",
+		"PIN" : "PIN 17378"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "3",
+		"PIN" : "PIN 17379"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "3",
+		"PIN" : "PIN 17486"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "3",
+		"PIN" : "PIN 17513"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "3",
+		"PIN" : "PIN 15454"
+	},
+	{
+		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "NoOnePager"
 	},
@@ -773,6 +1038,11 @@
 		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "14557"
+	},
+	{
+		"json_featuretype" : "onepagers",
+		"Region" : "3",
+		"PIN" : "14569"
 	},
 	{
 		"json_featuretype" : "onepagers",
