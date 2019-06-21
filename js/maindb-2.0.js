@@ -5,12 +5,14 @@
  */
 //Global Variables
 //Actual Dataset
+// var sourceDataset = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_AllProjects/MapServer/0";
+//var selectColumns ?f=pjson&outFields=PIN%2CWORKSHOP_CAT%2CSTIP_WORKSHOP%2CREGION_CD%2CCOMM_APRV_IND%2CPIN_DESC%2CPRIMARY_CONCEPT%2CPROJECT_VALUE%2CPLANNED_CONSTRUCTION_YEAR%2CPROGRAM%2CPUBLIC_DESC%2CFORECAST_ST_YR%2CFED_DOLLARS%2CSTATE_DOLLARS
+
+//Socrata Dataset
 var sourceDataset = "https://dashboard.udot.utah.gov/resource/d3ck-j69f.json";
-//Testing Dataset
-//var sourceDataset = "https://dashboard.udot.utah.gov/resource/a6xh-u32h.json";
 var selectColumns = "?$select=pin,workshop_cat,stip_workshop,region_cd,comm_aprv_ind,pin_desc,primary_concept,project_value,planned_construction_year,program,public_desc,forecast_st_yr,fed_dollars,state_dollars";
 //Use Limit to gurantee more than 1000 rows in dataset
-var tail = '&$limit=50000';
+ var tail = '&$limit=50000';
 //Helper currency formater
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -22,13 +24,14 @@ function dataTableBuilder(pn_status,workshop,dom,region){
     //Build where clause by filter
     var whereClause = whereClauseBuilder(pn_status,workshop,region);
     var query = sourceDataset+selectColumns+whereClause+tail;
-    //console.log(query);
+    //query = sourceDataset+selectColumn + whereClause;
+    console.log(query);
     fetch(query)
         .then(function(response){
             return response.json();
         }).then(function(data){
             //Where the magic occurs
-            //console.log(data);
+            //console.log(data); //TODO: console log in main to see format for ESRI object
             var html = '';
             var thead = '<table style="width:100%" id="dataTable'+dom.substring(1)+'" class="table table-striped table-hover">';
             thead += '<thead><tr><th>Region</th>';
@@ -36,16 +39,17 @@ function dataTableBuilder(pn_status,workshop,dom,region){
             html += thead;
             for(var i=0; i < data.length;i++){
                 //Populate funded rows
-                html += '<tr><td class="sorting">'+data[i]['region_cd']+'</td>';
+                html += '<tr><td class="sorting">'+data[i]['REGION_CD']+'</td>';
                 html += '<td><button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" tooltip="Click for PIN Details" tooltip-position="top"';
-                html += ' data-target="#myModal" onClick="pingPin('+data[i]['pin']+')">';
-                html += data[i]['pin']+'</button></td>';
-                html += '<td><a data-toggle="modal" class="alt-link" data-target="#mapModal" onClick="showMapModal('+data[i]['pin']+')" ';
-                html += 'tooltip="Click for Project Map" tooltip-position="top">'+data[i]['pin_desc']+'</a></td>';
-                html += '<td>'+data[i]['primary_concept']+'</td>';
-                html += '<td>'+formatter.format(data[i]['project_value'])+'</td>';
-                html += '<td class="'+bgColorClass(data[i]['forecast_st_yr'])+'">'+data[i]['forecast_st_yr']+'</td></tr>';
+                html += ' data-target="#myModal" onClick="pingPin('+data[i]['PIN']+')">';
+                html += data[i]['PIN']+'</button></td>';
+                html += '<td><a data-toggle="modal" class="alt-link" data-target="#mapModal" onClick="showMapModal('+data[i]['PIN']+')" ';
+                html += 'tooltip="Click for Project Map" tooltip-position="top">'+data[i]['PIN_DESC']+'</a></td>';
+                html += '<td>'+data[i]['PRIMARY_CONCEPT']+'</td>';
+                html += '<td>'+formatter.format(data[i]['PROJECT_VALUE'])+'</td>';
+                html += '<td class="'+bgColorClass(data[i]['FORECAST_ST_YR'])+'">'+data[i]['FORECAST_ST_YR']+'</td></tr>';
             }
+            
             var tfoot = "</tbody></table>";
             html += tfoot;
             $(dom).append(html);
@@ -72,52 +76,27 @@ function dataTableBuilder(pn_status,workshop,dom,region){
             console.log(query);
     });
 }
-//Drill Chart using plotly
-function drillPlotlyChart(pn_status,workshop,dom,groupOrder){
-    var whereClause = whereClauseBuilder(pn_status,workshop);
-    var vizQueryAgg = "?$select="+groupOrder+",sum(project_value)";
-    var vizQueryGroup = "&$group="+groupOrder;
-    var vizQueryOrder = "&$order="+groupOrder;
-    var url = sourceDataset+vizQueryAgg+whereClause+vizQueryGroup+vizQueryOrder;
-    fetch(url).then(function(response){
-        return response.json();
-    }).then(function(j){
-      var x = [];
-      var y = [];
-      for(var i = 0; i < j.length; i++){
-        x.push(j[i][groupOrder]);
-        y.push(formatter.format(j[i]["sum_project_value"]));
-      }
-      var trace1 = {
-        x: x,
-        y: y,
-        name: 'Project Value',
-        type: 'bar'
-      };
-      var data = [trace1];
-      var layout = {
-        yaxis: {title: 'Project values',hoverformat: '$0f'},xaxis: {type: 'category'},
-      };
-      Plotly.newPlot(dom, data, layout,{responsive: true});
-  });
-}
 //Drill Chart takes type parameter for table or graph
 function drillVisual(pn_status,workshop,dom,groupOrder,aggregate,type,region){
     var whereClause = whereClauseBuilder(pn_status,workshop,region);
+    let statistic=[{'statisticType': 'sum', 'onStatisticField': aggregate, 'outStatisticFieldName': 'aggregate'}] //TODO: toString?
     var vizQueryAgg = "?$select="+groupOrder+",sum("+aggregate+") as aggregate";
+    //TODO: var vizQueryAgg = "?$select="+groupOrder+statistic;
     var vizQueryGroup = "&$group="+groupOrder;
+    //var vizQueryGroup = "&groupByFieldsForStatistics="+groupOrder;
     var vizQueryOrder = "&$order="+groupOrder;
+    //var vizQueryOrder =  "&orderByFields=" +groupOrder;
     var url = sourceDataset+vizQueryAgg+whereClause+vizQueryGroup+vizQueryOrder;
     fetch(url).then(function(response){
         return response.json();
-    }).then(function(j){
+    }).then(function(data){
         //Check type and draw whats requested
         if(type === 'chart'){
             var x = [];
             var y = [];
-            for(var i = 0; i < j.length; i++){
-                x.push(j[i][groupOrder]);
-                y.push(formatter.format(j[i]["aggregate"]));
+            for(var i = 0; i < data.length; i++){
+                x.push(data[i][groupOrder]);
+                y.push(formatter.format(data[i]["aggregate"])); //TODO
             }
             var trace1 = {
                 x: x,
@@ -131,15 +110,15 @@ function drillVisual(pn_status,workshop,dom,groupOrder,aggregate,type,region){
             };
             Plotly.newPlot(dom, data, layout,{responsive: true});
         } else if(type === 'table'){
-            var col = (groupOrder === "region_cd")?"Region":"Year";
+            var col = (groupOrder === "REGION_CD")?"Region":"Year";
             var html = '<table class="table"><thead><tr><th>'+col+'</th><th>Dollars</th></thead><tbody>';
-            for(var i=0; i < j.length;i++){
+            for(var i=0; i < data.length;i++){
                 if(groupOrder === "forecast_st_yr") {
-                    html += '<tr><td>'+j[i][groupOrder]+'</td>';
-                    html += '<td class="'+bgColorClass(j[i][groupOrder])+'">'+formatter.format(j[i]['aggregate'])+'</td></tr>';
+                    html += '<tr><td>'+data[i][groupOrder]+'</td>';
+                    html += '<td class="'+bgColorClass(data[i][groupOrder])+'">'+formatter.format(data[i]['aggregate'])+'</td></tr>';
                 } else {
-                    html += '<tr><td>'+j[i][groupOrder]+'</td>';
-                    html += '<td>'+formatter.format(j[i]['aggregate'])+'</td></tr>';
+                    html += '<tr><td>'+data[i][groupOrder]+'</td>';
+                    html += '<td>'+formatter.format(data[i]['aggregate'])+'</td></tr>';
                 }
             }
             html += '</tbody></table>';
@@ -153,28 +132,28 @@ function whereClauseBuilder(pn_status,workshop,region) {
     if(workshop === "all"){
         workshop = "";
     } else {
-        workshop = "and workshop_cat in ("+workshop+") ";
+        workshop = "AND WORKSHOP_CAT ="+workshop;
     }
     if(region === 0 || region === undefined){
         region = "";
     } else {
-        region = "and region_cd='"+region+"' "
+        region = "AND REGION_CD="+region;
     }
     switch(pn_status){
         case "unfunded":
-            whereClause = "&$where=stip_workshop='N' and pin_stat_nm='Proposed' "+workshop+region;
+            whereClause = "&where=STIP_WORKSHOP='N' and PIN_STAT_NM='Proposed' "+workshop+region;
         break;
         case "proposed":
-            whereClause = "&$where=stip_workshop='Y' and pin_stat_nm='Proposed' "+workshop+region;
+            whereClause = "&where=STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed' "+workshop+region;
         break;
         case "comapp":
-            whereClause = "&$where=comm_aprv_ind='Y' and pin_stat_nm in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete') "+workshop+region;
+            whereClause = "&where=COMM_APRV_IND='Y' and PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete') "+workshop+region;
         break;
         case "design":
-            whereClause = "&$where=pin_stat_nm in('STIP','Scoping','Active','Advertised','Awarded') "+workshop+region;
+            whereClause = "&where=PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded') "+workshop+region;
         break;
         case "construction":
-            whereClause = "&$where=pin_stat_nm in('Under Construction','Substantially Compl','Physically Complete') "+workshop+region;
+            whereClause = "&where=PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete') "+workshop+region;
         break;
     }
     return whereClause;
@@ -326,10 +305,10 @@ function onePagerLink(pin,region,dom) {
     $(dom).empty();
     fetch('data/onepagers.json').then(function(response){
         return response.json();
-    }).then(function(j){
-        //console.log(j);
-        for(var i=0;i<j.length;i++){
-            if(j[i]['Region']=== region && j[i]['PIN']=== pin){
+    }).then(function(data){
+        //console.log(data);
+        for(var i=0;i<data.length;i++){
+            if(data[i]['Region']=== region && data[i]['PIN']=== pin){
                 onePagerButton = '<a href="http://maps.udot.utah.gov/wadocuments/Apps/ProgramBriefing/'+region+"/"+pin+'.pdf" class="btn btn-primary" target="new">Project Briefing</a>';
                 break;
             }
@@ -490,58 +469,7 @@ function onepagerSummaryTable (dom){
         console.log("{*_*} Bummer, could not load onepager data!!!!"+err);
     });
 }
-//Show entire dataset in app documentation
-function printSourceData(dom){
-    var s = "?$select=pin,pin_desc,pin_stat_nm,proj_loc,project_value,region_cd,planned_construction_year,forecast_st_yr,workshop_cat&$limit=1000000"
-    fetch(sourceDataset+s).then(function(response){
-        return response.json();
-    }).then(function(d){
-        //console.log(sourceDataset+s);
-        var html = '';
-        var thead = '<table style="width:100%" id="sourceDataTable" class="table table-striped table-hover">';
-        thead += '<thead><tr><th>PIN</th><th>PIN Description</th><th>PIN Status</th><th>Project Location</th><th>Project Value</th>';
-        thead +='<th>Region</th><th>Planned Construction Year</th><th>Forecast Start Year</th><th>Workshop Category</th></tr></thead><tbody>';
-        html += thead;
-        for(var i = 0;i < d.length;i++){
-            html += '<tr><td>'+d[i]['pin']+'</td>';
-            html += '<td class="text-left">'+d[i]['pin_desc']+'</td>';
-            html += '<td>'+d[i]['pin_stat_nm']+'</td>';
-            html += '<td>'+d[i]['proj_loc']+'</td>';
-            html += '<td>'+formatter.format(d[i]['project_value'])+'</td>';
-            html += '<td>'+d[i]['region_cd']+'</td>';
-            html += '<td>'+d[i]['planned_construction_year']+'</td>';
-            html += '<td>'+d[i]['forecast_st_yr']+'</td>';
-            html += '<td>'+d[i]['workshop_cat']+'</td></tr>';
-        }
-        var tfoot = "</tbody></table>";
-        html += tfoot;
-        $(dom).append(html);
-        $('#sourceDataTable').DataTable( {
-            "pagingType": "full_numbers",
-            "columns": [
-                { "orderable": true },
-                { "orderable": true },
-                { "orderable": true },
-                { "orderable": true },
-                { "orderable": true },
-                { "orderable": true },
-                { "orderable": true },
-                { "orderable": true },
-                { "orderable": true }
-                ],
-            dom: 'Bfrtip',
-            buttons: [
-                'copyHtml5',
-                'excelHtml5',
-                'csvHtml5',
-                'pdfHtml5'
-            ]
-        });
-    }).catch(function(err){
-        alert("{*_*} Bummer, could not load onepager data!!!!"+err);
-        console.log("{*_*} Bummer, could not load onepager data!!!!"+err);
-    })
-}
+
 //Helper function to get URL Vars
 function getAllUrlParams(url) {
     // get query string from url (optional) or window
@@ -614,72 +542,6 @@ function pathClearandReload(region){
     //button.classList.add("active");
     //button.href=load;
 }
-//Map Loader Function
-function mapLoader(dom,region,mapid){
-    var centerLong = -111.693657;
-    var centerLat = 39.631301;
-    var zoom = 2500000;
-    switch(region) {
-      case 1:
-        centerLong = -112.455054;
-        centerLat = 41.343983;
-        zoom = 700000;
-        break;
-      case 2:
-        centerLong = -111.667910;
-        centerLat = 40.680967;
-        zoom = 1200000;
-        break;
-      case 3:
-        centerLong = -111.534103;
-        centerLat = 40.134867;
-        zoom = 1200000;
-        break;
-      case 4:
-        centerLong = -111.662749;
-        centerLat = 38.377228;
-        zoom = 1400000;
-        break;
-    }
-    require([
-        "esri/views/MapView",
-      "esri/widgets/Legend",
-        "esri/widgets/Expand",
-        "esri/WebMap"
-      ], function(
-        MapView, Legend, Expand, WebMap
-      ) {
-
-        /************************************************************
-         * Creates a new WebMap instance. A WebMap must reference
-         * a PortalItem ID that represents a WebMap saved to
-         * arcgis.com or an on-premise portal.
-         *
-         * To load a WebMap from an on-premise portal, set the portal
-         * url with esriConfig.portalUrl.
-         ************************************************************/
-        var webmap = new WebMap({
-          portalItem: { // autocasts as new PortalItem()
-            id: mapid //webID from https://docs.google.com/document/d/1IPLxqlAdF1VLfdAIu1w04exWKRO7hgkvsnTRlBU4z_0/
-          }
-        });
-        var view = new MapView({
-          map: webmap,  // The WebMap instance created above
-          container: dom,
-          center: [centerLong, centerLat], //edit to center base on lat and lon state center 39.631301,-111.693657
-          scale: zoom //larger number zooms out, smaller zooms in 
-        });
-        var legend = new Expand({
-              content: new Legend({
-                view: view,
-                style: "classic" // other style is 'classic'
-              }),
-              view: view,
-              expanded: true
-            });
-            view.ui.add(legend, "bottom-left");
-        });
-  }
   //A second verstio of map loader 
   function mapLoaderDynamic(dom,region,program){
     var centerLong = -111.693657;
@@ -812,12 +674,6 @@ function mapLoader(dom,region,mapid){
         });
         view.ui.add(legend, "bottom-right");
         view.ui.add(basemapToggle, "top-right");
-        //view.when(function(){	
-        //	layer.when(function(){
-        //		return layer.queryExtent();
-        //	}).then(function(response){
-        //		view.goTo(response.extent);
-        //	});
-        //});	
+        
     });
   }

@@ -191,7 +191,7 @@ function bgColorClass(year){
 }
 //Function queries PIN and returns data
 function pingPin(pinNum){
-    fetch('https://dashboard.udot.utah.gov/resource/a6xh-u32h.json?$where=pin="'+pinNum+'"').then(function(response){
+    fetch('https://opendata.arcgis.com/datasets/a7ee5e6cc85742978d25449aae6c1941_0.geojson?$where=pin="'+pinNum+'"').then(function(response){
         return response.json();
     }).then(function(data){
         //console.log(data);
@@ -333,7 +333,7 @@ function drillChart(dop,groupOrder,workshop,status){
         vizQueryFilter = "&$where=workshop_cat="+workshop+" and pin_stat_nm='"+status+"'";
       }
     }
-    var vizDataset = "https://dashboard.udot.utah.gov/resource/a6xh-u32h.json";
+    var vizDataset = "https://opendata.arcgis.com/datasets/a7ee5e6cc85742978d25449aae6c1941_0.geojson";
     var vizQueryAgg = "?$select="+groupOrder+",sum(fed_dollars),sum(state_dollars),sum(project_value)";
     var vizQueryGroup = "&$group="+groupOrder;
     var vizQueryOrder = "&$order="+groupOrder;
@@ -379,7 +379,7 @@ function drillPlotlyChart(dop,groupOrder,workshop,status){
         vizQueryFilter = "&$where=workshop_cat="+workshop+" and pin_stat_nm='"+status+"'";
       }
     }
-    var vizDataset = "https://dashboard.udot.utah.gov/resource/a6xh-u32h.json";
+    var vizDataset = "https://opendata.arcgis.com/datasets/a7ee5e6cc85742978d25449aae6c1941_0.geojson";
     var vizQueryAgg = "?$select="+groupOrder+",sum(project_value)";
     var vizQueryGroup = "&$group="+groupOrder;
     var vizQueryOrder = "&$order="+groupOrder;
@@ -414,7 +414,7 @@ function summaryTable(dop,groupOrder,workshop,status){
     } else {
         vizQueryFilter = "&$where=workshop_cat="+workshop+" and pin_stat_nm='"+status+"'";
     }
-    var vizDataset = "https://dashboard.udot.utah.gov/resource/a6xh-u32h.json";
+    var vizDataset = "https://opendata.arcgis.com/datasets/a7ee5e6cc85742978d25449aae6c1941_0.geojson";
     var vizQueryAgg = "?$select="+groupOrder+",sum(fed_dollars),sum(state_dollars),sum(project_value)";
     var vizQueryGroup = "&$group="+groupOrder;
     var vizQueryOrder = "&$order="+groupOrder;
