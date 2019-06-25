@@ -5,14 +5,21 @@
  */
 //Global Variables
 //Actual Dataset
-// var sourceDataset = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_AllProjects/MapServer/0";
-//var selectColumns ?f=pjson&outFields=PIN%2CWORKSHOP_CAT%2CSTIP_WORKSHOP%2CREGION_CD%2CCOMM_APRV_IND%2CPIN_DESC%2CPRIMARY_CONCEPT%2CPROJECT_VALUE%2CPLANNED_CONSTRUCTION_YEAR%2CPROGRAM%2CPUBLIC_DESC%2CFORECAST_ST_YR%2CFED_DOLLARS%2CSTATE_DOLLARS
+//STIP Service https://maps.udot.utah.gov/arcgis/rest/services/EPM_AllProjects/MapServer/0
 
+// var sourceDataset = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects/MapServer/0/query?f=json&returnGeometry=false";
+//EPM
+// var sourceDataset = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_AllProjects/MapServer/0/query?f=json&returnGeometry=false";
+//uplan Service
+var sourceDataset = "https://services.arcgis.com/pA2nEVnB6tquxgOW/ArcGIS/rest/services/STIP_Service/FeatureServer/0/query?f=json&returnGeometry=false";
+var selectColumns = "&outFields=PIN,WORKSHOP_CAT,STIP_WORKSHOP,REGION_CD,COMM_APRV_IND,PIN_DESC,PRIMARY_CONCEPT,PROJECT_VALUE,PLANNED_CONSTRUCTION_YEAR,PROGRAM,PUBLIC_DESC,FORECAST_ST_YR,FED_DOLLARS,STATE_DOLLARS"
+//var selectColumns= ""
 //Socrata Dataset
-var sourceDataset = "https://dashboard.udot.utah.gov/resource/d3ck-j69f.json";
-var selectColumns = "?$select=pin,workshop_cat,stip_workshop,region_cd,comm_aprv_ind,pin_desc,primary_concept,project_value,planned_construction_year,program,public_desc,forecast_st_yr,fed_dollars,state_dollars";
+// var sourceDataset = "https://dashboard.udot.utah.gov/resource/d3ck-j69f.json";
+
+// var selectColumns = "?$select=pin,workshop_cat,stip_workshop,region_cd,comm_aprv_ind,pin_desc,primary_concept,project_value,planned_construction_year,program,public_desc,forecast_st_yr,fed_dollars,state_dollars";
 //Use Limit to gurantee more than 1000 rows in dataset
- var tail = '&$limit=50000';
+// var tail = '&$limit=50000';
 //Helper currency formater
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -21,34 +28,42 @@ const formatter = new Intl.NumberFormat('en-US', {
   });
  //Query Dataset then build table
 function dataTableBuilder(pn_status,workshop,dom,region){
+    
     //Build where clause by filter
     var whereClause = whereClauseBuilder(pn_status,workshop,region);
-    var query = sourceDataset+selectColumns+whereClause+tail;
-    //query = sourceDataset+selectColumn + whereClause;
-    console.log(query);
+    //var query = sourceDataset+selectColumns+whereClause+tail;
+    var query = sourceDataset + selectColumns + whereClause;
+
     fetch(query)
-        .then(function(response){
+        .then(function(response){  
             return response.json();
         }).then(function(data){
+            // console.log(pn_status,workshop,dom,region);
+            // console.log(query);
+            // console.log(data);
+            features = data.features
+           
+            // console.log(features);
             //Where the magic occurs
-            //console.log(data); //TODO: console log in main to see format for ESRI object
             var html = '';
             var thead = '<table style="width:100%" id="dataTable'+dom.substring(1)+'" class="table table-striped table-hover">';
             thead += '<thead><tr><th>Region</th>';
             thead +='<th>PIN</th><th>PIN Description</th><th>Primary Concept</th><th>Project Value</th><th>Forecast Start Year</th></tr></thead><tbody>';
             html += thead;
-            for(var i=0; i < data.length;i++){
+            features.forEach(function(item){
+                attributes = item.attributes
+                // console.log(attributes);
                 //Populate funded rows
-                html += '<tr><td class="sorting">'+data[i]['REGION_CD']+'</td>';
+                html += '<tr><td class="sorting">'+attributes['REGION_CD']+'</td>';
                 html += '<td><button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" tooltip="Click for PIN Details" tooltip-position="top"';
-                html += ' data-target="#myModal" onClick="pingPin('+data[i]['PIN']+')">';
-                html += data[i]['PIN']+'</button></td>';
-                html += '<td><a data-toggle="modal" class="alt-link" data-target="#mapModal" onClick="showMapModal('+data[i]['PIN']+')" ';
-                html += 'tooltip="Click for Project Map" tooltip-position="top">'+data[i]['PIN_DESC']+'</a></td>';
-                html += '<td>'+data[i]['PRIMARY_CONCEPT']+'</td>';
-                html += '<td>'+formatter.format(data[i]['PROJECT_VALUE'])+'</td>';
-                html += '<td class="'+bgColorClass(data[i]['FORECAST_ST_YR'])+'">'+data[i]['FORECAST_ST_YR']+'</td></tr>';
-            }
+                html += ' data-target="#myModal" onClick="pingPin('+attributes['PIN']+')">';
+                html += attributes['PIN']+'</button></td>';
+                html += '<td><a data-toggle="modal" class="alt-link" data-target="#mapModal" onClick="showMapModal('+attributes['PIN']+')" ';
+                html += 'tooltip="Click for Project Map" tooltip-position="top">'+attributes['PIN_DESC']+'</a></td>';
+                html += '<td>'+attributes['PRIMARY_CONCEPT']+'</td>';
+                html += '<td>'+formatter.format(attributes['PROJECT_VALUE'])+'</td>';
+                html += '<td class="'+bgColorClass(attributes['FORECAST_ST_YR'])+'">'+attributes['FORECAST_ST_YR']+'</td></tr>';
+            });
             
             var tfoot = "</tbody></table>";
             html += tfoot;
@@ -72,32 +87,40 @@ function dataTableBuilder(pn_status,workshop,dom,region){
                     ]
             });
         }).catch(function(err){
-            console.log("{*_*} Shit, I should not be here!!!!");
-            console.log(query);
+            console.log("error!!!!");
+            console.log(err);
     });
 }
+
 //Drill Chart takes type parameter for table or graph
 function drillVisual(pn_status,workshop,dom,groupOrder,aggregate,type,region){
     var whereClause = whereClauseBuilder(pn_status,workshop,region);
-    let statistic=[{'statisticType': 'sum', 'onStatisticField': aggregate, 'outStatisticFieldName': 'aggregate'}] //TODO: toString?
-    var vizQueryAgg = "?$select="+groupOrder+",sum("+aggregate+") as aggregate";
-    //TODO: var vizQueryAgg = "?$select="+groupOrder+statistic;
-    var vizQueryGroup = "&$group="+groupOrder;
-    //var vizQueryGroup = "&groupByFieldsForStatistics="+groupOrder;
-    var vizQueryOrder = "&$order="+groupOrder;
-    //var vizQueryOrder =  "&orderByFields=" +groupOrder;
+    let statistic= `[{'statisticType': 'SUM', 'onStatisticField': '${aggregate}', 'outStatisticFieldName': 'aggregate'}]` 
+    // console.log(statistic);
+   // var vizQueryAgg = "?$select="+groupOrder+",sum("+aggregate+") as aggregate";
+    var vizQueryAgg = `&outStatistics=${statistic}`;
+    //var vizQueryGroup = "&$group="+groupOrder;
+    var vizQueryGroup = `&groupByFieldsForStatistics=${groupOrder}`;
+    //var vizQueryOrder = "&$order="+groupOrder;
+    var vizQueryOrder =  `&orderByFields=${groupOrder}`;
     var url = sourceDataset+vizQueryAgg+whereClause+vizQueryGroup+vizQueryOrder;
     fetch(url).then(function(response){
         return response.json();
     }).then(function(data){
+        features = data.features;
+        console.log(data)
         //Check type and draw whats requested
+        //  console.log(pn_status,workshop,dom,groupOrder,aggregate,type,region);
+        //  console.log(url)
+        // console.log(features)
         if(type === 'chart'){
             var x = [];
             var y = [];
-            for(var i = 0; i < data.length; i++){
-                x.push(data[i][groupOrder]);
-                y.push(formatter.format(data[i]["aggregate"])); //TODO
-            }
+            features.forEach(function(item){
+                attributes = item.attributes;
+                x.push(attributes[groupOrder]);
+                y.push(formatter.format(attributes["aggregate"])); //TODO
+            });
             var trace1 = {
                 x: x,
                 y: y,
@@ -112,15 +135,16 @@ function drillVisual(pn_status,workshop,dom,groupOrder,aggregate,type,region){
         } else if(type === 'table'){
             var col = (groupOrder === "REGION_CD")?"Region":"Year";
             var html = '<table class="table"><thead><tr><th>'+col+'</th><th>Dollars</th></thead><tbody>';
-            for(var i=0; i < data.length;i++){
+            features.forEach(function(item){
+                attributes = item.attributes;
                 if(groupOrder === "forecast_st_yr") {
-                    html += '<tr><td>'+data[i][groupOrder]+'</td>';
-                    html += '<td class="'+bgColorClass(data[i][groupOrder])+'">'+formatter.format(data[i]['aggregate'])+'</td></tr>';
+                    html += '<tr><td>'+attributes[groupOrder]+'</td>';
+                    html += '<td class="'+bgColorClass(attributes[groupOrder])+'">'+formatter.format(attributes['aggregate'])+'</td></tr>';
                 } else {
-                    html += '<tr><td>'+data[i][groupOrder]+'</td>';
-                    html += '<td>'+formatter.format(data[i]['aggregate'])+'</td></tr>';
+                    html += '<tr><td>'+attributes[groupOrder]+'</td>';
+                    html += '<td>'+formatter.format(attributes['aggregate'])+'</td></tr>';
                 }
-            }
+            });
             html += '</tbody></table>';
             document.getElementById(dom).innerHTML = html;
         }
@@ -137,7 +161,7 @@ function whereClauseBuilder(pn_status,workshop,region) {
     if(region === 0 || region === undefined){
         region = "";
     } else {
-        region = "AND REGION_CD="+region;
+        region = `AND REGION_CD='${region}'`;
     }
     switch(pn_status){
         case "unfunded":
@@ -153,7 +177,7 @@ function whereClauseBuilder(pn_status,workshop,region) {
             whereClause = "&where=PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded') "+workshop+region;
         break;
         case "construction":
-            whereClause = "&where=PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete') "+workshop+region;
+            whereClause = "&where=PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete')"+workshop+region;
         break;
     }
     return whereClause;
@@ -194,75 +218,78 @@ function bgColorClass(year){
 }
 //Function queries PIN and returns data
 function pingPin(pinNum){
-    fetch(sourceDataset+'?$where=pin="'+pinNum+'"').then(function(response){
+    let url = sourceDataset+'&outFields=*&where=PIN='+pinNum
+    // console.log(url)
+    fetch(url).then(function(response){
         return response.json();
     }).then(function(data){
-        //console.log(data);
+        let feature = data.features[0].attributes;
+        // console.log(feature);
         $('#pinNum').empty();
         $('#PinDetails').empty();
-        $('#pinNum').html("PIN: "+data[0]['pin']+" - "+data[0]['pin_desc']);
-        var pinDetails = "Planned Year: <strong>"+data[0]['planned_construction_year']+"</strong>";
-        pinDetails += "<br />Funding Program: <strong>"+data[0]['program']+"</strong>";
-        pinDetails += "<br />Public Desctiption: <i>"+data[0]['public_desc']+"</i>";
-        pinDetails += "<br />Forcast Start Year: <strong>"+data[0]['forecast_st_yr']+"</strong>";
-        pinDetails += "<br />Federal Dollars: <strong>"+formatter.format(data[0]['fed_dollars'])+"</strong>";
-        pinDetails += "<br />State Dollars: <strong>"+formatter.format(data[0]['state_dollars'])+"</strong>";
+        $('#pinNum').html("PIN: "+feature['PIN']+" - "+feature['PIN_DESC']);
+        var pinDetails = "Planned Year: <strong>"+feature['PLANNED_CONSTRUCTION_YEAR']+"</strong>";
+        pinDetails += "<br />Funding Program: <strong>"+feature['PROGRAM']+"</strong>";
+        pinDetails += "<br />Public Desctiption: <i>"+feature['PUBLIC_DESC']+"</i>";
+        pinDetails += "<br />Forcast Start Year: <strong>"+feature['FORECAST_ST_YR']+"</strong>";
+        pinDetails += "<br />Federal Dollars: <strong>"+formatter.format(feature['FED_DOLLARS'])+"</strong>";
+        pinDetails += "<br />State Dollars: <strong>"+formatter.format(feature['STATE_DOLLARS'])+"</strong>";
         //Timeline
         //Stip Workwhip approved date if exists
         var projectDates = [];
         var dates;
-        if(data[0]['stip_workshop_approved_dt'] !== undefined){
+        if(feature['STIP_WORKSHOP_APPROVED_DT'] !== undefined){
             //pinDetails += "<br />STIP Approved Date: <strong>"+dateTransform(data[0]['stip_workshop_approved_dt'])+"</strong>";
             dates = {
-                0:"STIP Approved Date",1:dateTransform(data[0]['stip_workshop_approved_dt'])
+                0:"STIP Approved Date",1:dateTransform(feature['STIP_WORKSHOP_APPROVED_DT'])
             };
             projectDates.push(dates);
         }
         //Adversise data if exsists, else sumbmited for adverstise if exists
-        if(data[0]['advertise_date'] !== undefined){
+        if(feature['ADVERTISE_DATE'] !== undefined){
             //pinDetails += "<br />Advertise Date: <strong>"+dateTransform(data[0]['advertise_date'])+"</strong>";
             dates = {
-                0:"Advertise Date",1:dateTransform(data[0]['advertise_date'])
+                0:"Advertise Date",1:dateTransform(feature['ADVERTISE_DATE'])
             };
             projectDates.push(dates);
-        } else if (data[0]['submit_for_advertise_date'] !== undefined){
+        } else if (feature['SUBMIT_FOR_ADVERTISE_DATE'] !== undefined){
             //pinDetails += "<br />Submit for Advertise Date: <strong>"+dateTransform(data[0]['submit_for_advertise_date'])+"</strong>";
             dates = {
-                0:"Submit for Advertise Date",1:dateTransform(data[0]['submit_for_advertise_date'])
+                0:"Submit for Advertise Date",1:dateTransform(feature['SUBMIT_FOR_ADVERTISE_DATE'])
             };
             projectDates.push(dates);
         }
         //Start date if exists, else projected start data if existis, else epm plan start date if exisits
-        if(data[0]['start_date'] !== undefined){
+        if(feature['START_DATE'] !== undefined){
             //pinDetails += "<br />Start Date: <strong>"+dateTransform(data[0]['start_date'])+"</strong>";
             dates = {
-                0:"Start Date",1:dateTransform(data[0]['start_date'])
+                0:"Start Date",1:dateTransform(feature['START_DATE'])
             };
             projectDates.push(dates);
-        } else if (data[0]['projected_start_date'] !== undefined){
+        } else if (feature['PROJECTED_START_DATE'] !== undefined){
             //pinDetails += "<br />Projected Start Date: <strong>"+dateTransform(data[0]['projected_start_date'])+"</strong>";
             dates = {
-                0:"Projected Start Date",1:dateTransform(data[0]['projected_start_date'])
+                0:"Projected Start Date",1:dateTransform(feature['PROJECTED_START_DATE'])
             };
             projectDates.push(dates);
-        } else if (data[0]['epm_plan_start_date'] !== undefined){
+        } else if (feature['EPM_PLAN_START_DATE'] !== undefined){
             //pinDetails += "<br />EPM Planed Start Date: <strong>"+dateTransform(data[0]['epm_plan_start_date'])+"</strong>";
             dates = {
-                0:"EPM Planed Start Date",1:dateTransform(data[0]['epm_plan_start_date'])
+                0:"EPM Planed Start Date",1:dateTransform(feature['EPM_PLAN_START_DATE'])
             };
             projectDates.push(dates);
         }
         //Subtatially complete date if exists, else epm plan end date if exists
-        if(data[0]['substantially_complete_date'] !== undefined){
+        if(feature['SUBSTANTIALLY_COMPLETE_DATE'] !== undefined){
             //pinDetails += "<br />Substantially Complete Date: <strong>"+dateTransform(data[0]['substantially_complete_date'])+"</strong>";
             dates = {
-                0:"Substantially Complete Date",1:dateTransform(data[0]['substantially_complete_date'])
+                0:"Substantially Complete Date",1:dateTransform(feature['SUBSTANTIALLY_COMPLETE_DATE'])
             };
             projectDates.push(dates);
-        } else if (data[0]['epm_plan_end_date'] !== undefined){
+        } else if (feature['EPM_PLAN_END_DATE'] !== undefined){
             //pinDetails += "<br />EPM Plan End Date: <strong>"+dateTransform(data[0]['epm_plan_end_date'])+"</strong>";
             dates = {
-                0:"EPM Plan End Date",1:dateTransform(data[0]['epm_plan_end_date'])
+                0:"EPM Plan End Date",1:dateTransform(feature['EPM_PLAN_END_DATE'])
             };
             projectDates.push(dates);
         }
@@ -272,7 +299,7 @@ function pingPin(pinNum){
         }
         //One pager link
         $('#PinDetails').html(pinDetails);
-        onePagerLink(data[0]['pin'],data[0]['region_cd'],'#programBriefingButton');
+        onePagerLink(feature['PIN'],feature['REGION_CD'],'#programBriefingButton');
     }).catch (function(err) {
         console.log("Error on PingPin:"+err);
     });
@@ -299,16 +326,19 @@ function timeline(projectDates){
     timeline += "</ul></div>";
     return timeline;
 }
-//Function to build one pager link 
+//Function to build one pager link TODO: check with leonel?
 function onePagerLink(pin,region,dom) {
     var onePagerButton = '<a href="#" class="btn btn-primary" disabled>No Program Briefing</a>';
     $(dom).empty();
     fetch('data/onepagers.json').then(function(response){
         return response.json();
     }).then(function(data){
-        //console.log(data);
+        console.log(pin,region,dom);
+        console.log(data);
         for(var i=0;i<data.length;i++){
-            if(data[i]['Region']=== region && data[i]['PIN']=== pin){
+             console.log(data[i])
+            if(data[i]['Region']=== region.toString() && data[i]['PIN']=== pin.toString()){
+                console.log("hi")
                 onePagerButton = '<a href="http://maps.udot.utah.gov/wadocuments/Apps/ProgramBriefing/'+region+"/"+pin+'.pdf" class="btn btn-primary" target="new">Project Briefing</a>';
                 break;
             }
@@ -316,33 +346,38 @@ function onePagerLink(pin,region,dom) {
         //console.log(onePagerButton);
         $(dom).append(onePagerButton);
     }).catch(function(err){
-        console.log(err+" {*_*} Shit, I should not be here!!!!");
+        console.log(err+"error");
     });
 }
 //Documentation Functions
 //Summarize Categories in dataset
 function workshopCategories(dom){
-    var s = '?$select=workshop_cat,count(pin) as pins&$group=workshop_cat';
-    fetch(sourceDataset+s).then(function(response) { 
+    let stats = `[{"statisticType":"COUNT", "onStatisticField": "WORKSHOP_CAT", "outStatisticFieldName": "pins"}]`
+    let url = sourceDataset + `&outStatistics=${stats}&groupByFieldsForStatistics=WORKSHOP_CAT`;
+    fetch(url).then(function(response) { 
         // Convert to JSON
+      
         return response.json();
-    }).then(function(j) {
+    }).then(function(data) {
+        let features = data.features;
+        // console.log(features);
         var html = '';
         var thead = '<table style="width:100%" id="workshopsDataTable" class="table table-striped table-hover">';
         thead += '<thead><tr><th>Workshop</th>';
         thead +='<th>PINs</th></tr></thead><tbody>';
         html += thead;
-        for(var i=0; i < j.length;i++){
+        features.forEach(function(item){
             //Populate rows
-            if(j[i]['workshop_cat'] == null){
+            let attributes = item.attributes
+            if(attributes['WORKSHOP_CAT'] == null){
                 html += '<tr><td class="text-left"><button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#workshopPinsModal" ';
                 html += 'onclick="pingWorkshop('+"'No Category'"+','+"'#WorkshopPinDetails'"+')">No Category</button></td>';    
             } else {
                 html += '<tr><td class="text-left"><button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#workshopPinsModal" '
-                html += 'onclick="pingWorkshop('+"'"+j[i]['workshop_cat']+"'"+','+"'#WorkshopPinDetails'"+')">'+j[i]['workshop_cat']+'</button></td>';
+                html += 'onclick="pingWorkshop('+"'"+attributes['WORKSHOP_CAT']+"'"+','+"'#WorkshopPinDetails'"+')">'+attributes['WORKSHOP_CAT']+'</button></td>';
             }
-            html += '<td class="sorting">'+j[i]['pins']+'</td></tr>';
-        }
+            html += '<td class="sorting">'+attributes['pins']+'</td></tr>';
+        });
         var tfoot = "</tbody></table>";
         html += tfoot;
         $(dom).append(html);
@@ -361,28 +396,35 @@ function workshopCategories(dom){
             ]
         });
     }).catch(function(err){
-        console.log("{*_*} Shit, I should not be here!!!!");
-        console.log(sourceDataset+s);
+        console.log("{*_*} error!!!!");
+        console.log(url);
     });
 }
 //Function to ping workship and get list of pin details 
 function pingWorkshop(workshop,dom){
+    // console.log(workshop)
+    let url =`${sourceDataset}&outFields=PIN,PIN_DESC,REGION_CD,PIN_STAT_NM&where=WORKSHOP_CAT='${workshop}'`
     var s = "?$select=pin,pin_desc,region_cd,pin_stat_nm&$where=workshop_cat='"+workshop+"'";
-    fetch(sourceDataset+s).then(function(response){
+    // console.log(url)
+    fetch(url).then(function(response){
+        // console.log(response)
         return response.json();
-    }).then(function(j){
+    }).then(function(data){
+        // console.log(url)
+        let features = data.features;
         var html = '';
         var thead = '<table style="width:100%" id="workshopPingTable" class="table table-striped table-hover">';
         thead += '<thead><tr><th class="text-left">PINs</th>';
         thead +='<th>Pin Description</th><th>Pin Status</th><th>Region</th></tr></thead><tbody>';
         html += thead;
-        for(var i=0; i < j.length;i++){
+        features.forEach(function(item){
+            let attributes = item.attributes
             //Populate rows
-            html += '<tr><td>'+j[i]['pin']+'</td>';
-            html += '<td class="text-left">'+j[i]['pin_desc']+'</td>';
-            html += '<td>'+j[i]['pin_stat_nm']+'</td>';
-            html += '<td>'+j[i]['region_cd']+'</td></tr>';
-        }
+            html += '<tr><td>'+attributes['PIN']+'</td>';
+            html += '<td class="text-left">'+attributes['PIN_DESC']+'</td>';
+            html += '<td>'+attributes['PIN_STAT_NM']+'</td>';
+            html += '<td>'+attributes['REGION_CD']+'</td></tr>';
+        });
         var tfoot = "</tbody></table>";
         html += tfoot;
         $('#workshopName').empty();
@@ -404,21 +446,25 @@ function pingWorkshop(workshop,dom){
         }
         $('#workshopName').append(workshop);
     }).catch(function(err){
-        console.log("{*_*} Bummer, who ever put this together should get fired!!!!"+err);
+        console.log("{*_*}"+err);
     });
 }
 //One pager summary table
 function onepagerSummaryTable (dom){
     fetch('data/onepagers.json').then(function(response){
         return response.json();
-    }).then(function(j){
-        //console.log(j);
-        var OnePagers = j;
+    }).then(function(onePagers){
+        // console.log(onePagers);
         //console.log(OnePagers[3]['PIN']);
-        var s = '?$select=pin,region_cd,workshop_cat&$limit=1000000';
-        fetch(sourceDataset+s).then(function(response){
+        let url = sourceDataset+'&outFields=PIN,REGION_CD,WORKSHOP_CAT&where=1=1'
+        // console.log(url)
+        // var s = '?$select=pin,region_cd,workshop_cat&$limit=1000000';
+        fetch(url).then(function(response){
+           
             return response.json();
-        }).then(function(d){
+        }).then(function(data){
+            // console.log(data);
+            features = data.features
             // console.log(OnePagers[7]['PIN']);
             // console.log(d[3]['pin']);
             var flag = 0;
@@ -427,26 +473,27 @@ function onepagerSummaryTable (dom){
             thead += '<thead><tr><th class="text-left">Workshop</th>';
             thead +='<th>Region</th><th>PIN</th><th>One Pager</th></tr></thead><tbody>';
             html += thead;
-            for(var i = 0;i < d.length;i++){
-                html += '<tr><td class="text-left">'+d[i]['workshop_cat']+'</td>';
-                html += '<td>'+d[i]['region_cd']+'</td>';
-                html += '<td>'+d[i]['pin']+'</td>';
+            features.forEach(function(item){
+                attributes = item.attributes;
+                html += '<tr><td class="text-left">'+attributes['WORKSHOP_CAT']+'</td>';
+                html += '<td>'+attributes['REGION_CD']+'</td>';
+                html += '<td>'+attributes['PIN']+'</td>';
                 //Reset the flag
                 flag = 0;
-                for(var l = 0; l < OnePagers.length; l++){
+                for(var l = 0; l < onePagers.length; l++){
                     //Search for pin in onepager json file, if found flip the flag..
-                    if(OnePagers[l]['PIN'] === d[i]['pin']){
+                    if(onePagers[l]['PIN'] === attributes['PIN']){
                         flag =1;
                         break;
                     }
                 }
                 if(flag === 1){
-                    html += '<td><a class="text-info" target="new" href="http://maps.udot.utah.gov/wadocuments/Apps/ProgramBriefing/'+d[i]['region_cd']+"/"+d[i]['pin']+'.pdf">Yes</a></td></tr>';
+                    html += '<td><a class="text-info" target="new" href="http://maps.udot.utah.gov/wadocuments/Apps/ProgramBriefing/'+attributes['REGION_CD']+"/"+attributes['PIN']+'.pdf">Yes</a></td></tr>';
                 } else{
                     html += '<td>No</td></tr>';
                 }
                 
-            }
+            });
             var tfoot = "</tbody></table>";
             html += tfoot;
             $(dom).append(html);
@@ -469,7 +516,62 @@ function onepagerSummaryTable (dom){
         console.log("{*_*} Bummer, could not load onepager data!!!!"+err);
     });
 }
-
+//Show entire dataset in app documentation
+function printSourceData(dom){
+    let url = sourceDataset + "&outFields=PIN,PIN_DESC,PIN_STAT_NM,PROJ_LOC ,PROJECT_VALUE,REGION_CD,PLANNED_CONSTRUCTION_YEAR,FORECAST_ST_YR,WORKSHOP_CAT&where=1=1"
+    // var s = "?$select=pin,pin_desc,pin_stat_nm,proj_loc,project_value,region_cd,planned_construction_year,forecast_st_yr,workshop_cat&$limit=1000000"
+    fetch(url).then(function(response){
+        return response.json();
+    }).then(function(data){
+        features = data.features;
+        // console.log(url)
+        // console.log(data);
+        var html = '';
+        var thead = '<table style="width:100%" id="sourceDataTable" class="table table-striped table-hover">';
+        thead += '<thead><tr><th>PIN</th><th>PIN Description</th><th>PIN Status</th><th>Project Location</th><th>Project Value</th>';
+        thead +='<th>Region</th><th>Planned Construction Year</th><th>Forecast Start Year</th><th>Workshop Category</th></tr></thead><tbody>';
+        html += thead;
+        features.forEach(function(item){
+            let attributes = item.attributes;
+            html += '<tr><td>'+attributes['PIN']+'</td>';
+            html += '<td class="text-left">'+attributes['PIN_DESC']+'</td>';
+            html += '<td>'+attributes['PIN_STAT_NM']+'</td>';
+            html += '<td>'+attributes['PROJ_LOC']+'</td>';
+            html += '<td>'+formatter.format(attributes['PROJECT_VALUE'])+'</td>';
+            html += '<td>'+attributes['REGION_CD']+'</td>';
+            html += '<td>'+attributes['PLANNED_CONSTRUCTION_YEAR']+'</td>';
+            html += '<td>'+attributes['FORECAST_ST_YR']+'</td>';
+            html += '<td>'+attributes['WORKSHOP_CAT']+'</td></tr>';
+        });
+        var tfoot = "</tbody></table>";
+        html += tfoot;
+        $(dom).append(html);
+        $('#sourceDataTable').DataTable( {
+            "pagingType": "full_numbers",
+            "columns": [
+                { "orderable": true },
+                { "orderable": true },
+                { "orderable": true },
+                { "orderable": true },
+                { "orderable": true },
+                { "orderable": true },
+                { "orderable": true },
+                { "orderable": true },
+                { "orderable": true }
+                ],
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ]
+        });
+    }).catch(function(err){
+        alert("{*_*} Bummer, could not load onepager data!!!!"+err);
+        console.log("{*_*} Bummer, could not load onepager data!!!!"+err);
+    })
+}
 //Helper function to get URL Vars
 function getAllUrlParams(url) {
     // get query string from url (optional) or window
@@ -542,7 +644,7 @@ function pathClearandReload(region){
     //button.classList.add("active");
     //button.href=load;
 }
-  //A second verstio of map loader 
+  //A second version of map loader 
   function mapLoaderDynamic(dom,region,program){
     var centerLong = -111.693657;
     var centerLat = 39.631301;
