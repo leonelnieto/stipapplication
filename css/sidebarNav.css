@@ -123,6 +123,7 @@ a:focus {
 #sidebarNav ul li a:hover {
     color: #5a85c6;
     background: #fff;
+    cursor: pointer;
 }
 
 #sidebarNav ul li.active>a,

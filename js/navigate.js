@@ -24,3 +24,12 @@ sections = {
     ATMSAsset:["'ATMS Asset Management'", 22],
     Other:["'Other'", 24]
 }
+
+for(i=0;i<document.querySelectorAll("#sidebarNav li").length;i++){
+    document.querySelectorAll("#sidebarNav li a")[i].addEventListener("click", function(event){
+        if(event.target.attributes.section.value !== undefined){
+            var section = event.target.attributes.section.value;
+            draw(sections[section][0], sections[section][1]);
+        }
+    })
+}
