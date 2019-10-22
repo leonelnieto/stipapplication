@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-let STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects/MapServer/0" //live data
-//let STIPData = "https://services.arcgis.com/pA2nEVnB6tquxgOW/ArcGIS/rest/services/STIP_Service/FeatureServer/0/" //test data
+let STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects/MapServer/0/" //live data
+//let STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects2019/MapServer/0/" //test data
 let sourceDataset = STIPData + "query?f=json&returnGeometry=false";
 let selectColumns = "&outFields=PIN,WORKSHOP_CAT,STIP_WORKSHOP,PROJECT_MANAGER,REGION_CD,COMM_APRV_IND,PIN_DESC,PRIMARY_CONCEPT,PROJECT_VALUE,PLANNED_CONSTRUCTION_YEAR,PROJECTED_START_DATE,PROGRAM,PUBLIC_DESC,FORECAST_ST_YR,FED_DOLLARS,STATE_DOLLARS"
 //Helper currency formater
@@ -17,10 +17,10 @@ const formatter = new Intl.NumberFormat('en-US', {
  
  //Query Dataset then build table
 function dataTableBuilder(pn_status,workshop,dom,region){
-    console.log(pn_status)
+    
     //Build where clause by filter
     var whereClause = whereClauseBuilder(pn_status,workshop,region);
-    //var query = sourceDataset+selectColumns+whereClause+tail;
+    
     var query = sourceDataset + selectColumns + whereClause;
     
     //fetch one page data 
@@ -32,8 +32,10 @@ function dataTableBuilder(pn_status,workshop,dom,region){
         .then(function(response){  
             return response.json();
         }).then(function(data){
+       
+            
             features = data.features
-             console.log(features);
+           
             
             //Where the magic occurs
             var html = '';
@@ -82,13 +84,13 @@ function dataTableBuilder(pn_status,workshop,dom,region){
                         'pdfHtml5'
                     ]
             });
-        })
-    //     .catch(function(err){
-    //         console.log(err);
-    // });
+        }).catch(function(err){
+            console.log(err);
+        });
 });
 
 }
+
 
 function onePageButtons(pin,region,data) {
     //var onePagerButton = '<a href="#" class="btn btn-primary" disabled>No Program Briefing</a>';
@@ -104,7 +106,7 @@ function onePageButtons(pin,region,data) {
 
 //Drill Chart takes type parameter for table or graph
 function drillVisual(pn_status,workshop,dom,groupOrder,aggregate,type,region){
-    // console.log(pn_status,workshop,dom,groupOrder,aggregate,type,region);
+   
     var whereClause = whereClauseBuilder(pn_status,workshop,region);
     let statistic= `[{'statisticType': 'SUM', 'onStatisticField': '${aggregate}', 'outStatisticFieldName': 'aggregate'}]` 
     var vizQueryAgg = `&outStatistics=${statistic}`;
@@ -115,6 +117,7 @@ function drillVisual(pn_status,workshop,dom,groupOrder,aggregate,type,region){
         return response.json();
     }).then(function(data){
         features = data.features;
+        console.log(data);
         //Check type and draw whats requested
         if(type === 'chart'){
             var x = [];
@@ -223,114 +226,6 @@ function bgColorClass(year){
   }
   return bg;
 }
-
-//Function to build one pager link 
-// function onePagerLink(pin,region,dom) {
-//     var onePagerButton = '<a href="#" class="btn btn-primary" disabled>No Program Briefing</a>';
-//     $(dom).empty();
-//     fetch('data/onepagers.json').then(function(response){
-//         return response.json();
-//     }).then(function(j){
-//         //console.log(j);
-//         for(var i=0;i<j.length;i++){
-//             if(j[i]['Region']=== region && j[i]['PIN']=== pin){
-//                 onePagerButton = '<a href="http://maps.udot.utah.gov/wadocuments/Apps/ProgramBriefing/'+region+"/"+pin+'.pdf" class="btn btn-primary" target="new">Project Briefing</a>';
-//                 break;
-//             }
-//         }
-//         //console.log(onePagerButton);
-//         $(dom).append(onePagerButton);
-//     }).catch(function(err){
-//         console.log(err+" {*_*} Shit, I should not be here!!!!");
-//     });
-// }
-
-
-//Function queries PIN and returns data
-// function pingPin(pinNum){
-//     fetch(sourceDataset+'?$where=pin="'+pinNum+'"').then(function(response){
-//         return response.json();
-//     }).then(function(data){
-//          console.log(data);
-//         $('#pinNum').empty();
-//         $('#PinDetails').empty();
-//         $('#pinNum').html("PIN: "+data[0]['pin']+" - "+data[0]['pin_desc']);
-//         var pinDetails = "Planned Year: <strong>"+data[0]['planned_construction_year']+"</strong>";
-//         pinDetails += "<br />Funding Program: <strong>"+data[0]['program']+"</strong>";
-//         pinDetails += "<br />Public Desctiption: <i>"+data[0]['public_desc']+"</i>";
-//         pinDetails += "<br />Forcast Start Year: <strong>"+data[0]['forecast_st_yr']+"</strong>";
-//         pinDetails += "<br />Federal Dollars: <strong>"+formatter.format(data[0]['fed_dollars'])+"</strong>";
-//         pinDetails += "<br />State Dollars: <strong>"+formatter.format(data[0]['state_dollars'])+"</strong>";
-//         //Timeline
-//         //Stip Workwhip approved date if exists
-//         var projectDates = [];
-//         var dates;
-//         if(data[0]['stip_workshop_approved_dt'] !== undefined){
-//             //pinDetails += "<br />STIP Approved Date: <strong>"+dateTransform(data[0]['stip_workshop_approved_dt'])+"</strong>";
-//             dates = {
-//                 0:"STIP Approved Date",1:dateTransform(data[0]['stip_workshop_approved_dt'])
-//             };
-//             projectDates.push(dates);
-//         }
-//         //Adversise data if exsists, else sumbmited for adverstise if exists
-//         if(data[0]['advertise_date'] !== undefined){
-//             //pinDetails += "<br />Advertise Date: <strong>"+dateTransform(data[0]['advertise_date'])+"</strong>";
-//             dates = {
-//                 0:"Advertise Date",1:dateTransform(data[0]['advertise_date'])
-//             };
-//             projectDates.push(dates);
-//         } else if (data[0]['submit_for_advertise_date'] !== undefined){
-//             //pinDetails += "<br />Submit for Advertise Date: <strong>"+dateTransform(data[0]['submit_for_advertise_date'])+"</strong>";
-//             dates = {
-//                 0:"Submit for Advertise Date",1:dateTransform(data[0]['submit_for_advertise_date'])
-//             };
-//             projectDates.push(dates);
-//         }
-//         //Start date if exists, else projected start data if existis, else epm plan start date if exisits
-//         if(data[0]['start_date'] !== undefined){
-//             //pinDetails += "<br />Start Date: <strong>"+dateTransform(data[0]['start_date'])+"</strong>";
-//             dates = {
-//                 0:"Start Date",1:dateTransform(data[0]['start_date'])
-//             };
-//             projectDates.push(dates);
-//         } else if (data[0]['projected_start_date'] !== undefined){
-//             //pinDetails += "<br />Projected Start Date: <strong>"+dateTransform(data[0]['projected_start_date'])+"</strong>";
-//             dates = {
-//                 0:"Projected Start Date",1:dateTransform(data[0]['projected_start_date'])
-//             };
-//             projectDates.push(dates);
-//         } else if (data[0]['epm_plan_start_date'] !== undefined){
-//             //pinDetails += "<br />EPM Planed Start Date: <strong>"+dateTransform(data[0]['epm_plan_start_date'])+"</strong>";
-//             dates = {
-//                 0:"EPM Planed Start Date",1:dateTransform(data[0]['epm_plan_start_date'])
-//             };
-//             projectDates.push(dates);
-//         }
-//         //Subtatially complete date if exists, else epm plan end date if exists
-//         if(data[0]['substantially_complete_date'] !== undefined){
-//             //pinDetails += "<br />Substantially Complete Date: <strong>"+dateTransform(data[0]['substantially_complete_date'])+"</strong>";
-//             dates = {
-//                 0:"Substantially Complete Date",1:dateTransform(data[0]['substantially_complete_date'])
-//             };
-//             projectDates.push(dates);
-//         } else if (data[0]['epm_plan_end_date'] !== undefined){
-//             //pinDetails += "<br />EPM Plan End Date: <strong>"+dateTransform(data[0]['epm_plan_end_date'])+"</strong>";
-//             dates = {
-//                 0:"EPM Plan End Date",1:dateTransform(data[0]['epm_plan_end_date'])
-//             };
-//             projectDates.push(dates);
-//         }
-//         //console.log(projectDates.length);
-//         if(projectDates.length  !== 0){
-//             pinDetails += timeline(projectDates);
-//         }
-//         //One pager link
-//         $('#PinDetails').html(pinDetails);
-//         onePagerLink(data[0]['pin'],data[0]['region_cd'],'#programBriefingButton');
-//     }).catch (function(err) {
-//         console.log("Error on PingPin:"+err);
-//     });
-// }
 
 //Function to show map when pin description is clicked
 function showMapModal(pin) {
@@ -789,9 +684,10 @@ function pathClearandReload(region){
             "esri/views/MapView",
             "esri/widgets/Legend",
             "esri/layers/FeatureLayer",
+            "esri/widgets/Expand",
             "esri/widgets/BasemapToggle"
         ],
-        function (Map, MapView, Legend, FeatureLayer, BasemapToggle) {
+        function (Map, MapView, Legend, FeatureLayer, Expand, BasemapToggle) {
         //symbols for year lines
         const year2018 = {type: "simple-line", color: "#A87000", width: 4, style: "solid"};
         const year2019 = {type: "simple-line", color: "#4ce600", width: 4, style: "solid"};
@@ -853,6 +749,9 @@ function pathClearandReload(region){
                         "STIP_WORKSHOP_YR = '2019' AND (WORKSHOP_CAT = 'Bridge Preservation' OR WORKSHOP_CAT = 'Bridge Replacement and Rehabilitation')" //29 All Structures
                     ]  
         
+                    // Expand widget for the queryFeature div
+    	let html = makeQueryForm()
+        $('#map').append(html);
          let layer = new FeatureLayer({
             url: STIPData, // EPM STIP Service
             renderer: STIPRender, //this gives the line styles
@@ -883,10 +782,79 @@ function pathClearandReload(region){
             view: view,
             nextBasemap: "satellite"
         });
+        const filterProjects = new Expand({
+	    	expandIconClass: "esri-icon-filter",
+		    expandTooltip: "Query Projects",
+	    	expanded: false,
+	    	group: "top-left",
+	    	view: view,
+	    	content: document.getElementById("queryProjects")
+        });
+        view.ui.add(filterProjects, "top-left")
         view.ui.add(legend, "bottom-right");
         view.ui.add(basemapToggle, "top-right");
+
+        getFeatures(layer).then(function(data){
+            let features = data.features;
+            populateDropdowns(features);
+        });
         
     });
+  }
+
+  function populateDropdowns(features){
+    features.forEach(function(feature){
+        console.log(feature.attributes);
+    });
+  }
+
+  function getFeatures(layer) {
+    let query = layer.createQuery();
+    return layer.queryFeatures(query);
+}
+
+  function makeQueryForm(){
+      return `<div id="queryProjects" class="editArea-container">
+      <div id="queryDiv" style="display:block;">
+          <h4 class="list-heading">Filter</h4>
+          <div id="queryDiv" class="esri-component esri-widget ">
+              <div id="queryForm" class="esri-component scroller esri-widget esri-feature-form">
+                  <form class="esri-feature-form__form">
+
+                      <label class="esri-feature-form__label">County
+                          <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
+                              id="queryCounty" maxlength="">
+                              <option value="0">Select a County</option>
+                          </select>
+                      </label>
+                      <label class="esri-feature-form__label">Municipality
+                        <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
+                            id="queryMuni" maxlength="">
+                            <option value="0">Select a Municipality</option>
+                        </select>
+                      </label>
+                      <label class="esri-feature-form__label">Legislative District
+                        <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
+                            id="queryMuni" maxlength="">
+                            <option value="0">Select a District</option>
+                        </select>
+                      </label>
+                      <label class="esri-feature-form__label">PIN Status
+                        <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
+                            id="queryMuni" maxlength="">
+                            <option value="0">Select a Status</option>
+                        </select>
+                      </label>
+
+                  </form>
+                  <input type="submit" class="esri-button" value="Filter Projects" id="query">
+                  <input type="submit" class="esri-button" value="Reset Filter" id="resetQuery">
+              </div>
+              
+          </div>
+
+      </div>
+  </div>`
   }
 
   console.log(document.querySelectorAll(".regionFilter"))

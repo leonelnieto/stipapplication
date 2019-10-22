@@ -237,3 +237,32 @@ and open the template in the editor.
 #refreshData{
   width: 20vw;
 }
+
+.editArea-container{
+  background: #fff;
+  font-family: "Avenir Next W00", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1em;
+  overflow: auto; 
+  padding: 0 6px 0 6px;
+  max-width: 350px; 
+  min-width: 250px;
+  z-index:2;
+  max-height: 400px;
+}
+
+.list-heading {
+  font-weight: normal;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #323232;
+}
+
+.esri-widget{
+  line-height:1em;
+}
+
+.esri-button {
+  margin-bottom: 7px;
+  width: 100%;
+  height: 25px;
+}
