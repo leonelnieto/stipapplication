@@ -889,4 +889,13 @@ function pathClearandReload(region){
     });
   }
 
-  console.log(document.querySelectorAll(".regionFilter"))
+for(i=0;i<document.querySelectorAll(".filterregion").length;i++){
+    document.querySelectorAll(".filterregion")[i].addEventListener("click", function(event){
+        if(event.target.attributes.region.value === "all"){
+            window.location = window.location.pathname;
+        }
+        else{
+            pathClearandReload(event.target.attributes.region.value);
+        }
+    });
+}
