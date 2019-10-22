@@ -20,7 +20,7 @@
     <!-- Datatable CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-flash-1.5.4/b-html5-1.5.4/datatables.css">
     <!--Map Loader Required Css-->
-    <link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/css/main.css">
     <!-- Custom styles for this template -->
     <link href="css/sidebarNav.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
@@ -171,16 +171,16 @@
                         <a class="nav-link" id="pills-unfunded-tab" data-toggle="pill" href="#pills-unfunded" role="tab" aria-controls="pills-unfunded" aria-selected="false" onclick="setTimeout(function(){drawUnfunded('project_value')},500)">Unfunded</a>
                     </li>-->
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false" onclick="setTimeout(function(){drawProposed('PROJECT_VALUE')},500)">Proposed</a>
+                        <a class="nav-link proposed" agg="'PROJECT_VALUE'" id="pills-proposed-tab" data-toggle="pill" href="#pills-proposed" role="tab" aria-controls="pills-proposed" aria-selected="false" workshop="'ATMS Asset Management'">Proposed</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-comapp-tab" data-toggle="pill" href="#pills-comapp" role="tab" aria-controls="pills-comapp" aria-selected="false" onclick="setTimeout(function(){drawComApp('PROJECT_VALUE')},500)">Commission Approved</a>
+                        <a class="nav-link comapp" agg="'PROJECT_VALUE'" id="pills-comapp-tab" data-toggle="pill" href="#pills-comapp" role="tab" aria-controls="pills-comapp" aria-selected="false" workshop="'ATMS Asset Management'">Commission Approved</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-design-tab" data-toggle="pill" href="#pills-design" role="tab" aria-controls="pills-design" aria-selected="false" onclick="setTimeout(function(){drawDesign('PROJECT_VALUE')},500)">Design</a>
+                        <a class="nav-link design" agg="'PROJECT_VALUE'" id="pills-design-tab" data-toggle="pill" href="#pills-design" role="tab" aria-controls="pills-design" aria-selected="false" workshop="'ATMS Asset Management'">Design</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-construction-tab" data-toggle="pill" href="#pills-construction" role="tab" aria-controls="pills-construction" aria-selected="false" onclick="setTimeout(function(){drawConstruction('PROJECT_VALUE')},500)">Construction</a>
+                        <a class="nav-link construction" agg="'PROJECT_VALUE'" id="pills-construction-tab" data-toggle="pill" href="#pills-construction" role="tab" aria-controls="pills-construction" aria-selected="false" workshop="'ATMS Asset Management'">Construction</a>
                     </li>
                 </ul>
                 <!--END Tab Selectors-->
@@ -271,9 +271,9 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <button type="button" id="projVal" onclick="setTimeout(function(){drawComApp('project_value')},500)" class="btn btn-outline-secondary btn-sm">Project Value</button>
-                                <button type="button" id="statDol" onclick="setTimeout(function(){drawComApp('STATE_DOLLARS')},500)" class="btn btn-outline-secondary btn-sm">State Dollars</button>
-                                <button type="button" onclick="setTimeout(function(){drawComApp('FED_DOLLARS')},500)" id="fedDol" class="btn btn-outline-secondary btn-sm">Federal Dollars</button>
+                                <button type="button" id="projVal" onclick="setTimeout(function(){drawComApp('project_value')},500)" class="btn btn-outline-secondary btn-sm comapp" agg="'PROJECT_VALUE'">Project Value</button>
+                                <button type="button" id="statDol" onclick="setTimeout(function(){drawComApp('STATE_DOLLARS')},500)" class="btn btn-outline-secondary btn-sm comapp" agg="'STATE_DOLLARS'">State Dollars</button>
+                                <button type="button" onclick="setTimeout(function(){drawComApp('FED_DOLLARS')},500)" id="fedDol" class="btn btn-outline-secondary btn-sm comapp" agg="'FED_DOLLARS'">Federal Dollars</button>
                             </div>
                         </div>
                         <div class="row">
@@ -305,9 +305,9 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <button type="button" id="projVal" onclick="setTimeout(function(){drawDesign('project_value')},500)" class="btn btn-outline-secondary btn-sm">Project Value</button>
-                                <button type="button" id="statDol" onclick="setTimeout(function(){drawDesign('STATE_DOLLARS')},500)" class="btn btn-outline-secondary btn-sm">State Dollars</button>
-                                <button type="button" onclick="setTimeout(function(){drawDesign('FED_DOLLARS')},500)" id="fedDol" class="btn btn-outline-secondary btn-sm">Federal Dollars</button>
+                                <button type="button" id="projVal" onclick="setTimeout(function(){drawDesign('project_value')},500)" class="btn btn-outline-secondary btn-sm design" agg="'PROJECT_VALUE'">Project Value</button>
+                                <button type="button" id="statDol" onclick="setTimeout(function(){drawDesign('STATE_DOLLARS')},500)" class="btn btn-outline-secondary btn-sm design" agg="'STATE_DOLLARS'">State Dollars</button>
+                                <button type="button" onclick="setTimeout(function(){drawDesign('FED_DOLLARS')},500)" id="fedDol" class="btn btn-outline-secondary btn-sm design" agg="'FED_DOLLARS'">Federal Dollars</button>
                             </div>
                         </div>
                         <div class="row">
@@ -339,9 +339,9 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <button type="button" id="projVal" onclick="setTimeout(function(){drawConstruction('project_value')},500)" class="btn btn-outline-secondary btn-sm">Project Value</button>
-                                <button type="button" id="statDol" onclick="setTimeout(function(){drawConstruction('STATE_DOLLARS')},500)" class="btn btn-outline-secondary btn-sm">State Dollars</button>
-                                <button type="button" onclick="setTimeout(function(){drawConstruction('FED_DOLLARS')},500)" id="fedDol" class="btn btn-outline-secondary btn-sm">Federal Dollars</button>
+                                <button type="button" id="projVal" onclick="setTimeout(function(){drawConstruction('project_value')},500)" class="btn btn-outline-secondary btn-sm construction" agg="'PROJECT_VALUE'">Project Value</button>
+                                <button type="button" id="statDol" onclick="setTimeout(function(){drawConstruction('STATE_DOLLARS')},500)" class="btn btn-outline-secondary btn-sm construction" agg="'STATE_DOLLARS'">State Dollars</button>
+                                <button type="button" onclick="setTimeout(function(){drawConstruction('FED_DOLLARS')},500)" id="fedDol" class="btn btn-outline-secondary btn-sm construction" agg="'FED_DOLLARS'">Federal Dollars</button>
                             </div>
                         </div>
                         <div class="row">
@@ -433,55 +433,14 @@
     <!--Plotly JS -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <!--Map Loader Required Scripts-->
-    <script src="https://js.arcgis.com/4.10/"></script>
+    <script src="https://js.arcgis.com/4.13/"></script>
     <!-- Custom scripts for this template -->
     <script src="js/canned.js"></script>
     <!-- Main Dashboard Javascript -->
     <script src="js/maindb-2.0.js"></script>
+    <script src="js/draw.js"></script>
     <script>
-        var region = getAllUrlParams(window.location.href)["region"];
-        if(region === undefined){
-            region = 0;
-        }
-        var workshop = "'ATMS Asset Management'";
-        //dataTableBuilder('unfunded',workshop,'#pills-unfundedtbl',region);
-        dataTableBuilder('proposed',workshop,'#pills-proposedtbl',region);
-        dataTableBuilder('comapp',workshop,'#pills-comapptbl',region);
-        dataTableBuilder('design',workshop,'#pills-designtbl',region);
-        dataTableBuilder('construction',workshop,'#pills-constructiontbl',region);
-        //Drill Charts
-        //   function drawUnfunded(agg){
-        //     drillVisual('unfunded',workshop,'unfundedbyRegionChart','region_cd',agg,'chart',region);
-        //     drillVisual('unfunded',workshop,'unfundedbyRegionTable','region_cd',agg,'table',region);
-        //     drillVisual('unfunded',workshop,'unfunedbyYearChart','forecast_st_yr',agg,'chart',region);
-        //     drillVisual('unfunded',workshop,'unfunedbyYearTable','forecast_st_yr',agg,'table',region);
-        //   }
-        function drawProposed(agg){
-            drillVisual('proposed',workshop,'proposedbyYearChart','FORECAST_ST_YR',agg,'chart',region);
-            drillVisual('proposed',workshop,'proposedbyYearTable','FORECAST_ST_YR',agg,'table',region);
-            drillVisual('proposed',workshop,'proposedbyRegionChart','REGION_CD',agg,'chart',region);
-            drillVisual('proposed',workshop,'proposedbyRegionTable','REGION_CD',agg,'table',region);
-        }
-        function drawComApp(agg) {
-            drillVisual('comapp',workshop,'comappbyYearChart','FORECAST_ST_YR',agg,'chart',region);
-            drillVisual('comapp',workshop,'comappbyYearTable','forecast_st_yr',agg,'table',region);
-            drillVisual('comapp',workshop,'comappbyRegionChart','REGION_CD',agg,'chart',region);
-            drillVisual('comapp',workshop,'comappbyRegionTable','REGION_CD',agg,'table',region);
-        }
-        function drawDesign(agg){
-            drillVisual('design',workshop,'designbyYearChart','FORECAST_ST_YR',agg,'chart',region);
-            drillVisual('design',workshop,'designbyYearTable','FORECAST_ST_YR',agg,'table',region);
-            drillVisual('design',workshop,'designbyRegionChart','REGION_CD',agg,'chart',region);
-            drillVisual('design',workshop,'designbyRegionTable','REGION_CD',agg,'table',region);
-        }
-        function drawConstruction(agg){
-            drillVisual('construction',workshop,'constructionbyYearChart','FORECAST_ST_YR',agg,'chart',region);
-            drillVisual('construction',workshop,'constructionbyYearTable','FORECAST_ST_YR',agg,'table',region);
-            drillVisual('construction',workshop,'constructionbyRegionChart','REGION_CD',agg,'chart',region);
-            drillVisual('construction',workshop,'constructionbyRegionTable','REGION_CD',agg,'table',region);
-        }
-        //mapLoader("map",parseInt(region),"5140bcbbff7e4fc0966075b1e2d9bb9f");
-        mapLoaderDynamic("map",parseInt(region),22);
+        draw("'ATMS Asset Management'", 22);
     </script>
   </body>
 </html>
