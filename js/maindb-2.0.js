@@ -796,16 +796,67 @@ function pathClearandReload(region){
 
         getFeatures(layer).then(function(data){
             let features = data.features;
-            populateDropdowns(features);
+            processFeatures(features);
         });
         
     });
   }
 
-  function populateDropdowns(features){
+  function processFeatures(features){
+      let counties = []
+      let municipalities = []
+      let legislative =[]
+      let status = []
     features.forEach(function(feature){
-        console.log(feature.attributes);
+        let attributes = feature.attributes
+        status.push(attributes.PIN_STAT_NM)
+        //check for multiple counties
+        if (attributes.CNTY_NAME.indexOf(',') > -1) { 
+            let crossCounties = attributes.CNTY_NAME.split(',')
+            counties.push.apply(crossCounties)
+         } else{
+            counties.push(attributes.CNTY_NAME)
+         }
+         //check for multiple municipalities
+        if (attributes.Municipality_Name.indexOf(',') > -1) { 
+           let crossMunis = attributes.Municipality_Name.split(',')
+           municipalities.push.apply(crossMunis)
+        } else{
+            municipalities.push(attributes.Municipality_Name)
+        } 
+        //check for mumtiple senate district
+        if (attributes.UT_SENATE_DIST_NAME.indexOf(',') > -1) { 
+            let crossSenate = attributes.UT_SENATE_DIST_NAME.split(',')
+            crossSenate.forEach(function(district){
+                legislative.push(`Senate District ${district}`) 
+            })
+        } else{
+            legislative.push(`Senate District ${attributes.UT_SENATE_DIST_NAME}`)
+        } 
+
+         //check for mumtiple house district
+         if (attributes.UT_House_Dist_Name.indexOf(',') > -1) { 
+            let crossHouse = attributes.UT_House_Dist_Name.split(',')
+        crossHouse.forEach(function(district){
+            legislative.push( `House District ${district}`) 
+         })
+        } else{
+            legislative.push( `House District ${attributes.UT_House_Dist_Name}`)
+        } 
     });
+
+    let countyset = new Set(counties)
+    let muniset = new Set(municipalities)
+    let legiset = new Set(legislative)
+    let statuset = new Set(status)
+    makeDropdown(countyset,muniset,legiset, statuset)
+    
+  }
+
+  function makeDropdown(counties, municipalities, legislative, status){
+      counties.forEach((i) => console.log(i))
+
+
   }
 
   function getFeatures(layer) {
