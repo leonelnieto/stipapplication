@@ -647,49 +647,48 @@ function pathClearandReload(region){
     } else {
         load += window.location.pathname+"?region="+region;
     }
-   
+
     window.location.href = load;
-}
-  //A second version of map loader 
-  function mapLoaderDynamic(dom,region,program){
+    }
+    //A second version of map loader 
+    function mapLoaderDynamic(dom,region,program){
     let centerLong = -111.693657;
     let centerLat = 39.631301;
     let zoom = 2500000;
     switch(region) {
-      case 1:
+        case 1:
         centerLong = -112.455054;
         centerLat = 41.343983;
         zoom = 700000;
         break;
-      case 2:
+        case 2:
         centerLong = -111.667910;
         centerLat = 40.680967;
         zoom = 1200000;
         break;
-      case 3:
+        case 3:
         centerLong = -111.534103;
         centerLat = 40.134867;
         zoom = 1200000;
         break;
-      case 4:
+        case 4:
         centerLong = -111.662749;
         centerLat = 38.377228;
         zoom = 1400000;
         break;
-    }
-    
-    let mapFilter = region ? "AND REGION_CD ='"+ region +"'": "";
+}
 
-    require([
-            "esri/Map",
-            "esri/views/MapView",
-            "esri/widgets/Legend",
-            "esri/layers/FeatureLayer",
-            "esri/widgets/Expand",
-            "esri/widgets/BasemapToggle"
-        ],
-        function (Map, MapView, Legend, FeatureLayer, Expand, BasemapToggle) {
-        let features;    
+let mapFilter = region ? "AND REGION_CD ='"+ region +"'": "";
+
+require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/widgets/Legend",
+        "esri/layers/FeatureLayer",
+        "esri/widgets/Expand",
+        "esri/widgets/BasemapToggle"
+    ],
+    function (Map, MapView, Legend, FeatureLayer, Expand, BasemapToggle) {
         //symbols for year lines
         const year2018 = {type: "simple-line", color: "#A87000", width: 4, style: "solid"};
         const year2019 = {type: "simple-line", color: "#4ce600", width: 4, style: "solid"};
@@ -793,9 +792,29 @@ function pathClearandReload(region){
 	    	view: view,
 	    	content: document.getElementById("queryProjects")
         });
-        view.ui.add(filterProjects, "top-left")
-        view.ui.add(legend, "bottom-right");
-        view.ui.add(basemapToggle, "top-right");
+    map.add(layer);	    
+    var legend = new Legend({
+        view: view,
+        layerInfos: [{
+        layer: layer,
+        title: "Legend"
+        }]
+    });
+    var basemapToggle = new BasemapToggle({
+        view: view,
+        nextBasemap: "satellite"
+    });
+    const filterProjects = new Expand({
+        expandIconClass: "esri-icon-filter",
+        expandTooltip: "Query Projects",
+        expanded: false,
+        group: "top-left",
+        view: view,
+        content: document.getElementById("queryProjects")
+    });
+    view.ui.add(filterProjects, "top-left")
+    view.ui.add(legend, "bottom-right");
+    view.ui.add(basemapToggle, "top-right");
 
         getFeatures(layer).then(function(data){
             let features = data.features;
@@ -839,79 +858,81 @@ function pathClearandReload(region){
         };
         
     });
-  }
-
-  function processFeatures(features){
-      let counties = []
-      let municipalities = []
-      let legislative =[]
-      let status = []
-    features.forEach(function(feature){
-        let attributes = feature.attributes
-        status.push(attributes.PIN_STAT_NM)
-        //check for multiple counties
-        if (attributes.CNTY_NAME.indexOf(',') > -1) { 
-            let crossCounties = attributes.CNTY_NAME.split(',')
-            counties.push.apply(crossCounties)
-         } else{
-            counties.push(attributes.CNTY_NAME)
-         }
-         //check for multiple municipalities
-        if (attributes.Municipality_Name.indexOf(',') > -1) { 
-           let crossMunis = attributes.Municipality_Name.split(',')
-           municipalities.push.apply(crossMunis)
-        } else{
-            municipalities.push(attributes.Municipality_Name)
-        } 
-        //check for mumtiple senate district
-        if (attributes.UT_SENATE_DIST_NAME.indexOf(',') > -1) { 
-            let crossSenate = attributes.UT_SENATE_DIST_NAME.split(',')
-            crossSenate.forEach(function(district){
-                legislative.push(`Senate District ${district}`) 
-            })
-        } else{
-            legislative.push(`Senate District ${attributes.UT_SENATE_DIST_NAME}`)
-        } 
-
-         //check for mumtiple house district
-         if (attributes.UT_House_Dist_Name.indexOf(',') > -1) { 
-            let crossHouse = attributes.UT_House_Dist_Name.split(',')
-        crossHouse.forEach(function(district){
-            legislative.push( `House District ${district}`) 
-         })
-        } else{
-            legislative.push( `House District ${attributes.UT_House_Dist_Name}`)
-        } 
-    });
-
-    let countyset = new Set(counties)
-    let muniset = new Set(municipalities)
-    let legiset = new Set(legislative)
-    let statuset = new Set(status)
-    makeDropdown(countyset,muniset,legiset, statuset)
     
-  }
+});
+}
 
-  function makeDropdown(counties, municipalities, legislative, status){
-      Array.from(counties).sort().forEach((i) =>{
-        $("#queryCounty").append($('<option></option>').attr('value', i).text(i))
-      })
-      Array.from(municipalities).sort().forEach((i) =>{
-        $("#queryMunicipality").append($('<option></option>').attr('value', i).text(i))
-      })
-      //TODO: sorting numbers not quite right
-      Array.from(legislative).sort().forEach((i) =>{
-        $("#queryLegislative").append($('<option></option>').attr('value', i).text(i))
-      })
+function processFeatures(features){
+    let counties = []
+    let municipalities = []
+    let legislative =[]
+    let status = []
+features.forEach(function(feature){
+    let attributes = feature.attributes
+    status.push(attributes.PIN_STAT_NM)
+    //check for multiple counties
+    if (attributes.CNTY_NAME.indexOf(',') > -1) { 
+        let crossCounties = attributes.CNTY_NAME.split(',')
+        counties.push.apply(crossCounties)
+        } else{
+        counties.push(attributes.CNTY_NAME)
+        }
+        //check for multiple municipalities
+    if (attributes.Municipality_Name.indexOf(',') > -1) { 
+        let crossMunis = attributes.Municipality_Name.split(',')
+        municipalities.push.apply(crossMunis)
+    } else{
+        municipalities.push(attributes.Municipality_Name)
+    } 
+    //check for mumtiple senate district
+    if (attributes.UT_SENATE_DIST_NAME.indexOf(',') > -1) { 
+        let crossSenate = attributes.UT_SENATE_DIST_NAME.split(',')
+        crossSenate.forEach(function(district){
+            legislative.push(`Senate District ${district}`) 
+        })
+    } else{
+        legislative.push(`Senate District ${attributes.UT_SENATE_DIST_NAME}`)
+    } 
 
-      Array.from(status).sort().forEach((i) =>{
-        $("#queryStatus").append($('<option></option>').attr('value', i).text(i))
-      })
-  }
+        //check for mumtiple house district
+        if (attributes.UT_House_Dist_Name.indexOf(',') > -1) { 
+        let crossHouse = attributes.UT_House_Dist_Name.split(',')
+    crossHouse.forEach(function(district){
+        legislative.push( `House District ${district}`) 
+        })
+    } else{
+        legislative.push( `House District ${attributes.UT_House_Dist_Name}`)
+    } 
+});
 
-  function getFeatures(layer) {
-    let query = layer.createQuery();
-    return layer.queryFeatures(query);
+let countyset = new Set(counties)
+let muniset = new Set(municipalities)
+let legiset = new Set(legislative)
+let statuset = new Set(status)
+makeDropdown(countyset,muniset,legiset, statuset)
+
+}
+
+function makeDropdown(counties, municipalities, legislative, status){
+    Array.from(counties).sort().forEach((i) =>{
+    $("#queryCounty").append($('<option></option>').attr('value', i).text(i))
+    })
+    Array.from(municipalities).sort().forEach((i) =>{
+    $("#queryMunicipality").append($('<option></option>').attr('value', i).text(i))
+    })
+    //TODO: sorting numbers not quite right
+    Array.from(legislative).sort().forEach((i) =>{
+    $("#queryLegislative").append($('<option></option>').attr('value', i).text(i))
+    })
+
+    Array.from(status).sort().forEach((i) =>{
+    $("#queryStatus").append($('<option></option>').attr('value', i).text(i))
+    })
+}
+
+function getFeatures(layer) {
+let query = layer.createQuery();
+return layer.queryFeatures(query);
 }
 
   function makeQueryForm(){
@@ -958,4 +979,13 @@ function pathClearandReload(region){
   </div>`
   }
 
-  console.log(document.querySelectorAll(".regionFilter"))
+for(i=0;i<document.querySelectorAll(".filterregion").length;i++){
+    document.querySelectorAll(".filterregion")[i].addEventListener("click", function(event){
+        if(event.target.attributes.region.value === "all"){
+            window.location = window.location.pathname;
+        }
+        else{
+            pathClearandReload(event.target.attributes.region.value);
+        }
+    });
+}
