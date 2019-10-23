@@ -752,6 +752,7 @@ function pathClearandReload(region){
                     // Expand widget for the queryFeature div
     	let html = makeQueryForm()
         $('#map').append(html);
+        console.log(filter[program]+mapFilter);
          let layer = new FeatureLayer({
             url: STIPData, // EPM STIP Service
             renderer: STIPRender, //this gives the line styles
@@ -798,6 +799,37 @@ function pathClearandReload(region){
             let features = data.features;
             processFeatures(features);
         });
+
+
+        document.getElementById("query").onclick = function () {
+            let county = document.getElementById("queryCounty").value;
+            let municipality = document.getElementById("queryMunicipality").value;
+            let legislative = document.getElementById("queryLegislative").value;
+            let status = document.getElementById("queryStatus").value
+           
+            let countyQuery = "";
+            if (county != 0) {       
+              countyQuery = ` AND CNTY_NAME = '${county}' `
+            }
+            let municipalityQuery = "";
+            if (municipality != 0) {
+                 municipalityQuery = ` AND Municipality_Name = '${municipality}' `
+            }
+            let legislativeQuery = "";
+            if (legislative != 0 && legislative.includes("Senate")) {
+                legislativeQuery = ` AND UT_SENATE_DIST_NAME = '${legislative}'`
+            } else if(legislative != 0 && legislative.includes("House")){
+               legislativeQuery = ` AND UT_House_Dist_Name = '${legislative}'`
+            }
+            let statusQuery = "";
+            if (status != 0) { 
+                statusQuery = ` AND PIN_STAT_NM = '${status}'`
+            }
+            let sql = filter[program]+mapFilter+legislativeQuery+countyQuery+municipalityQuery+statusQuery;
+            console.log(sql)
+            layer.definitionExpression = sql;
+            // resetQuery();
+        };
         
     });
   }
@@ -886,31 +918,31 @@ function pathClearandReload(region){
                       <label class="esri-feature-form__label">County
                           <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
                               id="queryCounty" maxlength="">
-                              <option value="0">Select a County</option>
+                              <option value="">Select a County</option>
                           </select>
                       </label>
                       <label class="esri-feature-form__label">Municipality
                         <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
                             id="queryMunicipality" maxlength="">
-                            <option value="0">Select a Municipality</option>
+                            <option value="">Select a Municipality</option>
                         </select>
                       </label>
                       <label class="esri-feature-form__label">Legislative District
                         <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
                             id="queryLegislative" maxlength="">
-                            <option value="0">Select a District</option>
+                            <option value="">Select a District</option>
                         </select>
                       </label>
                       <label class="esri-feature-form__label">PIN Status
                         <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
                             id="queryStatus" maxlength="">
-                            <option value="0">Select a Status</option>
+                            <option value="">Select a Status</option>
                         </select>
                       </label>
 
                   </form>
                   <input type="submit" class="esri-button" value="Filter Projects" id="query">
-                  <input type="submit" class="esri-button" value="Reset Filter" id="resetQuery">
+                 <!-- <input type="submit" class="esri-button" value="Reset Filter" id="resetQuery"> -->
               </div>
               
           </div>
