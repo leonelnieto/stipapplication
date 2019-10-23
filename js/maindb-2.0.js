@@ -689,6 +689,7 @@ function pathClearandReload(region){
             "esri/widgets/BasemapToggle"
         ],
         function (Map, MapView, Legend, FeatureLayer, Expand, BasemapToggle) {
+        let features;    
         //symbols for year lines
         const year2018 = {type: "simple-line", color: "#A87000", width: 4, style: "solid"};
         const year2019 = {type: "simple-line", color: "#4ce600", width: 4, style: "solid"};
@@ -798,6 +799,11 @@ function pathClearandReload(region){
 
         getFeatures(layer).then(function(data){
             let features = data.features;
+
+
+
+
+
             processFeatures(features);
         });
 
