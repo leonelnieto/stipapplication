@@ -635,6 +635,7 @@ function getAllUrlParams(url) {
         }
       }
     }
+    console.log(obj);
     return obj;
 }
 //Path Parser
