@@ -854,9 +854,20 @@ function pathClearandReload(region){
   }
 
   function makeDropdown(counties, municipalities, legislative, status){
-      counties.forEach((i) => console.log(i))
+      Array.from(counties).sort().forEach((i) =>{
+        $("#queryCounty").append($('<option></option>').attr('value', i).text(i))
+      })
+      Array.from(municipalities).sort().forEach((i) =>{
+        $("#queryMunicipality").append($('<option></option>').attr('value', i).text(i))
+      })
+      //TODO: sorting numbers not quite right
+      Array.from(legislative).sort().forEach((i) =>{
+        $("#queryLegislative").append($('<option></option>').attr('value', i).text(i))
+      })
 
-
+      Array.from(status).sort().forEach((i) =>{
+        $("#queryStatus").append($('<option></option>').attr('value', i).text(i))
+      })
   }
 
   function getFeatures(layer) {
@@ -880,19 +891,19 @@ function pathClearandReload(region){
                       </label>
                       <label class="esri-feature-form__label">Municipality
                         <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
-                            id="queryMuni" maxlength="">
+                            id="queryMunicipality" maxlength="">
                             <option value="0">Select a Municipality</option>
                         </select>
                       </label>
                       <label class="esri-feature-form__label">Legislative District
                         <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
-                            id="queryMuni" maxlength="">
+                            id="queryLegislative" maxlength="">
                             <option value="0">Select a District</option>
                         </select>
                       </label>
                       <label class="esri-feature-form__label">PIN Status
                         <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
-                            id="queryMuni" maxlength="">
+                            id="queryStatus" maxlength="">
                             <option value="0">Select a Status</option>
                         </select>
                       </label>
