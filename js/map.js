@@ -137,75 +137,51 @@ function mapLoaderDynamic(dom, region, program) {
             view.ui.add(filterProjects, "top-left")
             view.ui.add(legend, "bottom-right");
             view.ui.add(basemapToggle, "top-right");
-            
+
             layer.when(function () {
+                const filterChanges = ["County", "Municipality", "House", "Senate", "Status"]
                 let sql = makeQuery();
-                getFeatures(layer,sql)
+                getFeatures(sql, filterChanges)
             });
-                      
-            function getFeatures(layer,sql) {
+
+            function getFeatures(sql, filterChanges) {
                 let query = layer.createQuery();
                 query.where = sql
-                layer.queryFeatures(query).then(function(data){
-                   let features = data.features;
-                   processFeatures(features);
+                layer.queryFeatures(query).then(function (data) {
+                    let features = data.features;
+                    processFeatures(features, filterChanges);
                 });
             }
 
             document.getElementById("queryCounty").onchange = function () {
                 selectedCounty = document.getElementById("queryCounty").value;
                 let sql = makeQuery();
-                getFeatures(layer,sql)
+                getFeatures(sql, filterChanges)
             }
             document.getElementById("queryMunicipality").onchange = function () {
                 selectedMunicipality = document.getElementById("queryMunicipality").value;
                 let sql = makeQuery();
-                getFeatures(layer,sql)
+                getFeatures(sql, filterChanges)
             }
             document.getElementById("queryLegislative").onchange = function () {
                 selectedLegislative = document.getElementById("queryLegislative").value;
                 let sql = makeQuery();
-                getFeatures(layer,sql)
+                getFeatures(sql, filterChanges)
             }
             document.getElementById("queryStatus").onchange = function () {
                 selectedStatus = document.getElementById("queryStatus").value;
                 let sql = makeQuery();
-                getFeatures(layer,sql)
+                getFeatures(sql, filterChanges)
             }
 
             document.getElementById("query").onclick = function () {
-                // let county = document.getElementById("queryCounty").value;
-                // let municipality = document.getElementById("queryMunicipality").value;
-                // let legislative = document.getElementById("queryLegislative").value;
-                // let status = document.getElementById("queryStatus").value
-
-                // let countyQuery = "";
-                // if (county != 0) {
-                //     countyQuery = ` AND CNTY_NAME = '${county}' `
-                // }
-                // let municipalityQuery = "";
-                // if (municipality != 0) {
-                //     municipalityQuery = ` AND Municipality_Name = '${municipality}' `
-                // }
-                // let legislativeQuery = "";
-                // if (legislative != 0 && legislative.includes("Senate")) {
-                //     legislativeQuery = ` AND UT_SENATE_DIST_NAME = '${legislative.match(/\d+/)}'`
-                // } else if (legislative != 0 && legislative.includes("House")) {
-                //     legislativeQuery = ` AND UT_House_Dist_Name = '${legislative.match(/\d+/)}'`
-                // }
-                // let statusQuery = "";
-                // if (status != 0) {
-                //     statusQuery = ` AND PIN_STAT_NM = '${status}'`
-                // }
-                // let sql = filter[program] + mapFilter + legislativeQuery + countyQuery + municipalityQuery + statusQuery;
-                // console.log(sql)
                 let sql = makeQuery();
                 console.log(sql)
                 layer.definitionExpression = sql;
                 // resetQuery();
             };
 
-            function makeQuery(){
+            function makeQuery() {
                 let countyQuery = "";
                 if (selectedCounty != 0) {
                     countyQuery = ` AND CNTY_NAME = '${selectedCounty}' `
@@ -228,78 +204,37 @@ function mapLoaderDynamic(dom, region, program) {
 
                 return sql
             }
-
-            // function filterDropdown(attribute, selection) {
-            //     console.log(attribute, selection)
-            //     let newFeatures = []
-            //     selectedFeatures.forEach(function (feature) {
-            //         let attributes = feature.attributes;
-                    
-            //         if (attributes.CNTY_NAME == selection) {
-            //             newFeatures.push(feature)
-            //         }
-            //     })
-            //     console.log(newFeatures);
-
-            // }
-
-            function processFeatures(features) {
-                let counties = []
-                let municipalities = []
-                let legislative = []
-                let status = []
+            // let filterChanges = ["queryCounty", "queryMunicipality", "queryLegislative", "queryStatus"]
+            function processFeatures(features, filters) {
+                const attribute_name = { County: 'CNTY_NAME', Municipality: 'Municipality_Name', Status: 'PIN_STAT_NM', House: 'UT_House_Dist_Name', Senate: 'UT_SENATE_DIST_NAME' }
+                let attribute_collection = { County: [], Municipality: [], Status: [], House: [], Senate: [] }
                 features.forEach(function (feature) {
-                    let attributes = feature.attributes
-                    status.push(attributes.PIN_STAT_NM)
-                    //check for multiple counties
-                    if (attributes.CNTY_NAME.indexOf(',') > -1) {
-                        let crossCounties = attributes.CNTY_NAME.split(',')
-                        counties.push.apply(crossCounties)
-                    } else {
-                        counties.push(attributes.CNTY_NAME)
-                    }
-                    //check for multiple municipalities
-                    if (attributes.Municipality_Name.indexOf(',') > -1) {
-                        let crossMunis = attributes.Municipality_Name.split(',')
-                        municipalities.push.apply(crossMunis)
-                    } else {
-                        municipalities.push(attributes.Municipality_Name)
-                    }
-                    //check for mumtiple senate district
-                    if (attributes.UT_SENATE_DIST_NAME.indexOf(',') > -1) {
-                        let crossSenate = attributes.UT_SENATE_DIST_NAME.split(',')
-                        crossSenate.forEach(function (district) {
-                            legislative.push(`Senate District ${district}`)
-                        })
-                    } else {
-                        legislative.push(`Senate District ${attributes.UT_SENATE_DIST_NAME}`)
-                    }
-
-                    //check for mumtiple house district
-                    if (attributes.UT_House_Dist_Name.indexOf(',') > -1) {
-                        let crossHouse = attributes.UT_House_Dist_Name.split(',')
-                        crossHouse.forEach(function (district) {
-                            legislative.push(`House District ${district}`)
-                        })
-                    } else {
-                        legislative.push(`House District ${attributes.UT_House_Dist_Name}`)
-                    }
+                    filters.forEach(function (id) {
+                        let current_attribute = feature.attributes[attribute_name[id]]
+                        if (current_attribute.indexOf(',') > -1) {
+                            let existing = attribute_collection[id];
+                            let cross = current_attribute.split(',');
+                            let merged = existing.concat(cross);
+                            attribute_collection[id] = merged;
+                        } else {
+                            attribute_collection[id].push(current_attribute)
+                        }
+                    });
                 });
-
-                let countyset = new Set(counties)
-                let muniset = new Set(municipalities)
-                let legiset = new Set(legislative)
-                let statuset = new Set(status)
-                makeDropdown(countyset, muniset, legiset, statuset)
-
+                console.log(attribute_collection)
+                for (let key in attribute_collection) {
+                    attribute_collection[key] = new Set(attribute_collection[key])                
+                }
+                console.log(attribute_collection)
+                // makeDropdown(attribute_collection, filter)
             }
 
             function makeDropdown(counties, municipalities, legislative, status) {
                 let countyReset = document.createElement("option");
                 countyReset.value = 0;
                 let countyID = document.getElementById("queryCounty");
-                countyID.innerHTML='';
-                countyReset.textContent='Select a County';
+                countyID.innerHTML = '';
+                countyReset.textContent = 'Select a County';
                 countyID.appendChild(countyReset);
                 Array.from(counties).sort().forEach((i) => {
                     let option = document.createElement("option");
@@ -309,8 +244,8 @@ function mapLoaderDynamic(dom, region, program) {
                 });
                 let municipalityID = document.getElementById("queryMunicipality")
                 let muniReset = document.createElement("option");
-                municipalityID.innerHTML='';
-                muniReset.textContent='Select a Municipality';
+                municipalityID.innerHTML = '';
+                muniReset.textContent = 'Select a Municipality';
                 municipalityID.appendChild(muniReset);
                 Array.from(municipalities).sort().forEach((i) => {
                     let option = document.createElement("option")
@@ -320,9 +255,9 @@ function mapLoaderDynamic(dom, region, program) {
                 });
                 //TODO: sorting numbers not quite right
                 let legislativeID = document.getElementById("queryLegislative")
-                legislativeID.innerHTML='';
+                legislativeID.innerHTML = '';
                 let legReset = document.createElement("option");
-                legReset.textContent='Select a District';
+                legReset.textContent = 'Select a District';
                 legislativeID.appendChild(legReset);
                 Array.from(legislative).sort().forEach((i) => {
                     let option = document.createElement("option")
@@ -331,9 +266,9 @@ function mapLoaderDynamic(dom, region, program) {
                     legislativeID.appendChild(option);
                 });
                 let statusID = document.getElementById("queryStatus")
-                statusID.innerHTML='';
+                statusID.innerHTML = '';
                 let statReset = document.createElement("option");
-                statReset.textContent='Select a Status';
+                statReset.textContent = 'Select a Status';
                 statusID.appendChild(statReset);
                 Array.from(status).sort().forEach((i) => {
                     let option = document.createElement("option");
@@ -341,7 +276,7 @@ function mapLoaderDynamic(dom, region, program) {
                     option.value = i;
                     statusID.appendChild(option);
                 });
-            }            
+            }
         });
 }
 function makeQueryForm() {
