@@ -99,9 +99,61 @@ function mapLoaderDynamic(dom, region, program) {
             let layer = new FeatureLayer({
                 url: STIPData, // EPM STIP Service
                 renderer: STIPRender, //this gives the line styles
-                definitionExpression: filter[program] + mapFilter, //change filter to change dataset query
-                popupTemplate: { title: "{CONCEPT_DESC}", content: "{*}" } //the popup change be changed if we want
+                definitionExpression: filter[program] + mapFilter //change filter to change dataset query
+                // popupTemplate: { title: "{CONCEPT_DESC}", content: "{*}" } //the popup change be changed if we want
             });
+
+            let content = [{
+                type: "fields",
+                fieldInfos: [{
+                    fieldName: "STIP_WORKSHOP_YR"
+                }, {
+                    fieldName: "WORKSHOP_CAT"
+                }, {
+                    fieldName: "CNTY_NAME"
+                }, {
+                    fieldName: "PIN_STAT_NM"
+                }, {
+                    fieldName: "Municipality_Name"
+                }, {
+                    fieldName: "UT_SENATE_DIST_NAME"
+                }, {
+                    fieldName: "UT_House_Dist_Name"
+                }, {
+                    fieldName: "PIN"
+                }, {
+                    fieldName: "STIP_WORKSHOP"
+                }, {
+                    fieldName: "PROJECT_MANAGER"
+                }, {
+                    fieldName: "REGION_CD"
+                }, {
+                    fieldName: "COMM_APRV_IND"
+                }, {
+                    fieldName: "PIN_DESC"
+                }, {
+                    fieldName: "PRIMARY_CONCEPT"
+                }, {
+                    fieldName: "PROJECT_VALUE"
+                }, {
+                    fieldName: "PLANNED_CONSTRUCTION_YEAR"
+                }, {
+                    fieldName: "PROJECTED_START_DATE"
+                }, {
+                    fieldName: "PROGRAM"
+                }, {
+                    fieldName: "PUBLIC_DESC"
+                }, {
+                    fieldName: "FORECAST_ST_YR"
+                }, {
+                    fieldName: "FED_DOLLARS"
+                }, {
+                    fieldName: "STATE_DOLLARS"
+                }]
+            }]
+            layer.popupTemplate = { title: "{CONCEPT_DESC}", content: content };
+
+
             //initialize map
             let map = new Map({
                 basemap: "streets-vector"
@@ -139,62 +191,96 @@ function mapLoaderDynamic(dom, region, program) {
             view.ui.add(basemapToggle, "top-right");
 
             layer.when(function () {
-                const filterChanges = ["County", "Municipality", "House", "Senate", "Status"]
-                let sql = makeQuery();
-                getFeatures(sql, filterChanges)
+                resetQuery()
             });
 
-            function getFeatures(sql, filterChanges) {
+            function getFeatures(sql, filters) {
                 let query = layer.createQuery();
                 query.where = sql
                 layer.queryFeatures(query).then(function (data) {
                     let features = data.features;
-                    processFeatures(features, filterChanges);
+                    collectAttributes(features, filters);
                 });
+            }
+
+            function resetQuery(){
+                selectedCounty = selectedMunicipality = selectedLegislative = selectedStatus = 0;
+                const filters = buildFilter()
+                let sql = makeQuery();
+                getFeatures(sql, filters)
+            }
+
+            function buildFilter(){
+                filters = []
+                console.log(selectedCounty,selectedMunicipality,selectedLegislative,selectedStatus);
+         
+                if(selectedCounty == 0){
+                    filters.push("County")  
+                }
+                if(selectedMunicipality == 0){
+                    filters.push("Municipality")  
+                }
+                if(selectedLegislative == 0){
+                    filters.push("House")  
+                    filters.push("Senate")  
+                }
+                if(selectedStatus == 0){
+                    filters.push("Status")  
+                }
+                
+                    return filters
+            
             }
 
             document.getElementById("queryCounty").onchange = function () {
                 selectedCounty = document.getElementById("queryCounty").value;
+                const filters = buildFilter()
                 let sql = makeQuery();
-                getFeatures(sql, filterChanges)
+                getFeatures(sql, filters)
             }
-            document.getElementById("queryMunicipality").onchange = function () {
+            document.getElementById("queryMunicipality").onchange = function () {                
                 selectedMunicipality = document.getElementById("queryMunicipality").value;
+                const filters = buildFilter()
                 let sql = makeQuery();
-                getFeatures(sql, filterChanges)
+                getFeatures(sql, filters)
             }
-            document.getElementById("queryLegislative").onchange = function () {
-                selectedLegislative = document.getElementById("queryLegislative").value;
+            document.getElementById("queryDistrict").onchange = function () {                
+                selectedLegislative = document.getElementById("queryDistrict").value;
+                const filters = buildFilter()
                 let sql = makeQuery();
-                getFeatures(sql, filterChanges)
+                getFeatures(sql, filters)
             }
-            document.getElementById("queryStatus").onchange = function () {
+            document.getElementById("queryStatus").onchange = function () {                
                 selectedStatus = document.getElementById("queryStatus").value;
+                const filters = buildFilter()
                 let sql = makeQuery();
-                getFeatures(sql, filterChanges)
+                getFeatures(sql, filters)
+            }
+
+            document.getElementById("resetQuery").onclick = function(){
+                resetQuery()
             }
 
             document.getElementById("query").onclick = function () {
                 let sql = makeQuery();
                 console.log(sql)
-                layer.definitionExpression = sql;
-                // resetQuery();
+                layer.definitionExpression = sql;                
             };
 
             function makeQuery() {
                 let countyQuery = "";
                 if (selectedCounty != 0) {
-                    countyQuery = ` AND CNTY_NAME = '${selectedCounty}' `
+                    countyQuery = ` AND CNTY_NAME like '%${selectedCounty}%' `
                 }
                 let municipalityQuery = "";
                 if (selectedMunicipality != 0) {
-                    municipalityQuery = ` AND Municipality_Name = '${selectedMunicipality}' `
+                    municipalityQuery = ` AND Municipality_Name like '%${selectedMunicipality}%' `
                 }
                 let legislativeQuery = "";
                 if (selectedLegislative != 0 && selectedLegislative.includes("Senate")) {
-                    legislativeQuery = ` AND UT_SENATE_DIST_NAME = '${selectedLegislative.match(/\d+/)}'`
+                    legislativeQuery = ` AND UT_SENATE_DIST_NAME like '%${selectedLegislative.match(/\d+/)}%'`
                 } else if (selectedLegislative != 0 && selectedLegislative.includes("House")) {
-                    legislativeQuery = ` AND UT_House_Dist_Name = '${selectedLegislative.match(/\d+/)}'`
+                    legislativeQuery = ` AND UT_House_Dist_Name like '%${selectedLegislative.match(/\d+/)}%'`
                 }
                 let statusQuery = "";
                 if (selectedStatus != 0) {
@@ -204,7 +290,7 @@ function mapLoaderDynamic(dom, region, program) {
 
                 return sql
             }
-
+            //sort attributes for dropdowns, add house and senate ditrict and combine into legislative
             function sortAttributes(attributeCollection){
                 let senate = []
                 let house = []
@@ -220,12 +306,13 @@ function mapLoaderDynamic(dom, region, program) {
                             newCollection[key] = sortedAttributes;                             
                         }                      
                     }
-                        
-                newCollection['Legislative'] = house.concat(senate);
+                if (senate.length > 0 || house.length >0) { newCollection['District'] = house.concat(senate)}
+                
                 return newCollection
             }
 
-            function processFeatures(features, filters) {
+            //collect attributes from features and put in arrays
+            function collectAttributes(features, filters) {
                 const attribute_name = { County: 'CNTY_NAME', Municipality: 'Municipality_Name', Status: 'PIN_STAT_NM', House: 'UT_House_Dist_Name', Senate: 'UT_SENATE_DIST_NAME' }
                 let attributeCollection = {}
                 features.forEach(function (feature) {
@@ -247,31 +334,34 @@ function mapLoaderDynamic(dom, region, program) {
                     });
                 });
                 attributeCollection = sortAttributes(attributeCollection);
+                //create sets to remove duplicates
                 for (let key in attributeCollection) {
                     attributeCollection[key] = new Set(attributeCollection[key])
                 }
                 console.log(attributeCollection)
                 makeDropdown(attributeCollection, filters)
             }
-            // const filterChanges = ["County", "Municipality", "House", "Senate", "Status"]
-            function makeDropdown(attributeCollection, filters) {
-                let selectIDs = {County: "queryCounty" ,Municipality: "queryMunicipality",Status: "queryStatus" }
-                filters.forEach(function (id) {
+
+            
+            function makeDropdown(attributeCollection) {
+                let selectIDs = {County: "queryCounty" ,Municipality: "queryMunicipality",Status: "queryStatus", District:"queryDistrict"}
+               
+                for(let key in attributeCollection){
+                    let select = document.getElementById(selectIDs[key]);
+                    select.innerHTML =''
                     let reset = document.createElement("option");
-                    let select = document.getElementById("queryCounty");
-                })
-                let countyReset = 
-                countyReset.value = 0;
-                let countyID = 
-                countyID.innerHTML = '';
-                countyReset.textContent = 'Select a County';
-                countyID.appendChild(countyReset);
-                Array.from(counties).sort().forEach((i) => {
-                    let option = document.createElement("option");
-                    option.textContent = i;
-                    option.value = i;
-                    countyID.appendChild(option);
-                });
+                    reset.value = 0
+                    reset.textContent = `Select a ${key}`;
+                    select.append(reset);
+
+                    Array.from(attributeCollection[key]).forEach((i) => {
+                        let option = document.createElement("option");
+                        option.textContent = i;
+                        option.value = i;
+                        select.appendChild(option);
+                    });
+                }
+                
             }
         });
 }
@@ -297,7 +387,7 @@ function makeQueryForm() {
                       </label>
                       <label class="esri-feature-form__label">Legislative District
                         <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
-                            id="queryLegislative" maxlength="">
+                            id="queryDistrict" maxlength="">
                             <option value="0">Select a District</option>
                         </select>
                       </label>
@@ -310,7 +400,7 @@ function makeQueryForm() {
 
                   </form>
                   <input type="submit" class="esri-button" value="Filter Projects" id="query">
-                 <!-- <input type="submit" class="esri-button" value="Reset Filter" id="resetQuery"> -->
+                  <input type="submit" class="esri-button" value="Reset Filter" id="resetQuery">
               </div>
               
           </div>
