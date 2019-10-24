@@ -204,35 +204,65 @@ function mapLoaderDynamic(dom, region, program) {
 
                 return sql
             }
-            // let filterChanges = ["queryCounty", "queryMunicipality", "queryLegislative", "queryStatus"]
+
+            function sortAttributes(attributeCollection){
+                let senate = []
+                let house = []
+                let newCollection ={}
+                
+                    for (let key in attributeCollection) {
+                        let sortedAttributes = []
+                        if(key == "House" || key == "Senate"){
+                            sortedAttributes = attributeCollection[key].sort((a, b) => a - b);
+                            (key == "House") ? house = sortedAttributes.map(d => `House District ${d}`) : senate = sortedAttributes.map(d => `Senate District ${d}`)                            
+                        } else{
+                            sortedAttributes = attributeCollection[key].sort();
+                            newCollection[key] = sortedAttributes;                             
+                        }                      
+                    }
+                        
+                newCollection['Legislative'] = house.concat(senate);
+                return newCollection
+            }
+
             function processFeatures(features, filters) {
                 const attribute_name = { County: 'CNTY_NAME', Municipality: 'Municipality_Name', Status: 'PIN_STAT_NM', House: 'UT_House_Dist_Name', Senate: 'UT_SENATE_DIST_NAME' }
-                let attribute_collection = { County: [], Municipality: [], Status: [], House: [], Senate: [] }
+                let attributeCollection = {}
                 features.forEach(function (feature) {
                     filters.forEach(function (id) {
                         let current_attribute = feature.attributes[attribute_name[id]]
+                        //if more than one value for attribute, split and concat to array
                         if (current_attribute.indexOf(',') > -1) {
-                            let existing = attribute_collection[id];
+                            let existing
                             let cross = current_attribute.split(',');
+                            //if key doesn't exist, create value as empty array, else set existing to key value
+                            !(id in attributeCollection) ? existing = [] : existing = attributeCollection[id] 
                             let merged = existing.concat(cross);
-                            attribute_collection[id] = merged;
+                            attributeCollection[id] = merged;
                         } else {
-                            attribute_collection[id].push(current_attribute)
+                            //if key doesn't exist in object, create with current attribute as first value in array, else push  current attribute
+                            !(id in attributeCollection) ? attributeCollection[id] = [current_attribute] : attributeCollection[id].push(current_attribute)
+                            
                         }
                     });
                 });
-                console.log(attribute_collection)
-                for (let key in attribute_collection) {
-                    attribute_collection[key] = new Set(attribute_collection[key])                
+                attributeCollection = sortAttributes(attributeCollection);
+                for (let key in attributeCollection) {
+                    attributeCollection[key] = new Set(attributeCollection[key])
                 }
-                console.log(attribute_collection)
-                // makeDropdown(attribute_collection, filter)
+                console.log(attributeCollection)
+                makeDropdown(attributeCollection, filters)
             }
-
-            function makeDropdown(counties, municipalities, legislative, status) {
-                let countyReset = document.createElement("option");
+            // const filterChanges = ["County", "Municipality", "House", "Senate", "Status"]
+            function makeDropdown(attributeCollection, filters) {
+                let selectIDs = {County: "queryCounty" ,Municipality: "queryMunicipality",Status: "queryStatus" }
+                filters.forEach(function (id) {
+                    let reset = document.createElement("option");
+                    let select = document.getElementById("queryCounty");
+                })
+                let countyReset = 
                 countyReset.value = 0;
-                let countyID = document.getElementById("queryCounty");
+                let countyID = 
                 countyID.innerHTML = '';
                 countyReset.textContent = 'Select a County';
                 countyID.appendChild(countyReset);
@@ -241,40 +271,6 @@ function mapLoaderDynamic(dom, region, program) {
                     option.textContent = i;
                     option.value = i;
                     countyID.appendChild(option);
-                });
-                let municipalityID = document.getElementById("queryMunicipality")
-                let muniReset = document.createElement("option");
-                municipalityID.innerHTML = '';
-                muniReset.textContent = 'Select a Municipality';
-                municipalityID.appendChild(muniReset);
-                Array.from(municipalities).sort().forEach((i) => {
-                    let option = document.createElement("option")
-                    option.textContent = i;
-                    option.value = i;
-                    municipalityID.appendChild(option);
-                });
-                //TODO: sorting numbers not quite right
-                let legislativeID = document.getElementById("queryLegislative")
-                legislativeID.innerHTML = '';
-                let legReset = document.createElement("option");
-                legReset.textContent = 'Select a District';
-                legislativeID.appendChild(legReset);
-                Array.from(legislative).sort().forEach((i) => {
-                    let option = document.createElement("option")
-                    option.textContent = i;
-                    option.value = i;
-                    legislativeID.appendChild(option);
-                });
-                let statusID = document.getElementById("queryStatus")
-                statusID.innerHTML = '';
-                let statReset = document.createElement("option");
-                statReset.textContent = 'Select a Status';
-                statusID.appendChild(statReset);
-                Array.from(status).sort().forEach((i) => {
-                    let option = document.createElement("option");
-                    option.textContent = i;
-                    option.value = i;
-                    statusID.appendChild(option);
                 });
             }
         });
