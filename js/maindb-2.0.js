@@ -15,12 +15,10 @@ const formatter = new Intl.NumberFormat('en-US', {
     maximumFractionDigits: 0
   });
  
- //Query Dataset then build table
+//Query Dataset then build table
 function dataTableBuilder(pn_status,workshop,dom,region){
-    
     //Build where clause by filter
     var whereClause = whereClauseBuilder(pn_status,workshop,region);
-    
     var query = sourceDataset + selectColumns + whereClause;
     
     //fetch one page data 
@@ -32,11 +30,8 @@ function dataTableBuilder(pn_status,workshop,dom,region){
         .then(function(response){  
             return response.json();
         }).then(function(data){
-       
-            
             features = data.features
-           
-            
+    
             //Where the magic occurs
             var html = '';
             var thead = '<table style="width:100%" id="dataTable'+dom.substring(1)+'" class="table table-striped table-hover">';
@@ -84,10 +79,11 @@ function dataTableBuilder(pn_status,workshop,dom,region){
                         'pdfHtml5'
                     ]
             });
+            console.log($('#dataTable'+dom.substring(1)));
         }).catch(function(err){
             console.log(err);
         });
-});
+    });
 
 }
 
@@ -157,6 +153,7 @@ function drillVisual(pn_status,workshop,dom,groupOrder,aggregate,type,region){
         }
   });
 }
+
 //Helper function to build where clause
 function whereClauseBuilder(pn_status,workshop,region) {
     var whereClause = "";
@@ -189,7 +186,8 @@ function whereClauseBuilder(pn_status,workshop,region) {
     }
     return whereClause;
 }
-// Helpfer function gets year and returns bg color class
+
+// Helper function gets year and returns bg color class
 function bgColorClass(year){
   var bg = '';
   year = year !== null ? parseInt(year): 0;

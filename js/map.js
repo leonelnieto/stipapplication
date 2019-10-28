@@ -1,5 +1,4 @@
- //A second version of map loader 
- function mapLoaderDynamic(dom,region,program){
+  function mapLoaderDynamic(dom,region,program){
     let centerLong = -111.693657;
     let centerLat = 39.631301;
     let zoom = 2500000;
@@ -99,7 +98,7 @@
                         "STIP_WORKSHOP_YR = '2019' AND (WORKSHOP_CAT = 'Bridge Preservation' OR WORKSHOP_CAT = 'Bridge Replacement and Rehabilitation')" //29 All Structures
                     ]  
         
-                    // Expand widget for the queryFeature div
+        // Expand widget for the queryFeature div
     	let html = makeQueryForm()
         $('#map').append(html);
         console.log(filter[program]+mapFilter);
@@ -154,7 +153,6 @@
 
             processFeatures(features);
         });
-
 
         document.getElementById("query").onclick = function () {
             let county = document.getElementById("queryCounty").value;
