@@ -1,5 +1,6 @@
 //A second version of map loader 
 function mapLoaderDynamic(dom, region, program) {
+    console.log(dom, region, program)
     let centerLong = -111.693657;
     let centerLat = 39.631301;
     let zoom = 2500000;
@@ -93,9 +94,10 @@ function mapLoaderDynamic(dom, region, program) {
             ]
 
             // Expand widget for the queryFeature div
-            let html = makeQueryForm()
-            $('#map').append(html);
-            console.log(filter[program] + mapFilter);
+        
+            // let html = makeQueryForm()
+            // $('#map').append(html);
+            // console.log(filter[program] + mapFilter);
             let layer = new FeatureLayer({
                 url: STIPData, // EPM STIP Service
                 renderer: STIPRender, //this gives the line styles
@@ -191,12 +193,14 @@ function mapLoaderDynamic(dom, region, program) {
             view.ui.add(basemapToggle, "top-right");
 
             layer.when(function () {
+                
                 resetQuery()
             });
 
             function getFeatures(sql, filters) {
                 let query = layer.createQuery();
                 query.where = sql
+                
                 layer.queryFeatures(query).then(function (data) {
                     let features = data.features;
                     collectAttributes(features, filters);
@@ -207,13 +211,13 @@ function mapLoaderDynamic(dom, region, program) {
                 selectedCounty = selectedMunicipality = selectedLegislative = selectedStatus = 0;
                 const filters = buildFilter()
                 let sql = makeQuery();
+                
                 getFeatures(sql, filters)
             }
 
             function buildFilter(){
                 filters = []
-                console.log(selectedCounty,selectedMunicipality,selectedLegislative,selectedStatus);
-         
+                         
                 if(selectedCounty == 0){
                     filters.push("County")  
                 }
@@ -266,6 +270,7 @@ function mapLoaderDynamic(dom, region, program) {
             };
 
             function makeQuery() {
+                
                 let countyQuery = "";
                 if (selectedCounty != 0) {
                     countyQuery = ` AND CNTY_NAME like '%${selectedCounty}%' `
@@ -356,6 +361,7 @@ function mapLoaderDynamic(dom, region, program) {
                         let option = document.createElement("option");
                         option.textContent = i;
                         option.value = i;
+                       
                         select.appendChild(option);
                     });
                 }
@@ -363,46 +369,46 @@ function mapLoaderDynamic(dom, region, program) {
             }
         });
 }
-function makeQueryForm() {
-    return `<div id="queryProjects" class="editArea-container">
-      <div id="queryDiv" style="display:block;">
-          <h4 class="list-heading">Filter</h4>
-          <div id="queryDiv" class="esri-component esri-widget ">
-              <div id="queryForm" class="esri-component scroller esri-widget esri-feature-form">
-                  <form class="esri-feature-form__form">
+// function makeQueryForm() {
+//     return `<div id="queryProjects" class="editArea-container">
+//       <div id="queryDiv" style="display:block;">
+//           <h4 class="list-heading">Filter</h4>
+//           <div id="queryDiv" class="esri-component esri-widget ">
+//               <div id="queryForm" class="esri-component scroller esri-widget esri-feature-form">
+//                   <form class="esri-feature-form__form">
 
-                      <label class="esri-feature-form__label">County
-                          <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
-                              id="queryCounty" maxlength="">
-                              <option value="0">Select a County</option>
-                          </select>
-                      </label>
-                      <label class="esri-feature-form__label">Municipality
-                        <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
-                            id="queryMunicipality" maxlength="">
-                            <option value="0">Select a Municipality</option>
-                        </select>
-                      </label>
-                      <label class="esri-feature-form__label">Legislative District
-                        <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
-                            id="queryDistrict" maxlength="">
-                            <option value="0">Select a District</option>
-                        </select>
-                      </label>
-                      <label class="esri-feature-form__label">PIN Status
-                        <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
-                            id="queryStatus" maxlength="">
-                            <option value="0">Select a Status</option>
-                        </select>
-                      </label>
+//                       <label class="esri-feature-form__label">County
+//                           <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
+//                               id="queryCounty" maxlength="">
+//                               <option value="0">Select a County</option>
+//                           </select>
+//                       </label>
+//                       <label class="esri-feature-form__label">Municipality
+//                         <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
+//                             id="queryMunicipality" maxlength="">
+//                             <option value="0">Select a Municipality</option>
+//                         </select>
+//                       </label>
+//                       <label class="esri-feature-form__label">Legislative District
+//                         <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
+//                             id="queryDistrict" maxlength="">
+//                             <option value="0">Select a District</option>
+//                         </select>
+//                       </label>
+//                       <label class="esri-feature-form__label">PIN Status
+//                         <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
+//                             id="queryStatus" maxlength="">
+//                             <option value="0">Select a Status</option>
+//                         </select>
+//                       </label>
 
-                  </form>
-                  <input type="submit" class="esri-button" value="Filter Projects" id="query">
-                  <input type="submit" class="esri-button" value="Reset Filter" id="resetQuery">
-              </div>
+//                   </form>
+//                   <input type="submit" class="esri-button" value="Filter Projects" id="query">
+//                   <input type="submit" class="esri-button" value="Reset Filter" id="resetQuery">
+//               </div>
               
-          </div>
+//           </div>
 
-      </div>
-  </div>`
-}
+//       </div>
+//   </div>`
+// }

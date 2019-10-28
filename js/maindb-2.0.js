@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 let STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects/MapServer/0/" //live data
-//let STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects2019/MapServer/0/" //test data
+// let STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects2019/MapServer/0/" //test data
 let sourceDataset = STIPData + "query?f=json&returnGeometry=false";
 let selectColumns = "&outFields=PIN,WORKSHOP_CAT,STIP_WORKSHOP,PROJECT_MANAGER,REGION_CD,COMM_APRV_IND,PIN_DESC,PRIMARY_CONCEPT,PROJECT_VALUE,PLANNED_CONSTRUCTION_YEAR,PROJECTED_START_DATE,PROGRAM,PUBLIC_DESC,FORECAST_ST_YR,FED_DOLLARS,STATE_DOLLARS"
 //Helper currency formater
@@ -13,48 +13,39 @@ const formatter = new Intl.NumberFormat('en-US', {
     currency: 'USD',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0
-  });
- 
+});
+
 //Query Dataset then build table
-function dataTableBuilder(pn_status,workshop,dom,region){
+function dataTableBuilder(pn_status, workshop, dom, region) {
     //Build where clause by filter
-    var whereClause = whereClauseBuilder(pn_status,workshop,region);
+    var whereClause = whereClauseBuilder(pn_status, workshop, region);
     var query = sourceDataset + selectColumns + whereClause;
 
     //fetch one page data 
     fetch('data/onepagers.json').then(function (response) {
         return response.json();
-    }).then(function(onePages){
-    //then fetch project data    
-    fetch(query)
-        .then(function(response){  
-            return response.json();
-        }).then(function(data){
-            features = data.features
-    
-            //Where the magic occurs
-            var html = '';
-            var thead = '<table style="width:100%" id="dataTable'+dom.substring(1)+'" class="table table-striped table-hover">';
-            thead += '<thead><tr><th>Region</th><th>PIN</th><th>PIN Description</th><th>Primary Concept</th><th>Project Value</th>';
-            thead += pn_status != 'unfunded' ? '<th>Projected Start Year</th>': '';
-            //include start year if not unfunded
-            thead += '</tr></thead><tbody>';
-            html += thead;
-            features.forEach(function(item){
-                attributes = item.attributes
-                let region = attributes['REGION_CD']
-                let pin = attributes['PIN']
-                //Populate funded rows
-                html += `<tr><td class="sorting"> ${region}</td>`;
-                html += `<td>${onePageButtons(pin, region,onePages)}</td>`;
-                html += `<td><a data-toggle="modal" class="alt-link" data-target="#mapModal" onClick="showMapModal(${pin})" `;
-                html += `tooltip="Click for Project Map" tooltip-position="top">${attributes['PIN_DESC']}</a></td>`;
-                html += `<td>${attributes['PRIMARY_CONCEPT']}</td>`;
-                html += `<td>${formatter.format(attributes['PROJECT_VALUE'])}</td>`;
-                html += pn_status != 'unfunded' ? `<td class="${bgColorClass(attributes['FORECAST_ST_YR'])}">${attributes['FORECAST_ST_YR']}</td></tr>` : '';
-                //include start year if not unfunded
-            });
+    }).then(function (onePages) {
+        //then fetch project data    
+        fetch(query)
+            .then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                let tableID = '#dataTable' + dom.substring(1);
+                
+                if ( $.fn.dataTable.isDataTable( tableID) ) {
+                   
+                    let tableElement = document.getElementById(tableID)
+                const domElement = document.getElementById(dom.substring(1))
+                    const table = $(tableID).DataTable();
+                    
+                    // domElement.removeChild(tableElement);
+                    table.destroy();
+                    // domElement.parentNode.removeChild(tableElement)
+                    
+                    
 
+                }
+                
                 features = data.features
 
                 //Where the magic occurs
@@ -92,18 +83,28 @@ function dataTableBuilder(pn_status,workshop,dom,region){
 
                 var tfoot = "</tbody></table>";
                 html += tfoot;
-                $(dom).append(html);
-                $('#dataTable' + dom.substring(1)).DataTable({
-                    "pagingType": "full_numbers",
-                    "columns": columns,
-                    dom: 'Bfrtip',
-                    buttons: [
-                        'copyHtml5',
-                        'excelHtml5',
-                        'csvHtml5',
-                        'pdfHtml5'
-                    ]
-                });
+
+
+
+                if (!$.fn.dataTable.isDataTable(tableID)) {
+                    console.log(dom)
+                    $(dom).append(html);
+                    $('#dataTable' + dom.substring(1)).DataTable({
+                        "pagingType": "full_numbers",
+                        // retrieve: true,
+                        "columns": columns,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copyHtml5',
+                            'excelHtml5',
+                            'csvHtml5',
+                            'pdfHtml5'
+                        ]
+                    });
+                }
+
+                
+
             }).catch(function (err) {
                 console.log(err);
             });
@@ -656,7 +657,7 @@ function getAllUrlParams(url) {
             }
         }
     }
-    console.log(obj);
+
     return obj;
 }
 //Path Parser
@@ -672,12 +673,12 @@ function pathClearandReload(region) {
     window.location.href = load;
 }
 
-for(i=0;i<document.querySelectorAll(".filterregion").length;i++){
-    document.querySelectorAll(".filterregion")[i].addEventListener("click", function(event){
-        if(event.target.attributes.region.value === "all"){
+for (i = 0; i < document.querySelectorAll(".filterregion").length; i++) {
+    document.querySelectorAll(".filterregion")[i].addEventListener("click", function (event) {
+        if (event.target.attributes.region.value === "all") {
             window.location = window.location.pathname;
         }
-        else{
+        else {
             pathClearandReload(event.target.attributes.region.value);
         }
     });
