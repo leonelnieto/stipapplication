@@ -36,7 +36,8 @@ function dataTableBuilder(pn_status,workshop,dom,region){
             var html = '';
             var thead = '<table style="width:100%" id="dataTable'+dom.substring(1)+'" class="table table-striped table-hover">';
             thead += '<thead><tr><th>Region</th><th>PIN</th><th>PIN Description</th><th>Primary Concept</th><th>Project Value</th>';
-            thead += pn_status != 'unfunded' ? '<th>Projected Start Year</th>': ''; //include start year if not unfunded
+            thead += pn_status != 'unfunded' ? '<th>Projected Start Year</th>': '';
+            //include start year if not unfunded
             thead += '</tr></thead><tbody>';
             html += thead;
             features.forEach(function(item){
@@ -50,12 +51,11 @@ function dataTableBuilder(pn_status,workshop,dom,region){
                 html += `tooltip="Click for Project Map" tooltip-position="top">${attributes['PIN_DESC']}</a></td>`;
                 html += `<td>${attributes['PRIMARY_CONCEPT']}</td>`;
                 html += `<td>${formatter.format(attributes['PROJECT_VALUE'])}</td>`;
-                html += pn_status != 'unfunded' ? `<td class="${bgColorClass(attributes['FORECAST_ST_YR'])}">${attributes['FORECAST_ST_YR']}</td></tr>` : ''; //include start year if not unfunded
+                html += pn_status != 'unfunded' ? `<td class="${bgColorClass(attributes['FORECAST_ST_YR'])}">${attributes['FORECAST_ST_YR']}</td></tr>` : '';
+                //include start year if not unfunded
             });
 
-
                 features = data.features
-
 
                 //Where the magic occurs
                 var html = '';
