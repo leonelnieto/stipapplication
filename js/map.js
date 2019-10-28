@@ -227,9 +227,7 @@ function mapLoaderDynamic(dom, region, program) {
                 if(selectedStatus == 0){
                     filters.push("Status")  
                 }
-                
                     return filters
-            
             }
 
             document.getElementById("queryCounty").onchange = function () {
