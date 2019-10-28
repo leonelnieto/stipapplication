@@ -187,7 +187,47 @@
                 <!--Begin Tabs-->
                 <div class="tab-content card border-0" id="pills-tabContent">
                     <div class="tab-pane fade show active map" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
-                        <div class="map" id="map"></div>
+                        <div class="map" id="map">
+                            <div id="queryProjects" class="editArea-container">
+                                <div id="queryDiv" style="display:block;">
+                                    <h4 class="list-heading">Filter</h4>
+                                    <div id="queryDiv" class="esri-component esri-widget ">
+                                        <div id="queryForm" class="esri-component scroller esri-widget esri-feature-form">
+                                            <form class="esri-feature-form__form">
+                          
+                                                <label class="esri-feature-form__label">County
+                                                    <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
+                                                        id="queryCounty" maxlength="">
+                                                        <option value="0">Select a County</option>
+                                                    </select>
+                                                </label>
+                                                <label class="esri-feature-form__label">Municipality
+                                                  <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
+                                                      id="queryMunicipality" maxlength="">
+                                                      <option value="0">Select a Municipality</option>
+                                                  </select>
+                                                </label>
+                                                <label class="esri-feature-form__label">Legislative District
+                                                  <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
+                                                      id="queryDistrict" maxlength="">
+                                                      <option value="0">Select a District</option>
+                                                  </select>
+                                                </label>
+                                                <label class="esri-feature-form__label">PIN Status
+                                                  <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select"
+                                                      id="queryStatus" maxlength="">
+                                                      <option value="0">Select a Status</option>
+                                                  </select>
+                                                </label>
+                          
+                                            </form>
+                                            <input type="submit" class="esri-button" value="Filter Projects" id="query">
+                                            <input type="submit" class="esri-button" value="Reset Filter" id="resetQuery">
+                                        </div>                                       
+                                    </div>                          
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="pills-unfunded" role="tabpanel" aria-labelledby="pills-unfunded-tab">
                         <div class="row">

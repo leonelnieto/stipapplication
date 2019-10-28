@@ -11,7 +11,7 @@ function draw(workshop, regionNumber){
     dataTableBuilder('design',workshop,'#pills-designtbl',region);
     dataTableBuilder('construction',workshop,'#pills-constructiontbl',region);
 
-    mapLoaderDynamic("map",parseInt(region),regionNumber);
+    // mapLoaderDynamic("map",parseInt(region),regionNumber);
 }
 
 function drawProposed(agg, workshop){
