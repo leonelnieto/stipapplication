@@ -13,25 +13,45 @@ const formatter = new Intl.NumberFormat('en-US', {
     currency: 'USD',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0
-});
-
+  });
+ 
 //Query Dataset then build table
-function dataTableBuilder(pn_status, workshop, dom, region) {
-
+function dataTableBuilder(pn_status,workshop,dom,region){
     //Build where clause by filter
-    var whereClause = whereClauseBuilder(pn_status, workshop, region);
-
+    var whereClause = whereClauseBuilder(pn_status,workshop,region);
     var query = sourceDataset + selectColumns + whereClause;
 
     //fetch one page data 
     fetch('data/onepagers.json').then(function (response) {
         return response.json();
-    }).then(function (onePages) {
-        //then fetch project data    
-        fetch(query)
-            .then(function (response) {
-                return response.json();
-            }).then(function (data) {
+    }).then(function(onePages){
+    //then fetch project data    
+    fetch(query)
+        .then(function(response){  
+            return response.json();
+        }).then(function(data){
+            features = data.features
+    
+            //Where the magic occurs
+            var html = '';
+            var thead = '<table style="width:100%" id="dataTable'+dom.substring(1)+'" class="table table-striped table-hover">';
+            thead += '<thead><tr><th>Region</th><th>PIN</th><th>PIN Description</th><th>Primary Concept</th><th>Project Value</th>';
+            thead += pn_status != 'unfunded' ? '<th>Projected Start Year</th>': ''; //include start year if not unfunded
+            thead += '</tr></thead><tbody>';
+            html += thead;
+            features.forEach(function(item){
+                attributes = item.attributes
+                let region = attributes['REGION_CD']
+                let pin = attributes['PIN']
+                //Populate funded rows
+                html += `<tr><td class="sorting"> ${region}</td>`;
+                html += `<td>${onePageButtons(pin, region,onePages)}</td>`;
+                html += `<td><a data-toggle="modal" class="alt-link" data-target="#mapModal" onClick="showMapModal(${pin})" `;
+                html += `tooltip="Click for Project Map" tooltip-position="top">${attributes['PIN_DESC']}</a></td>`;
+                html += `<td>${attributes['PRIMARY_CONCEPT']}</td>`;
+                html += `<td>${formatter.format(attributes['PROJECT_VALUE'])}</td>`;
+                html += pn_status != 'unfunded' ? `<td class="${bgColorClass(attributes['FORECAST_ST_YR'])}">${attributes['FORECAST_ST_YR']}</td></tr>` : ''; //include start year if not unfunded
+            });
 
 
                 features = data.features
@@ -157,6 +177,7 @@ function drillVisual(pn_status, workshop, dom, groupOrder, aggregate, type, regi
         }
     });
 }
+
 //Helper function to build where clause
 function whereClauseBuilder(pn_status, workshop, region) {
     var whereClause = "";

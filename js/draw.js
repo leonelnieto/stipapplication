@@ -42,7 +42,6 @@ function drawConstruction(agg, workshop){
     drillVisual('construction',workshop,'constructionbyRegionTable','REGION_CD',agg,'table',region);
 }
 
-
 function drawUnfunded(agg, workshop){
     drillVisual('unfunded',workshop,'unfundedbyRegionChart','REGION_CD',agg,'chart',region);
     drillVisual('unfunded',workshop,'unfundedbyRegionTable','REGION_CD',agg,'table',region);
