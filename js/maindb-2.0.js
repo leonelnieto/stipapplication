@@ -20,6 +20,7 @@ function dataTableBuilder(pn_status, workshop, dom, region) {
     //Build where clause by filter
     var whereClause = whereClauseBuilder(pn_status, workshop, region);
     var query = sourceDataset + selectColumns + whereClause;
+    
 
     //fetch one page data 
     fetch('data/onepagers.json').then(function (response) {
@@ -30,6 +31,7 @@ function dataTableBuilder(pn_status, workshop, dom, region) {
             .then(function (response) {
                 return response.json();
             }).then(function (data) {
+                
                 let tableID = '#dataTable' + dom.substring(1);
                 features = data.features
 
@@ -40,6 +42,7 @@ function dataTableBuilder(pn_status, workshop, dom, region) {
                 }
                
                 if (!$.fn.dataTable.isDataTable(tableID)) {
+                    
                     //Where the magic occurs
                     columns = [
                         { "orderable": true },
@@ -64,6 +67,7 @@ function dataTableBuilder(pn_status, workshop, dom, region) {
                             'pdfHtml5'
                         ]
                     });
+                    
                     addRows(features, table)
                 }
             }).catch(function (err) {
@@ -148,7 +152,7 @@ function drillVisual(pn_status, workshop, dom, groupOrder, aggregate, type, regi
                 attributes = item.attributes;
                 if (groupOrder === "FORECAST_ST_YR") {
                     html += '<tr><td>' + attributes[groupOrder] + '</td>';
-                    html += '<td class="' + bgColorClass(attributes[groupOrder]) + '">' + formatter.format(attributes['aggregate']) + '</td></tr>';
+                    html += '<td class="' + attributes[groupOrder] + '">' + formatter.format(attributes['aggregate']) + '</td></tr>';
 
                 } else {
                     html += '<tr><td>' + attributes[groupOrder] + '</td>';

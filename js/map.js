@@ -1,12 +1,12 @@
 require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/FeatureLayer", "esri/widgets/Expand", "esri/widgets/BasemapToggle"],
     function (Map, MapView, Legend, FeatureLayer, Expand, BasemapToggle) {
-        let program =''
+        let program =28;
         let centerLong = -111.693657;
         let centerLat = 39.631301;
         let zoom = 2500000;
-        let region =0
+        let region;
 
-        let mapFilter = region ? "AND REGION_CD ='" + region + "'" : "";
+        let mapFilter = region ? `AND REGION_CD ="${region}"` : "";
         let selectedCounty = selectedMunicipality = selectedLegislative = selectedStatus = 0;
         //symbols for year lines
         const year2018 = { type: "simple-line", color: "#A87000", width: 4, style: "solid" };
@@ -76,7 +76,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             // definitionExpression: filter[program] + mapFilter //change filter to change dataset query
             // popupTemplate: { title: "{CONCEPT_DESC}", content: "{*}" } //the popup change be changed if we want
         });
-        console.log(layer)
+        
 
         let content = [{
             type: "fields",
@@ -165,11 +165,6 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
         view.ui.add(legend, "bottom-right");
         view.ui.add(basemapToggle, "top-right");
 
-        // layer.when(function () {
-
-            
-        // });
-
         window.mapLoaderDynamic = function (reg, prog) {
             program = prog;
             region = reg;
@@ -196,17 +191,20 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
                     break;
             }
             let sql = makeQuery();
-            console.log(sql)
             layer.definitionExpression = sql;
             resetQuery()
         }
-
+        // layer.when(function(){
+        //     resetQuery()
+        // })
         function getFeatures(sql, filters) {
             let query = layer.createQuery();
             query.where = sql
+            
 
             layer.queryFeatures(query).then(function (data) {
                 let features = data.features;
+                
                 collectAttributes(features, filters);
             });
         }
@@ -215,7 +213,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             selectedCounty = selectedMunicipality = selectedLegislative = selectedStatus = 0;
             const filters = buildFilter()
             let sql = makeQuery();
-
+            layer.definitionExpression = sql;
             getFeatures(sql, filters)
         }
 
@@ -279,21 +277,28 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             if (selectedCounty != 0) {
                 countyQuery = ` AND CNTY_NAME like '%${selectedCounty}%' `
             }
+            console.log(countyQuery)
             let municipalityQuery = "";
             if (selectedMunicipality != 0) {
                 municipalityQuery = ` AND Municipality_Name like '%${selectedMunicipality}%' `
             }
+            console.log(municipalityQuery)
             let legislativeQuery = "";
             if (selectedLegislative != 0 && selectedLegislative.includes("Senate")) {
                 legislativeQuery = ` AND UT_SENATE_DIST_NAME like '%${selectedLegislative.match(/\d+/)}%'`
             } else if (selectedLegislative != 0 && selectedLegislative.includes("House")) {
                 legislativeQuery = ` AND UT_House_Dist_Name like '%${selectedLegislative.match(/\d+/)}%'`
             }
+            console.log(legislativeQuery)
             let statusQuery = "";
             if (selectedStatus != 0) {
                 statusQuery = ` AND PIN_STAT_NM = '${selectedStatus}'`
             }
+            console.log(statusQuery)
+            console.log(mapFilter)
+            console.log(program)
             let sql = filter[program] + mapFilter + legislativeQuery + countyQuery + municipalityQuery + statusQuery;
+            console.log(sql)
 
             return sql
         }
@@ -344,8 +349,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             //create sets to remove duplicates
             for (let key in attributeCollection) {
                 attributeCollection[key] = new Set(attributeCollection[key])
-            }
-            console.log(attributeCollection)
+            }            
             makeDropdown(attributeCollection, filters)
         }
 
@@ -372,3 +376,4 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
 
         }
     });
+    

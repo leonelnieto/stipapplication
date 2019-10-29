@@ -236,14 +236,7 @@
               </button>
             </div>
             <div class="col-sm-2 mx-auto">
-              <button
-                type="button"
-                id="filterregion2"
-                region="1"
-                class="btn btn-info btn-sm btn-block filterregion"
-              >
-                Region 1
-              </button>
+                <button type="button" id="filterregion2" region="1" class="btn btn-info btn-sm btn-block filterregion"> Region 1 </button>
             </div>
             <div class="col-sm-2 mx-auto">
               <button
@@ -382,87 +375,43 @@
                       <h4 class="list-heading">Filter</h4>
                       <div id="queryDiv" class="esri-component esri-widget ">
                         <div
-                          id="queryForm"
-                          class="esri-component scroller esri-widget esri-feature-form"
-                        >
+                          id="queryForm" class="esri-component scroller esri-widget esri-feature-form">
                           <form class="esri-feature-form__form">
-                            <label class="esri-feature-form__label"
-                              >County
-                              <select
-                                aria-invalid="false"
-                                class="esri-input esri-feature-form__input esri-select"
-                                id="queryCounty"
-                                maxlength=""
-                              >
+                            <label class="esri-feature-form__label">County
+                              <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select" id="queryCounty" maxlength="">
                                 <option value="0">Select a County</option>
                               </select>
                             </label>
                             <label class="esri-feature-form__label"
                               >Municipality
-                              <select
-                                aria-invalid="false"
-                                class="esri-input esri-feature-form__input esri-select"
-                                id="queryMunicipality"
-                                maxlength=""
-                              >
+                              <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select" id="queryMunicipality" maxlength="">
                                 <option value="0">Select a Municipality</option>
                               </select>
                             </label>
-                            <label class="esri-feature-form__label"
-                              >Legislative District
-                              <select
-                                aria-invalid="false"
-                                class="esri-input esri-feature-form__input esri-select"
-                                id="queryDistrict"
-                                maxlength=""
-                              >
+                            <label class="esri-feature-form__label">Legislative District
+                              <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select" id="queryDistrict" maxlength="">
                                 <option value="0">Select a District</option>
                               </select>
                             </label>
-                            <label class="esri-feature-form__label"
-                              >PIN Status
-                              <select
-                                aria-invalid="false"
-                                class="esri-input esri-feature-form__input esri-select"
-                                id="queryStatus"
-                                maxlength=""
-                              >
+                            <label class="esri-feature-form__label">PIN Status
+                              <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select" id="queryStatus" maxlength="">
                                 <option value="0">Select a Status</option>
                               </select>
                             </label>
                           </form>
-                          <input
-                            type="submit"
-                            class="esri-button"
-                            value="Filter Projects"
-                            id="query"
-                          />
-                          <input
-                            type="submit"
-                            class="esri-button"
-                            value="Reset Filter"
-                            id="resetQuery"
-                          />
+                          <input type="submit" class="esri-button" value="Filter Projects" id="query"/>
+                          <input type="submit" class="esri-button" value="Reset Filter" id="resetQuery"/>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div
-                class="tab-pane fade"
-                id="pills-unfunded"
-                role="tabpanel"
-                aria-labelledby="pills-unfunded-tab"
-              >
+              <div class="tab-pane fade" id="pills-unfunded" role="tabpanel" aria-labelledby="pills-unfunded-tab">
                 <div class="row">
                   <div class="col-12">
                     <div id="pills-unfundedtbl">
-                      <table
-                        style="width:100%"
-                        id="dataTablepills-unfundedtbl"
-                        class="table table-striped table-hover"
-                      >
+                      <table style="width:100%" id="dataTablepills-unfundedtbl" class="table table-striped table-hover">
                         <thead>
                           <tr>
                             <th>Region</th>
@@ -478,28 +427,13 @@
                 </div>
                 <div class="row mt-5">
                   <div class="col-12">
-                    <button
-                      type="button"
-                      id="projVal"
-                      class="btn btn-outline-secondary btn-sm unfunded"
-                      agg="PROJECT_VALUE"
-                    >
+                    <button type="button" id="projVal" class="btn btn-outline-secondary btn-sm unfunded" agg="PROJECT_VALUE">
                       Project Value
                     </button>
-                    <button
-                      type="button"
-                      id="statDol"
-                      class="btn btn-outline-secondary btn-sm unfunded"
-                      agg="STATE_DOLLARS"
-                    >
+                    <button type="button" id="statDol" class="btn btn-outline-secondary btn-sm unfunded" agg="STATE_DOLLARS">
                       State Dollars
                     </button>
-                    <button
-                      type="button"
-                      id="fedDol"
-                      class="btn btn-outline-secondary btn-sm unfunded"
-                      agg="FED_DOLLARS"
-                    >
+                    <button type="button" id="fedDol" class="btn btn-outline-secondary btn-sm unfunded" agg="FED_DOLLARS">
                       Federal Dollars
                     </button>
                   </div>
@@ -509,10 +443,7 @@
                     <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title" id="byRegionTitle">Region</h5>
-                        <div
-                          id="unfundedbyRegionChart"
-                          style="height: 250px"
-                        ></div>
+                        <div id="unfundedbyRegionChart" style="height: 250px"></div>
                         <div id="unfundedbyRegionTable"></div>
                       </div>
                     </div>
@@ -523,30 +454,18 @@
                         <h5 class="card-title" id="byYearTitle">
                           Forecast Start Year
                         </h5>
-                        <div
-                          id="unfunedbyYearChart"
-                          style="height: 250px"
-                        ></div>
+                        <div id="unfunedbyYearChart" style="height: 250px"></div>
                         <div id="unfunedbyYearTable"></div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div
-                class="tab-pane fade"
-                id="pills-proposed"
-                role="tabpanel"
-                aria-labelledby="pills-proposed-tab"
-              >
+              <div class="tab-pane fade" id="pills-proposed" role="tabpanel" aria-labelledby="pills-proposed-tab">
                 <div class="row">
                   <div class="col-12">
                     <div id="pills-proposedtbl">
-                      <table
-                        style="width:100%"
-                        id="dataTablepills-proposedtbl"
-                        class="table table-striped table-hover"
-                      >
+                      <table style="width:100%" id="dataTablepills-proposedtbl" class="table table-striped table-hover">
                         <thead>
                           <tr>
                             <th>Region</th>
@@ -563,28 +482,13 @@
                 </div>
                 <div class="row mt-5">
                   <div class="col-12">
-                    <button
-                      type="button"
-                      id="projVal"
-                      class="btn btn-outline-secondary btn-sm proposed"
-                      agg="PROJECT_VALUE"
-                    >
+                    <button type="button" id="projVal" class="btn btn-outline-secondary btn-sm proposed" agg="PROJECT_VALUE">
                       Project Value
                     </button>
-                    <button
-                      type="button"
-                      id="statDol"
-                      class="btn btn-outline-secondary btn-sm proposed"
-                      agg="STATE_DOLLARS"
-                    >
+                    <button type="button" id="statDol" class="btn btn-outline-secondary btn-sm proposed" agg="STATE_DOLLARS">
                       State Dollars
                     </button>
-                    <button
-                      type="button"
-                      id="fedDol"
-                      class="btn btn-outline-secondary btn-sm proposed"
-                      agg="FED_DOLLARS"
-                    >
+                    <button type="button" id="fedDol" class="btn btn-outline-secondary btn-sm proposed" agg="FED_DOLLARS">
                       Federal Dollars
                     </button>
                   </div>
@@ -594,10 +498,7 @@
                     <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title">Region</h5>
-                        <div
-                          id="proposedbyRegionChart"
-                          style="height: 250px"
-                        ></div>
+                        <div id="proposedbyRegionChart" style="height: 250px"></div>
                         <div id="proposedbyRegionTable"></div>
                       </div>
                     </div>
@@ -606,30 +507,18 @@
                     <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title">Forecast Start Year</h5>
-                        <div
-                          id="proposedbyYearChart"
-                          style="height: 250px"
-                        ></div>
+                        <div id="proposedbyYearChart" style="height: 250px"></div>
                         <div id="proposedbyYearTable"></div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div
-                class="tab-pane fade"
-                id="pills-comapp"
-                role="tabpanel"
-                aria-labelledby="pills-comapp-tab"
-              >
+              <div class="tab-pane fade" id="pills-comapp" role="tabpanel" aria-labelledby="pills-comapp-tab">
                 <div class="row">
                   <div class="col-12">
                     <div id="pills-comapptbl">
-                      <table
-                        style="width:100%"
-                        id="dataTablepills-comapptbl"
-                        class="table table-striped table-hover"
-                      >
+                      <table style="width:100%" id="dataTablepills-comapptbl" class="table table-striped table-hover">
                         <thead>
                           <tr>
                             <th>Region</th>
@@ -646,28 +535,13 @@
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <button
-                      type="button"
-                      id="projVal"
-                      class="btn btn-outline-secondary btn-sm comapp"
-                      agg="PROJECT_VALUE"
-                    >
+                    <button type="button" id="projVal" class="btn btn-outline-secondary btn-sm comapp" agg="PROJECT_VALUE">
                       Project Value
                     </button>
-                    <button
-                      type="button"
-                      id="statDol"
-                      class="btn btn-outline-secondary btn-sm comapp"
-                      agg="STATE_DOLLARS"
-                    >
+                    <button type="button" id="statDol" class="btn btn-outline-secondary btn-sm comapp" agg="STATE_DOLLARS">
                       State Dollars
                     </button>
-                    <button
-                      type="button"
-                      id="fedDol"
-                      class="btn btn-outline-secondary btn-sm comapp"
-                      agg="FED_DOLLARS"
-                    >
+                    <button type="button" id="fedDol" class="btn btn-outline-secondary btn-sm comapp" agg="FED_DOLLARS">
                       Federal Dollars
                     </button>
                   </div>
@@ -677,10 +551,7 @@
                     <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title">Region</h5>
-                        <div
-                          id="comappbyRegionChart"
-                          style="height: 250px"
-                        ></div>
+                        <div id="comappbyRegionChart" style="height: 250px"></div>
                         <div id="comappbyRegionTable"></div>
                       </div>
                     </div>
@@ -696,20 +567,11 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="tab-pane fade"
-                id="pills-design"
-                role="tabpanel"
-                aria-labelledby="pills-design-tab"
-              >
+              <div class="tab-pane fade" id="pills-design" role="tabpanel" aria-labelledby="pills-design-tab">
                 <div class="row">
                   <div class="col-12">
                     <div id="pills-designtbl">
-                      <table
-                        style="width:100%"
-                        id="dataTablepills-designtbl"
-                        class="table table-striped table-hover"
-                      >
+                      <table style="width:100%" id="dataTablepills-designtbl" class="table table-striped table-hover">
                         <thead>
                           <tr>
                             <th>Region</th>
@@ -726,28 +588,13 @@
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <button
-                      type="button"
-                      id="projVal"
-                      class="btn btn-outline-secondary btn-sm design"
-                      agg="PROJECT_VALUE"
-                    >
+                    <button type="button" id="projVal" class="btn btn-outline-secondary btn-sm design" agg="PROJECT_VALUE">
                       Project Value
                     </button>
-                    <button
-                      type="button"
-                      id="statDol"
-                      class="btn btn-outline-secondary btn-sm design"
-                      agg="STATE_DOLLARS"
-                    >
+                    <button type="button" id="statDol" class="btn btn-outline-secondary btn-sm design" agg="STATE_DOLLARS">
                       State Dollars
                     </button>
-                    <button
-                      type="button"
-                      id="fedDol"
-                      class="btn btn-outline-secondary btn-sm design"
-                      agg="FED_DOLLARS"
-                    >
+                    <button type="button" id="fedDol" class="btn btn-outline-secondary btn-sm design" agg="FED_DOLLARS">
                       Federal Dollars
                     </button>
                   </div>
@@ -757,10 +604,7 @@
                     <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title">Region</h5>
-                        <div
-                          id="designbyRegionChart"
-                          style="height: 250px"
-                        ></div>
+                        <div id="designbyRegionChart" style="height: 250px"></div>
                         <div id="designbyRegionTable"></div>
                       </div>
                     </div>
@@ -776,20 +620,11 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="tab-pane fade"
-                id="pills-construction"
-                role="tabpanel"
-                aria-labelledby="pills-construction-tab"
-              >
+              <div class="tab-pane fade" id="pills-construction" role="tabpanel" aria-labelledby="pills-construction-tab">
                 <div class="row">
                   <div class="col-12">
                     <div id="pills-constructiontbl">
-                      <table
-                        style="width:100%"
-                        id="dataTablepills-constructiontbl"
-                        class="table table-striped table-hover"
-                      >
+                      <table style="width:100%" id="dataTablepills-constructiontbl" class="table table-striped table-hover">
                         <thead>
                           <tr>
                             <th>Region</th>
@@ -806,28 +641,13 @@
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <button
-                      type="button"
-                      id="projVal"
-                      class="btn btn-outline-secondary btn-sm construction"
-                      agg="PROJECT_VALUE"
-                    >
+                    <button type="button" id="projVal" class="btn btn-outline-secondary btn-sm construction" agg="PROJECT_VALUE">
                       Project Value
                     </button>
-                    <button
-                      type="button"
-                      id="statDol"
-                      class="btn btn-outline-secondary btn-sm construction"
-                      agg="STATE_DOLLARS"
-                    >
+                    <button type="button" id="statDol" class="btn btn-outline-secondary btn-sm construction" agg="STATE_DOLLARS">
                       State Dollars
                     </button>
-                    <button
-                      type="button"
-                      id="fedDol"
-                      class="btn btn-outline-secondary btn-sm construction"
-                      agg="FED_DOLLARS"
-                    >
+                    <button type="button" id="fedDol" class="btn btn-outline-secondary btn-sm construction" agg="FED_DOLLARS">
                       Federal Dollars
                     </button>
                   </div>
@@ -837,10 +657,7 @@
                     <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title">Region</h5>
-                        <div
-                          id="constructionbyRegionChart"
-                          style="height: 250px"
-                        ></div>
+                        <div id="constructionbyRegionChart" style="height: 250px"></div>
                         <div id="constructionbyRegionTable"></div>
                       </div>
                     </div>
@@ -849,10 +666,7 @@
                     <div class="card border-0">
                       <div class="card-body">
                         <h5 class="card-title">Forecast Start Year</h5>
-                        <div
-                          id="constructionbyYearChart"
-                          style="height: 250px"
-                        ></div>
+                        <div id="constructionbyYearChart" style="height: 250px"></div>
                         <div id="constructionbyYearTable"></div>
                       </div>
                     </div>
@@ -864,23 +678,13 @@
           </div>
         </section>
         <!-- Modal for Pin details -->
-        <div
-          class="modal fade"
-          id="myModal"
-          role="dialog"
-          style="z-index: 1050"
-        >
+        <div class="modal fade" id="myModal" role="dialog" style="z-index: 1050">
           <div class="modal-dialog">
             <!-- Pin Modal content-->
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="pinNum">Null</h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -891,11 +695,7 @@
               </div>
               <div class="modal-footer">
                 <span id="programBriefingButton"></span>
-                <button
-                  type="button"
-                  class="btn btn-default"
-                  data-dismiss="modal"
-                >
+                <button type="button" class="btn btn-default" data-dismiss="modal">
                   Close
                 </button>
               </div>
@@ -904,23 +704,13 @@
         </div>
         <!-- END Modal for Pin details -->
         <!-- Modal for Project Map -->
-        <div
-          class="modal fade"
-          id="mapModal"
-          role="dialog"
-          style="z-index: 1050"
-        >
+        <div class="modal fade" id="mapModal" role="dialog" style="z-index: 1050">
           <div class="modal-dialog modal-full">
             <!-- Pin Modal content-->
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="MapModalTitle">Project Map</h5>
-                <button
-                  type="button"
-                  class="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -928,11 +718,7 @@
                 <p>If you seem run!!! Jk the map failed to load.</p>
               </div>
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-default"
-                  data-dismiss="modal"
-                >
+                <button type="button" class="btn btn-default" data-dismiss="modal">
                   Close
                 </button>
               </div>
@@ -947,11 +733,7 @@
     </div>
     <!-- Bootstrap core JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
-      integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <!-- jQuery Custom Scroller CDN -->
@@ -986,10 +768,10 @@
     <script src="js/map.js"></script>
     <script src="js/navigate.js"></script>
     <script>
-      document.addEventListener('load', function() {
+      window.addEventListener('load', function () {
       // your code here
       draw("all", 28);
-      }, false);
+      });
     </script>
   </body>
 </html>
