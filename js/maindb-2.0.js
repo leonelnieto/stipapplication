@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-// let STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects/MapServer/0/" //live data
-let STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects2019/MapServer/0/" //test data
+let STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects/MapServer/0/" //live data
+// let STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects2019/MapServer/0/" //test data
 let sourceDataset = STIPData + "query?f=json&returnGeometry=false";
 let selectColumns = "&outFields=PIN,WORKSHOP_CAT,STIP_WORKSHOP,PROJECT_MANAGER,REGION_CD,COMM_APRV_IND,PIN_DESC,PRIMARY_CONCEPT,PROJECT_VALUE,PLANNED_CONSTRUCTION_YEAR,PROJECTED_START_DATE,PROGRAM,PUBLIC_DESC,FORECAST_ST_YR,FED_DOLLARS,STATE_DOLLARS"
 //Helper currency formater
@@ -38,16 +38,9 @@ function dataTableBuilder(pn_status, workshop, dom, region) {
                     table.clear();
                     addRows(features, table)
                 }
-
+               
                 if (!$.fn.dataTable.isDataTable(tableID)) {
                     //Where the magic occurs
-                    var html = '';
-                    var thead = '<table style="width:100%" id="dataTable' + dom.substring(1) + '" class="table table-striped table-hover">';
-                    thead += '<thead><tr><th>Region</th><th>PIN</th><th>PIN Description</th><th>Primary Concept</th><th>Project Value</th>';
-                    thead += pn_status != 'unfunded' ? '<th>Projected Start Year</th>' : ''; //include start year if not unfunded
-                    thead += '</tr></thead></table>';
-                    html += thead;
-               
                     columns = [
                         { "orderable": true },
                         { "orderable": true },
@@ -58,9 +51,7 @@ function dataTableBuilder(pn_status, workshop, dom, region) {
                     //include column for start year if not unfunded
                     if (pn_status != 'unfunded') {
                         columns.push({ "orderable": true });
-                    }                    
-
-                    $(dom).append(html);
+                    }                   
                     const table = $('#dataTable' + dom.substring(1)).DataTable({
                         "pagingType": "full_numbers",
                         retrieve: true,
@@ -80,31 +71,29 @@ function dataTableBuilder(pn_status, workshop, dom, region) {
             });
 
 
-            function addRows(features, table) {
-                features.forEach(function (item) {
-                    attributes = item.attributes
-                    let region = attributes['REGION_CD']
-                    let pin = attributes['PIN']
-        
-                    let row = [
-                        `${region}`,
-                        `${onePageButtons(pin, region, onePages)}`,
-                        `<a data-toggle="modal" class="alt-link" data-target="#mapModal" onClick="showMapModal(${pin})" tooltip="Click for Project Map" tooltip-position="top">${attributes['PIN_DESC']}</a>`,
-                        `${attributes['PRIMARY_CONCEPT']}`,
-                        `${formatter.format(attributes['PROJECT_VALUE'])}`
-                    ];
-        
-                    pn_status != 'unfunded' ? row.push(`${attributes['FORECAST_ST_YR']}`) : ''
-                   
-                    table.row.add(row);        
-                });
-                table.draw();
-            }
+        function addRows(features, table) {
+            features.forEach(function (item) {
+                attributes = item.attributes
+                let region = attributes['REGION_CD']
+                let pin = attributes['PIN']
+
+                let row = [
+                    `${region}`,
+                    `${onePageButtons(pin, region, onePages)}`,
+                    `<a data-toggle="modal" class="alt-link" data-target="#mapModal" onClick="showMapModal(${pin})" tooltip="Click for Project Map" tooltip-position="top">${attributes['PIN_DESC']}</a>`,
+                    `${attributes['PRIMARY_CONCEPT']}`,
+                    `${formatter.format(attributes['PROJECT_VALUE'])}`
+                ];
+
+                pn_status != 'unfunded' ? row.push(`${attributes['FORECAST_ST_YR']}`) : ''
+
+                table.row.add(row);
+            });
+            table.draw();
+        }
     });
 
 }
-
-
 
 function onePageButtons(pin, region, data) {
     //var onePagerButton = '<a href="#" class="btn btn-primary" disabled>No Program Briefing</a>';
@@ -131,7 +120,7 @@ function drillVisual(pn_status, workshop, dom, groupOrder, aggregate, type, regi
         return response.json();
     }).then(function (data) {
         features = data.features;
-        
+
         //Check type and draw whats requested
         if (type === 'chart') {
             var x = [];
