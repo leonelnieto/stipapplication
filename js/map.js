@@ -7,7 +7,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
         let region;
 
         let mapFilter = region ? `AND REGION_CD ="${region}"` : "";
-        let selectedCounty = selectedMunicipality = selectedLegislative = selectedStatus = 0;
+        let selectedCounty = selectedMunicipality = selectedLegislative = selectedStatus =selectedMPO= 0;
         //symbols for year lines
         const year2018 = { type: "simple-line", color: "#A87000", width: 4, style: "solid" };
         const year2019 = { type: "simple-line", color: "#4ce600", width: 4, style: "solid" };
@@ -190,27 +190,22 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
                     zoom = 1400000;
                     break;
             }
-            let sql = makeQuery();
-            layer.definitionExpression = sql;
             resetQuery()
         }
-        // layer.when(function(){
-        //     resetQuery()
-        // })
         function getFeatures(sql, filters) {
             let query = layer.createQuery();
             query.where = sql
             
-
             layer.queryFeatures(query).then(function (data) {
                 let features = data.features;
+                
                 
                 collectAttributes(features, filters);
             });
         }
 
         function resetQuery() {
-            selectedCounty = selectedMunicipality = selectedLegislative = selectedStatus = 0;
+            selectedCounty = selectedMunicipality = selectedLegislative = selectedStatus = selectedMPO = 0;
             const filters = buildFilter()
             let sql = makeQuery();
             layer.definitionExpression = sql;
@@ -219,7 +214,9 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
 
         function buildFilter() {
             filters = []
-
+            if (selectedMPO == 0){
+                filters.push("MPO")
+            }
             if (selectedCounty == 0) {
                 filters.push("County")
             }
@@ -234,6 +231,13 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
                 filters.push("Status")
             }
             return filters
+        }
+
+        document.getElementById("queryMPO").onchange = function () {         
+            selectedMPO = document.getElementById("queryMPO").value;
+            const filters = buildFilter()
+            let sql = makeQuery();
+            getFeatures(sql, filters)
         }
 
         document.getElementById("queryCounty").onchange = function () {
@@ -267,7 +271,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
 
         document.getElementById("query").onclick = function () {
             let sql = makeQuery();
-            console.log(sql)
+            
             layer.definitionExpression = sql;
         };
 
@@ -277,27 +281,30 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             if (selectedCounty != 0) {
                 countyQuery = ` AND CNTY_NAME like '%${selectedCounty}%' `
             }
-            console.log(countyQuery)
+
+            let mpoQuery = ""
+            if(selectedMPO !=0){
+                mpoQuery = ` AND MPO_Name like '%${selectedMPO}%'`
+            }
+            
             let municipalityQuery = "";
             if (selectedMunicipality != 0) {
                 municipalityQuery = ` AND Municipality_Name like '%${selectedMunicipality}%' `
             }
-            console.log(municipalityQuery)
+            
             let legislativeQuery = "";
             if (selectedLegislative != 0 && selectedLegislative.includes("Senate")) {
                 legislativeQuery = ` AND UT_SENATE_DIST_NAME like '%${selectedLegislative.match(/\d+/)}%'`
             } else if (selectedLegislative != 0 && selectedLegislative.includes("House")) {
                 legislativeQuery = ` AND UT_House_Dist_Name like '%${selectedLegislative.match(/\d+/)}%'`
             }
-            console.log(legislativeQuery)
+           
             let statusQuery = "";
             if (selectedStatus != 0) {
                 statusQuery = ` AND PIN_STAT_NM = '${selectedStatus}'`
             }
-            console.log(statusQuery)
-            console.log(mapFilter)
-            console.log(program)
-            let sql = filter[program] + mapFilter + legislativeQuery + countyQuery + municipalityQuery + statusQuery;
+           
+            let sql = filter[program] + mapFilter + legislativeQuery + countyQuery + municipalityQuery + statusQuery + mpoQuery;
             console.log(sql)
 
             return sql
@@ -325,22 +332,25 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
 
         //collect attributes from features and put in arrays
         function collectAttributes(features, filters) {
-            const attribute_name = { County: 'CNTY_NAME', Municipality: 'Municipality_Name', Status: 'PIN_STAT_NM', House: 'UT_House_Dist_Name', Senate: 'UT_SENATE_DIST_NAME' }
+            
+            const attribute_name = { County: 'CNTY_NAME', Municipality: 'Municipality_Name', Status: 'PIN_STAT_NM', House: 'UT_House_Dist_Name', Senate: 'UT_SENATE_DIST_NAME', MPO: 'MPO_Name'}
             let attributeCollection = {}
             features.forEach(function (feature) {
                 filters.forEach(function (id) {
-                    let current_attribute = feature.attributes[attribute_name[id]]
+                    
+                    let currentAttribute = feature.attributes[attribute_name[id]]
                     //if more than one value for attribute, split and concat to array
-                    if (current_attribute.indexOf(',') > -1) {
-                        let existing
-                        let cross = current_attribute.split(',');
+                    
+                    if (currentAttribute.indexOf(',') > -1) {
+                        let existing;
+                        let cross = currentAttribute.split(',');
                         //if key doesn't exist, create value as empty array, else set existing to key value
                         !(id in attributeCollection) ? existing = [] : existing = attributeCollection[id]
                         let merged = existing.concat(cross);
                         attributeCollection[id] = merged;
                     } else {
                         //if key doesn't exist in object, create with current attribute as first value in array, else push  current attribute
-                        !(id in attributeCollection) ? attributeCollection[id] = [current_attribute] : attributeCollection[id].push(current_attribute)
+                        !(id in attributeCollection) ? attributeCollection[id] = [currentAttribute] : attributeCollection[id].push(currentAttribute)
 
                     }
                 });
@@ -350,12 +360,13 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             for (let key in attributeCollection) {
                 attributeCollection[key] = new Set(attributeCollection[key])
             }            
+            
             makeDropdown(attributeCollection, filters)
         }
 
 
         function makeDropdown(attributeCollection) {
-            let selectIDs = { County: "queryCounty", Municipality: "queryMunicipality", Status: "queryStatus", District: "queryDistrict" }
+            let selectIDs = { County: "queryCounty", Municipality: "queryMunicipality", Status: "queryStatus", District: "queryDistrict", MPO: "queryMPO" }
 
             for (let key in attributeCollection) {
                 let select = document.getElementById(selectIDs[key]);
@@ -376,4 +387,3 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
 
         }
     });
-    

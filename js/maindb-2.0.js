@@ -646,26 +646,4 @@ function getAllUrlParams(url) {
 
     return obj;
 }
-//Path Parser
-//This was put together in haste..... Verify and optimize
-function pathClearandReload(region) {
-    var load = '';
-    if (region === 0 || region === null || region === undefined) {
-        load += window.location.href;
-    } else {
-        load += window.location.pathname + "?region=" + region;
-    }
 
-    window.location.href = load;
-}
-
-for (i = 0; i < document.querySelectorAll(".filterregion").length; i++) {
-    document.querySelectorAll(".filterregion")[i].addEventListener("click", function (event) {
-        if (event.target.attributes.region.value === "all") {
-            window.location = window.location.pathname;
-        }
-        else {
-            pathClearandReload(event.target.attributes.region.value);
-        }
-    });
-}
