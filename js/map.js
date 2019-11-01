@@ -142,14 +142,14 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             scale: zoom //larger number zooms out, smaller zooms in 
         });
         map.add(layer);
-        var legend = new Legend({
+        let legend = new Legend({
             view: view,
             layerInfos: [{
                 layer: layer,
                 title: "Legend"
             }]
         });
-        var basemapToggle = new BasemapToggle({
+        let basemapToggle = new BasemapToggle({
             view: view,
             nextBasemap: "satellite"
         });

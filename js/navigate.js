@@ -28,7 +28,7 @@ sections = {
 for(i=0;i<document.querySelectorAll("#sidebarNav li").length;i++){
     document.querySelectorAll("#sidebarNav li a")[i].addEventListener("click", function(event){
         if(event.target.attributes.section.value !== undefined){
-            var section = event.target.attributes.section.value;
+            let section = event.target.attributes.section.value;
             console.log(sections[section][0], sections[section][1])
             draw(sections[section][0], sections[section][1]);
         }
@@ -38,7 +38,7 @@ for(i=0;i<document.querySelectorAll("#sidebarNav li").length;i++){
 //Path Parser
 // This was put together in haste..... Verify and optimize
 function pathClearandReload(region) {
-    var load = '';
+    let load = '';
     if (region === 0 || region === null || region === undefined) {
         load += window.location.href;
     } else {

@@ -1,4 +1,4 @@
-var region = getAllUrlParams(window.location.href)["region"];
+let region = getAllUrlParams(window.location.href)["region"];
 
 if(region === undefined){
     region = 0;
@@ -51,6 +51,7 @@ function drawUnfunded(agg, workshop){
 
 for(i=0;i<document.querySelectorAll(".proposed").length;i++){
     document.querySelectorAll(".proposed")[i].addEventListener("click", function(event){
+        console.log(event.target.attributes)
         setTimeout(function(){drawProposed(event.target.attributes.agg.value, event.target.attributes.workshop.value)},500)
     })
 };

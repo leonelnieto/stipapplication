@@ -18,8 +18,8 @@ const formatter = new Intl.NumberFormat('en-US', {
 //Query Dataset then build table
 function dataTableBuilder(pn_status, workshop, dom, region) {
     //Build where clause by filter
-    var whereClause = whereClauseBuilder(pn_status, workshop, region);
-    var query = sourceDataset + selectColumns + whereClause;
+    let whereClause = whereClauseBuilder(pn_status, workshop, region);
+    let query = sourceDataset + selectColumns + whereClause;
     
 
     //fetch one page data 
@@ -114,12 +114,12 @@ function onePageButtons(pin, region, data) {
 //Drill Chart takes type parameter for table or graph
 function drillVisual(pn_status, workshop, dom, groupOrder, aggregate, type, region) {
 
-    var whereClause = whereClauseBuilder(pn_status, workshop, region);
+    let whereClause = whereClauseBuilder(pn_status, workshop, region);
     let statistic = `[{'statisticType': 'SUM', 'onStatisticField': '${aggregate}', 'outStatisticFieldName': 'aggregate'}]`
-    var vizQueryAgg = `&outStatistics=${statistic}`;
-    var vizQueryGroup = `&groupByFieldsForStatistics=${groupOrder}`;
-    var vizQueryOrder = `&orderByFields=${groupOrder}`;
-    var url = sourceDataset + vizQueryAgg + whereClause + vizQueryGroup + vizQueryOrder;
+    let vizQueryAgg = `&outStatistics=${statistic}`;
+    let vizQueryGroup = `&groupByFieldsForStatistics=${groupOrder}`;
+    let vizQueryOrder = `&orderByFields=${groupOrder}`;
+    let url = sourceDataset + vizQueryAgg + whereClause + vizQueryGroup + vizQueryOrder;
     fetch(url).then(function (response) {
         return response.json();
     }).then(function (data) {
@@ -127,27 +127,27 @@ function drillVisual(pn_status, workshop, dom, groupOrder, aggregate, type, regi
 
         //Check type and draw whats requested
         if (type === 'chart') {
-            var x = [];
-            var y = [];
+            let x = [];
+            let y = [];
             features.forEach(function (item) {
                 attributes = item.attributes;
                 x.push(attributes[groupOrder]);
                 y.push(formatter.format(attributes["aggregate"])); //TODO
             });
-            var trace1 = {
+            let trace1 = {
                 x: x,
                 y: y,
                 name: 'Project Value',
                 type: 'bar'
             };
-            var data = [trace1];
-            var layout = {
+            let data = [trace1];
+            let layout = {
                 yaxis: { title: '$', hoverformat: '$0f' }, xaxis: { type: 'category' },
             };
             Plotly.newPlot(dom, data, layout, { responsive: true });
         } else if (type === 'table') {
-            var col = (groupOrder === "REGION_CD") ? "Region" : "Year";
-            var html = '<table class="table"><thead><tr><th>' + col + '</th><th>Dollars</th></thead><tbody>';
+            let col = (groupOrder === "REGION_CD") ? "Region" : "Year";
+            let html = '<table class="table"><thead><tr><th>' + col + '</th><th>Dollars</th></thead><tbody>';
             features.forEach(function (item) {
                 attributes = item.attributes;
                 if (groupOrder === "FORECAST_ST_YR") {
@@ -167,7 +167,7 @@ function drillVisual(pn_status, workshop, dom, groupOrder, aggregate, type, regi
 
 //Helper function to build where clause
 function whereClauseBuilder(pn_status, workshop, region) {
-    var whereClause = "";
+    let whereClause = "";
     if (workshop === "all") {
         workshop = "";
     } else {
@@ -199,7 +199,7 @@ function whereClauseBuilder(pn_status, workshop, region) {
 }
 // Helpfer function gets year and returns bg color class
 function bgColorClass(year) {
-    var bg = '';
+    let bg = '';
     year = year !== null ? parseInt(year) : 0;
     switch (year) {
         case 2018:
@@ -276,7 +276,7 @@ function showMapModal(pin) {
 };
 //Function to parse date string
 function dateTransform(str) {
-    var datize = new Date(str);
+    let datize = new Date(str);
     datize = datize.toDateString();
     return datize;
 }
@@ -317,7 +317,7 @@ function projectManagers(dom) {
             }
             html += `<td class="sorting">${attributes['pins']}</td></tr>`;
         });
-        var tfoot = "</tbody></table>";
+        let tfoot = "</tbody></table>";
         html += tfoot;
         $(dom).append(html);
         $('#PMsDataTable').DataTable({
@@ -369,7 +369,7 @@ function workshopCategories(dom) {
             }
             html += `<td class="sorting">${attributes['pins']}</td></tr>`;
         });
-        var tfoot = "</tbody></table>";
+        let tfoot = "</tbody></table>";
         html += tfoot;
         $(dom).append(html);
         $('#workshopsDataTable').DataTable({
@@ -399,8 +399,8 @@ function pingPMs(PM, dom) {
         return response.json();
     }).then(function (data) {
         let features = data.features;
-        var html = '';
-        var thead = '<table style="width:100%" id="PMPingTable" class="table table-striped table-hover">';
+        let html = '';
+        let thead = '<table style="width:100%" id="PMPingTable" class="table table-striped table-hover">';
         thead += '<thead><tr><th class="text-left">PINs</th>';
         thead += '<th>Pin Description</th><th>Pin Status</th><th>Region</th></tr></thead><tbody>';
         html += thead;
@@ -412,7 +412,7 @@ function pingPMs(PM, dom) {
             html += '<td>' + attributes['PIN_STAT_NM'] + '</td>';
             html += '<td>' + attributes['REGION_CD'] + '</td></tr>';
         });
-        var tfoot = "</tbody></table>";
+        let tfoot = "</tbody></table>";
         html += tfoot;
         $('#PMName').empty();
         $(dom).empty();
@@ -443,8 +443,8 @@ function pingWorkshop(workshop, dom) {
         return response.json();
     }).then(function (data) {
         let features = data.features;
-        var html = '';
-        var thead = '<table style="width:100%" id="workshopPingTable" class="table table-striped table-hover">';
+        let html = '';
+        let thead = '<table style="width:100%" id="workshopPingTable" class="table table-striped table-hover">';
         thead += '<thead><tr><th class="text-left">PINs</th>';
         thead += '<th>Pin Description</th><th>Pin Status</th><th>Region</th></tr></thead><tbody>';
         html += thead;
@@ -456,7 +456,7 @@ function pingWorkshop(workshop, dom) {
             html += '<td>' + attributes['PIN_STAT_NM'] + '</td>';
             html += '<td>' + attributes['REGION_CD'] + '</td></tr>';
         });
-        var tfoot = "</tbody></table>";
+        let tfoot = "</tbody></table>";
         html += tfoot;
         $('#workshopName').empty();
         $(dom).empty();
@@ -490,9 +490,9 @@ function onepagerSummaryTable(dom) {
             return response.json();
         }).then(function (data) {
             features = data.features;
-            var flag = 0;
-            var html = '';
-            var thead = '<table style="width:100%" id="onePagerSummaryTable" class="table table-striped table-hover">';
+            let flag = 0;
+            let html = '';
+            let thead = '<table style="width:100%" id="onePagerSummaryTable" class="table table-striped table-hover">';
             thead += '<thead><tr><th class="text-left">Workshop</th>';
             thead += '<th>Region</th><th>PIN</th><th>One Pager</th></tr></thead><tbody>';
             html += thead;
@@ -503,7 +503,7 @@ function onepagerSummaryTable(dom) {
                 html += '<td>' + attributes['PIN'] + '</td>';
                 //Reset the flag
                 flag = 0;
-                for (var l = 0; l < onePagers.length; l++) {
+                for (let l = 0; l < onePagers.length; l++) {
                     //Search for pin in onepager json file, if found flip the flag..
                     if (onePagers[l]['PIN'] === attributes['PIN']) {
                         flag = 1;
@@ -517,7 +517,7 @@ function onepagerSummaryTable(dom) {
                 }
 
             });
-            var tfoot = "</tbody></table>";
+            let tfoot = "</tbody></table>";
             html += tfoot;
             $(dom).append(html);
             $('#onePagerSummaryTable').DataTable({
@@ -546,8 +546,8 @@ function printSourceData(dom) {
         return response.json();
     }).then(function (data) {
         features = data.features;
-        var html = '';
-        var thead = '<table style="width:100%" id="sourceDataTable" class="table table-striped table-hover">';
+        let html = '';
+        let thead = '<table style="width:100%" id="sourceDataTable" class="table table-striped table-hover">';
         thead += '<thead><tr><th>PIN</th><th>PIN Description</th><th>PIN Status</th><th>Project Location</th><th>Project Value</th>';
         thead += '<th>Region</th><th>Planned Construction Year</th><th>Projected Start Year</th><th>Workshop Category</th></tr></thead><tbody>';
         html += thead;
@@ -563,7 +563,7 @@ function printSourceData(dom) {
             html += '<td>' + attributes['FORECAST_ST_YR'] + '</td>';
             html += '<td>' + attributes['WORKSHOP_CAT'] + '</td></tr>';
         });
-        var tfoot = "</tbody></table>";
+        let tfoot = "</tbody></table>";
         html += tfoot;
         $(dom).append(html);
         $('#sourceDataTable').DataTable({
@@ -595,33 +595,33 @@ function printSourceData(dom) {
 //Helper function to get URL Vars
 function getAllUrlParams(url) {
     // get query string from url (optional) or window
-    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+    let queryString = url ? url.split('?')[1] : window.location.search.slice(1);
     // we'll store the parameters here
-    var obj = {};
+    let obj = {};
     // if query string exists
     if (queryString) {
         // stuff after # is not part of query string, so get rid of it
         queryString = queryString.split('#')[0];
         // split our query string into its component parts
-        var arr = queryString.split('&');
-        for (var i = 0; i < arr.length; i++) {
+        let arr = queryString.split('&');
+        for (let i = 0; i < arr.length; i++) {
             // separate the keys and the values
-            var a = arr[i].split('=');
+            let a = arr[i].split('=');
             // set parameter name and value (use 'true' if empty)
-            var paramName = a[0];
-            var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
+            let paramName = a[0];
+            let paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
             // (optional) keep case consistent
             paramName = paramName.toLowerCase();
             if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
             // if the paramName ends with square brackets, e.g. colors[] or colors[2]
             if (paramName.match(/\[(\d+)?\]$/)) {
                 // create key if it doesn't exist
-                var key = paramName.replace(/\[(\d+)?\]/, '');
+                let key = paramName.replace(/\[(\d+)?\]/, '');
                 if (!obj[key]) obj[key] = [];
                 // if it's an indexed array e.g. colors[2]
                 if (paramName.match(/\[\d+\]$/)) {
                     // get the index value and add the entry at the appropriate position
-                    var index = /\[(\d+)\]/.exec(paramName)[1];
+                    let index = /\[(\d+)\]/.exec(paramName)[1];
                     obj[key][index] = paramValue;
                 } else {
                     // otherwise add the value to the end of the array
