@@ -294,9 +294,9 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             
             let legislativeQuery = "";
             if (selectedLegislative != 0 && selectedLegislative.includes("Senate")) {
-                legislativeQuery = ` AND UT_SENATE_DIST_NAME like '%${selectedLegislative.match(/\d+/)}%'`
+                legislativeQuery = ` AND UT_SENATE_DIST_NAME like '${selectedLegislative}'`
             } else if (selectedLegislative != 0 && selectedLegislative.includes("House")) {
-                legislativeQuery = ` AND UT_House_Dist_Name like '%${selectedLegislative.match(/\d+/)}%'`
+                legislativeQuery = ` AND UT_House_Dist_Name like '${selectedLegislative}'`
             }
            
             let statusQuery = "";
@@ -318,7 +318,9 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             for (let key in attributeCollection) {
                 let sortedAttributes = []
                 if (key == "House" || key == "Senate") {
-                    sortedAttributes = attributeCollection[key].sort((a, b) => a - b);
+                    let stripped = attributeCollection[key].map(leg => leg.replace(/[^0-9\.]+/g, ""))
+                    ;
+                    sortedAttributes = stripped.sort((a, b) => a - b);
                     (key == "House") ? house = sortedAttributes.map(d => `House District ${d}`) : senate = sortedAttributes.map(d => `Senate District ${d}`)
                 } else {
                     sortedAttributes = attributeCollection[key].sort();
@@ -337,7 +339,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             let attributeCollection = {}
             features.forEach(function (feature) {
                 filters.forEach(function (id) {
-                    
+                  
                     let currentAttribute = feature.attributes[attribute_name[id]]
                     //if more than one value for attribute, split and concat to array
                     
