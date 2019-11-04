@@ -318,8 +318,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             for (let key in attributeCollection) {
                 let sortedAttributes = []
                 if (key == "House" || key == "Senate") {
-                    let stripped = attributeCollection[key].map(leg => leg.replace(/[^0-9\.]+/g, ""))
-                    ;
+                    let stripped = attributeCollection[key].map(leg => leg.replace(/[^0-9\.]+/g, ""));
                     sortedAttributes = stripped.sort((a, b) => a - b);
                     (key == "House") ? house = sortedAttributes.map(d => `House District ${d}`) : senate = sortedAttributes.map(d => `Senate District ${d}`)
                 } else {
