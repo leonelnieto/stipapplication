@@ -37,36 +37,36 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             ]
         };
         //Map Query Statements
-        const filter = ["WORKSHOP_CAT = 'Transportation Investment Funds' AND STIP_WORKSHOP_YR = '2019'", //0 TransportationInvestmentFunds - no records
-            "WORKSHOP_CAT = 'Transportation Solutions' AND STIP_WORKSHOP_YR = '2019'",//1 TransportationSolutions
-            "WORKSHOP_CAT = 'Contingency Fund' AND STIP_WORKSHOP_YR = '2019'", //2 ContingencyFund - no records
-            "STIP_WORKSHOP_YR = '2019' AND (WORKSHOP_CAT = 'Preservation High Volume' OR WORKSHOP_CAT = 'Rehabilitation High Volume')", //3 PavementHighVolume 
-            "STIP_WORKSHOP_YR = '2019' AND (WORKSHOP_CAT = 'Preservation Low Volume' OR WORKSHOP_CAT = 'Rehabilitation Low Volume')", //4 PavementLowVolume
-            "WORKSHOP_CAT = 'Bridge Preservation' AND STIP_WORKSHOP_YR = '2019'", //5 BridgePreservation
-            "WORKSHOP_CAT = 'Bridge Replacement and Rehabilitation' AND STIP_WORKSHOP_YR = '2019'", //6 BridgeReplacementandRehabilitation
-            "WORKSHOP_CAT = 'HSIP - Highway Safety Improvement' AND STIP_WORKSHOP_YR = '2019'", //7 HighwaySafetyImprovement
-            "WORKSHOP_CAT = 'SSIP - Safety Spot Improvement' AND STIP_WORKSHOP_YR = '2019'", //8 SafetySpotImprovement - I think this one is being retired
-            "WORKSHOP_CAT = 'Barrier Treatments' AND STIP_WORKSHOP_YR = '2019'", //9 BarrierTreatments - no records
-            "WORKSHOP_CAT = 'Small Area Lighting' AND STIP_WORKSHOP_YR = '2019'", //10 SmallAreaLighting - no records
-            "WORKSHOP_CAT = 'Safe Routes to Schools' AND STIP_WORKSHOP_YR = '2019'", //11 SafeRoutestoSchools - no records
-            "WORKSHOP_CAT = 'Sign Modification & Replacement' AND STIP_WORKSHOP_YR = '2019'",//12 SignModificationReplacement - no records
-            "WORKSHOP_CAT = 'Railway-Highway Grade Crossing' AND STIP_WORKSHOP_YR = '2019'", //13 RailwayHighwayGradeCrossing
-            "WORKSHOP_CAT = 'New Traffic Signals' AND STIP_WORKSHOP_YR = '2019'", //14 NewTrafficSignals
-            "WORKSHOP_CAT = 'Freight' AND STIP_WORKSHOP_YR = '2019'",//15 Freight - no records
-            "WORKSHOP_CAT = 'Off-System Bridge' AND STIP_WORKSHOP_YR = '2019'", //16 OffSystemBridge - no records
-            "WORKSHOP_CAT = 'Non-Urban' AND STIP_WORKSHOP_YR = '2019'", //17 NonUrban - no records
-            "WORKSHOP_CAT = 'Small Urban' AND STIP_WORKSHOP_YR = '2019'", //18 SmallUrban - no records
-            "WORKSHOP_CAT = 'State Park Access' AND STIP_WORKSHOP_YR = '2019'", //19 StateParkAccess - no records
-            "WORKSHOP_CAT = 'Transportation Alternatives' AND STIP_WORKSHOP_YR = '2019'", //20 TransportationAlternatives
-            "WORKSHOP_CAT = 'Environmental Studies' AND STIP_WORKSHOP_YR = '2019'", //21 EnvironmentalStudies - no records
-            "WORKSHOP_CAT = 'ATMS Asset Management' AND STIP_WORKSHOP_YR = '2019'", //22 ATMSAssetManagement - no records
-            "WORKSHOP_CAT = 'Federal Lands Access Program' AND STIP_WORKSHOP_YR = '2019'", //23 FederalLandsAccessProgram - no records
-            "WORKSHOP_CAT = 'Other' AND STIP_WORKSHOP_YR = '2019'", //24 Other - no records
-            "STIP_WORKSHOP_YR = '2019' AND (WORKSHOP_CAT = 'HSIP - Highway Safety Improvement' OR WORKSHOP_CAT = 'Safe Routes to Schools' OR WORKSHOP_CAT = 'New Traffic Signals' OR WORKSHOP_CAT = 'Railway-Highway Grade Crossing')", //25 TrafficSafety - is this one redundant?
-            "WORKSHOP_CAT = 'MPO' AND STIP_WORKSHOP_YR = '2019'", //26 LocalGovernmentMPOs no records
-            "WORKSHOP_CAT = 'Reconstruction High Volume' AND STIP_WORKSHOP_YR = '2019'", //27 PavementLowVolume
-            "STIP_WORKSHOP_YR = '2019'", //noquery
-            "STIP_WORKSHOP_YR = '2019' AND (WORKSHOP_CAT = 'Bridge Preservation' OR WORKSHOP_CAT = 'Bridge Replacement and Rehabilitation')" //29 All Structures
+        const filter = ["WORKSHOP_CAT = 'Transportation Investment Funds'", //0 TransportationInvestmentFunds - no records
+            "WORKSHOP_CAT = 'Transportation Solutions'",//1 TransportationSolutions
+            "WORKSHOP_CAT = 'Contingency Fund'", //2 ContingencyFund - no records
+            "WORKSHOP_CAT = 'Preservation High Volume' OR WORKSHOP_CAT = 'Rehabilitation High Volume'", //3 PavementHighVolume 
+            "WORKSHOP_CAT = 'Preservation Low Volume' OR WORKSHOP_CAT = 'Rehabilitation Low Volume'", //4 PavementLowVolume
+            "WORKSHOP_CAT = 'Bridge Preservation'", //5 BridgePreservation
+            "WORKSHOP_CAT = 'Bridge Replacement and Rehabilitation'", //6 BridgeReplacementandRehabilitation
+            "WORKSHOP_CAT = 'HSIP - Highway Safety Improvement'", //7 HighwaySafetyImprovement
+            "WORKSHOP_CAT = 'SSIP - Safety Spot Improvement'", //8 SafetySpotImprovement - I think this one is being retired
+            "WORKSHOP_CAT = 'Barrier Treatments'", //9 BarrierTreatments - no records
+            "WORKSHOP_CAT = 'Small Area Lighting'", //10 SmallAreaLighting - no records
+            "WORKSHOP_CAT = 'Safe Routes to Schools'", //11 SafeRoutestoSchools - no records
+            "WORKSHOP_CAT = 'Sign Modification & Replacement'",//12 SignModificationReplacement - no records
+            "WORKSHOP_CAT = 'Railway-Highway Grade Crossing'", //13 RailwayHighwayGradeCrossing
+            "WORKSHOP_CAT = 'New Traffic Signals'", //14 NewTrafficSignals
+            "WORKSHOP_CAT = 'Freight'",//15 Freight - no records
+            "WORKSHOP_CAT = 'Off-System Bridge'", //16 OffSystemBridge - no records
+            "WORKSHOP_CAT = 'Non-Urban'", //17 NonUrban - no records
+            "WORKSHOP_CAT = 'Small Urban'", //18 SmallUrban - no records
+            "WORKSHOP_CAT = 'State Park Access'", //19 StateParkAccess - no records
+            "WORKSHOP_CAT = 'Transportation Alternatives'", //20 TransportationAlternatives
+            "WORKSHOP_CAT = 'Environmental Studies'", //21 EnvironmentalStudies - no records
+            "WORKSHOP_CAT = 'ATMS Asset Management'", //22 ATMSAssetManagement - no records
+            "WORKSHOP_CAT = 'Federal Lands Access Program'", //23 FederalLandsAccessProgram - no records
+            "WORKSHOP_CAT = 'Other'", //24 Other - no records
+            "WORKSHOP_CAT = 'HSIP - Highway Safety Improvement' OR WORKSHOP_CAT = 'Safe Routes to Schools' OR WORKSHOP_CAT = 'New Traffic Signals' OR WORKSHOP_CAT = 'Railway-Highway Grade Crossing'", //25 TrafficSafety - is this one redundant?
+            "WORKSHOP_CAT = 'MPO'", //26 LocalGovernmentMPOs no records
+            "WORKSHOP_CAT = 'Reconstruction High Volume'", //27 PavementLowVolume
+            "", //noquery
+            "WORKSHOP_CAT = 'Bridge Preservation' OR WORKSHOP_CAT = 'Bridge Replacement and Rehabilitation'" //29 All Structures
         ]
 
         // Expand widget for the queryFeature div               
@@ -198,6 +198,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             
             layer.queryFeatures(query).then(function (data) {
                 let features = data.features;
+                console.log(features)
                 
                 
                 collectAttributes(features, filters);
