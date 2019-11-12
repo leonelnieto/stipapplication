@@ -37,7 +37,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             ]
         };
         //Map Query Statements
-        const filter = ["WORKSHOP_CAT = 'Transportation Investment Funds'", //0 TransportationInvestmentFunds - no records
+        const programQuery = ["WORKSHOP_CAT = 'Transportation Investment Funds'", //0 TransportationInvestmentFunds - no records
             "WORKSHOP_CAT = 'Transportation Solutions'",//1 TransportationSolutions
             "WORKSHOP_CAT = 'Contingency Fund'", //2 ContingencyFund - no records
             "WORKSHOP_CAT = 'Preservation High Volume' OR WORKSHOP_CAT = 'Rehabilitation High Volume'", //3 PavementHighVolume 
@@ -305,7 +305,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
                 statusQuery = ` AND PIN_STAT_NM = '${selectedStatus}'`
             }
            
-            let sql = filter[program] + mapFilter + legislativeQuery + countyQuery + municipalityQuery + statusQuery + mpoQuery;
+            let sql = programQuery[program] + mapFilter + legislativeQuery + countyQuery + municipalityQuery + statusQuery + mpoQuery;
             console.log(sql)
 
             return sql
