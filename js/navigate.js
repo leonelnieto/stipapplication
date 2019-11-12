@@ -44,14 +44,12 @@ function pathClearandReload(region) {
     } else {
         load += window.location.pathname + "?region=" + region;
     }
-
-    //add a draw function here depending on the category and pass in the region
-    //add an event listener that gets region number from region button?
     window.location.href = load;
 }
 
 for (i = 0; i < document.querySelectorAll(".filterregion").length; i++) {
     document.querySelectorAll(".filterregion")[i].addEventListener("click", function (event) {
+        //add a draw function here depending on the region selected
         if (event.target.attributes.region.value === "all") {
             window.location = window.location.pathname;
         }
