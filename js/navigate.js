@@ -45,6 +45,8 @@ function pathClearandReload(region) {
         load += window.location.pathname + "?region=" + region;
     }
 
+    //add a draw function here depending on the category and pass in the region
+    //add an event listener that gets region number from region button?
     window.location.href = load;
 }
 

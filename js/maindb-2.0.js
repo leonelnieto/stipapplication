@@ -646,4 +646,3 @@ function getAllUrlParams(url) {
 
     return obj;
 }
-

@@ -365,7 +365,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             makeDropdown(attributeCollection, filters)
         }
 
-
+ 
         function makeDropdown(attributeCollection) {
             let selectIDs = { County: "queryCounty", Municipality: "queryMunicipality", Status: "queryStatus", District: "queryDistrict", MPO: "queryMPO" }
 
