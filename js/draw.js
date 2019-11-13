@@ -55,7 +55,7 @@ function drawConstruction(agg){
 function drawUnfunded(agg){
     let program = document.getElementById("currentProgram").getAttribute("value");
     let region = parseInt(document.getElementById("currentRegion").getAttribute("value"));
-    
+
     drillVisual('unfunded',program,'unfundedbyRegionChart','REGION_CD',agg,'chart',region);
     drillVisual('unfunded',program,'unfundedbyRegionTable','REGION_CD',agg,'table',region);
     drillVisual('unfunded',program,'unfunedbyYearChart','FORECAST_ST_YR',agg,'chart',region);
@@ -65,8 +65,7 @@ function drawUnfunded(agg){
 for(i=0;i<document.querySelectorAll(".proposed").length;i++){
     console.log(document.querySelectorAll(".proposed")[i])
     document.querySelectorAll(".proposed")[i].addEventListener("click", function(event){
-        console.log("hi")
-        drawProposed(event.target.attributes.agg.value)
+        setTimeout(function(){drawProposed(event.target.attributes.agg.value, event.target.attributes.workshop.value)},500)
     })
 };
 
