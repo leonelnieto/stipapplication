@@ -65,7 +65,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             "WORKSHOP_CAT = 'HSIP - Highway Safety Improvement' OR WORKSHOP_CAT = 'Safe Routes to Schools' OR WORKSHOP_CAT = 'New Traffic Signals' OR WORKSHOP_CAT = 'Railway-Highway Grade Crossing'", //25 TrafficSafety - is this one redundant?
             "WORKSHOP_CAT = 'MPO'", //26 LocalGovernmentMPOs no records
             "WORKSHOP_CAT = 'Reconstruction High Volume'", //27 PavementLowVolume
-            "", //noquery
+            "", //28 noquery
             "WORKSHOP_CAT = 'Bridge Preservation' OR WORKSHOP_CAT = 'Bridge Replacement and Rehabilitation'" //29 All Structures
         ]
 
