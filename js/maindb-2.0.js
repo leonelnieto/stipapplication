@@ -17,6 +17,7 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 //Query Dataset then build table
 function dataTableBuilder(pn_status, workshop, dom, region) {
+    
     //Build where clause by filter
     let whereClause = whereClauseBuilder(pn_status, workshop, region);
     let query = sourceDataset + selectColumns + whereClause;

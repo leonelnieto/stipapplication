@@ -1,4 +1,5 @@
 const programs = {
+    all:["all",28],
     tif:["'Transportation Investment Funds'", 0],
     transSolutions:["'Transportation Solutions','Barrier Treatments','Maintenance Spot Improvement','Sign Modification %26 Replacement','Small Area Lighting','SSIP - Safety Spot Improvement'", 1],
     highVolumePavements:["'Pavement High Volume','Preservation High Volume','Rehabilitation High Volume'", 3],
@@ -38,44 +39,34 @@ const regionName = {
 for(i=0;i<document.querySelectorAll("#sidebarNav li").length;i++){
     document.querySelectorAll("#sidebarNav li a")[i].addEventListener("click", function(event){
         let programDisplay = document.getElementById("currentProgram")
+        let regionNum = document.getElementById("currentRegion").getAttribute("value");
+        
         //TODO: change "section" to "program" in html 
         if(event.target.attributes.section.value !== undefined){
             let program = event.target.attributes.section.value;
-            console.log(event.target.innerHTML)
+        
             programDisplay.innerHTML = event.target.innerHTML
             programDisplay.setAttribute("value", program)
-            draw(programs[program][0], programs[program][1]);
+            
+            draw(programs[program][0], programs[program][1],parseInt(regionNum));
         }
     })
 }
 
-//Path Parser
-// This was put together in haste..... Verify and optimize
-// function pathClearandReload(region) {
-//     let load = '';
-//     if (region === 0 || region === null || region === undefined) {
-//         load += window.location.href;
-//     } else {
-//         load += window.location.pathname + "?region=" + region;
-//     }
-//     window.location.href = load;
-// }
+
 
 for (i = 0; i < document.querySelectorAll(".filterregion").length; i++) {
     document.querySelectorAll(".filterregion")[i].addEventListener("click", function (event) {
         //add a draw function here depending on the region selected
-        let regionDisplay = document.getElementById("currentRegion")
+            let regionDisplay = document.getElementById("currentRegion")
+            let program = document.getElementById("currentProgram").getAttribute("value");
+           
             let regionNum = event.target.attributes.region.value
             regionDisplay.innerHTML = regionName[regionNum]
             regionDisplay.setAttribute("value", regionNum);
         
-        // if (event.target.attributes.region.value === "all") {
-        //     window.location = window.location.pathname;
-        // }
-        // else {
-        //     pathClearandReload(event.target.attributes.region.value);
-        // }
-        
-       // mapLoaderDynamic(parseInt(event.target.attributes.region.value)/*, workshopIndex */);
+     
+        draw(programs[program][0], programs[program][1],parseInt(regionNum));
+    
     });
 }

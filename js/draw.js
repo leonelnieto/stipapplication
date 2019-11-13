@@ -4,7 +4,7 @@ if(region === undefined){
     region = 0;
 }
 
-function draw(program, programIndex){
+function draw(program, programIndex,region){
     dataTableBuilder('unfunded',program,'#pills-unfundedtbl',region);
     dataTableBuilder('proposed',program,'#pills-proposedtbl',region);
     dataTableBuilder('comapp',program,'#pills-comapptbl',region);
@@ -53,6 +53,7 @@ function drawUnfunded(agg, program){
 
 for(i=0;i<document.querySelectorAll(".proposed").length;i++){
     document.querySelectorAll(".proposed")[i].addEventListener("click", function(event){
+        
         setTimeout(function(){drawProposed(event.target.attributes.agg.value, event.target.attributes.workshop.value)},500)
     })
 };

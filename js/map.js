@@ -6,7 +6,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
         let zoom = 2500000;
         let region;
 
-        let mapFilter = region ? `AND REGION_CD ="${region}"` : "";
+        
         let selectedCounty = selectedMunicipality = selectedLegislative = selectedStatus =selectedMPO= 0;
         //symbols for year lines
         const year2018 = { type: "simple-line", color: "#A87000", width: 4, style: "solid" };
@@ -40,8 +40,8 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
         const programQuery = ["WORKSHOP_CAT = 'Transportation Investment Funds'", //0 TransportationInvestmentFunds - no records
             "WORKSHOP_CAT = 'Transportation Solutions'",//1 TransportationSolutions
             "WORKSHOP_CAT = 'Contingency Fund'", //2 ContingencyFund - no records
-            "WORKSHOP_CAT = 'Preservation High Volume' OR WORKSHOP_CAT = 'Rehabilitation High Volume'", //3 PavementHighVolume 
-            "WORKSHOP_CAT = 'Preservation Low Volume' OR WORKSHOP_CAT = 'Rehabilitation Low Volume'", //4 PavementLowVolume
+            "WORKSHOP_CAT IN('Preservation High Volume','Rehabilitation High Volume')", //3 PavementHighVolume 
+            "WORKSHOP_CAT IN('Preservation Low Volume', 'Rehabilitation Low Volume')", //4 PavementLowVolume
             "WORKSHOP_CAT = 'Bridge Preservation'", //5 BridgePreservation
             "WORKSHOP_CAT = 'Bridge Replacement and Rehabilitation'", //6 BridgeReplacementandRehabilitation
             "WORKSHOP_CAT = 'HSIP - Highway Safety Improvement'", //7 HighwaySafetyImprovement
@@ -62,19 +62,18 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             "WORKSHOP_CAT = 'ATMS Asset Management'", //22 ATMSAssetManagement - no records
             "WORKSHOP_CAT = 'Federal Lands Access Program'", //23 FederalLandsAccessProgram - no records
             "WORKSHOP_CAT = 'Other'", //24 Other - no records
-            "WORKSHOP_CAT = 'HSIP - Highway Safety Improvement' OR WORKSHOP_CAT = 'Safe Routes to Schools' OR WORKSHOP_CAT = 'New Traffic Signals' OR WORKSHOP_CAT = 'Railway-Highway Grade Crossing'", //25 TrafficSafety - is this one redundant?
+            "WORKSHOP_CAT IN('HSIP - Highway Safety Improvement','Safe Routes to Schools', 'New Traffic Signals', 'Railway-Highway Grade Crossing')", //25 TrafficSafety - is this one redundant?
             "WORKSHOP_CAT = 'MPO'", //26 LocalGovernmentMPOs no records
             "WORKSHOP_CAT = 'Reconstruction High Volume'", //27 PavementLowVolume
             "", //28 noquery
-            "WORKSHOP_CAT = 'Bridge Preservation' OR WORKSHOP_CAT = 'Bridge Replacement and Rehabilitation'" //29 All Structures
+            "WORKSHOP_CAT IN('Bridge Preservation','Bridge Replacement and Rehabilitation')" //29 All Structures
         ]
 
         // Expand widget for the queryFeature div               
         let layer = new FeatureLayer({
             url: STIPData, // EPM STIP Service
-            renderer: STIPRender, //this gives the line styles
-            // definitionExpression: filter[program] + mapFilter //change filter to change dataset query
-            // popupTemplate: { title: "{CONCEPT_DESC}", content: "{*}" } //the popup change be changed if we want
+            renderer: STIPRender //this gives the line styles
+           
         });
         
 
@@ -199,7 +198,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             
             layer.queryFeatures(query).then(function (data) {
                 let features = data.features;
-                console.log(features)
+                
                 
                 
                 collectAttributes(features, filters);
@@ -278,35 +277,50 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
         };
 
         function makeQuery() {
-
-            let countyQuery = "";
+            let queries = []
+            
+            if(program != 28){
+                let programSQL = programQuery[program] 
+                queries.push(programSQL)
+            }
+            if(region){
+                let regionSQL = `REGION_CD ='${region}'`
+                queries.push(regionSQL)
+            }
             if (selectedCounty != 0) {
-                countyQuery = ` AND CNTY_NAME like '%${selectedCounty}%' `
+               let countySQL = `CNTY_NAME like '%${selectedCounty}%'`
+               queries.push(countySQL)
             }
 
-            let mpoQuery = ""
+            
             if(selectedMPO !=0){
-                mpoQuery = ` AND MPO_Name like '%${selectedMPO}%'`
+               let mpoSQL = `MPO_Name like '%${selectedMPO}%'`
+               queries.push(mpoSQL)
             }
             
-            let municipalityQuery = "";
+            
             if (selectedMunicipality != 0) {
-                municipalityQuery = ` AND Municipality_Name like '%${selectedMunicipality}%' `
+               let municipalitySQL = `Municipality_Name like '%${selectedMunicipality}%'`
+               queries.push(municipalitySQL)
             }
             
-            let legislativeQuery = "";
+            
             if (selectedLegislative != 0 && selectedLegislative.includes("Senate")) {
-                legislativeQuery = ` AND UT_SENATE_DIST_NAME like '${selectedLegislative}'`
+               let legislativeSQL = `UT_SENATE_DIST_NAME like '${selectedLegislative}'`
+               queries.push(legislativeSQL)
             } else if (selectedLegislative != 0 && selectedLegislative.includes("House")) {
-                legislativeQuery = ` AND UT_House_Dist_Name like '${selectedLegislative}'`
+               let legislativeSQL = `UT_House_Dist_Name like '${selectedLegislative}'`
+               queries.push(legislativeSQL)
             }
            
-            let statusQuery = "";
             if (selectedStatus != 0) {
-                statusQuery = ` AND PIN_STAT_NM = '${selectedStatus}'`
+               let statusSQL = `PIN_STAT_NM = '${selectedStatus}'`
+               queries.push(statusSQL)
             }
+
+
            
-            let sql = programQuery[program] + mapFilter + legislativeQuery + countyQuery + municipalityQuery + statusQuery + mpoQuery;
+            let sql = queries.join(" AND ")
             console.log(sql)
 
             return sql
