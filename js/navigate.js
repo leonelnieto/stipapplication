@@ -76,5 +76,6 @@ for (i = 0; i < document.querySelectorAll(".filterregion").length; i++) {
         //     pathClearandReload(event.target.attributes.region.value);
         // }
         
+       // mapLoaderDynamic(parseInt(event.target.attributes.region.value)/*, workshopIndex */);
     });
 }
