@@ -1,9 +1,3 @@
-// let region = getAllUrlParams(window.location.href)["region"];
-
-// if(region === undefined){
-//     region = 0;
-// }
-
 function draw(program, programIndex,region){
     dataTableBuilder('unfunded',program,'#pills-unfundedtbl',region);
     dataTableBuilder('proposed',program,'#pills-proposedtbl',region);
@@ -12,8 +6,6 @@ function draw(program, programIndex,region){
     dataTableBuilder('construction',program,'#pills-constructiontbl',region);
 
     mapLoaderDynamic(parseInt(region),programIndex);
-
-    //assign workshop value function callback here
 }
 
 function drawProposed(agg){
