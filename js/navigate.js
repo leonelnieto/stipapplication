@@ -1,4 +1,4 @@
-sections = {
+const programs = {
     tif:["'Transportation Investment Funds'", 0],
     transSolutions:["'Transportation Solutions','Barrier Treatments','Maintenance Spot Improvement','Sign Modification %26 Replacement','Small Area Lighting','SSIP - Safety Spot Improvement'", 1],
     highVolumePavements:["'Pavement High Volume','Preservation High Volume','Rehabilitation High Volume'", 3],
@@ -25,36 +25,56 @@ sections = {
     Other:["'Other'", 24]
 }
 
+const regionName = {
+    0: "Statewide",
+    1: "Region 1",
+    2: "Region 2",
+    3: "Region 3",
+    4: "Region 4"
+}
+
+
+
 for(i=0;i<document.querySelectorAll("#sidebarNav li").length;i++){
     document.querySelectorAll("#sidebarNav li a")[i].addEventListener("click", function(event){
+        let programDisplay = document.getElementById("currentProgram")
+        //TODO: change "section" to "program" in html 
         if(event.target.attributes.section.value !== undefined){
-            let section = event.target.attributes.section.value;
-            console.log(sections[section][0], sections[section][1])
-            draw(sections[section][0], sections[section][1]);
+            let program = event.target.attributes.section.value;
+            console.log(event.target.innerHTML)
+            programDisplay.innerHTML = event.target.innerHTML
+            programDisplay.setAttribute("value", program)
+            draw(programs[program][0], programs[program][1]);
         }
     })
 }
 
 //Path Parser
 // This was put together in haste..... Verify and optimize
-function pathClearandReload(region) {
-    let load = '';
-    if (region === 0 || region === null || region === undefined) {
-        load += window.location.href;
-    } else {
-        load += window.location.pathname + "?region=" + region;
-    }
-    window.location.href = load;
-}
+// function pathClearandReload(region) {
+//     let load = '';
+//     if (region === 0 || region === null || region === undefined) {
+//         load += window.location.href;
+//     } else {
+//         load += window.location.pathname + "?region=" + region;
+//     }
+//     window.location.href = load;
+// }
 
 for (i = 0; i < document.querySelectorAll(".filterregion").length; i++) {
     document.querySelectorAll(".filterregion")[i].addEventListener("click", function (event) {
         //add a draw function here depending on the region selected
-        if (event.target.attributes.region.value === "all") {
-            window.location = window.location.pathname;
-        }
-        else {
-            pathClearandReload(event.target.attributes.region.value);
-        }
+        let regionDisplay = document.getElementById("currentRegion")
+            let regionNum = event.target.attributes.region.value
+            regionDisplay.innerHTML = regionName[regionNum]
+            regionDisplay.setAttribute("value", regionNum);
+        
+        // if (event.target.attributes.region.value === "all") {
+        //     window.location = window.location.pathname;
+        // }
+        // else {
+        //     pathClearandReload(event.target.attributes.region.value);
+        // }
+        
     });
 }
