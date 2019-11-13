@@ -53,7 +53,6 @@ function drawUnfunded(agg, program){
 
 for(i=0;i<document.querySelectorAll(".proposed").length;i++){
     document.querySelectorAll(".proposed")[i].addEventListener("click", function(event){
-        
         setTimeout(function(){drawProposed(event.target.attributes.agg.value, event.target.attributes.workshop.value)},500)
     })
 };
