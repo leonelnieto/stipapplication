@@ -29,7 +29,6 @@ for(i=0;i<document.querySelectorAll("#sidebarNav li").length;i++){
     document.querySelectorAll("#sidebarNav li a")[i].addEventListener("click", function(event){
         if(event.target.attributes.section.value !== undefined){
             let section = event.target.attributes.section.value;
-            console.log(sections[section][0], sections[section][1])
             draw(sections[section][0], sections[section][1]);
         }
     })
@@ -49,12 +48,6 @@ function pathClearandReload(region) {
 
 for (i = 0; i < document.querySelectorAll(".filterregion").length; i++) {
     document.querySelectorAll(".filterregion")[i].addEventListener("click", function (event) {
-        //add a draw function here depending on the region selected
-        if (event.target.attributes.region.value === "all") {
-            window.location = window.location.pathname;
-        }
-        else {
-            pathClearandReload(event.target.attributes.region.value);
-        }
+        mapLoaderDynamic(parseInt(event.target.attributes.region.value)/*, workshopIndex */);
     });
 }

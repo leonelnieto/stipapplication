@@ -192,6 +192,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             }
             resetQuery()
         }
+
         function getFeatures(sql, filters) {
             let query = layer.createQuery();
             query.where = sql
