@@ -78,5 +78,6 @@ for(i=0;i<document.querySelectorAll(".construction").length;i++){
 for(i=0;i<document.querySelectorAll(".unfunded").length;i++){
     document.querySelectorAll(".unfunded")[i].addEventListener("click", function(event){
         setTimeout(function(){drawUnfunded(event.target.attributes.agg.value, event.target.attributes.workshop.value)},500)
+        console.log(event.target);
     })
 };
