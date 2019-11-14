@@ -385,50 +385,50 @@ function projectManagers(dom) {
 //documentation.html functions
 //summarize categories in dataset
 function programCategories(dom) {
-  let stats = `[{"statisticType":"COUNT", "onStatisticField": "WORKSHOP_CAT", "outStatisticFieldName": "pins"}]`;
-  let url =
-    sourceDataset +
-    `&outStatistics=${stats}&groupByFieldsForStatistics=WORKSHOP_CAT`;
-  fetch(url)
-    .then(function(response) {
-      // Convert to JSON
-      return response.json();
-    })
-    .then(function(data) {
-      let features = data.features;
-      let html = "";
-      let thead =
-        '<table style="width:100%" id="workshopsDataTable" class="table table-striped table-hover">';
-      thead += "<thead><tr><th>Workshop</th>";
-      thead += "<th>PINs</th></tr></thead><tbody>";
-      html += thead;
-      features.forEach(function(item) {
-        //Populate rows
-        let attributes = item.attributes;
-        let category = attributes["WORKSHOP_CAT"];
-        if (category == null) {
-          html +=
-            '<tr><td class="text-left"><button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#workshopPinsModal" ';
-          html += `onclick="pingWorkshop('No Category','#WorkshopPinDetails')">No Category</button></td>`;
-        } else {
-          html +=
-            '<tr><td class="text-left"><button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#workshopPinsModal" ';
-          html += `onclick="pingWorkshop('${category}','#WorkshopPinDetails')">${category}</button></td>`;
-        }
-        html += `<td class="sorting">${attributes["pins"]}</td></tr>`;
-      });
-      let tfoot = "</tbody></table>";
-      html += tfoot;
-      $(dom).append(html);
-      $("#programsDataTable").DataTable({
-        pagingType: "full_numbers",
-        columns: [{ orderable: true }, { orderable: true }],
-        dom: "Bfrtip",
-        buttons: ["copyHtml5", "excelHtml5", "csvHtml5", "pdfHtml5"]
-      });
-    })
-    .catch(function(err) {
-      console.log(err);
+    let stats = `[{"statisticType":"COUNT", "onStatisticField": "WORKSHOP_CAT", "outStatisticFieldName": "pins"}]`
+    let url = sourceDataset + `&outStatistics=${stats}&groupByFieldsForStatistics=WORKSHOP_CAT`;
+    fetch(url).then(function (response) {
+        // Convert to JSON
+        return response.json();
+    }).then(function (data) {
+        let features = data.features;
+        let html = '';
+        let thead = '<table style="width:100%" id="programsDataTable" class="table table-striped table-hover">';
+        thead += '<thead><tr><th>Workshop</th>';
+        thead += '<th>PINs</th></tr></thead><tbody>';
+        html += thead;
+        features.forEach(function (item) {
+            //Populate rows
+            let attributes = item.attributes
+            let category = attributes['WORKSHOP_CAT']
+            if (category == null) {
+                html += '<tr><td class="text-left"><button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#workshopPinsModal" ';
+                html += `onclick="pingProgram('No Category','#WorkshopPinDetails')">No Category</button></td>`;
+            } else {
+                html += '<tr><td class="text-left"><button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#workshopPinsModal" '
+                html += `onclick="pingProgram('${category}','#WorkshopPinDetails')">${category}</button></td>`;
+            }
+            html += `<td class="sorting">${attributes['pins']}</td></tr>`;
+        });
+        let tfoot = "</tbody></table>";
+        html += tfoot;
+        $(dom).append(html);
+        $('#programsDataTable').DataTable({
+            "pagingType": "full_numbers",
+            "columns": [
+                { "orderable": true },
+                { "orderable": true }
+            ],
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ]
+        });
+    }).catch(function (err) {
+        console.log(err);
     });
 }
 
