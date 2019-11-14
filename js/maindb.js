@@ -198,6 +198,7 @@ function whereClauseBuilder(pn_status, workshop, region) {
     }
     return whereClause;
 }
+
 // Helpfer function gets year and returns bg color class
 function bgColorClass(year) {
     let bg = '';
@@ -436,6 +437,7 @@ function pingPMs(PM, dom) {
         console.log("{*_*}" + err);
     });
 }
+
 //Function to ping workship and get list of pin details 
 function pingWorkshop(workshop, dom) {
     let url = `${sourceDataset}&outFields=PIN,PIN_DESC,REGION_CD,PIN_STAT_NM&where=WORKSHOP_CAT='${workshop}'`
@@ -480,6 +482,7 @@ function pingWorkshop(workshop, dom) {
         console.log("{*_*}" + err);
     });
 }
+
 //One pager summary table
 function onepagerSummaryTable(dom) {
     fetch('data/onepagers.json').then(function (response) {
@@ -539,6 +542,7 @@ function onepagerSummaryTable(dom) {
         console.log("{*_*} Bummer, could not load onepager data!!!!" + err);
     });
 }
+
 //Show entire dataset in app documentation
 function printSourceData(dom) {
     let url = sourceDataset + "&outFields=PIN,PIN_DESC,PIN_STAT_NM,PROJ_LOC ,PROJECT_VALUE,REGION_CD,PLANNED_CONSTRUCTION_YEAR,FORECAST_ST_YR,WORKSHOP_CAT&where=1=1"
