@@ -358,7 +358,7 @@ function programCategories(dom) {
     }).then(function (data) {
         let features = data.features;
         let html = '';
-        let thead = '<table style="width:100%" id="workshopsDataTable" class="table table-striped table-hover">';
+        let thead = '<table style="width:100%" id="programsDataTable" class="table table-striped table-hover">';
         thead += '<thead><tr><th>Workshop</th>';
         thead += '<th>PINs</th></tr></thead><tbody>';
         html += thead;
@@ -368,10 +368,10 @@ function programCategories(dom) {
             let category = attributes['WORKSHOP_CAT']
             if (category == null) {
                 html += '<tr><td class="text-left"><button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#workshopPinsModal" ';
-                html += `onclick="pingWorkshop('No Category','#WorkshopPinDetails')">No Category</button></td>`;
+                html += `onclick="pingProgram('No Category','#WorkshopPinDetails')">No Category</button></td>`;
             } else {
                 html += '<tr><td class="text-left"><button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#workshopPinsModal" '
-                html += `onclick="pingWorkshop('${category}','#WorkshopPinDetails')">${category}</button></td>`;
+                html += `onclick="pingProgram('${category}','#WorkshopPinDetails')">${category}</button></td>`;
             }
             html += `<td class="sorting">${attributes['pins']}</td></tr>`;
         });
