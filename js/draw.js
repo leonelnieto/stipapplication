@@ -4,7 +4,7 @@ function draw(program, programIndex,region){
     dataTableBuilder('comapp',program,'#pills-comapptbl',region);
     dataTableBuilder('design',program,'#pills-designtbl',region);
     dataTableBuilder('construction',program,'#pills-constructiontbl',region);
-
+    
     mapLoaderDynamic(parseInt(region),programIndex);
 };
 
@@ -53,6 +53,16 @@ function drawUnfunded(agg){
     drillVisual('unfunded',program,'unfunedbyYearChart','FORECAST_ST_YR',agg,'chart',region);
     drillVisual('unfunded',program,'unfunedbyYearTable','FORECAST_ST_YR',agg,'table',region);
 };
+
+function drawCharts(agg,projPhase){
+    let program = document.getElementById("currentProgram").getAttribute("value");
+    let region = parseInt(document.getElementById("currentRegion").getAttribute("value"));
+    
+    drillVisual(projPhase, program,'unfundedbyRegionChart','REGION_CD',agg,'chart',region);
+    drillVisual(projPhase, program,'unfundedbyRegionTable','REGION_CD',agg,'table',region);
+    drillVisual(projPhase, program,'unfunedbyYearChart','FORECAST_ST_YR',agg,'chart',region);
+    drillVisual(projPhase, program,'unfunedbyYearTable','FORECAST_ST_YR',agg,'table',region);
+}
 
 function removeSelected(elements){
     //this function expects an array of DOM elements

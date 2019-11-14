@@ -38,7 +38,6 @@ for(i=0;i<document.querySelectorAll("#sidebarNav li").length;i++){
     document.querySelectorAll("#sidebarNav li a")[i].addEventListener("click", function(event){
         let programDisplay = document.getElementById("currentProgram")
         let regionNum = document.getElementById("currentRegion").getAttribute("value");
-        
         //TODO: change "section" to "program" in html 
         if(event.target.attributes.section.value !== "null"){
             let program = event.target.attributes.section.value;
