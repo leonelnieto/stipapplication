@@ -6,7 +6,7 @@ function draw(program, programIndex,region){
     dataTableBuilder('construction',program,'#pills-constructiontbl',region);
 
     mapLoaderDynamic(parseInt(region),programIndex);
-}
+};
 
 function drawProposed(agg){
     let program = document.getElementById("currentProgram").getAttribute("value");
@@ -15,7 +15,7 @@ function drawProposed(agg){
     drillVisual('proposed',program,'proposedbyYearTable','FORECAST_ST_YR',agg,'table',region);
     drillVisual('proposed',program,'proposedbyRegionChart','REGION_CD',agg,'chart',region);
     drillVisual('proposed',program,'proposedbyRegionTable','REGION_CD',agg,'table',region);
-}
+};
 
 function drawComApp(agg) {
     let program = document.getElementById("currentProgram").getAttribute("value");
@@ -24,7 +24,7 @@ function drawComApp(agg) {
     drillVisual('comapp',program,'comappbyYearTable','FORECAST_ST_YR',agg,'table',region);
     drillVisual('comapp',program,'comappbyRegionChart','REGION_CD',agg,'chart',region);
     drillVisual('comapp',program,'comappbyRegionTable','REGION_CD',agg,'table',region);
-}
+};
 
 function drawDesign(agg){
     let program = document.getElementById("currentProgram").getAttribute("value");
@@ -33,7 +33,7 @@ function drawDesign(agg){
     drillVisual('design',program,'designbyYearTable','FORECAST_ST_YR',agg,'table',region);
     drillVisual('design',program,'designbyRegionChart','REGION_CD',agg,'chart',region);
     drillVisual('design',program,'designbyRegionTable','REGION_CD',agg,'table',region);
-}
+};
 
 function drawConstruction(agg){
     let program = document.getElementById("currentProgram").getAttribute("value");
@@ -42,7 +42,7 @@ function drawConstruction(agg){
     drillVisual('construction',program,'constructionbyYearTable','FORECAST_ST_YR',agg,'table',region);
     drillVisual('construction',program,'constructionbyRegionChart','REGION_CD',agg,'chart',region);
     drillVisual('construction',program,'constructionbyRegionTable','REGION_CD',agg,'table',region);
-}
+};
 
 function drawUnfunded(agg){
     let program = document.getElementById("currentProgram").getAttribute("value");
@@ -52,7 +52,7 @@ function drawUnfunded(agg){
     drillVisual('unfunded',program,'unfundedbyRegionTable','REGION_CD',agg,'table',region);
     drillVisual('unfunded',program,'unfunedbyYearChart','FORECAST_ST_YR',agg,'chart',region);
     drillVisual('unfunded',program,'unfunedbyYearTable','FORECAST_ST_YR',agg,'table',region);
-}
+};
 
 function removeSelected(elements){
     //this function expects an array of DOM elements
@@ -61,7 +61,7 @@ function removeSelected(elements){
             elements[i].className = elements[i].className.slice(0, -9);
         }
     }
-}
+};
 
 function addSelectedFinance(elementEvent, projPhase){
     removeSelected(document.querySelectorAll(".finance"));
