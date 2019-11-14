@@ -21,7 +21,6 @@ function dataTableBuilder(pn_status, workshop, dom, region) {
     //Build where clause by filter
     let whereClause = whereClauseBuilder(pn_status, workshop, region);
     let query = sourceDataset + selectColumns + whereClause;
-    
 
     //fetch one page data 
     fetch('data/onepagers.json').then(function (response) {
@@ -43,8 +42,6 @@ function dataTableBuilder(pn_status, workshop, dom, region) {
                 }
                
                 if (!$.fn.dataTable.isDataTable(tableID)) {
-                    
-                    //Where the magic occurs
                     columns = [
                         { "orderable": true },
                         { "orderable": true },
@@ -52,10 +49,12 @@ function dataTableBuilder(pn_status, workshop, dom, region) {
                         { "orderable": true },
                         { "orderable": false }
                     ]
+
                     //include column for start year if not unfunded
                     if (pn_status != 'unfunded') {
                         columns.push({ "orderable": true });
-                    }                   
+                    }
+
                     const table = $('#dataTable' + dom.substring(1)).DataTable({
                         "pagingType": "full_numbers",
                         retrieve: true,
@@ -199,6 +198,7 @@ function whereClauseBuilder(pn_status, workshop, region) {
     }
     return whereClause;
 }
+
 // Helpfer function gets year and returns bg color class
 function bgColorClass(year) {
     let bg = '';
@@ -389,7 +389,6 @@ function workshopCategories(dom) {
             ]
         });
     }).catch(function (err) {
-
         console.log(err);
     });
 }
@@ -438,6 +437,7 @@ function pingPMs(PM, dom) {
         console.log("{*_*}" + err);
     });
 }
+
 //Function to ping workship and get list of pin details 
 function pingWorkshop(workshop, dom) {
     let url = `${sourceDataset}&outFields=PIN,PIN_DESC,REGION_CD,PIN_STAT_NM&where=WORKSHOP_CAT='${workshop}'`
@@ -482,6 +482,7 @@ function pingWorkshop(workshop, dom) {
         console.log("{*_*}" + err);
     });
 }
+
 //One pager summary table
 function onepagerSummaryTable(dom) {
     fetch('data/onepagers.json').then(function (response) {
@@ -541,6 +542,7 @@ function onepagerSummaryTable(dom) {
         console.log("{*_*} Bummer, could not load onepager data!!!!" + err);
     });
 }
+
 //Show entire dataset in app documentation
 function printSourceData(dom) {
     let url = sourceDataset + "&outFields=PIN,PIN_DESC,PIN_STAT_NM,PROJ_LOC ,PROJECT_VALUE,REGION_CD,PLANNED_CONSTRUCTION_YEAR,FORECAST_ST_YR,WORKSHOP_CAT&where=1=1"
@@ -593,58 +595,4 @@ function printSourceData(dom) {
         alert("{*_*} Bummer, could not load onepager data!!!!" + err);
         console.log("{*_*} Bummer, could not load onepager data!!!!" + err);
     })
-}
-//Helper function to get URL Vars
-function getAllUrlParams(url) {
-    // get query string from url (optional) or window
-    let queryString = url ? url.split('?')[1] : window.location.search.slice(1);
-    // we'll store the parameters here
-    let obj = {};
-    // if query string exists
-    if (queryString) {
-        // stuff after # is not part of query string, so get rid of it
-        queryString = queryString.split('#')[0];
-        // split our query string into its component parts
-        let arr = queryString.split('&');
-        for (let i = 0; i < arr.length; i++) {
-            // separate the keys and the values
-            let a = arr[i].split('=');
-            // set parameter name and value (use 'true' if empty)
-            let paramName = a[0];
-            let paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
-            // (optional) keep case consistent
-            paramName = paramName.toLowerCase();
-            if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
-            // if the paramName ends with square brackets, e.g. colors[] or colors[2]
-            if (paramName.match(/\[(\d+)?\]$/)) {
-                // create key if it doesn't exist
-                let key = paramName.replace(/\[(\d+)?\]/, '');
-                if (!obj[key]) obj[key] = [];
-                // if it's an indexed array e.g. colors[2]
-                if (paramName.match(/\[\d+\]$/)) {
-                    // get the index value and add the entry at the appropriate position
-                    let index = /\[(\d+)\]/.exec(paramName)[1];
-                    obj[key][index] = paramValue;
-                } else {
-                    // otherwise add the value to the end of the array
-                    obj[key].push(paramValue);
-                }
-            } else {
-                // we're dealing with a string
-                if (!obj[paramName]) {
-                    // if it doesn't exist, create property
-                    obj[paramName] = paramValue;
-                } else if (obj[paramName] && typeof obj[paramName] === 'string') {
-                    // if property does exist and it's a string, convert it to an array
-                    obj[paramName] = [obj[paramName]];
-                    obj[paramName].push(paramValue);
-                } else {
-                    // otherwise add the property
-                    obj[paramName].push(paramValue);
-                }
-            }
-        }
-    }
-
-    return obj;
 }
