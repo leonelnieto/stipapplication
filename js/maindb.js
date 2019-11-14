@@ -21,7 +21,6 @@ function dataTableBuilder(pn_status, workshop, dom, region) {
     //Build where clause by filter
     let whereClause = whereClauseBuilder(pn_status, workshop, region);
     let query = sourceDataset + selectColumns + whereClause;
-    
 
     //fetch one page data 
     fetch('data/onepagers.json').then(function (response) {
@@ -43,8 +42,6 @@ function dataTableBuilder(pn_status, workshop, dom, region) {
                 }
                
                 if (!$.fn.dataTable.isDataTable(tableID)) {
-                    
-                    //Where the magic occurs
                     columns = [
                         { "orderable": true },
                         { "orderable": true },
@@ -52,10 +49,12 @@ function dataTableBuilder(pn_status, workshop, dom, region) {
                         { "orderable": true },
                         { "orderable": false }
                     ]
+
                     //include column for start year if not unfunded
                     if (pn_status != 'unfunded') {
                         columns.push({ "orderable": true });
-                    }                   
+                    }
+
                     const table = $('#dataTable' + dom.substring(1)).DataTable({
                         "pagingType": "full_numbers",
                         retrieve: true,
