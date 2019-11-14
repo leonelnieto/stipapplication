@@ -16,9 +16,9 @@ const formatter = new Intl.NumberFormat('en-US', {
 });
 
 //Query Dataset then build table
-function dataTableBuilder(pn_status, workshop, dom, region) {
+function dataTableBuilder(pn_status, program, dom, region) {
     //Build where clause by filter
-    let whereClause = whereClauseBuilder(pn_status, workshop, region);
+    let whereClause = whereClauseBuilder(pn_status, program, region);
     let query = sourceDataset + selectColumns + whereClause;
 
     //fetch one page data 
@@ -173,12 +173,12 @@ function drillVisual(pn_status, program, dom, groupOrder, aggregate, type, regio
 }
 
 //Helper function to build where clause
-function whereClauseBuilder(pn_status, workshop, region) {
+function whereClauseBuilder(pn_status, program, region) {
     let whereClause = "";
-    if (workshop === "all") {
-        workshop = "";
+    if (program === "all") {
+        program = "";
     } else {
-        workshop = `AND WORKSHOP_CAT in (${workshop})`;
+        program = `AND WORKSHOP_CAT in (${program})`;
     }
     if (region === 0 || region === undefined) {
         region = "";
@@ -187,19 +187,19 @@ function whereClauseBuilder(pn_status, workshop, region) {
     }
     switch (pn_status) {
         case "unfunded":
-            whereClause = "&where=STIP_WORKSHOP='N' and PIN_STAT_NM='Proposed' " + workshop + region;
+            whereClause = "&where=STIP_WORKSHOP='N' and PIN_STAT_NM='Proposed' " + program + region;
             break;
         case "proposed":
-            whereClause = "&where=STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed' " + workshop + region;
+            whereClause = "&where=STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed' " + program + region;
             break;
         case "comapp":
-            whereClause = "&where=COMM_APRV_IND='Y' and PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete') " + workshop + region;
+            whereClause = "&where=COMM_APRV_IND='Y' and PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete') " + program + region;
             break;
         case "design":
-            whereClause = "&where=PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded') " + workshop + region;
+            whereClause = "&where=PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded') " + program + region;
             break;
         case "construction":
-            whereClause = "&where=PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete')" + workshop + region;
+            whereClause = "&where=PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete')" + program + region;
             break;
     }
     return whereClause;
@@ -349,9 +349,9 @@ function projectManagers(dom) {
 
 }
 
-//Documentation Functions
-//Summarize Categories in dataset
-function workshopCategories(dom) {
+//documentation.html functions
+//summarize categories in dataset
+function programCategories(dom) {
     let stats = `[{"statisticType":"COUNT", "onStatisticField": "WORKSHOP_CAT", "outStatisticFieldName": "pins"}]`
     let url = sourceDataset + `&outStatistics=${stats}&groupByFieldsForStatistics=WORKSHOP_CAT`;
     fetch(url).then(function (response) {
@@ -380,7 +380,7 @@ function workshopCategories(dom) {
         let tfoot = "</tbody></table>";
         html += tfoot;
         $(dom).append(html);
-        $('#workshopsDataTable').DataTable({
+        $('#programsDataTable').DataTable({
             "pagingType": "full_numbers",
             "columns": [
                 { "orderable": true },
@@ -445,14 +445,14 @@ function pingPMs(PM, dom) {
 }
 
 //Function to ping workship and get list of pin details 
-function pingWorkshop(workshop, dom) {
-    let url = `${sourceDataset}&outFields=PIN,PIN_DESC,REGION_CD,PIN_STAT_NM&where=WORKSHOP_CAT='${workshop}'`
+function pingProgram(program, dom) {
+    let url = `${sourceDataset}&outFields=PIN,PIN_DESC,REGION_CD,PIN_STAT_NM&where=WORKSHOP_CAT='${program}'`
     fetch(url).then(function (response) {
         return response.json();
     }).then(function (data) {
         let features = data.features;
         let html = '';
-        let thead = '<table style="width:100%" id="workshopPingTable" class="table table-striped table-hover">';
+        let thead = '<table style="width:100%" id="programPingTable" class="table table-striped table-hover">';
         thead += '<thead><tr><th class="text-left">PINs</th>';
         thead += '<th>Pin Description</th><th>Pin Status</th><th>Region</th></tr></thead><tbody>';
         html += thead;
@@ -466,14 +466,14 @@ function pingWorkshop(workshop, dom) {
         });
         let tfoot = "</tbody></table>";
         html += tfoot;
-        $('#workshopName').empty();
+        $('#programName').empty();
         $(dom).empty();
         $(dom).append(html);
-        if ($.fn.dataTable.isDataTable('#workshopPingTable')) {
-            table = $('#workshopPingTable').DataTable();
+        if ($.fn.dataTable.isDataTable('#programPingTable')) {
+            table = $('#programPingTable').DataTable();
         }
         else {
-            table = $('#workshopPingTable').DataTable({
+            table = $('#programPingTable').DataTable({
                 "pagingType": "full_numbers",
                 "columns": [
                     { "orderable": true },
@@ -483,7 +483,7 @@ function pingWorkshop(workshop, dom) {
                 ]
             });
         }
-        $('#workshopName').append(workshop);
+        $('#programName').append(program);
     }).catch(function (err) {
         console.log("{*_*}" + err);
     });
