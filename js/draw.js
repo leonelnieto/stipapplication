@@ -54,33 +54,53 @@ function drawUnfunded(agg){
     drillVisual('unfunded',program,'unfunedbyYearTable','FORECAST_ST_YR',agg,'table',region);
 }
 
+function removeSelected(elements){
+    //this function expects an array of DOM elements
+    for(i=0; i<elements.length; i++){
+        if(elements[i].className.indexOf("selected") !== -1){
+            elements[i].className = elements[i].className.slice(0, -9);
+        }
+    }
+}
+
+function addSelectedFinance(elementEvent){
+    if(elementEvent.target.className.indexOf("finance") !== -1){
+        removeSelected(document.querySelectorAll(".finance"));
+        elementEvent.target.className += " selected";
+    }
+}
+
 for(i=0;i<document.querySelectorAll(".proposed").length;i++){
-    console.log(document.querySelectorAll(".proposed")[i])
     document.querySelectorAll(".proposed")[i].addEventListener("click", function(event){
         setTimeout(function(){drawProposed(event.target.attributes.agg.value, event.target.attributes.workshop.value)},500)
+        addSelectedFinance(event);
     })
 };
 
 for(i=0;i<document.querySelectorAll(".comapp").length;i++){
     document.querySelectorAll(".comapp")[i].addEventListener("click", function(event){
         setTimeout(function(){drawComApp(event.target.attributes.agg.value)},500)
+        addSelectedFinance(event);
     })
 };
 
 for(i=0;i<document.querySelectorAll(".design").length;i++){
     document.querySelectorAll(".design")[i].addEventListener("click", function(event){
         setTimeout(function(){drawDesign(event.target.attributes.agg.value)},500)
+        addSelectedFinance(event);
     })
 };
 
 for(i=0;i<document.querySelectorAll(".construction").length;i++){
     document.querySelectorAll(".construction")[i].addEventListener("click", function(event){
         setTimeout(function(){drawConstruction(event.target.attributes.agg.value)},500)
+        addSelectedFinance(event);
     })
 };
 
 for(i=0;i<document.querySelectorAll(".unfunded").length;i++){
     document.querySelectorAll(".unfunded")[i].addEventListener("click", function(event){
         setTimeout(function(){drawUnfunded(event.target.attributes.agg.value)},500)
+        addSelectedFinance(event);
     })
 };
