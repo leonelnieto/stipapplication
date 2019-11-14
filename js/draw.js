@@ -11,12 +11,12 @@ function draw(program, programIndex,region){
 
 
 function drawCharts(agg,projPhase){
-    let program = document.getElementById("currentProgram").getAttribute("program");
-    let region = parseInt(document.getElementById("currentRegion").getAttribute("region"));
-    drillVisual(projPhase, program,`${projPhase}byRegionChart`,'REGION_CD',agg,'chart',region);
-    drillVisual(projPhase, program,`${projPhase}byRegionTable`,'REGION_CD',agg,'table',region);
-    drillVisual(projPhase, program,`${projPhase}byYearChart`,'FORECAST_ST_YR',agg,'chart',region);
-    drillVisual(projPhase, program,`${projPhase}byYearTable`,'FORECAST_ST_YR',agg,'table',region);
+    let program = document.getElementById("currentProgram").getAttribute("value");
+    let region = parseInt(document.getElementById("currentRegion").getAttribute("value"));
+    drillVisual(projPhase, programs[program][0],`${projPhase}byRegionChart`,'REGION_CD',agg,'chart',region);
+    drillVisual(projPhase, programs[program][0],`${projPhase}byRegionTable`,'REGION_CD',agg,'table',region);
+    drillVisual(projPhase, programs[program][0],`${projPhase}byYearChart`,'FORECAST_ST_YR',agg,'chart',region);
+    drillVisual(projPhase, programs[program][0],`${projPhase}byYearTable`,'FORECAST_ST_YR',agg,'table',region);
 }
 
 function removeSelected(elements){
