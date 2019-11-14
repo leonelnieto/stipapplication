@@ -115,7 +115,6 @@ function onePageButtons(pin, region, data) {
 function drillVisual(pn_status, workshop, dom, groupOrder, aggregate, type, region) {
    
     let whereClause = whereClauseBuilder(pn_status, workshop, region);
-    console.log(whereClause)
     let statistic = `[{'statisticType': 'SUM', 'onStatisticField': '${aggregate}', 'outStatisticFieldName': 'aggregate'}]`
     let vizQueryAgg = `&outStatistics=${statistic}`;
     let vizQueryGroup = `&groupByFieldsForStatistics=${groupOrder}`;

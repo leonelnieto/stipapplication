@@ -58,10 +58,10 @@ function drawCharts(agg,projPhase){
     let program = document.getElementById("currentProgram").getAttribute("value");
     let region = parseInt(document.getElementById("currentRegion").getAttribute("value"));
     
-    drillVisual(projPhase, program,'unfundedbyRegionChart','REGION_CD',agg,'chart',region);
-    drillVisual(projPhase, program,'unfundedbyRegionTable','REGION_CD',agg,'table',region);
-    drillVisual(projPhase, program,'unfunedbyYearChart','FORECAST_ST_YR',agg,'chart',region);
-    drillVisual(projPhase, program,'unfunedbyYearTable','FORECAST_ST_YR',agg,'table',region);
+    drillVisual(projPhase, program,`${projPhase}byRegionChart`,'REGION_CD',agg,'chart',region);
+    drillVisual(projPhase, program,`${projPhase}byRegionTable`,'REGION_CD',agg,'table',region);
+    drillVisual(projPhase, program,`${projPhase}byYearChart`,'FORECAST_ST_YR',agg,'chart',region);
+    drillVisual(projPhase, program,`${projPhase}byYearTable`,'FORECAST_ST_YR',agg,'table',region);
 }
 
 function removeSelected(elements){
@@ -89,35 +89,36 @@ function addSelectedFinance(elementEvent, projPhase){
 
 for(i=0;i<document.querySelectorAll(".unfunded").length;i++){
     document.querySelectorAll(".unfunded")[i].addEventListener("click", function(event){
-        drawUnfunded(event.target.attributes.agg.value);
+        drawCharts(event.target.attributes.agg.value,"unfunded");
         addSelectedFinance(event,".unfunded");
     })
 };
 
 for(i=0;i<document.querySelectorAll(".proposed").length;i++){
     document.querySelectorAll(".proposed")[i].addEventListener("click", function(event){
-        drawProposed(event.target.attributes.agg.value);
+        ddrawCharts(event.target.attributes.agg.value, "proposed");
         addSelectedFinance(event,".proposed");
     })
 };
 
 for(i=0;i<document.querySelectorAll(".comapp").length;i++){
     document.querySelectorAll(".comapp")[i].addEventListener("click", function(event){
-        drawComApp(event.target.attributes.agg.value);
+        
+        drawCharts(event.target.attributes.agg.value, "comapp");
         addSelectedFinance(event,".comapp");
     })
 };
 
 for(i=0;i<document.querySelectorAll(".design").length;i++){
     document.querySelectorAll(".design")[i].addEventListener("click", function(event){
-        drawDesign(event.target.attributes.agg.value);
+        drawCharts(event.target.attributes.agg.value,"design");
         addSelectedFinance(event,".design");
     })
 };
 
 for(i=0;i<document.querySelectorAll(".construction").length;i++){
     document.querySelectorAll(".construction")[i].addEventListener("click", function(event){
-        drawConstruction(event.target.attributes.agg.value);
+        drawCharts(event.target.attributes.agg.value, "construction");
         addSelectedFinance(event,".construction");
     })
 };
