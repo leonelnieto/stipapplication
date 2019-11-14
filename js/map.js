@@ -122,7 +122,6 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
                 fieldName: "STATE_DOLLARS"
             }]
         }]
-        layer.popupTemplate = { title: "{CONCEPT_DESC}", content: content };
 
         let map = new Map({
                 basemap: "streets-vector"
@@ -152,7 +151,8 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
                 view: view,
                 content: document.getElementById("queryProjects")
             });
-
+        
+        layer.popupTemplate = { title: "{CONCEPT_DESC}", content: content };
         map.add(layer);
         view.ui.add(filterProjects, "top-left")
         view.ui.add(legend, "bottom-right");
@@ -266,7 +266,6 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
 
         document.getElementById("query").onclick = function () {
             let sql = makeQuery();
-            
             layer.definitionExpression = sql;
         };
 
@@ -274,48 +273,45 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
             let queries = []
             
             if(program != 28){
-                let programSQL = programQuery[program] 
-                queries.push(programSQL)
-            }
-            if(region){
-                let regionSQL = `REGION_CD ='${region}'`
-                queries.push(regionSQL)
-            }
-            if (selectedCounty != 0) {
-               let countySQL = `CNTY_NAME like '%${selectedCounty}%'`
-               queries.push(countySQL)
+                let programSQL = programQuery[program] ;
+                queries.push(programSQL);
             }
 
-            
-            if(selectedMPO !=0){
-               let mpoSQL = `MPO_Name like '%${selectedMPO}%'`
-               queries.push(mpoSQL)
+            if(region){
+                let regionSQL = `REGION_CD ='${region}'`;
+                queries.push(regionSQL);
             }
-            
+
+            if (selectedCounty != 0) {
+               let countySQL = `CNTY_NAME like '%${selectedCounty}%'`;
+               queries.push(countySQL);
+            }
+
+            if(selectedMPO !=0){
+               let mpoSQL = `MPO_Name like '%${selectedMPO}%'`;
+               queries.push(mpoSQL);
+            }
             
             if (selectedMunicipality != 0) {
-               let municipalitySQL = `Municipality_Name like '%${selectedMunicipality}%'`
-               queries.push(municipalitySQL)
-            }
-            
-            
-            if (selectedLegislative != 0 && selectedLegislative.includes("Senate")) {
-               let legislativeSQL = `UT_SENATE_DIST_NAME like '${selectedLegislative}'`
-               queries.push(legislativeSQL)
-            } else if (selectedLegislative != 0 && selectedLegislative.includes("House")) {
-               let legislativeSQL = `UT_House_Dist_Name like '${selectedLegislative}'`
-               queries.push(legislativeSQL)
+               let municipalitySQL = `Municipality_Name like '%${selectedMunicipality}%'`;
+               queries.push(municipalitySQL);
             }
            
             if (selectedStatus != 0) {
-               let statusSQL = `PIN_STAT_NM = '${selectedStatus}'`
-               queries.push(statusSQL)
+               let statusSQL = `PIN_STAT_NM = '${selectedStatus}'`;
+               queries.push(statusSQL);
             }
 
+            if (selectedLegislative != 0 && selectedLegislative.includes("Senate")) {
+                let legislativeSQL = `UT_SENATE_DIST_NAME like '${selectedLegislative}'`;
+                queries.push(legislativeSQL);
+            } 
+            else if (selectedLegislative != 0 && selectedLegislative.includes("House")) {
+                let legislativeSQL = `UT_House_Dist_Name like '${selectedLegislative}'`;
+                queries.push(legislativeSQL);
+            }
 
-           
-            let sql = queries.join(" AND ")
-            console.log(sql)
+            let sql = queries.join(" AND ");
 
             return sql
         }
@@ -336,6 +332,7 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
                     newCollection[key] = sortedAttributes;
                 }
             }
+
             if (senate.length > 0 || house.length > 0) { newCollection['District'] = house.concat(senate) }
 
             return newCollection
@@ -359,7 +356,8 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
                         !(id in attributeCollection) ? existing = [] : existing = attributeCollection[id]
                         let merged = existing.concat(cross);
                         attributeCollection[id] = merged;
-                    } else {
+                    }
+                    else {
                         //if key doesn't exist in object, create with current attribute as first value in array, else push  current attribute
                         !(id in attributeCollection) ? attributeCollection[id] = [currentAttribute] : attributeCollection[id].push(currentAttribute)
 
