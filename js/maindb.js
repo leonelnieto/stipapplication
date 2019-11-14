@@ -17,7 +17,6 @@ const formatter = new Intl.NumberFormat('en-US', {
 
 //Query Dataset then build table
 function dataTableBuilder(pn_status, workshop, dom, region) {
-    
     //Build where clause by filter
     let whereClause = whereClauseBuilder(pn_status, workshop, region);
     let query = sourceDataset + selectColumns + whereClause;
@@ -112,13 +111,15 @@ function onePageButtons(pin, region, data) {
 }
 
 //Drill Chart takes type parameter for table or graph
-function drillVisual(pn_status, workshop, dom, groupOrder, aggregate, type, region) {
-    let whereClause = whereClauseBuilder(pn_status, workshop, region);
+function drillVisual(pn_status, program, dom, groupOrder, aggregate, type, region) {
+    let whereClause = whereClauseBuilder(pn_status, program, region);
     let statistic = `[{'statisticType': 'SUM', 'onStatisticField': '${aggregate}', 'outStatisticFieldName': 'aggregate'}]`
     let vizQueryAgg = `&outStatistics=${statistic}`;
     let vizQueryGroup = `&groupByFieldsForStatistics=${groupOrder}`;
     let vizQueryOrder = `&orderByFields=${groupOrder}`;
     let url = sourceDataset + vizQueryAgg + whereClause + vizQueryGroup + vizQueryOrder;
+
+    //url = https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects2019/MapServer/0/query?f=json&returnGeometry=false&outStatistics=[{'statisticType': 'SUM', 'onStatisticField': 'PROJECT_VALUE', 'outStatisticFieldName': 'aggregate'}]&where=STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed' AND WORKSHOP_CAT in (preserveStructures)&groupByFieldsForStatistics=REGION_CD&orderByFields=REGION_CD
 
     fetch(url).then(function (response) {
         return response.json();
@@ -158,7 +159,8 @@ function drillVisual(pn_status, workshop, dom, groupOrder, aggregate, type, regi
                     html += '<tr><td>' + attributes[groupOrder] + '</td>';
                     html += '<td class="' + attributes[groupOrder] + '">' + formatter.format(attributes['aggregate']) + '</td></tr>';
 
-                } else {
+                }
+                else {
                     html += '<tr><td>' + attributes[groupOrder] + '</td>';
                     html += '<td>' + formatter.format(attributes['aggregate']) + '</td></tr>';
                 }
