@@ -117,7 +117,7 @@ function drillVisual(pnStatus, program, dom, groupOrder, aggregate, type, region
     let vizQueryGroup = `&groupByFieldsForStatistics=${groupOrder}`;
     let vizQueryOrder = `&orderByFields=${groupOrder}`;
     let url = sourceDataset + vizQueryAgg + whereClause + vizQueryGroup + vizQueryOrder;
-    console.log(url)
+    
     //url = https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects2019/MapServer/0/query?f=json&returnGeometry=false&outStatistics=[{'statisticType': 'SUM', 'onStatisticField': 'PROJECT_VALUE', 'outStatisticFieldName': 'aggregate'}]&where=STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed' AND WORKSHOP_CAT in (preserveStructures)&groupByFieldsForStatistics=REGION_CD&orderByFields=REGION_CD
 
     fetch(url).then(function (response) {

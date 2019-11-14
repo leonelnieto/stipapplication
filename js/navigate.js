@@ -37,13 +37,13 @@ const regionName = {
 for(i=0;i<document.querySelectorAll("#sidebarNav li").length;i++){
     document.querySelectorAll("#sidebarNav li a")[i].addEventListener("click", function(event){
         let programDisplay = document.getElementById("currentProgram")
-        let regionNum = document.getElementById("currentRegion").getAttribute("value");
+        let regionNum = document.getElementById("currentRegion").getAttribute("region");
         //TODO: change "section" to "program" in html 
         if(event.target.attributes.section.value !== "null"){
             let program = event.target.attributes.section.value;
-        
+           
             programDisplay.innerHTML = event.target.innerHTML
-            programDisplay.setAttribute("value", program)
+            programDisplay.setAttribute("program", program)
             
             draw(programs[program][0], programs[program][1],parseInt(regionNum));
         }
@@ -53,11 +53,11 @@ for(i=0;i<document.querySelectorAll("#sidebarNav li").length;i++){
 for (i = 0; i < document.querySelectorAll(".filterregion").length; i++) {
     document.querySelectorAll(".filterregion")[i].addEventListener("click", function (event) {
         let regionDisplay = document.getElementById("currentRegion")
-        let program = document.getElementById("currentProgram").getAttribute("value");
+        let program = document.getElementById("currentProgram").getAttribute("program");
         let regionNum = event.target.attributes.region.value
-
+        
         regionDisplay.innerHTML = regionName[regionNum]
-        regionDisplay.setAttribute("value", regionNum);
+        regionDisplay.setAttribute("region", regionNum);
      
         draw(programs[program][0], programs[program][1],parseInt(regionNum));
     });
