@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-// let STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects/MapServer/0/" //live data
-let STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects2019/MapServer/0/" //test data
-let sourceDataset = STIPData + "query?f=json&returnGeometry=false";
-let selectColumns = "&outFields=PIN,WORKSHOP_CAT,STIP_WORKSHOP,PROJECT_MANAGER,REGION_CD,COMM_APRV_IND,PIN_DESC,PRIMARY_CONCEPT,PROJECT_VALUE,PLANNED_CONSTRUCTION_YEAR,PROJECTED_START_DATE,PROGRAM,PUBLIC_DESC,FORECAST_ST_YR,FED_DOLLARS,STATE_DOLLARS"
+// const STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects/MapServer/0/" //live data
+const STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects2019/MapServer/0/" //test data
+const sourceDataset = STIPData + "query?f=json&returnGeometry=false";
+const selectColumns = "&outFields=PIN,WORKSHOP_CAT,STIP_WORKSHOP,PROJECT_MANAGER,REGION_CD,COMM_APRV_IND,PIN_DESC,PRIMARY_CONCEPT,PROJECT_VALUE,PLANNED_CONSTRUCTION_YEAR,PROJECTED_START_DATE,PROGRAM,PUBLIC_DESC,FORECAST_ST_YR,FED_DOLLARS,STATE_DOLLARS"
 //Helper currency formater
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -113,7 +113,6 @@ function onePageButtons(pin, region, data) {
 
 //Drill Chart takes type parameter for table or graph
 function drillVisual(pn_status, workshop, dom, groupOrder, aggregate, type, region) {
-   
     let whereClause = whereClauseBuilder(pn_status, workshop, region);
     console.log(whereClause)
     let statistic = `[{'statisticType': 'SUM', 'onStatisticField': '${aggregate}', 'outStatisticFieldName': 'aggregate'}]`
@@ -121,6 +120,7 @@ function drillVisual(pn_status, workshop, dom, groupOrder, aggregate, type, regi
     let vizQueryGroup = `&groupByFieldsForStatistics=${groupOrder}`;
     let vizQueryOrder = `&orderByFields=${groupOrder}`;
     let url = sourceDataset + vizQueryAgg + whereClause + vizQueryGroup + vizQueryOrder;
+
     fetch(url).then(function (response) {
         return response.json();
     }).then(function (data) {
@@ -130,11 +130,6 @@ function drillVisual(pn_status, workshop, dom, groupOrder, aggregate, type, regi
         if (type === 'chart') {
             let x = [];
             let y = [];
-            features.forEach(function (item) {
-                attributes = item.attributes;
-                x.push(attributes[groupOrder]);
-                y.push(formatter.format(attributes["aggregate"])); //TODO
-            });
             let trace1 = {
                 x: x,
                 y: y,
@@ -145,10 +140,19 @@ function drillVisual(pn_status, workshop, dom, groupOrder, aggregate, type, regi
             let layout = {
                 yaxis: { title: '$', hoverformat: '$0f' }, xaxis: { type: 'category' },
             };
+
+            features.forEach(function (item) {
+                attributes = item.attributes;
+                x.push(attributes[groupOrder]);
+                y.push(formatter.format(attributes["aggregate"])); //TODO
+            });
+
             Plotly.newPlot(dom, data, layout, { responsive: true });
-        } else if (type === 'table') {
+        }
+        else if (type === 'table') {
             let col = (groupOrder === "REGION_CD") ? "Region" : "Year";
             let html = '<table class="table"><thead><tr><th>' + col + '</th><th>Dollars</th></thead><tbody>';
+
             features.forEach(function (item) {
                 attributes = item.attributes;
                 if (groupOrder === "FORECAST_ST_YR") {
@@ -160,6 +164,7 @@ function drillVisual(pn_status, workshop, dom, groupOrder, aggregate, type, regi
                     html += '<td>' + formatter.format(attributes['aggregate']) + '</td></tr>';
                 }
             });
+
             html += '</tbody></table>';
             document.getElementById(dom).innerHTML = html;
         }
