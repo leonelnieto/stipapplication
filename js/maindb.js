@@ -16,9 +16,9 @@ const formatter = new Intl.NumberFormat('en-US', {
 });
 
 //Query Dataset then build table
-function dataTableBuilder(pn_status, program, dom, region) {
+function dataTableBuilder(pnStatus, program, dom, region) {
     //Build where clause by filter
-    let whereClause = whereClauseBuilder(pn_status, program, region);
+    let whereClause = whereClauseBuilder(pnStatus, program, region);
     let query = sourceDataset + selectColumns + whereClause;
 
     //fetch one page data 
@@ -50,7 +50,7 @@ function dataTableBuilder(pn_status, program, dom, region) {
                     ]
 
                     //include column for start year if not unfunded
-                    if (pn_status != 'unfunded') {
+                    if (pnStatus != 'unfunded') {
                         columns.push({ "orderable": true });
                     }
 
@@ -88,7 +88,7 @@ function dataTableBuilder(pn_status, program, dom, region) {
                     `${formatter.format(attributes['PROJECT_VALUE'])}`
                 ];
 
-                pn_status != 'unfunded' ? row.push(`${attributes['FORECAST_ST_YR']}`) : ''
+                pnStatus != 'unfunded' ? row.push(`${attributes['FORECAST_ST_YR']}`) : ''
 
                 table.row.add(row);
             });
@@ -111,8 +111,8 @@ function onePageButtons(pin, region, data) {
 }
 
 //Drill Chart takes type parameter for table or graph
-function drillVisual(pn_status, program, dom, groupOrder, aggregate, type, region) {
-    let whereClause = whereClauseBuilder(pn_status, program, region);
+function drillVisual(pnStatus, program, dom, groupOrder, aggregate, type, region) {
+    let whereClause = whereClauseBuilder(pnStatus, program, region);
     let statistic = `[{'statisticType': 'SUM', 'onStatisticField': '${aggregate}', 'outStatisticFieldName': 'aggregate'}]`
     let vizQueryAgg = `&outStatistics=${statistic}`;
     let vizQueryGroup = `&groupByFieldsForStatistics=${groupOrder}`;
@@ -173,7 +173,7 @@ function drillVisual(pn_status, program, dom, groupOrder, aggregate, type, regio
 }
 
 //Helper function to build where clause
-function whereClauseBuilder(pn_status, program, region) {
+function whereClauseBuilder(pnStatus, program, region) {
     let whereClause = "";
     if (program === "all") {
         program = "";
@@ -185,7 +185,7 @@ function whereClauseBuilder(pn_status, program, region) {
     } else {
         region = `AND REGION_CD='${region}'`;
     }
-    switch (pn_status) {
+    switch (pnStatus) {
         case "unfunded":
             whereClause = "&where=STIP_WORKSHOP='N' and PIN_STAT_NM='Proposed' " + program + region;
             break;
