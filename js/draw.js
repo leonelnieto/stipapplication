@@ -68,18 +68,19 @@ function addSelectedFinance(elementEvent){
         removeSelected(document.querySelectorAll(".finance"));
         elementEvent.target.className += " selected";
     }
-}
+};
 
 for(i=0;i<document.querySelectorAll(".proposed").length;i++){
     document.querySelectorAll(".proposed")[i].addEventListener("click", function(event){
-        setTimeout(function(){drawProposed(event.target.attributes.agg.value, event.target.attributes.workshop.value)},500)
+        
+        drawProposed(event.target.attributes.agg.value)
         addSelectedFinance(event);
     })
 };
 
 for(i=0;i<document.querySelectorAll(".comapp").length;i++){
     document.querySelectorAll(".comapp")[i].addEventListener("click", function(event){
-        setTimeout(function(){drawComApp(event.target.attributes.agg.value)},500)
+        drawComApp(event.target.attributes.agg.value)
         addSelectedFinance(event);
     })
 };
