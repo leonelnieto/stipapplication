@@ -63,44 +63,51 @@ function removeSelected(elements){
     }
 }
 
-function addSelectedFinance(elementEvent){
+function addSelectedFinance(elementEvent, projPhase){
+    removeSelected(document.querySelectorAll(".finance"));
     if(elementEvent.target.className.indexOf("finance") !== -1){
-        removeSelected(document.querySelectorAll(".finance"));
         elementEvent.target.className += " selected";
+    } else{
+        let elements = document.querySelectorAll(projPhase)
+       for(i=0;i<elements.length; i++){
+           if(elements[i].id=="projVal"){
+               elements[i].classList.add("selected")
+           }
+       }
     }
 };
 
 for(i=0;i<document.querySelectorAll(".unfunded").length;i++){
     document.querySelectorAll(".unfunded")[i].addEventListener("click", function(event){
         drawUnfunded(event.target.attributes.agg.value);
-        addSelectedFinance(event);
+        addSelectedFinance(event,".unfunded");
     })
 };
 
 for(i=0;i<document.querySelectorAll(".proposed").length;i++){
     document.querySelectorAll(".proposed")[i].addEventListener("click", function(event){
         drawProposed(event.target.attributes.agg.value);
-        addSelectedFinance(event);
+        addSelectedFinance(event,".proposed");
     })
 };
 
 for(i=0;i<document.querySelectorAll(".comapp").length;i++){
     document.querySelectorAll(".comapp")[i].addEventListener("click", function(event){
         drawComApp(event.target.attributes.agg.value);
-        addSelectedFinance(event);
+        addSelectedFinance(event,".comapp");
     })
 };
 
 for(i=0;i<document.querySelectorAll(".design").length;i++){
     document.querySelectorAll(".design")[i].addEventListener("click", function(event){
         drawDesign(event.target.attributes.agg.value);
-        addSelectedFinance(event);
+        addSelectedFinance(event,".design");
     })
 };
 
 for(i=0;i<document.querySelectorAll(".construction").length;i++){
     document.querySelectorAll(".construction")[i].addEventListener("click", function(event){
         drawConstruction(event.target.attributes.agg.value);
-        addSelectedFinance(event);
+        addSelectedFinance(event,".construction");
     })
 };
