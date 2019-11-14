@@ -5,8 +5,6 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
         let centerLat = 39.631301;
         let zoom = 2500000;
         let region;
-
-        
         let selectedCounty = selectedMunicipality = selectedLegislative = selectedStatus =selectedMPO= 0;
         //symbols for year lines
         const year2018 = { type: "simple-line", color: "#A87000", width: 4, style: "solid" };
@@ -76,7 +74,6 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
            
         });
         
-
         let content = [{
             type: "fields",
             fieldInfos: [{
@@ -127,39 +124,36 @@ require(["esri/Map", "esri/views/MapView", "esri/widgets/Legend", "esri/layers/F
         }]
         layer.popupTemplate = { title: "{CONCEPT_DESC}", content: content };
 
-
-        //initialize map
         let map = new Map({
-            basemap: "streets-vector"
-
-        });
-        //create map view
+                basemap: "streets-vector"
+            });
         let view = new MapView({
-            container: "map",
-            map: map,
-            center: [centerLong, centerLat], //edit to center base on lat and lon state center 39.631301,-111.693657
-            scale: zoom //larger number zooms out, smaller zooms in 
-        });
-        map.add(layer);
+                container: "map",
+                map: map,
+                center: [centerLong, centerLat], //state center 39.631301,-111.693657
+                scale: zoom
+            });
         let legend = new Legend({
-            view: view,
-            layerInfos: [{
-                layer: layer,
-                title: "Legend"
-            }]
-        });
+                view: view,
+                layerInfos: [{
+                    layer: layer,
+                    title: "Legend"
+                }]
+            });
         let basemapToggle = new BasemapToggle({
-            view: view,
-            nextBasemap: "satellite"
-        });
+                view: view,
+                nextBasemap: "satellite"
+            });
         const filterProjects = new Expand({
-            expandIconClass: "esri-icon-filter",
-            expandTooltip: "Query Projects",
-            expanded: false,
-            group: "top-left",
-            view: view,
-            content: document.getElementById("queryProjects")
-        });
+                expandIconClass: "esri-icon-filter",
+                expandTooltip: "Query Projects",
+                expanded: false,
+                group: "top-left",
+                view: view,
+                content: document.getElementById("queryProjects")
+            });
+
+        map.add(layer);
         view.ui.add(filterProjects, "top-left")
         view.ui.add(legend, "bottom-right");
         view.ui.add(basemapToggle, "top-right");

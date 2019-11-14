@@ -34,8 +34,6 @@ const regionName = {
     4: "Region 4"
 }
 
-
-
 for(i=0;i<document.querySelectorAll("#sidebarNav li").length;i++){
     document.querySelectorAll("#sidebarNav li a")[i].addEventListener("click", function(event){
         let programDisplay = document.getElementById("currentProgram")
@@ -52,8 +50,6 @@ for(i=0;i<document.querySelectorAll("#sidebarNav li").length;i++){
         }
     })
 }
-
-
 
 for (i = 0; i < document.querySelectorAll(".filterregion").length; i++) {
     document.querySelectorAll(".filterregion")[i].addEventListener("click", function (event) {
