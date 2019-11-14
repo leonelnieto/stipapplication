@@ -4,14 +4,15 @@ function draw(program, programIndex,region){
     dataTableBuilder('comapp',program,'#pills-comapptbl',region);
     dataTableBuilder('design',program,'#pills-designtbl',region);
     dataTableBuilder('construction',program,'#pills-constructiontbl',region);
-    
+    getSelectedPill();
     mapLoaderDynamic(parseInt(region),programIndex);
 };
+
+
 
 function drawCharts(agg,projPhase){
     let program = document.getElementById("currentProgram").getAttribute("value");
     let region = parseInt(document.getElementById("currentRegion").getAttribute("value"));
-    
     drillVisual(projPhase, program,`${projPhase}byRegionChart`,'REGION_CD',agg,'chart',region);
     drillVisual(projPhase, program,`${projPhase}byRegionTable`,'REGION_CD',agg,'table',region);
     drillVisual(projPhase, program,`${projPhase}byYearChart`,'FORECAST_ST_YR',agg,'chart',region);
@@ -40,6 +41,30 @@ function addSelectedFinance(elementEvent, projPhase){
        }
     }
 };
+
+function getSelectedPill(){
+    let phases = ["unfunded", "proposed", "comapp","design", "construction"]
+    let pills = document.querySelectorAll(".data-pill")
+    for(i=0; i<pills.length; i++){
+        if(pills[i].classList.contains("active")){
+           phases.forEach(function(phase){
+            if(pills[i].classList.contains(phase)){
+                getSelectedAgg(phase)
+                
+            }
+           })
+        }
+    }
+}
+
+function getSelectedAgg(phase){
+    let aggButtons = document.querySelectorAll(`.${phase}`);
+    for (i=0; i<aggButtons.length; i++){
+        if(aggButtons[i].classList.contains("selected")){
+            drawCharts(aggButtons[i].attributes.agg.value,phase);
+        }
+    }
+}
 
 for(i=0;i<document.querySelectorAll(".unfunded").length;i++){
     document.querySelectorAll(".unfunded")[i].addEventListener("click", function(event){
