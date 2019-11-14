@@ -96,7 +96,7 @@ for(i=0;i<document.querySelectorAll(".unfunded").length;i++){
 
 for(i=0;i<document.querySelectorAll(".proposed").length;i++){
     document.querySelectorAll(".proposed")[i].addEventListener("click", function(event){
-        ddrawCharts(event.target.attributes.agg.value, "proposed");
+        drawCharts(event.target.attributes.agg.value, "proposed");
         addSelectedFinance(event,".proposed");
     })
 };
