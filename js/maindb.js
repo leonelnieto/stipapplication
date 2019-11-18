@@ -604,7 +604,7 @@ function onepagerSummaryTable(dom) {
     });
 }
 
-//Show entire dataset in app documentation
+//Show entire dataset in app documentation.html
 function printSourceData(dom) {
   let url =
     sourceDataset +

@@ -267,7 +267,7 @@ require([
         zoom = 1400000;
         break;
     }
-    resetQuery();
+    resetQuery(newProgram, newRegion);
   };
 
   function getFeatures(sql, filters) {
@@ -281,10 +281,10 @@ require([
     });
   }
 
-  function resetQuery() {
+  function resetQuery(newProgram, newRegion) {
     selectedCounty = selectedMunicipality = selectedLegislative = selectedStatus = selectedMPO = 0;
     const filters = buildFilter();
-    let sql = makeQuery();
+    let sql = makeQuery(newProgram, newRegion);
     layer.definitionExpression = sql;
     getFeatures(sql, filters);
   }
@@ -323,18 +323,21 @@ require([
     let sql = makeQuery();
     getFeatures(sql, filters);
   };
+
   document.getElementById("queryMunicipality").onchange = function() {
     selectedMunicipality = document.getElementById("queryMunicipality").value;
     const filters = buildFilter();
     let sql = makeQuery();
     getFeatures(sql, filters);
   };
+
   document.getElementById("queryDistrict").onchange = function() {
     selectedLegislative = document.getElementById("queryDistrict").value;
     const filters = buildFilter();
     let sql = makeQuery();
     getFeatures(sql, filters);
   };
+
   document.getElementById("queryStatus").onchange = function() {
     selectedStatus = document.getElementById("queryStatus").value;
     const filters = buildFilter();
@@ -351,10 +354,10 @@ require([
     layer.definitionExpression = sql;
   };
 
-  function makeQuery() {
+  function makeQuery(newProgram, newRegion) {
     let queries = [];
-
-    if (program != 28) {
+    console.log(`newRegion = ${newRegion}, newProgram = ${newProgram}`);
+    if (program !== 28) {
       let programSQL = programQuery[program];
       queries.push(programSQL);
     }
