@@ -8,50 +8,13 @@ function draw(program, programIndex, region) {
   mapLoaderDynamic(parseInt(region), programIndex);
 }
 
-function drawCharts(agg, projPhase) {
-  let program = document
-    .getElementById("currentProgram")
-    .getAttribute("program");
-
-  let region = parseInt(
-    document.getElementById("currentRegion").getAttribute("region")
-  );
-  drillVisual(
-    projPhase,
-    programs[program][0],
-    `${projPhase}byRegionChart`,
-    "REGION_CD",
-    agg,
-    "chart",
-    region
-  );
-  drillVisual(
-    projPhase,
-    programs[program][0],
-    `${projPhase}byRegionTable`,
-    "REGION_CD",
-    agg,
-    "table",
-    region
-  );
-  drillVisual(
-    projPhase,
-    programs[program][0],
-    `${projPhase}byYearChart`,
-    "FORECAST_ST_YR",
-    agg,
-    "chart",
-    region
-  );
-  drillVisual(
-    projPhase,
-    programs[program][0],
-    `${projPhase}byYearTable`,
-    "FORECAST_ST_YR",
-    agg,
-    "table",
-    region
-  );
+function drawCharts(agg,projPhase){
+    let program = document.getElementById("currentProgram").getAttribute("program");    
+    let region = parseInt(document.getElementById("currentRegion").getAttribute("region"));
+    drillVisual(projPhase, programs[program][0],`${projPhase}byRegionChart`,'REGION_CD',agg,'chart',region);
+    drillVisual(projPhase, programs[program][0],`${projPhase}byRegionTable`,'REGION_CD',agg,'table',region);
+    drillVisual(projPhase, programs[program][0],`${projPhase}byYearChart`,'FORECAST_ST_YR',agg,'chart',region);
+    drillVisual(projPhase, programs[program][0],`${projPhase}byYearTable`,'FORECAST_ST_YR',agg,'table',region);
 }
 
 function removeSelected(elements) {
@@ -101,45 +64,35 @@ function getSelectedAgg(phase) {
 }
 
 for (i = 0; i < document.querySelectorAll(".unfunded").length; i++) {
-  document
-    .querySelectorAll(".unfunded")
-    [i].addEventListener("click", function(event) {
+  document.querySelectorAll(".unfunded")[i].addEventListener("click", function(event) {
       drawCharts(event.target.attributes.agg.value, "unfunded");
       addSelectedFinance(event, ".unfunded");
     });
 }
 
 for (i = 0; i < document.querySelectorAll(".proposed").length; i++) {
-  document
-    .querySelectorAll(".proposed")
-    [i].addEventListener("click", function(event) {
+  document.querySelectorAll(".proposed")[i].addEventListener("click", function(event) {
       drawCharts(event.target.attributes.agg.value, "proposed");
       addSelectedFinance(event, ".proposed");
     });
 }
 
 for (i = 0; i < document.querySelectorAll(".comapp").length; i++) {
-  document
-    .querySelectorAll(".comapp")
-    [i].addEventListener("click", function(event) {
+  document.querySelectorAll(".comapp")[i].addEventListener("click", function(event) {
       drawCharts(event.target.attributes.agg.value, "comapp");
       addSelectedFinance(event, ".comapp");
     });
 }
 
 for (i = 0; i < document.querySelectorAll(".design").length; i++) {
-  document
-    .querySelectorAll(".design")
-    [i].addEventListener("click", function(event) {
+  document.querySelectorAll(".design")[i].addEventListener("click", function(event) {
       drawCharts(event.target.attributes.agg.value, "design");
       addSelectedFinance(event, ".design");
     });
 }
 
 for (i = 0; i < document.querySelectorAll(".construction").length; i++) {
-  document
-    .querySelectorAll(".construction")
-    [i].addEventListener("click", function(event) {
+  document.querySelectorAll(".construction")[i].addEventListener("click", function(event) {
       drawCharts(event.target.attributes.agg.value, "construction");
       addSelectedFinance(event, ".construction");
     });
