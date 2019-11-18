@@ -8,11 +8,6 @@ function draw(program, programIndex, region) {
   mapLoaderDynamic(parseInt(region), programIndex);
 }
 
-function drawCharts(agg, projPhase) {
-  let program = document
-    .getElementById("currentProgram")
-    .getAttribute("program");
-
 function drawCharts(agg,projPhase){
     let program = document.getElementById("currentProgram").getAttribute("program");    
     let region = parseInt(document.getElementById("currentRegion").getAttribute("region"));

@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 // const STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects/MapServer/0/" //live data
-const STIPData =
-  "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects2019/MapServer/0/"; //test data
+const STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects2019/MapServer/0/"; //test data
 const sourceDataset = STIPData + "query?f=json&returnGeometry=false";
-const selectColumns =
-  "&outFields=PIN,WORKSHOP_CAT,STIP_WORKSHOP,PROJECT_MANAGER,REGION_CD,COMM_APRV_IND,PIN_DESC,PRIMARY_CONCEPT,PROJECT_VALUE,PLANNED_CONSTRUCTION_YEAR,PROJECTED_START_DATE,PROGRAM,PUBLIC_DESC,FORECAST_ST_YR,FED_DOLLARS,STATE_DOLLARS";
+const selectColumns = "&outFields=PIN,WORKSHOP_CAT,STIP_WORKSHOP,PROJECT_MANAGER,REGION_CD,COMM_APRV_IND,PIN_DESC,PRIMARY_CONCEPT,PROJECT_VALUE,PLANNED_CONSTRUCTION_YEAR,PROJECTED_START_DATE,PROGRAM,PUBLIC_DESC,FORECAST_ST_YR,FED_DOLLARS,STATE_DOLLARS";
 //Helper currency formater
 const formatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -22,13 +20,12 @@ function dataTableBuilder(pnStatus, program, dom, region) {
     //Build where clause by filter
     let whereClause = whereClauseBuilder(pnStatus, program, region);
     let query = sourceDataset + selectColumns + whereClause;
-    
+    console.log(query)
     fetch('data/onepagers.json').then(function (response) {
         return response.json();
     }).then(function (onePages) {
         //then fetch project data    
-        fetch(query)
-            .then(function (response) {
+        fetch(query).then(function (response) {
                 return response.json();
             }).then(function (data) {
                 
@@ -80,27 +77,6 @@ function dataTableBuilder(pnStatus, program, dom, region) {
                 let attributes = item.attributes
                 let region = attributes['REGION_CD']
                 let pin = attributes['PIN']
-
-            const table = $("#dataTable" + dom.substring(1)).DataTable({
-              pagingType: "full_numbers",
-              retrieve: true,
-              columns: columns,
-              dom: "Bfrtip",
-              buttons: ["copyHtml5", "excelHtml5", "csvHtml5", "pdfHtml5"]
-            });
-
-            addRows(features, table);
-          }
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-
-      function addRows(features, table) {
-        features.forEach(function(item) {
-          attributes = item.attributes;
-          let region = attributes["REGION_CD"];
-          let pin = attributes["PIN"];
 
           let row = [
             `${region}`,
@@ -197,6 +173,7 @@ function drillVisual(pnStatus, program, dom, groupOrder, aggregate, type, region
 
 //Helper function to build where clause
 function whereClauseBuilder(pnStatus, program, region) {
+  console.log(pnStatus, program, region)
     let whereClause = "";
     let programClause = "";
     let regionClause = "";
@@ -218,7 +195,7 @@ function whereClauseBuilder(pnStatus, program, region) {
             whereClause = "&where=STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed' " + programClause + regionClause;
             break;
         case "comapp":
-            whereClause = "&where=COMM_APRV_IND='Y' and PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete') " + program + region;
+            whereClause = "&where=COMM_APRV_IND='Y' and PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete') " + programClause + regionClause;
             break;
         case "design":
             whereClause = "&where=PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded') " + programClause + regionClause;
