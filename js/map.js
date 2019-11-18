@@ -206,9 +206,7 @@ require([
 
   let view = new MapView({
     container: "map",
-    map: map,
-    center: [-111.693657, 39.631301], //state center 39.631301,-111.693657
-    scale: 2500000
+    map: map
   });
   let legend = new Legend({
     view: view,
@@ -272,18 +270,9 @@ require([
         zoom = 7;
         break;
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-    resetQuery(newProgram, newRegion);
-=======
-    resetQuery();
->>>>>>> parent of 85554e3... pass functions
-  };
-=======
     view.center=[centerLong,centerLat];
     view.zoom=zoom;
   }
->>>>>>> ae3204b5dfa182ea5a17bc2c92170e00d822a011
 
   function getFeatures(sql, filters) {
     let query = layer.createQuery();
@@ -368,11 +357,8 @@ require([
   };
 
   function makeQuery() {
-<<<<<<< HEAD
     let program = programs[document.getElementById("currentProgram").getAttribute("program")][1];    
     let region = parseInt(document.getElementById("currentRegion").getAttribute("region"));
-=======
->>>>>>> parent of 85554e3... pass functions
     let queries = [];
 
     if (program != 28) {
