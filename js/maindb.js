@@ -20,7 +20,7 @@ function dataTableBuilder(pnStatus, program, dom, region) {
     //Build where clause by filter
     let whereClause = whereClauseBuilder(pnStatus, program, region);
     let query = sourceDataset + selectColumns + whereClause;
-    console.log(query)
+    
     fetch('data/onepagers.json').then(function (response) {
         return response.json();
     }).then(function (onePages) {
@@ -173,7 +173,6 @@ function drillVisual(pnStatus, program, dom, groupOrder, aggregate, type, region
 
 //Helper function to build where clause
 function whereClauseBuilder(pnStatus, program, region) {
-  console.log(pnStatus, program, region)
     let whereClause = "";
     let programClause = "";
     let regionClause = "";
