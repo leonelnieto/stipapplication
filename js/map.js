@@ -273,7 +273,11 @@ require([
         break;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     resetQuery(newProgram, newRegion);
+=======
+    resetQuery();
+>>>>>>> parent of 85554e3... pass functions
   };
 =======
     view.center=[centerLong,centerLat];
@@ -292,10 +296,10 @@ require([
     });
   }
 
-  function resetQuery(newProgram, newRegion) {
+  function resetQuery() {
     selectedCounty = selectedMunicipality = selectedLegislative = selectedStatus = selectedMPO = 0;
     const filters = buildFilter();
-    let sql = makeQuery(newProgram, newRegion);
+    let sql = makeQuery();
     layer.definitionExpression = sql;
     getFeatures(sql, filters);
     
@@ -335,21 +339,18 @@ require([
     let sql = makeQuery();
     getFeatures(sql, filters);
   };
-
   document.getElementById("queryMunicipality").onchange = function() {
     selectedMunicipality = document.getElementById("queryMunicipality").value;
     const filters = buildFilter();
     let sql = makeQuery();
     getFeatures(sql, filters);
   };
-
   document.getElementById("queryDistrict").onchange = function() {
     selectedLegislative = document.getElementById("queryDistrict").value;
     const filters = buildFilter();
     let sql = makeQuery();
     getFeatures(sql, filters);
   };
-
   document.getElementById("queryStatus").onchange = function() {
     selectedStatus = document.getElementById("queryStatus").value;
     const filters = buildFilter();
@@ -367,11 +368,14 @@ require([
   };
 
   function makeQuery() {
+<<<<<<< HEAD
     let program = programs[document.getElementById("currentProgram").getAttribute("program")][1];    
     let region = parseInt(document.getElementById("currentRegion").getAttribute("region"));
+=======
+>>>>>>> parent of 85554e3... pass functions
     let queries = [];
-    console.log(`newRegion = ${newRegion}, newProgram = ${newProgram}`);
-    if (program !== 28) {
+
+    if (program != 28) {
       let programSQL = programQuery[program];
       queries.push(programSQL);
     }

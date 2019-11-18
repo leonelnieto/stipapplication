@@ -524,7 +524,7 @@ function onepagerSummaryTable(dom) {
     });
 }
 
-//Show entire dataset in app documentation.html
+//Show entire dataset in app documentation
 function printSourceData(dom) {
     let url = sourceDataset + "&outFields=PIN,PIN_DESC,PIN_STAT_NM,PROJ_LOC ,PROJECT_VALUE,REGION_CD,PLANNED_CONSTRUCTION_YEAR,FORECAST_ST_YR,WORKSHOP_CAT&where=1=1"
     fetch(url).then(function (response) {
