@@ -25,9 +25,7 @@ function refreshData(){
             params.push({name: param["name"], value: param["defaultValue"]})
         });
         
-        let parameters = {"publishedParameters": params}
-
-        
+        let parameters = {"publishedParameters": params}        
         FMEServer.submitSyncJob(repository, workspaceName, parameters, fmeFinish)
     }
 

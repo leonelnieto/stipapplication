@@ -31,16 +31,16 @@ function dataTableBuilder(pnStatus, program, dom, region) {
             }).then(function (data) {
                 
                 let tableID = '#dataTable' + dom.substring(1);
-                features = data.features
+                let features = data.features
 
                 if ($.fn.dataTable.isDataTable(tableID)) {
-                    const table = $(tableID).DataTable();
+                    let table = $(tableID).DataTable();
                     table.clear();
                     addRows(features, table)
                 }
                
                 if (!$.fn.dataTable.isDataTable(tableID)) {
-                    columns = [
+                    let columns = [
                         { "orderable": true },
                         { "orderable": true },
                         { "orderable": false },
@@ -75,7 +75,7 @@ function dataTableBuilder(pnStatus, program, dom, region) {
 
         function addRows(features, table) {
             features.forEach(function (item) {
-                attributes = item.attributes
+                let attributes = item.attributes
                 let region = attributes['REGION_CD']
                 let pin = attributes['PIN']
 
@@ -118,12 +118,10 @@ function drillVisual(pnStatus, program, dom, groupOrder, aggregate, type, region
     let vizQueryOrder = `&orderByFields=${groupOrder}`;
     let url = sourceDataset + vizQueryAgg + whereClause + vizQueryGroup + vizQueryOrder;
     
-    //url = https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects2019/MapServer/0/query?f=json&returnGeometry=false&outStatistics=[{'statisticType': 'SUM', 'onStatisticField': 'PROJECT_VALUE', 'outStatisticFieldName': 'aggregate'}]&where=STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed' AND WORKSHOP_CAT in (preserveStructures)&groupByFieldsForStatistics=REGION_CD&orderByFields=REGION_CD
-
     fetch(url).then(function (response) {
         return response.json();
     }).then(function (data) {
-        features = data.features;
+        let features = data.features;
         
         //Check type and draw whats requested
         if (type === 'chart') {
@@ -141,7 +139,7 @@ function drillVisual(pnStatus, program, dom, groupOrder, aggregate, type, region
             };
 
             features.forEach(function (item) {
-                attributes = item.attributes;
+                let attributes = item.attributes;
                 x.push(attributes[groupOrder]);
                 y.push(formatter.format(attributes["aggregate"])); //TODO
             });
@@ -153,7 +151,7 @@ function drillVisual(pnStatus, program, dom, groupOrder, aggregate, type, region
             let html = '<table class="table"><thead><tr><th>' + col + '</th><th>Dollars</th></thead><tbody>';
 
             features.forEach(function (item) {
-                attributes = item.attributes;
+                let attributes = item.attributes;
                 if (groupOrder === "FORECAST_ST_YR") {
                     html += '<tr><td>' + attributes[groupOrder] + '</td>';
                     html += '<td class="' + attributes[groupOrder] + '">' + formatter.format(attributes['aggregate']) + '</td></tr>';
@@ -174,73 +172,38 @@ function drillVisual(pnStatus, program, dom, groupOrder, aggregate, type, region
 //Helper function to build where clause
 function whereClauseBuilder(pnStatus, program, region) {
     let whereClause = "";
+    let programClause = "";
+    let regionClause = "";
     if (program === "all") {
-        program = "";
+        programClause = "";
     } else {
-        program = `AND WORKSHOP_CAT in (${program})`;
+        programClause = `AND WORKSHOP_CAT in (${program})`;
     }
     if (region === 0 || region === undefined) {
-        region = "";
+        regionClause = "";
     } else {
-        region = `AND REGION_CD='${region}'`;
+        regionClause = `AND REGION_CD='${region}'`;
     }
     switch (pnStatus) {
         case "unfunded":
-            whereClause = "&where=STIP_WORKSHOP='N' and PIN_STAT_NM='Proposed' " + program + region;
+            whereClause = "&where=STIP_WORKSHOP='N' and PIN_STAT_NM='Proposed' " + programClause + regionClause;
             break;
         case "proposed":
-            whereClause = "&where=STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed' " + program + region;
+            whereClause = "&where=STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed' " + programClause + regionClause;
             break;
         case "comapp":
             whereClause = "&where=COMM_APRV_IND='Y' and PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete') " + program + region;
             break;
         case "design":
-            whereClause = "&where=PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded') " + program + region;
+            whereClause = "&where=PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded') " + programClause + regionClause;
             break;
         case "construction":
-            whereClause = "&where=PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete')" + program + region;
+            whereClause = "&where=PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete')" + programClause + regionClause;
             break;
     }
     return whereClause;
 }
 
-// Helpfer function gets year and returns bg color class
-function bgColorClass(year) {
-    let bg = '';
-    year = year !== null ? parseInt(year) : 0;
-    switch (year) {
-        case 2018:
-            bg = 'bg2018';
-            break;
-        case 2019:
-            bg = 'bg2019';
-            break;
-        case 2020:
-            bg = 'bg2020';
-            break;
-        case 2021:
-            bg = 'bg2021';
-            break;
-        case 2022:
-            bg = 'bg2022';
-            break;
-        case 2023:
-            bg = 'bg2023';
-            break;
-        case 2024:
-            bg = 'bg2024';
-            break;
-        case 2025:
-            bg = 'bg2025';
-            break;
-        case 2026:
-            bg = 'bg2026';
-            break;
-        default:
-            bg = 'bgdefault'
-    }
-    return bg;
-}
 
 //Function to show map when pin description is clicked
 function showMapModal(pin) {
@@ -287,16 +250,6 @@ function dateTransform(str) {
     datize = datize.toDateString();
     return datize;
 }
-//Function to build mini timeline
-// function timeline(projectDates){
-//     var timeline = "<div id='timelineContent'><p class='center-text'>Timeline</p><ul class='timeline'>";
-//     for(var i = 0;i < projectDates.length; i++){
-//         timeline += "<li class='event' data-date='"+projectDates[i][1]+"'>";
-//         timeline += "<div class='member-infos'><span class='member-title'>"+projectDates[i][0]+"</span></div></li>";
-//     }
-//     timeline += "</ul></div>";
-//     return timeline;
-// }
 
 function projectManagers(dom) {
     let stats = `[{"statisticType":"COUNT", "onStatisticField": "PROJECT_MANAGER", "outStatisticFieldName": "pins"}]`
@@ -553,7 +506,7 @@ function printSourceData(dom) {
     fetch(url).then(function (response) {
         return response.json();
     }).then(function (data) {
-        features = data.features;
+        let features = data.features;
         let html = '';
         let thead = '<table style="width:100%" id="sourceDataTable" class="table table-striped table-hover">';
         thead += '<thead><tr><th>PIN</th><th>PIN Description</th><th>PIN Status</th><th>Project Location</th><th>Project Value</th>';
