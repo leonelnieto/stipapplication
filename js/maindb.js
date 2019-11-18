@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-// const STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects/MapServer/0/" //live data
-const STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects2019/MapServer/0/"; //test data
+const STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects/MapServer/0/" //live data
+// const STIPData = "https://maps.udot.utah.gov/arcgis/rest/services/EPM_STIPProjects2019/MapServer/0/"; //test data
 const sourceDataset = STIPData + "query?f=json&returnGeometry=false";
 const selectColumns = "&outFields=PIN,WORKSHOP_CAT,STIP_WORKSHOP,PROJECT_MANAGER,REGION_CD,COMM_APRV_IND,PIN_DESC,PRIMARY_CONCEPT,PROJECT_VALUE,PLANNED_CONSTRUCTION_YEAR,PROJECTED_START_DATE,PROGRAM,PUBLIC_DESC,FORECAST_ST_YR,FED_DOLLARS,STATE_DOLLARS";
 //Helper currency formater
@@ -20,7 +20,7 @@ function dataTableBuilder(pnStatus, program, dom, region) {
     //Build where clause by filter
     let whereClause = whereClauseBuilder(pnStatus, program, region);
     let query = sourceDataset + selectColumns + whereClause;
-    
+    console.log(query)
     fetch('data/onepagers.json').then(function (response) {
         return response.json();
     }).then(function (onePages) {

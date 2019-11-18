@@ -6,11 +6,6 @@ require([
   "esri/widgets/Expand",
   "esri/widgets/BasemapToggle"
 ], function(Map, MapView, Legend, FeatureLayer, Expand, BasemapToggle) {
-  let program = 28;
-  let centerLong = -111.693657;
-  let centerLat = 39.631301;
-  let zoom = 2500000;
-  let region;
   let selectedCounty = (selectedMunicipality = selectedLegislative = selectedStatus = selectedMPO = 0);
   //symbols for year lines
   const year2018 = {
@@ -208,11 +203,12 @@ require([
   let map = new Map({
     basemap: "streets-vector"
   });
+
   let view = new MapView({
     container: "map",
     map: map,
-    center: [centerLong, centerLat], //state center 39.631301,-111.693657
-    scale: zoom
+    center: [-111.693657, 39.631301], //state center 39.631301,-111.693657
+    scale: 2500000
   });
   let legend = new Legend({
     view: view,
@@ -242,33 +238,43 @@ require([
   view.ui.add(legend, "bottom-right");
   view.ui.add(basemapToggle, "top-right");
 
-  window.mapLoaderDynamic = function(newRegion, newProgram) {
-    program = newProgram;
-    region = newRegion;
-    switch (newRegion) {
+  window.mapLoaderDynamic = function() {
+    regionZoom()
+    resetQuery();
+  };
+
+  function regionZoom(){
+    let region = parseInt(document.getElementById("currentRegion").getAttribute("region"));
+    //statewide, default/region 0
+    let centerLong = -111.693657;
+    let centerLat = 39.631301;
+    let zoom = 6;
+    
+    switch (region) {
       case 1:
         centerLong = -112.455054;
         centerLat = 41.343983;
-        zoom = 700000;
+        zoom = 8;
         break;
       case 2:
         centerLong = -111.66791;
         centerLat = 40.680967;
-        zoom = 1200000;
+        zoom = 8;
         break;
       case 3:
         centerLong = -111.534103;
-        centerLat = 40.134867;
-        zoom = 1200000;
+        centerLat = 40.159900;
+        zoom = 8;
         break;
       case 4:
         centerLong = -111.662749;
         centerLat = 38.377228;
-        zoom = 1400000;
+        zoom = 7;
         break;
     }
-    resetQuery();
-  };
+    view.center=[centerLong,centerLat];
+    view.zoom=zoom;
+  }
 
   function getFeatures(sql, filters) {
     let query = layer.createQuery();
@@ -287,6 +293,7 @@ require([
     let sql = makeQuery();
     layer.definitionExpression = sql;
     getFeatures(sql, filters);
+    
   }
 
   function buildFilter() {
@@ -352,6 +359,8 @@ require([
   };
 
   function makeQuery() {
+    let program = programs[document.getElementById("currentProgram").getAttribute("program")][1];    
+    let region = parseInt(document.getElementById("currentRegion").getAttribute("region"));
     let queries = [];
 
     if (program != 28) {
