@@ -16,10 +16,16 @@
   });
 
   // Closes responsive menu when a scroll trigger link is clicked
-  $('.mopeed-section').click(function() {
+  $(window).click(function() {
     $('#sidebarNav').removeClass('active');
   });
 
+  $('#sidebarNav').click(function(event){
+    event.stopPropagation();
+  });
+$('#sidebarNavCollapse').click(function(event){
+  event.stopPropagation();
+  });
 
   // Activate scrollspy to add active class to navbar items on scroll
   $('body').scrollspy({
