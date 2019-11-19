@@ -21,13 +21,13 @@ wrapper div.row.regions div button{
   margin: 1px 0;
 }
 
-wrapper div.fundingtype ul.nav li.unfunded{
+wrapper div.fundingtype ul.nav li.nav-item.unfunded{
   display: none;
 }
 
-wrapper[program=all] div.fundingtype ul.nav li.unfunded,
-wrapper[program=tif] div.fundingtype ul.nav li.unfunded,
-wrapper[program=transSolutions] div.fundingtype ul.nav li.unfunded{
+wrapper[program=all] div.fundingtype ul.nav li.nav-item.unfunded,
+wrapper[program=tif] div.fundingtype ul.nav li.nav-item.unfunded,
+wrapper[program=transSolutions] div.fundingtype ul.nav li.nav-item.unfunded{
   display: block;
 }
 
