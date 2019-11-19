@@ -51,9 +51,9 @@ const regionName = {
 
 for (i = 0; i < document.querySelectorAll("#sidebarNav li").length; i++) {
   document.querySelectorAll("#sidebarNav li a")[i].addEventListener("click", function(event) {
-      let regionNum = document.getElementById("currentRegion").getAttribute("region");
+      let regionNum = document.getElementsByTagName("wrapper")[0].getAttribute("region");
       if (event.target.attributes.section.value !== "null") {
-
+        
         let program = event.target.attributes.section.value;
         document.getElementById("currentProgram").innerHTML = programs[program][2]
         document.getElementsByTagName("wrapper")[0].setAttribute("program", program);
@@ -71,7 +71,7 @@ for (i = 0; i < document.querySelectorAll(".filterregion").length; i++) {
 
       regionDisplay.innerHTML = regionName[regionNum];
       document.getElementsByTagName("wrapper")[0].setAttribute("region", regionNum);
-
+      
       draw(programs[program][0], programs[program][1], parseInt(regionNum));
     });
 }
