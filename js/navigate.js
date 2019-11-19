@@ -1,54 +1,54 @@
 const programs = {
   all: ["all", 28],
-  tif: ["'Transportation Investment Funds'", 0],
+  tif: ["'Transportation Investment Funds'", 0, "TIF"],
   transSolutions: [
     "'Transportation Solutions','Barrier Treatments','Maintenance Spot Improvement','Sign Modification %26 Replacement','Small Area Lighting','SSIP - Safety Spot Improvement'",
-    1
+    1, "Transportation Solutions"
   ],
   highVolumePavements: [
     "'Pavement High Volume','Preservation High Volume','Rehabilitation High Volume'",
-    3
+    3, "Pavement High Volume"
   ],
   lowVolumePavements: [
     "'Pavement Low Volume','Preservation Low Volume','Rehabilitation Low Volume'",
-    4
+    4, "Pavement Low Volume"
   ],
-  reconstructPavements: ["'Reconstruction High Volume'", 27],
+  reconstructPavements: ["'Reconstruction High Volume'", 27,"Pavement Reconstruction"],
   allStructures: [
     "'Bridge Replacement and Rehabilitation','Bridge Preservation'",
-    29
+    29, "All Structures"
   ],
-  preserveStructures: ["'Bridge Preservation'", 5],
-  rehabStructures: ["'Bridge Replacement and Rehabilitation'", 6],
+  preserveStructures: ["'Bridge Preservation'", 5, "Structures Preservation"],
+  rehabStructures: ["'Bridge Replacement and Rehabilitation'", 6, "Structures Rehab or Replace"],
   allTrafficSafety: [
     "'HSIP - Highway Safety Improvement', 'Safe Routes to Schools','New Traffic Signals','Railway-Highway Grade Crossing'",
-    25
+    25, "Traffic & Safety"
   ],
-  HSIP: ["'HSIP - Highway Safety Improvement'", 7],
-  newTrafficSignals: ["'New Traffic Signals'", 14],
-  railHighwayCrossing: ["'Railway-Highway Grade Crossing'", 13],
-  safeRoutesToSchool: ["'Safe Routes to Schools'", 11],
-  MPO: ["'MPO Projects'", 26],
-  offSystemBridge: ["'Off-System Bridge'", 16],
-  nonUrban: ["'Non-Urban'", 17],
-  smallUrban: ["'Small Urban'", 18],
-  statePark: ["'State Park Access'", 19],
-  environmentalStudies: ["'Environmental Studies'", 21],
-  freightProgram: ["'Freight'", 15],
-  transportationAlternatives: ["'Transportation Alternatives'", 20],
-  contingencyFund: ["'Contingency Fund'", 2],
-  ATMSAsset: ["'ATMS Asset Management'", 22],
-  Other: ["'Other'", 24]
+  HSIP: ["'HSIP - Highway Safety Improvement'", 7, "HSIP"],
+  newTrafficSignals: ["'New Traffic Signals'", 14, "New Traffic Signals"],
+  railHighwayCrossing: ["'Railway-Highway Grade Crossing'", 13, "Rail-Highway Grade Crossing"],
+  safeRoutesToSchool: ["'Safe Routes to Schools'", 11, "Safe Routes to School"],
+  MPO: ["'MPO Projects'", 26, "MPO"],
+  offSystemBridge: ["'Off-System Bridge'", 16,'Off-System Bridge'],
+  nonUrban: ["'Non-Urban'", 17,'Non-Urban'],
+  smallUrban: ["'Small Urban'", 18,'Small Urban'],
+  statePark: ["'State Park Access'", 19,'State Park Access'],
+  environmentalStudies: ["'Environmental Studies'", 21,'Environmental Studies'],
+  freightProgram: ["'Freight'", 15,'Freight'],
+  transportationAlternatives: ["'Transportation Alternatives'", 20,'Transportation Alternatives'],
+  contingencyFund: ["'Contingency Fund'", 2,'Contingency Fund'],
+  ATMSAsset: ["'ATMS Asset Management'", 22,'ATMS Asset Management'],
+  Other: ["'Other'", 24,'Other']
 };
 
-const regionName = {
+const regionName = { 
   0: "Statewide",
   1: "Region 1",
   2: "Region 2",
   3: "Region 3",
   4: "Region 4"
 };
-
+const hasUnfunded = ["all", "tif", "transSolutions"]
 for (i = 0; i < document.querySelectorAll("#sidebarNav li").length; i++) {
   document.querySelectorAll("#sidebarNav li a")[i].addEventListener("click", function(event) {
       let regionNum = document.getElementById("currentRegion").getAttribute("region");
