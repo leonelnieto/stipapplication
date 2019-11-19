@@ -96,7 +96,7 @@ function dataTableBuilder(pnStatus, program, dom, region) {
         });
         table.draw();
       }
-    });
+  });
 }
 
 function onePageButtons(pin, region, data) {

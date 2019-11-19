@@ -43,7 +43,7 @@ function addSelectedFinance(elementEvent, projPhase) {
 
 function getSelectedPill() {
   let phases = ["unfunded", "proposed", "comapp", "design", "construction"];
-  let pills = document.querySelectorAll(".data-pill");
+  let pills = document.querySelectorAll(".data-pill.nav-link");
   for (i = 0; i < pills.length; i++) {
     if (pills[i].classList.contains("active")) {
       phases.forEach(function(phase) {
