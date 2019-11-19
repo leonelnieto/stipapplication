@@ -48,14 +48,14 @@ const regionName = {
   3: "Region 3",
   4: "Region 4"
 };
-const hasUnfunded = ["all", "tif", "transSolutions"]
+
 for (i = 0; i < document.querySelectorAll("#sidebarNav li").length; i++) {
   document.querySelectorAll("#sidebarNav li a")[i].addEventListener("click", function(event) {
       let regionNum = document.getElementById("currentRegion").getAttribute("region");
       if (event.target.attributes.section.value !== "null") {
 
         let program = event.target.attributes.section.value;
-        document.getElementById("currentProgram").innerHTML = event.target.innerHTML;
+        document.getElementById("currentProgram").innerHTML = programs[program][2]
         document.getElementsByTagName("wrapper")[0].setAttribute("program", program);
         draw(programs[program][0], programs[program][1], parseInt(regionNum));
 
