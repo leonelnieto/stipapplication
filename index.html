@@ -55,19 +55,15 @@
     <link href="css/sidebarNav.css" rel="stylesheet" />
     <link href="css/custom.css" rel="stylesheet" />
   </head>
-  <body id="page-top">
-    <!--Wrapper-->
-    <div class="wrapper">
+  <body id="page-top" class="mapapplication">
+    <wrapper program="all" region="0">
       <!--Begin Navigation sidebarNav = sidebar-->
       <nav id="sidebarNav">
         <div id="dismiss">
           <i class="fas fa-arrow-left"></i>
         </div>
-        <div class="sidebarNav-header">
-          <h3>UDOT</h3>
-        </div>
         <ul class="list-unstyled components">
-          <p>STIP Workshop Categories</p>
+          <h3>STIP Programs</h3>
           <li>
             <a section="tif"><i class="fa fa-road"></i> TIF</a>
           </li>
@@ -186,7 +182,7 @@
       </nav>
       <!--End Navigation-->
       <div class="container-fluid p-0" id="content">
-        <nav class="navbar navbar-expand-lg fixed-top">
+        <nav class="navbar navbar-expand-lg">
           <div class="container-fluid">
             <button type="button" id="sidebarNavCollapse" class="btn btn-info">
               <i class="fas fa-align-left"></i>
@@ -197,8 +193,8 @@
                 <span class="text-primary">STIP</span> Workshop Application 
               </h3>
               <h4>
-                <span class="text-info" id="currentRegion" region="0">Statewide</span> 
-                <span id="currentProgram" program="all"></span>
+                <span class="text-info" id="currentRegion">Statewide</span> 
+                <span id="currentProgram"></span>
               </h4>
             </div>
             <button class="btn btn-dark d-inline-block d-lg-none ml-auto"
@@ -229,10 +225,9 @@
           </div>
         </nav>
         <!-- TIF Documentation Secition -->
-        <hr class="spacer py-4" />
         <section class="mopeed-section p-3 d-flex flex-column">
           <!--Region Buttons-->
-          <div class="row my-3">
+          <div class="row regions">
             <div class="col-sm-2 mx-auto">
               <button
                 type="button"
@@ -278,14 +273,14 @@
             </div>
           </div>
           <!--/END Region Buttons-->
-          <div class="my-auto">
+          <div class="fundingtype">
             <!--Tab Selectors-->
             <ul
               class="nav nav-pills mb-3 nav-justified md-tabs bg-secondary text-white"
               id="pills-tab"
               role="tablist"
             >
-              <li class="nav-item">
+              <li class="nav-item maptab">
                 <a
                   class="map-pill nav-link active"
                   id="pills-map-tab"
@@ -297,9 +292,9 @@
                   >Map</a
                 >
               </li>
-              <li class="nav-item">
+              <li class="nav-item unfunded">
                 <a
-                  class="data-pill nav-link unfunded"
+                  class="data-pill nav-link"
                   agg="PROJECT_VALUE"
                   id="pills-unfunded-tab"
                   data-toggle="pill"
@@ -310,8 +305,8 @@
                   >Unfunded</a
                 >
               </li>
-              <li class="nav-item">
-                <a class="data-pill nav-link proposed"
+              <li class="nav-item proposed">
+                <a class="data-pill nav-link"
                   agg="PROJECT_VALUE"
                   id="pills-proposed-tab"
                   data-toggle="pill"
@@ -322,9 +317,9 @@
                   >Proposed</a
                 >
               </li>
-              <li class="nav-item">
+              <li class="nav-item comapp">
                 <a
-                  class="data-pill nav-link comapp"
+                  class="data-pill nav-link"
                   agg="PROJECT_VALUE"
                   id="pills-comapp-tab"
                   data-toggle="pill"
@@ -335,9 +330,9 @@
                   >Commission Approved</a
                 >
               </li>
-              <li class="nav-item">
+              <li class="nav-item design">
                 <a
-                  class="data-pill nav-link design"
+                  class="data-pill nav-link"
                   agg="PROJECT_VALUE"
                   id="pills-design-tab"
                   data-toggle="pill"
@@ -348,9 +343,9 @@
                   >Design</a
                 >
               </li>
-              <li class="nav-item">
+              <li class="nav-item construction">
                 <a
-                  class="data-pill nav-link construction"
+                  class="data-pill nav-link"
                   agg="PROJECT_VALUE"
                   id="pills-construction-tab"
                   data-toggle="pill"
@@ -736,8 +731,7 @@
         <!-- END Modal for Project Map -->
         <!--Overlay darkdayze-->
         <div class="overlay"></div>
-      </div>
-      <!--END Wrapper-->
+      </wrapper>
     </div>
     <!-- Bootstrap core JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

@@ -9,6 +9,28 @@ and open the template in the editor.
 */
 
 /*Css Style for table forked from https://codepen.io/barney-parker/pen/QjXOmv */
+body.mapapplication{
+  overflow: hidden;
+}
+
+wrapper div.row.regions{
+  margin: 0 0 10px 0;
+}
+
+wrapper div.row.regions div button{
+  margin: 1px 0;
+}
+
+wrapper div.fundingtype ul.nav li.unfunded{
+  display: none;
+}
+
+wrapper[program=all] div.fundingtype ul.nav li.unfunded,
+wrapper[program=tif] div.fundingtype ul.nav li.unfunded,
+wrapper[program=transSolutions] div.fundingtype ul.nav li.unfunded{
+  display: block;
+}
+
 #content {
   text-align: center;
 }
@@ -267,8 +289,19 @@ and open the template in the editor.
   height: 25px;
 }
 
+div#map div.esri-component.esri-legend.esri-widget--panel.esri-widget{
+  position: fixed;
+  bottom: 0;
+}
+
 .btn-outline-secondary.selected{
   color:#fff;
   background-color:#6c757d;
   border-color:#6c757d;
+}
+
+@media only screen and (max-width: 600px) {
+  wrapper div.fundingtype ul.nav{
+    display: block;
+  }
 }

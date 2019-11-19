@@ -357,8 +357,8 @@ require([
   };
 
   function makeQuery() {
-    let program = programs[document.getElementById("currentProgram").getAttribute("program")][1];    
-    let region = parseInt(document.getElementById("currentRegion").getAttribute("region"));
+    let program = programs[document.getElementsByTagName("wrapper")[0].getAttribute("program")][1];    
+    let region = parseInt(document.getElementsByTagName("wrapper")[0].getAttribute("region"));
     let queries = [];
 
     if (program != 28) {
