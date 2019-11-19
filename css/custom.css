@@ -10,7 +10,7 @@ and open the template in the editor.
 
 /*Css Style for table forked from https://codepen.io/barney-parker/pen/QjXOmv */
 body.mapapplication{
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 wrapper div.row.regions{
