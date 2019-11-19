@@ -48,7 +48,9 @@ const regionName = {
   3: "Region 3",
   4: "Region 4"
 };
+
 const hasUnfunded = ["all", "tif", "transSolutions"]
+
 for (i = 0; i < document.querySelectorAll("#sidebarNav li").length; i++) {
   document.querySelectorAll("#sidebarNav li a")[i].addEventListener("click", function(event) {
       let regionNum = document.getElementById("currentRegion").getAttribute("region");

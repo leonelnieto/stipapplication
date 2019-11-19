@@ -208,6 +208,7 @@ require([
     container: "map",
     map: map
   });
+  
   let legend = new Legend({
     view: view,
     layerInfos: [
@@ -217,10 +218,12 @@ require([
       }
     ]
   });
+
   let basemapToggle = new BasemapToggle({
     view: view,
     nextBasemap: "satellite"
   });
+
   const filterProjects = new Expand({
     expandIconClass: "esri-icon-filter",
     expandTooltip: "Query Projects",
@@ -328,18 +331,21 @@ require([
     let sql = makeQuery();
     getFeatures(sql, filters);
   };
+
   document.getElementById("queryMunicipality").onchange = function() {
     selectedMunicipality = document.getElementById("queryMunicipality").value;
     const filters = buildFilter();
     let sql = makeQuery();
     getFeatures(sql, filters);
   };
+
   document.getElementById("queryDistrict").onchange = function() {
     selectedLegislative = document.getElementById("queryDistrict").value;
     const filters = buildFilter();
     let sql = makeQuery();
     getFeatures(sql, filters);
   };
+
   document.getElementById("queryStatus").onchange = function() {
     selectedStatus = document.getElementById("queryStatus").value;
     const filters = buildFilter();
