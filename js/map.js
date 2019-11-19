@@ -242,7 +242,7 @@ require([
   };
 
   function regionZoom(){
-    let region = parseInt(document.getElementById("currentRegion").getAttribute("region"));
+    let region = parseInt(document.getElementsByTagName("wrapper")[0].getAttribute("region"));
     //statewide, default/region 0
     let centerLong = -111.693657;
     let centerLat = 39.631301;

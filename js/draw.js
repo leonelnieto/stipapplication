@@ -9,8 +9,8 @@ function draw(program, programIndex, region) {
 }
 
 function drawCharts(agg,projPhase){
-    let program = document.getElementById("currentProgram").getAttribute("program");    
-    let region = parseInt(document.getElementById("currentRegion").getAttribute("region"));
+    let program = document.getElementsByTagName("wrapper")[0].getAttribute("program");    
+    let region = parseInt(document.getElementsByTagName("wrapper")[0].getAttribute("region"));
     drillVisual(projPhase, programs[program][0],`${projPhase}byRegionChart`,'REGION_CD',agg,'chart',region);
     drillVisual(projPhase, programs[program][0],`${projPhase}byRegionTable`,'REGION_CD',agg,'table',region);
     drillVisual(projPhase, programs[program][0],`${projPhase}byYearChart`,'FORECAST_ST_YR',agg,'chart',region);
