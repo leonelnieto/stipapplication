@@ -31,6 +31,39 @@ wrapper[program=transSolutions] div.fundingtype ul.nav li.nav-item.unfunded{
   display: block;
 }
 
+wrapper nav button[type=button], wrapper div.regions button[type=button]{
+  background-color: #5496ff;
+  border-color: #5496ff;
+}
+
+wrapper nav button[type=button]:hover, wrapper div.regions button[type=button]:hover{
+  color: #5496ff;
+  background-color: #fff;
+  border-color: #5496ff;
+}
+
+wrapper div.fundingtype ul.nav.nav-pills li.nav-item a.nav-link{
+  background-color:transparent;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+wrapper div.fundingtype ul.nav.nav-pills li.nav-item a.nav-link.active,
+wrapper div.fundingtype ul.nav.nav-pills li.nav-item a.nav-link:hover{
+  background-color:#fff;
+  color:#000;
+}
+
+wrapper div.fundingtype ul.nav.nav-pills li.nav-item{
+  background-color:#ff610d;
+  border:#ff610d 1px solid;
+}
+
+wrapper div.fundingtype ul.nav.nav-pills li.nav-item.comapp{
+  flex-grow: 2;
+}
+
 #content {
   text-align: center;
 }

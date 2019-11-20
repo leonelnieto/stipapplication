@@ -1,5 +1,4 @@
 function draw(program, programIndex, region) {
-  
   dataTableBuilder("unfunded", program, "#pills-unfundedtbl", region);
   dataTableBuilder("proposed", program, "#pills-proposedtbl", region);
   dataTableBuilder("comapp", program, "#pills-comapptbl", region);
