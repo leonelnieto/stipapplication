@@ -46,7 +46,6 @@ function getSelectedPill() {
   pills.forEach(function(pill){
     if (pill.classList.contains("active")) {
       phases.forEach(function(phase) {
-        console.log(pill)
         if (pill.classList.contains(phase)) {
           getSelectedAgg(phase);
         }
