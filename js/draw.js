@@ -43,15 +43,16 @@ function addSelectedFinance(elementEvent, projPhase) {
 function getSelectedPill() {
   let phases = ["unfunded", "proposed", "comapp", "design", "construction"];
   let pills = document.querySelectorAll(".data-pill.nav-link");
-  for (i = 0; i < pills.length; i++) {
-    if (pills[i].classList.contains("active")) {
+  pills.forEach(function(pill){
+    if (pill.classList.contains("active")) {
       phases.forEach(function(phase) {
-        if (pills[i].classList.contains(phase)) {
+        console.log(pill)
+        if (pill.classList.contains(phase)) {
           getSelectedAgg(phase);
         }
       });
     }
-  }
+  });
 }
 
 function getSelectedAgg(phase) {
