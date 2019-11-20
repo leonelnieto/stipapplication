@@ -8,12 +8,6 @@ require([
 ], function(Map, MapView, Legend, FeatureLayer, Expand, BasemapToggle) {
   let selectedCounty = (selectedMunicipality = selectedLegislative = selectedStatus = selectedMPO = 0);
   //symbols for year lines
-  const year2018 = {
-    type: "simple-line",
-    color: "#A87000",
-    width: 4,
-    style: "solid"
-  };
   const year2019 = {
     type: "simple-line",
     color: "#4ce600",
@@ -73,8 +67,7 @@ require([
     type: "unique-value",
     field: "FORECAST_ST_YR",
     uniqueValueInfos: [
-      // used for specifying unique values
-      { value: "2018", symbol: year2018, label: "2018" },
+      // used for specifying unique value
       { value: "2019", symbol: year2019, label: "2019" },
       { value: "2020", symbol: year2020, label: "2020" },
       { value: "2021", symbol: year2021, label: "2021" },
