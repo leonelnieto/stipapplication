@@ -244,6 +244,7 @@ require([
   view.ui.add(shrinkLegend, "top-right");
 
   window.mapLoaderDynamic = function() {
+    $("#startModal").modal('show');
     regionZoom()
     resetQuery();
   };

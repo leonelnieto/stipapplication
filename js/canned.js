@@ -24,7 +24,10 @@
   $("#sidebarNav").mCustomScrollbar({
     theme: "minimal"
   });
-
+  
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 
   //SidebarNav Toggle
   $('#dismiss, .overlay').on('click', function () {

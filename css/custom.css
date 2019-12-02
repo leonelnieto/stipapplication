@@ -286,6 +286,12 @@ wrapper div.fundingtype ul.nav.nav-pills li.nav-item.comapp{
 #refreshData{
   width: 20vw;
 }
+.tooltip-inner{
+  padding:3px 8px;
+  color:#fff;
+  text-align:center;
+  background-color:#323232 !important;
+  }
 
 .editArea-container{
   background: #fff;

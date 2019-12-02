@@ -192,30 +192,20 @@
           <!--Region Buttons-->
           <div class="row regions">
             <div class="col-sm-2 mx-auto">
-              <button
-                type="button"
-                id="filterregion0"
-                region="0"
-                class="btn btn-info btn-sm btn-block filterregion"
-              >
+              <button type="button" id="filterregion0" region="0" data-toggle="tooltip" data-placement="top" title="Statewide Projects" class="btn btn-info btn-sm btn-block filterregion">
                 Statewide
               </button>
             </div>
             <div class="col-sm-2 mx-auto">
-                <button type="button" id="filterregion2" region="1" class="btn btn-info btn-sm btn-block filterregion"> Region 1 </button>
+                <button type="button" id="filterregion2" region="1" data-toggle="tooltip" data-placement="top" title="Region 1 Projects" class="btn btn-info btn-sm btn-block filterregion"> Region 1 </button>
             </div>
             <div class="col-sm-2 mx-auto">
-              <button
-                type="button"
-                id="filterregion2"
-                region="2"
-                class="btn btn-info btn-sm btn-block filterregion"
-              >
+              <button type="button" id="filterregion2" region="2" data-toggle="tooltip" data-placement="top" title="Region 2 Projects" class="btn btn-info btn-sm btn-block filterregion">
                 Region 2
               </button>
             </div>
             <div class="col-sm-2 mx-auto">
-              <button
+              <button data-toggle="tooltip" data-placement="top" title="Region 3 Projects"
                 type="button"
                 id="filterregion3"
                 region="3"
@@ -225,7 +215,7 @@
               </button>
             </div>
             <div class="col-sm-2 mx-auto">
-              <button
+              <button data-toggle="tooltip" data-placement="top" title="Region 4 Projects"
                 type="button"
                 id="filterregion4"
                 region="4"
@@ -700,10 +690,28 @@
         <!-- END Modal for Project Map -->
         <!--Overlay darkdayze-->
         <div class="overlay"></div>
+        <!-- Startup Modal -->
+        <div class="modal fade" id="startModal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title" id="popupLabel"> UDOT 2020 STIP APP</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Insert descriptive text from Ivan</p>
+                
+              </div>
+            </div>
+          </div>
+        </div>
       </wrapper>
     </div>
     <!-- Bootstrap core JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
