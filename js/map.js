@@ -4,8 +4,10 @@ require([
   "esri/widgets/Legend",
   "esri/layers/FeatureLayer",
   "esri/widgets/Expand",
-  "esri/widgets/BasemapToggle"
-], function(Map, MapView, Legend, FeatureLayer, Expand, BasemapToggle) {
+  "esri/widgets/BasemapToggle",
+  "esri/widgets/LayerList"
+], function(Map, MapView, Legend, FeatureLayer, Expand, BasemapToggle,LayerList) {
+
   let selectedCounty = selectedMunicipality = selectedLegislative = selectedMPO = 0;
   let selectedStatus = "Proposed";
   //symbols for year lines
@@ -114,11 +116,57 @@ require([
     "WORKSHOP_CAT IN('Bridge Preservation','Bridge Replacement and Rehabilitation')" //29 All Structures
   ];
 
+  let countyRender = {
+    type: "simple",
+    symbol:{
+      type: "simple-fill",
+      color: "#00a9e6",
+      style: "diagonal-cross",
+      outline: {
+       color: "#1a1a1a",
+        width: "2px"
+     }
+   }
+  }
+
   // Expand widget for the queryFeature div
   let layer = new FeatureLayer({
     url: STIPData, // EPM STIP Service
-    renderer: STIPRender //this gives the line styles
+    renderer: STIPRender, //this gives the line styles
+    title: "EPM STIP Projects"
   });
+
+  let counties = new FeatureLayer({
+    url: "https://services1.arcgis.com/99lidPhWCzftIe9K/arcgis/rest/services/UtahCountyBoundaries/FeatureServer/0",
+    visible: false,
+    renderer: countyRender,
+    defaultPopupTemplateEnabled: true,
+    opacity: 0.6,
+    title: "Utah Counties"
+  });
+
+  let senate = new FeatureLayer({
+    url: "https://services1.arcgis.com/99lidPhWCzftIe9K/arcgis/rest/services/Utah_Senate_Districts/FeatureServer/0",
+    visible: false
+  });
+
+  let house = new FeatureLayer({
+    url: "https://services1.arcgis.com/99lidPhWCzftIe9K/arcgis/rest/services/Utah_House_Districts/FeatureServer/0",
+    visible: false
+  });
+
+  let regions = new FeatureLayer({
+    url: "https://maps.udot.utah.gov/arcgis/rest/services/UDOT_Regions/MapServer/1",
+    visible: false,
+    opacity: 0.6,
+    title: "UDOT Region Boundaries"
+  });
+
+  let stations = new FeatureLayer({
+    url: "https://maps.udot.utah.gov/arcgis/rest/services/StationInformation/MapServer/2",
+    visible: false,
+    title: "UDOT Station Boundaries"
+  })
 
   let content = [
     {
@@ -202,16 +250,26 @@ require([
     container: "map",
     map: map
   });
+view.popup.defaultPopupTemplateEnabled = true
+  
+  map.add(counties)
+  map.add(house);
+  map.add(senate);
+  map.add(regions);
+  map.add(stations);
+  map.add(layer);
   
   let legend = new Legend({
     view: view,
-    layerInfos: [
-      {
-        layer: layer,
-        title: "Legend"
-      }
-    ]
+    layerInfos: [{
+      layer: layer,
+       title: "Legend"
+    }]
   });
+  
+  let layerList = new LayerList({
+    view: view
+  })
 
   let basemapToggle = new BasemapToggle({
     view: view,
@@ -227,6 +285,15 @@ require([
     content: document.getElementById("queryProjects")
   });
 
+  const layers =  new Expand({
+    expandIconClass: "esri-icon-layer-list",
+    expandTooltip: "Map Layers",
+    expanded: false,
+    group: "top-left",
+    view: view,
+    content: layerList
+  });
+
   const shrinkLegend = new Expand({
     expandIconClass: "esri-icon-collection",
     expandTooltip: "Legend",
@@ -237,9 +304,9 @@ require([
   });
 
   layer.popupTemplate = { title: "{CONCEPT_DESC}", content: content };
-  map.add(layer);
-  view.ui.add(filterProjects, "top-left");
 
+  view.ui.add(filterProjects, "top-left");
+  view.ui.add(layers, "top-left");
   view.ui.add(basemapToggle, "top-right");
   view.ui.add(shrinkLegend, "top-right");
 
