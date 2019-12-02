@@ -63,18 +63,6 @@ a:focus {
     left: 0;
 }
 
-#sidebarNav li.parentmenu ul{
-    visibility: hidden;
-    transition: 0.2s 1s;
-    display: none;
-}
-
-#sidebarNav li.parentmenu:hover ul{
-    visibility: visible;
-    transition-delay: 0s;
-    display: block;
-}
-
 #dismiss {
     width: 35px;
     height: 35px;
