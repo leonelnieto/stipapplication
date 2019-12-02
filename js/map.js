@@ -6,7 +6,8 @@ require([
   "esri/widgets/Expand",
   "esri/widgets/BasemapToggle"
 ], function(Map, MapView, Legend, FeatureLayer, Expand, BasemapToggle) {
-  let selectedCounty = (selectedMunicipality = selectedLegislative = selectedStatus = selectedMPO = 0);
+  let selectedCounty = selectedMunicipality = selectedLegislative = selectedMPO = 0;
+  let selectedStatus = "Proposed";
   //symbols for year lines
   const year2019 = {
     type: "simple-line",
@@ -226,11 +227,21 @@ require([
     content: document.getElementById("queryProjects")
   });
 
+  const shrinkLegend = new Expand({
+    expandIconClass: "esri-icon-collection",
+    expandTooltip: "Legend",
+    expanded: true,
+    group: "top-right",
+    view: view,
+    content: legend
+  });
+
   layer.popupTemplate = { title: "{CONCEPT_DESC}", content: content };
   map.add(layer);
   view.ui.add(filterProjects, "top-left");
-  view.ui.add(legend, "bottom-right");
+
   view.ui.add(basemapToggle, "top-right");
+  view.ui.add(shrinkLegend, "top-right");
 
   window.mapLoaderDynamic = function() {
     regionZoom()
@@ -282,7 +293,8 @@ require([
   }
 
   function resetQuery() {
-    selectedCounty = selectedMunicipality = selectedLegislative = selectedStatus = selectedMPO = 0;
+    selectedCounty = selectedMunicipality = selectedLegislative =  selectedMPO = 0;
+    document.getElementById('queryStatus').value=selectedStatus = "Proposed"
     const filters = buildFilter();
     let sql = makeQuery();
     layer.definitionExpression = sql;
@@ -305,9 +317,9 @@ require([
       filters.push("House");
       filters.push("Senate");
     }
-    if (selectedStatus == 0) {
-      filters.push("Status");
-    }
+    // if (selectedStatus == 0) {
+    //   filters.push("Status");
+    // }
     return filters;
   }
 
@@ -341,6 +353,7 @@ require([
 
   document.getElementById("queryStatus").onchange = function() {
     selectedStatus = document.getElementById("queryStatus").value;
+    console.log(projectStatus[selectedStatus])
     const filters = buildFilter();
     let sql = makeQuery();
     getFeatures(sql, filters);
@@ -354,6 +367,14 @@ require([
     let sql = makeQuery();
     layer.definitionExpression = sql;
   };
+
+  let projectStatus = {
+    "Unfunded": "STIP_WORKSHOP='N' and PIN_STAT_NM='Proposed'",
+    "Proposed": "STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed'",
+    "ComApp" :  "COMM_APRV_IND='Y' and PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete')",
+    "Design" :  "PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded')",
+    "Construction": "PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete')"
+  }
 
   function makeQuery() {
     let program = programs[document.getElementsByTagName("wrapper")[0].getAttribute("program")][1];    
@@ -384,12 +405,10 @@ require([
       let municipalitySQL = `Municipality_Name like '%${selectedMunicipality}%'`;
       queries.push(municipalitySQL);
     }
-
-    if (selectedStatus != 0) {
-      let statusSQL = `PIN_STAT_NM = '${selectedStatus}'`;
-      queries.push(statusSQL);
-    }
-
+     
+    let statusSQL = projectStatus[selectedStatus];
+    queries.push(statusSQL);
+     
     if (selectedLegislative != 0 && selectedLegislative.includes("Senate")) {
       let legislativeSQL = `UT_SENATE_DIST_NAME like '${selectedLegislative}'`;
       queries.push(legislativeSQL);
@@ -439,7 +458,7 @@ require([
     const attribute_name = {
       County: "CNTY_NAME",
       Municipality: "Municipality_Name",
-      Status: "PIN_STAT_NM",
+      // Status: "PIN_STAT_NM",
       House: "UT_House_Dist_Name",
       Senate: "UT_SENATE_DIST_NAME",
       MPO: "MPO_Name"
@@ -480,7 +499,7 @@ require([
     let selectIDs = {
       County: "queryCounty",
       Municipality: "queryMunicipality",
-      Status: "queryStatus",
+      // Status: "queryStatus",
       District: "queryDistrict",
       MPO: "queryMPO"
     };

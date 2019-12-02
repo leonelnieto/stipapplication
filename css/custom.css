@@ -316,11 +316,6 @@ wrapper div.fundingtype ul.nav.nav-pills li.nav-item.comapp{
   height: 25px;
 }
 
-div#map div.esri-component.esri-legend.esri-widget--panel.esri-widget{
-  position: fixed;
-  bottom: 0;
-}
-
 .btn-outline-secondary.selected{
   color:#fff;
   background-color:#6c757d;

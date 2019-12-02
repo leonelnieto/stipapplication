@@ -186,7 +186,7 @@
               </h3>
               <h4>
                 <span id="currentRegion">Statewide</span> 
-                <span id="currentProgram"></span>
+                <span id="currentProgram">All Programs</span>
               </h4>
             </div>
             <button class="btn btn-dark d-inline-block d-lg-none ml-auto"
@@ -359,6 +359,7 @@
                 aria-labelledby="pills-map-tab"
               >
                 <div class="map" id="map">
+                  <div id="mapLegend"></div>
                   <div id="queryProjects" class="editArea-container">
                     <div id="queryDiv" style="display:block;">
                       <h4 class="list-heading">Filter</h4>
@@ -367,29 +368,34 @@
                           id="queryForm" class="esri-component scroller esri-widget esri-feature-form">
                           <form class="esri-feature-form__form">
                             <label class="esri-feature-form__label">County
-                              <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select" id="queryCounty" maxlength="">
+                              <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select" id="queryCounty">
                                 <option value="0">Select a County</option>
                               </select>
                             </label>
                             <label class="esri-feature-form__label"
                               >Municipality
-                              <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select" id="queryMunicipality" maxlength="">
+                              <select class="esri-input esri-feature-form__input esri-select" id="queryMunicipality">
                                 <option value="0">Select a Municipality</option>
                               </select>
                             </label>
                             <label class="esri-feature-form__label">Legislative District
-                              <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select" id="queryDistrict" maxlength="">
+                              <select class="esri-input esri-feature-form__input esri-select" id="queryDistrict">
                                 <option value="0">Select a District</option>
                               </select>
                             </label>
                             <label class="esri-feature-form__label">Metro Planning Org
-                              <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select" id="queryMPO" maxlength="">
+                              <select class="esri-input esri-feature-form__input esri-select" id="queryMPO">
                                 <option value="0">Select an Organization</option>
                               </select>
                             </label>
-                            <label class="esri-feature-form__label">PIN Status
-                              <select aria-invalid="false" class="esri-input esri-feature-form__input esri-select" id="queryStatus" maxlength="">
-                                <option value="0">Select a Status</option>
+                            <label class="esri-feature-form__label">Status
+                              <select class="esri-input esri-feature-form__input esri-select" id="queryStatus">
+                                <option value="Proposed">Proposed</option>
+                                <option value="Unfunded">Unfunded</option>
+                                <option value="ComApp">Commission Approved</option>
+                                <option value="Design">Commission Approved Design</option>
+                                <option value="Construction">Commission Approved Construction</option>
+
                               </select>
                             </label>
                             

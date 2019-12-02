@@ -203,6 +203,7 @@ function whereClauseBuilder(pnStatus, program, region) {
   } else {
     regionClause = `AND REGION_CD='${region}'`;
   }
+
   switch (pnStatus) {
     case "unfunded":
       whereClause =
