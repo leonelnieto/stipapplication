@@ -1,1436 +1,1165 @@
 [
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "NoOnePager"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "S",
 		"PIN" : "NoOnePager"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "10783"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "11438"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "11458"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "11467"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "11470"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "11608"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "11978"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "11979"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "12602"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "12780"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "13664"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "14165"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "14560"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "S",
 		"PIN" : "14569"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "14722"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "15226"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "15228"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "15329"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "15355"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "15420"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "15425"
 	},
 	{
-		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "15674"
+	},
+	{
 		"Region" : "B",
 		"PIN" : "15735"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "S",
 		"PIN" : "15880"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "16097"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "16098"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "16306"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "16315"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "16316"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "16317"
 	},
 	{
-		"json_featuretype" : "onepagers",
+		"Region" : "B",
+		"PIN" : "16740"
+	},
+	{
 		"Region" : "B",
 		"PIN" : "16911"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "16912"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "17195"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "17228"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "17259"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "17260"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "17261"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "17333"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "17334"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "17383"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "B",
 		"PIN" : "17621"
 	},
 	{
-		"json_featuretype" : "onepagers",
-		"Region" : "1",
-		"PIN" : "I-15Capacity"
-	},
-	{
-		"json_featuretype" : "onepagers",
-		"Region" : "1",
-		"PIN" : "I-15Reconstruct"
-	},
-	{
-		"json_featuretype" : "onepagers",
-		"Region" : "1",
-		"PIN" : "I-84Interchange"
-	},
-	{
-		"json_featuretype" : "onepagers",
-		"Region" : "1",
-		"PIN" : "NoOnePager"
-	},
-	{
-		"json_featuretype" : "onepagers",
-		"Region" : "1",
-		"PIN" : "test Pin modified"
-	},
-	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "I-15Reconstruct_EIS"
 	},
 	{
-		"json_featuretype" : "onepagers",
+		"Region" : "1",
+		"PIN" : "I-84Interchange"
+	},
+	{
+		"Region" : "1",
+		"PIN" : "NoOnePager"
+	},
+	{
+		"Region" : "1",
+		"PIN" : "test Pin modified"
+	},
+	{
+		"Region" : "1",
+		"PIN" : "I-15Capacity"
+	},
+	{
+		"Region" : "1",
+		"PIN" : "I-15Reconstruct"
+	},
+	{
 		"Region" : "1",
 		"PIN" : "7176"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "10400"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "10491"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "11263"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "11268"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "11477"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "11479"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "11481"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "11595"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "11596"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "12614"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "12674"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "13037"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "13224"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "13480"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "13749"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "13821"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "13822"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "13823"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "14199"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "14408"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "14409"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "14422"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "14509"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "14511"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "14514"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "14730"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "14841"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "14842"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "14843"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15119"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15281"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15528"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15534"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15601"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15602"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15680"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15681"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15682"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15683"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15684"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15685"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15717"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15802"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "15896"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16091"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16124"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16132"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16374"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16376"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16377"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16381"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16391"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16400"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16401"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16480"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16518"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16520"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16537"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16543"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16544"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16630"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16648"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16649"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16650"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16651"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16653"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16660"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16661"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16662"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16663"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16664"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16665"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16666"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16667"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16668"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16717"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16736"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16945"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "16947"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "17130"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "17131"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "17132"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "17133"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "17223"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "17343"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "17475"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "17479"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "17526"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "17571"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "17577"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "1",
 		"PIN" : "17616"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "NoOnePager"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "3523"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "11086"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "11106"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "11203"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "11497"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "11507"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "11827"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "11828"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "11986"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "12566"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "12570"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "12587"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "13149"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "13324"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "13585"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "13772"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "13963"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "14412"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "14413"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "14415"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "14416"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "14417"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "14421"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "14552"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "14569"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "14785"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "15135"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "15253"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "15669"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "15670"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "15902"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "15936"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16092"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16116"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16153"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16208"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16211"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16216"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16314"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16373"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16379"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16380"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16382"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16383"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16384"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16388"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16389"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16390"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16445"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16446"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16749"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "16822"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "17104"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "17153"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "17247"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "17248"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "17330"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "17396"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "17397"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "17398"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "17399"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "17400"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "17401"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "17402"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "17403"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "2",
 		"PIN" : "17626"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "NoOnePager"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "5988"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "10263"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "10266"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "11350"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "11982"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "12158"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "12304"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "13385"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "13390"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "13394"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "13608"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "14557"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "14569"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "15138"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "15153"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "15275"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "15454"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "15731"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "15734"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16179"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16357"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16385"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16386"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16387"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16392"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16393"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16394"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16415"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16497"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16500"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16506"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16545"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16580"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "16790"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "17206"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "17378"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "17379"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "17452"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "17486"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "3",
 		"PIN" : "17513"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "NoOnePager"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "10783"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "11438"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "11458"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "11467"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "11470"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "11608"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "11978"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "11979"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "12602"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "12780"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "13664"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "14165"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "14560"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "14722"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "15226"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "15228"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "15329"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "15355"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "15420"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "15425"
 	},
 	{
-		"json_featuretype" : "onepagers",
+		"Region" : "4",
+		"PIN" : "15674"
+	},
+	{
 		"Region" : "4",
 		"PIN" : "15735"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "16097"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "16098"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "16306"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "16315"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "16316"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "16317"
 	},
 	{
-		"json_featuretype" : "onepagers",
+		"Region" : "4",
+		"PIN" : "16740"
+	},
+	{
 		"Region" : "4",
 		"PIN" : "16911"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "16912"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "17195"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "17228"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "17259"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "17260"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "17261"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "17333"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "17334"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "17383"
 	},
 	{
-		"json_featuretype" : "onepagers",
 		"Region" : "4",
 		"PIN" : "17621"
 	}

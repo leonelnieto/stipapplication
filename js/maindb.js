@@ -80,9 +80,7 @@ function dataTableBuilder(pnStatus, program, dom, region) {
           let row = [
             `${region}`,
             `${onePageButtons(pin, region, onePages)}`,
-            `<a data-toggle="modal" class="alt-link" data-target="#mapModal" onClick="showMapModal(${pin})" tooltip="Click for Project Map" tooltip-position="top">${
-              attributes["PIN_DESC"]
-            }</a>`,
+            `<a data-toggle="modal" class="alt-link" data-target="#mapModal" onClick="showMapModal(${pin})" tooltip="Click for Project Map" tooltip-position="top">${attributes["PIN_DESC"]}</a>`,
             `${attributes["PRIMARY_CONCEPT"]}`,
             `${formatter.format(attributes["PROJECT_VALUE"])}`
           ];
@@ -393,17 +391,15 @@ function pingPMs(PM, dom) {
     .then(function(data) {
       let features = data.features;
       let html = "";
-      let thead =
-        '<table style="width:100%" id="PMPingTable" class="table table-striped table-hover">';
+      let thead ='<table style="width:100%" id="PMPingTable" class="table table-striped table-hover">';
       thead += '<thead><tr><th class="text-left">PINs</th>';
-      thead +=
-        "<th>Pin Description</th><th>Pin Status</th><th>Region</th></tr></thead><tbody>";
+      thead += "<th>Pin Description</th><th>Pin Status</th><th>Region</th></tr></thead><tbody>";
       html += thead;
       features.forEach(function(item) {
         let attributes = item.attributes;
         //Populate rows
         html += "<tr><td>" + attributes["PIN"] + "</td>";
-        html += '<td class="text-left">' + attributes["PIN_DESC"] + "</td>";
+        html += '<td class="text-left">' + `<a data-toggle="modal" class="alt-link" data-target="#mapModal" onClick="showMapModal(${attributes["PIN"]})" tooltip="Click for Project Map" tooltip-position="top">${attributes["PIN_DESC"]}</a>` + "</td>"; 
         html += "<td>" + attributes["PIN_STAT_NM"] + "</td>";
         html += "<td>" + attributes["REGION_CD"] + "</td></tr>";
       });
@@ -417,12 +413,9 @@ function pingPMs(PM, dom) {
       } else {
         table = $("#PMPingTable").DataTable({
           pagingType: "full_numbers",
-          columns: [
-            { orderable: true },
-            { orderable: true },
-            { orderable: true },
-            { orderable: true }
-          ]
+          columns: [{ orderable: true },{ orderable: true },{ orderable: true },{ orderable: true }],
+          dom: "Bfrtip",
+          buttons: ["copyHtml5", "excelHtml5", "csvHtml5", "pdfHtml5"]
         });
       }
       $("#PMName").append(PM);
@@ -452,7 +445,7 @@ function pingProgram(program, dom) {
         let attributes = item.attributes;
         //Populate rows
         html += "<tr><td>" + attributes["PIN"] + "</td>";
-        html += '<td class="text-left">' + attributes["PIN_DESC"] + "</td>";
+        html += '<td class="text-left">' + `<a data-toggle="modal" class="alt-link" data-target="#mapModal" onClick="showMapModal(${attributes["PIN"]})" tooltip="Click for Project Map" tooltip-position="top">${attributes["PIN_DESC"]}</a>` + "</td>";
         html += "<td>" + attributes["PIN_STAT_NM"] + "</td>";
         html += "<td>" + attributes["REGION_CD"] + "</td></tr>";
       });
@@ -466,12 +459,9 @@ function pingProgram(program, dom) {
       } else {
         table = $("#programPingTable").DataTable({
           pagingType: "full_numbers",
-          columns: [
-            { orderable: true },
-            { orderable: true },
-            { orderable: true },
-            { orderable: true }
-          ]
+          columns: [{ orderable: true },{ orderable: true },{ orderable: true },{ orderable: true }],
+          dom: "Bfrtip",
+          buttons: ["copyHtml5", "excelHtml5", "csvHtml5", "pdfHtml5"]
         });
       }
       $("#programName").append(program);

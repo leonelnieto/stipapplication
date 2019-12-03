@@ -7,7 +7,7 @@ require([
   "esri/widgets/BasemapToggle",
   "esri/widgets/LayerList"
 ], function(Map, MapView, Legend, FeatureLayer, Expand, BasemapToggle,LayerList) {
-
+  $("#startModal").modal('show');
   let selectedCounty = selectedMunicipality = selectedLegislative = selectedMPO = 0;
   let selectedStatus = "Proposed";
   //symbols for year lines
@@ -311,7 +311,6 @@ view.popup.defaultPopupTemplateEnabled = true
   view.ui.add(shrinkLegend, "top-right");
 
   window.mapLoaderDynamic = function() {
-    $("#startModal").modal('show');
     regionZoom()
     resetQuery();
   };
