@@ -15,6 +15,15 @@
     }
   });
 
+  //close the side bar when it's open and you click outside it
+  $(window).click(function(event) {
+    if(!event.target.classList.contains('stopProp')){
+      if(event.target.id !== 'mCSB_1'){
+        $('#sidebarNav').removeClass('active');
+        }
+      }  
+    });
+
   // Activate scrollspy to add active class to navbar items on scroll
   $('body').scrollspy({
     target: '#sideNav'
@@ -24,6 +33,7 @@
   $("#sidebarNav").mCustomScrollbar({
     theme: "minimal"
   });
+
   
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
