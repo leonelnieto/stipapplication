@@ -84,10 +84,10 @@ require([
   //Map Query Statements
   const programQuery = [
     "WORKSHOP_CAT = 'Transportation Investment Funds'", //0 TransportationInvestmentFunds - no records
-    "WORKSHOP_CAT = 'Transportation Solutions'", //1 TransportationSolutions
+    "WORKSHOP_CAT IN('Transportation Solutions','Barrier Treatments','Maintenance Spot Improvement','Sign Modification & Replacement','Small Area Lighting','SSIP - Safety Spot Improvement')", //1 TransportationSolutions
     "WORKSHOP_CAT = 'Contingency Fund'", //2 ContingencyFund - no records
-    "WORKSHOP_CAT IN('Preservation High Volume','Rehabilitation High Volume')", //3 PavementHighVolume
-    "WORKSHOP_CAT IN('Preservation Low Volume', 'Rehabilitation Low Volume')", //4 PavementLowVolume
+    "WORKSHOP_CAT IN('Pavement High Volume','Preservation High Volume','Rehabilitation High Volume')", //3 PavementHighVolume
+    "WORKSHOP_CAT IN('Pavement Low Volume','Preservation Low Volume','Rehabilitation Low Volume')", //4 PavementLowVolume
     "WORKSHOP_CAT = 'Bridge Preservation'", //5 BridgePreservation
     "WORKSHOP_CAT = 'Bridge Replacement and Rehabilitation'", //6 BridgeReplacementandRehabilitation
     "WORKSHOP_CAT = 'HSIP - Highway Safety Improvement'", //7 HighwaySafetyImprovement
@@ -350,9 +350,10 @@ view.popup.defaultPopupTemplateEnabled = true
   function getFeatures(sql, filters) {
     let query = layer.createQuery();
     query.where = sql;
-
+    console.log(sql)
     layer.queryFeatures(query).then(function(data) {
       let features = data.features;
+      
 
       collectAttributes(features, filters);
     });
