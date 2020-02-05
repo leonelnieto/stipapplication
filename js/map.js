@@ -110,7 +110,7 @@ require([
     "WORKSHOP_CAT = 'Other'", //24 Other - no records
     "WORKSHOP_CAT IN('HSIP - Highway Safety Improvement','Safe Routes to Schools', 'New Traffic Signals', 'Railway-Highway Grade Crossing')", //25 TrafficSafety - is this one redundant?
     "WORKSHOP_CAT = 'MPO'", //26 LocalGovernmentMPOs no records
-    "WORKSHOP_CAT = 'Reconstruction High Volume'", //27 PavementLowVolume
+    "WORKSHOP_CAT = 'Reconstruction High Volume'", //27 Pavement Reconstruction
     "", //28 noquery
     "WORKSHOP_CAT IN('Bridge Preservation','Bridge Replacement and Rehabilitation')" //29 All Structures
   ];

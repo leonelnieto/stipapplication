@@ -52,12 +52,17 @@ const regionName = {
 for (i = 0; i < document.querySelectorAll("#sidebarNav li").length; i++) {
   document.querySelectorAll("#sidebarNav li a")[i].addEventListener("click", function(event) {
       let regionNum = document.getElementsByTagName("wrapper")[0].getAttribute("region");
+      let TIFUnfunded = document.getElementById("TIFUnfunded")
       if (event.target.attributes.section.value !== "null") {
         
         let program = event.target.attributes.section.value;
+        
         document.getElementById("currentProgram").innerHTML = programs[program][2]
         document.getElementsByTagName("wrapper")[0].setAttribute("program", program);
         draw(programs[program][0], programs[program][1], parseInt(regionNum));
+        TIFUnfunded.style.display = program=="tif" ? 'inline' : 'none';
+
+        
 
       }
     });

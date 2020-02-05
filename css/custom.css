@@ -333,3 +333,9 @@ wrapper div.fundingtype ul.nav.nav-pills li.nav-item.comapp{
     display: block;
   }
 }
+
+#TIFUnfunded{
+  display: none;
+  width: 100%; 
+  height: 70%;
+}
