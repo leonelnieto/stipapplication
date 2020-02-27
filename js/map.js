@@ -439,8 +439,8 @@ view.popup.defaultPopupTemplateEnabled = true
     "Unfunded": "STIP_WORKSHOP='N' and PIN_STAT_NM='Proposed'",
     "Proposed": "STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed'",
     "ComApp" :  "COMM_APRV_IND='Y' and PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete')",
-    "Design" :  "PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded')",
-    "Construction": "PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete')"
+    "Design" :  "COMM_APRV_IND='Y' and PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded')",
+    "Construction": "COMM_APRV_IND='Y' and PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete')"
   }
 
   function makeQuery() {

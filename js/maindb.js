@@ -15,7 +15,7 @@ const formatter = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 0,
   maximumFractionDigits: 0
 });
-
+//
 //Query Dataset then build table
 function dataTableBuilder(pnStatus, program, dom, region) {
   //Build where clause by filter
@@ -223,13 +223,13 @@ function whereClauseBuilder(pnStatus, program, region) {
       break;
     case "design":
       whereClause =
-        "&where=PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded') " +
+        "&where=COMM_APRV_IND='Y' and PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded') " +
         programClause +
         regionClause;
       break;
     case "construction":
       whereClause =
-        "&where=PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete')" +
+        "&where=COMM_APRV_IND='Y' and PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete')" +
         programClause +
         regionClause;
       break;

@@ -3,7 +3,7 @@
 //<button type="button" id="refreshData" class="btn btn-secondary btn-sm">Refresh Data</button>
 
 const host = "https://fme.udot.utah.gov"
-const token =  "9227939636261347716e7e32d4f2707a2c906c56"
+const token =  "2d6e5109e3059d2069f6202c336ab1aab9834192"
 const repository = 'NewGate'; 
 const workspaceName = 'EPM_EGDB_FGDB_STIP_ONLY.fmw'; 
 
@@ -21,6 +21,7 @@ function refreshData(){
         document.getElementById("refreshData").innerHTML = "Refreshing - This may take up to 15 minutes";
 
         let params = []
+        console.log(response);
         response.forEach(function(param){
             params.push({name: param["name"], value: param["defaultValue"]})
         });
