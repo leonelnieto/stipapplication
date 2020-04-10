@@ -46,7 +46,7 @@ function dataTableBuilder(pnStatus, program, dom, region) {
             let columns = [
               { orderable: true },
               { orderable: true },
-              { orderable: false },
+              { orderable: true },
               { orderable: true },
               { orderable: false }
             ];
@@ -205,35 +205,36 @@ function whereClauseBuilder(pnStatus, program, region) {
   switch (pnStatus) {
     case "unfunded":
       whereClause =
-        "&where=STIP_WORKSHOP='N' and PIN_STAT_NM='Proposed' " +
+        "&where=(STIP_WORKSHOP='N' or PIN_STAT_NM='Proposed') " +
         programClause +
         regionClause;
       break;
     case "proposed":
       whereClause =
-        "&where=STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed' " +
+        "&where=(STIP_WORKSHOP='Y' or PIN_STAT_NM='Proposed') " +
         programClause +
         regionClause;
       break;
     case "comapp":
       whereClause =
-        "&where=COMM_APRV_IND='Y' and PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete') " +
+        "&where=(COMM_APRV_IND='Y' or PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete')) " +
         programClause +
         regionClause;
       break;
     case "design":
       whereClause =
-        "&where=COMM_APRV_IND='Y' and PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded') " +
+        "&where=(COMM_APRV_IND='Y' or PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded')) " +
         programClause +
         regionClause;
       break;
     case "construction":
       whereClause =
-        "&where=COMM_APRV_IND='Y' and PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete')" +
+        "&where=(COMM_APRV_IND='Y' or PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete'))" +
         programClause +
         regionClause;
       break;
   }
+  console.log(whereClause);
   return whereClause;
 }
 

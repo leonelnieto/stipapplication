@@ -350,7 +350,7 @@ view.popup.defaultPopupTemplateEnabled = true
   function getFeatures(sql, filters) {
     let query = layer.createQuery();
     query.where = sql;
-    console.log(sql)
+
     layer.queryFeatures(query).then(function(data) {
       let features = data.features;
       
@@ -420,7 +420,7 @@ view.popup.defaultPopupTemplateEnabled = true
 
   document.getElementById("queryStatus").onchange = function() {
     selectedStatus = document.getElementById("queryStatus").value;
-    console.log(projectStatus[selectedStatus])
+    
     const filters = buildFilter();
     let sql = makeQuery();
     getFeatures(sql, filters);
@@ -436,11 +436,11 @@ view.popup.defaultPopupTemplateEnabled = true
   };
 
   let projectStatus = {
-    "Unfunded": "STIP_WORKSHOP='N' and PIN_STAT_NM='Proposed'",
-    "Proposed": "STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed'",
-    "ComApp" :  "COMM_APRV_IND='Y' and PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete')",
-    "Design" :  "COMM_APRV_IND='Y' and PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded')",
-    "Construction": "COMM_APRV_IND='Y' and PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete')"
+    "Unfunded": "(STIP_WORKSHOP='N' or PIN_STAT_NM='Proposed')",
+    "Proposed": "(STIP_WORKSHOP='Y' or PIN_STAT_NM='Proposed')",
+    "ComApp" :  "(COMM_APRV_IND='Y' or PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete'))",
+    "Design" :  "(COMM_APRV_IND='Y' or PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded'))",
+    "Construction": "(COMM_APRV_IND='Y' or PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete'))"
   }
 
   function makeQuery() {

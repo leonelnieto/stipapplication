@@ -3,7 +3,7 @@
 //<button type="button" id="refreshData" class="btn btn-secondary btn-sm">Refresh Data</button>
 
 const host = "https://fme.udot.utah.gov"
-const token =  "2d6e5109e3059d2069f6202c336ab1aab9834192"
+const token = "3d388676e908d7bd24f2693d55ea2f5d034d99e1"
 const repository = 'NewGate'; 
 const workspaceName = 'EPM_EGDB_FGDB_STIP_ONLY.fmw'; 
 
