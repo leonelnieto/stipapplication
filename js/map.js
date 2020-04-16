@@ -156,7 +156,7 @@ require([
 
   let regions = new FeatureLayer({
     url: "https://maps.udot.utah.gov/arcgis/rest/services/UDOT_Regions/MapServer/1",
-    visible: false,
+    visible: true,
     opacity: 0.6,
     title: "UDOT Region Boundaries"
   });
@@ -436,11 +436,11 @@ view.popup.defaultPopupTemplateEnabled = true
   };
 
   let projectStatus = {
-    "Unfunded": "(STIP_WORKSHOP='N' or PIN_STAT_NM='Proposed')",
-    "Proposed": "(STIP_WORKSHOP='Y' or PIN_STAT_NM='Proposed')",
+    "Unfunded": "(STIP_WORKSHOP='N' and PIN_STAT_NM='Proposed')",
+    "Proposed": "(STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed')",
     "ComApp" :  "(COMM_APRV_IND='Y' or PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete'))",
-    "Design" :  "(COMM_APRV_IND='Y' or PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded'))",
-    "Construction": "(COMM_APRV_IND='Y' or PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete'))"
+    "Design" :  "(COMM_APRV_IND='Y' and PIN_STAT_NM='Proposed') or PIN_STAT_NM in('STIP','Scoping','Active','Advertised')",
+    "Construction": "PIN_STAT_NM in('Awarded', 'Under Construction','Substantially Compl','Physically Complete','Central Review')"
   }
 
   function makeQuery() {

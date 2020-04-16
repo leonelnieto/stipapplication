@@ -205,13 +205,13 @@ function whereClauseBuilder(pnStatus, program, region) {
   switch (pnStatus) {
     case "unfunded":
       whereClause =
-        "&where=(STIP_WORKSHOP='N' or PIN_STAT_NM='Proposed') " +
+        "&where=(STIP_WORKSHOP='N' and PIN_STAT_NM='Proposed') " +
         programClause +
         regionClause;
       break;
     case "proposed":
       whereClause =
-        "&where=(STIP_WORKSHOP='Y' or PIN_STAT_NM='Proposed') " +
+        "&where=(STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed') " +
         programClause +
         regionClause;
       break;
@@ -223,13 +223,13 @@ function whereClauseBuilder(pnStatus, program, region) {
       break;
     case "design":
       whereClause =
-        "&where=(COMM_APRV_IND='Y' or PIN_STAT_NM in('STIP','Scoping','Active','Advertised','Awarded')) " +
+        "&where=((COMM_APRV_IND='Y' and PIN_STAT_NM='Proposed') or PIN_STAT_NM in('STIP','Scoping','Active','Advertised')) " +
         programClause +
         regionClause;
       break;
     case "construction":
       whereClause =
-        "&where=(COMM_APRV_IND='Y' or PIN_STAT_NM in('Under Construction','Substantially Compl','Physically Complete'))" +
+        "&where=(PIN_STAT_NM in('Awarded', 'Under Construction','Substantially Compl','Physically Complete','Central Review')" +
         programClause +
         regionClause;
       break;
