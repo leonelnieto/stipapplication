@@ -229,7 +229,7 @@ function whereClauseBuilder(pnStatus, program, region) {
       break;
     case "construction":
       whereClause =
-        "&where=(PIN_STAT_NM in('Awarded', 'Under Construction','Substantially Compl','Physically Complete','Central Review')" +
+        "&where=PIN_STAT_NM in('Awarded', 'Under Construction','Substantially Compl','Physically Complete','Central Review')" +
         programClause +
         regionClause;
       break;
