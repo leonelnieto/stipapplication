@@ -35,7 +35,9 @@ wrapper[program=transSolutions] div.col-lg-6.forecastyear.unfundedbyyear{
   display:none;
 }
 
-wrapper[program=tif] div.tab-pane#pills-proposed{
+/*temporarily hiding for the 2020 STIP Meeting*/
+wrapper[program=tif] div.tab-pane#pills-proposed div.row,
+wrapper[program=tif] div.tab-pane#pills-unfunded div.row{
   display:none;
 }
 
