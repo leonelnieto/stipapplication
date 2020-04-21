@@ -35,6 +35,10 @@ wrapper[program=transSolutions] div.col-lg-6.forecastyear.unfundedbyyear{
   display:none;
 }
 
+wrapper[program=tif] div.tab-pane#pills-proposed{
+  display:none;
+}
+
 wrapper nav button[type=button],
 wrapper div.regions button[type=button]{
   color:#fff;
