@@ -350,7 +350,7 @@ view.popup.defaultPopupTemplateEnabled = true
   function getFeatures(sql, filters) {
     let query = layer.createQuery();
     query.where = sql;
-
+    console.log(sql)
     layer.queryFeatures(query).then(function(data) {
       let features = data.features;
       
@@ -439,7 +439,7 @@ view.popup.defaultPopupTemplateEnabled = true
     "Unfunded": "(STIP_WORKSHOP='N' and PIN_STAT_NM='Proposed')",
     "Proposed": "(STIP_WORKSHOP='Y' and PIN_STAT_NM='Proposed')",
     "ComApp" :  "(COMM_APRV_IND='Y' or PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete'))",
-    "Design" :  "(COMM_APRV_IND='Y' and PIN_STAT_NM='Proposed') or PIN_STAT_NM in('STIP','Scoping','Active','Advertised')",
+    "Design" :  "((COMM_APRV_IND='Y' and PIN_STAT_NM='Proposed') or PIN_STAT_NM in('STIP','Scoping','Active','Advertised'))",
     "Construction": "PIN_STAT_NM in('Awarded', 'Under Construction','Substantially Compl','Physically Complete','Central Review')"
   }
 
@@ -451,6 +451,10 @@ view.popup.defaultPopupTemplateEnabled = true
     if (program != 28) {
       let programSQL = programQuery[program];
       queries.push(programSQL);
+    }
+    //Temporary Remove Proposed TIF
+    if (program == 28 && selectedStatus =="Proposed"){
+      queries.push("WORKSHOP_CAT <> 'Transportation Investment Funds'")
     }
 
     if (region) {
@@ -472,7 +476,7 @@ view.popup.defaultPopupTemplateEnabled = true
       let municipalitySQL = `Municipality_Name like '%${selectedMunicipality}%'`;
       queries.push(municipalitySQL);
     }
-     
+
     let statusSQL = projectStatus[selectedStatus];
     queries.push(statusSQL);
      
@@ -486,8 +490,14 @@ view.popup.defaultPopupTemplateEnabled = true
       let legislativeSQL = `UT_House_Dist_Name like '${selectedLegislative}'`;
       queries.push(legislativeSQL);
     }
+    //Temporary remove Proposed TIF
+    if (program == 0  && selectedStatus =="Proposed"){
+      return "WORKSHOP_CAT = 'NULL'"
+    }
 
     let sql = queries.join(" AND ");
+
+
 
     return sql;
   }

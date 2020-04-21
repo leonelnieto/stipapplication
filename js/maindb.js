@@ -234,7 +234,7 @@ function whereClauseBuilder(pnStatus, program, region) {
         regionClause;
       break;
   }
-  console.log(whereClause);
+
   return whereClause;
 }
 
