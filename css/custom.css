@@ -31,6 +31,14 @@ wrapper[program=transSolutions] div.fundingtype ul.nav li.nav-item.unfunded{
   display: block;
 }
 
+wrapper[program=transSolutions] div.col-lg-6.forecastyear{
+  display:none;
+}
+
+div.col-lg-6.forecastyear.unfundedbyyear{
+  display:none;
+}
+
 wrapper nav button[type=button],
 wrapper div.regions button[type=button]{
   color:#fff;
