@@ -61,9 +61,6 @@ for (i = 0; i < document.querySelectorAll("#sidebarNav li").length; i++) {
         document.getElementsByTagName("wrapper")[0].setAttribute("program", program);
         draw(programs[program][0], programs[program][1], parseInt(regionNum));
         TIFUnfunded.style.display = program=="tif" ? 'inline' : 'none';
-
-        
-
       }
     });
 }
