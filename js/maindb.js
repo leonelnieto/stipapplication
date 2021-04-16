@@ -216,8 +216,9 @@ function whereClauseBuilder(pnStatus, program, region) {
         regionClause;
       break;
     case "comapp":
-      whereClause =
-        "&where=(COMM_APRV_IND='Y' or PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete')) " +
+      whereClause = 
+//adjust the query that would exclude projects with the comm approved ind & is also in the 'Region Review', 'Central Review', 'Contract Complete', 'Contract Closed Out', 'Close Out', or 'Closed'
+        "&where=((COMM_APRV_IND='Y' and PIN_STAT_NM not in('Region Review', 'Central Review', 'Contract Complete', 'Contract Closed Out', 'Close Out', 'Closed'))  or PIN_STAT_NM in('STIP','Scoping','Awarded','Active','Advertised','Under Construction','Substantially Compl','Physically Complete')) " +
         programClause +
         regionClause;
       break;
@@ -229,7 +230,7 @@ function whereClauseBuilder(pnStatus, program, region) {
       break;
     case "construction":
       whereClause =
-        "&where=PIN_STAT_NM in('Awarded', 'Under Construction','Substantially Compl','Physically Complete','Central Review')" +
+        "&where=PIN_STAT_NM in('Awarded', 'Under Construction','Substantially Compl','Physically Complete')" +
         programClause +
         regionClause;
       break;

@@ -214,7 +214,10 @@ require([
           fieldName: "PRIMARY_CONCEPT"
         },
         {
-          fieldName: "PROJECT_VALUE"
+          fieldName: "PROJECT_VALUE",
+          format:{
+            digitSeparator: true
+          }
         },
         {
           fieldName: "PLANNED_CONSTRUCTION_YEAR"
@@ -232,10 +235,16 @@ require([
           fieldName: "FORECAST_ST_YR"
         },
         {
-          fieldName: "FED_DOLLARS"
+          fieldName: "FED_DOLLARS",
+          format:{
+            digitSeparator: true
+          }
         },
         {
-          fieldName: "STATE_DOLLARS"
+          fieldName: "STATE_DOLLARS",
+          format:{
+            digitSeparator: true
+          }
         }
       ]
     }
