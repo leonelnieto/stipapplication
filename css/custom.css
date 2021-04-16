@@ -26,7 +26,6 @@ wrapper div.fundingtype ul.nav li.nav-item.unfunded{
 }
 
 wrapper[program=all] div.fundingtype ul.nav li.nav-item.unfunded,
-wrapper[program=tif] div.fundingtype ul.nav li.nav-item.unfunded,
 wrapper[program=transSolutions] div.fundingtype ul.nav li.nav-item.unfunded{
   display: block;
 }
